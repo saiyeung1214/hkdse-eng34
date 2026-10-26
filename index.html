@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>HKDSE 英文 Level 3-4 保底穩衝系統</title>
+  <title>CAC DSE Eng 保3衝4 系統</title>
   <!-- iOS Web App (PWA) 專屬全螢幕運作設定 -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="DSE 3-4 詞彙" />
+  <meta name="apple-mobile-web-app-title" content="CAC 保3衝4" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
@@ -21,6 +21,9 @@
     }
   </script>
   <style>
+    html {
+      transition: font-size 0.15s ease;
+    }
     .perspective-1000 { perspective: 1200px; }
     .transform-style-3d { transform-style: preserve-3d; }
     .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
@@ -172,7 +175,7 @@
         </div>
         <div>
           <h1 class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center flex-wrap gap-2">
-            HKDSE English Level 3-4 保底穩衝系統
+            CAC DSE Eng 保3衝4 系統
             <span id="cloud-status-pill" class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">載入 3000+ 字庫中...</span>
           </h1>
           <p class="text-[11px] text-slate-400">介詞避伏 • 零失分升Grade替換 • Paper 3 必備聽音拼字 • 寫作保分骨架</p>
@@ -197,26 +200,41 @@
       </div>
     </div>
 
-    <!-- Voice Accent & Four-speed Control Bar -->
+    <!-- Voice Accent, Speech Speed & Font Size Control Bar -->
     <div class="max-w-5xl mx-auto px-4 py-1.5 border-t border-slate-800/50 flex flex-wrap items-center justify-between gap-2 text-xs">
-      <div class="flex items-center gap-1.5">
-        <span class="text-slate-400 font-medium">朗讀發音：</span>
-        <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
-          <button id="btn-accent-gb" onclick="setAccent('en-GB')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white">
-            🇬🇧 英音 (DSE官方)
-          </button>
-          <button id="btn-accent-us" onclick="setAccent('en-US')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white">
-            🇺🇸 美音
-          </button>
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- 發音選擇 -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 font-medium">發音：</span>
+          <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+            <button id="btn-accent-gb" onclick="setAccent('en-GB')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white">
+              🇬🇧 英音
+            </button>
+            <button id="btn-accent-us" onclick="setAccent('en-US')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white">
+              🇺🇸 美音
+            </button>
+          </div>
+        </div>
+
+        <!-- 字體大小調整 -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 font-medium">字體大小：</span>
+          <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+            <button onclick="setFontSize('sm')" id="font-sm" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition" title="細字體">A-</button>
+            <button onclick="setFontSize('md')" id="font-md" class="font-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition" title="標準字體">標準</button>
+            <button onclick="setFontSize('lg')" id="font-lg" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition" title="大字體">A+</button>
+            <button onclick="setFontSize('xl')" id="font-xl" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition" title="特大字體">特大</button>
+          </div>
         </div>
       </div>
 
+      <!-- 語速調整 -->
       <div class="flex items-center gap-1">
-        <span class="text-slate-400 font-medium">朗讀語速：</span>
+        <span class="text-slate-400 font-medium">語速：</span>
         <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
-          <button onclick="setSpeechRate(0.65)" id="rate-0.65" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">0.65x 慢速拆音</button>
-          <button onclick="setSpeechRate(0.85)" id="rate-0.85" class="rate-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition">0.85x 適中易跟</button>
-          <button onclick="setSpeechRate(1.0)" id="rate-1" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">1.0x 實戰原速</button>
+          <button onclick="setSpeechRate(0.65)" id="rate-0.65" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">0.65x 慢速</button>
+          <button onclick="setSpeechRate(0.85)" id="rate-0.85" class="rate-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition">0.85x 適中</button>
+          <button onclick="setSpeechRate(1.0)" id="rate-1" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">1.0x 原速</button>
         </div>
       </div>
     </div>
@@ -224,7 +242,7 @@
     <!-- Navigation Tabs -->
     <div class="max-w-5xl mx-auto px-4 flex gap-1 sm:gap-2 overflow-x-auto pt-1">
       <button onclick="switchTab('review')" id="tab-review" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold border-b-2 border-emerald-500 text-emerald-400 whitespace-nowrap flex items-center gap-1.5">
-        <span>📇 3-4級 必考保分閃卡</span>
+        <span>📇 保分閃卡</span>
         <span id="due-badge" class="px-1.5 py-0.5 text-[10px] rounded-full bg-emerald-500/20 text-emerald-300 font-bold">0</span>
       </button>
       <button onclick="switchTab('dictation')" id="tab-dictation" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
@@ -284,7 +302,7 @@
     </section>
 
     <!-- ========================================================
-         VIEW 1: LEVEL 3-4 FLASHCARD REVIEW (閃卡溫習)
+         VIEW 1: LEVEL 3-4 FLASHCARD REVIEW (保分閃卡)
          ======================================================== -->
     <section id="view-review" class="space-y-4">
       <!-- Filter Bar -->
@@ -313,11 +331,11 @@
 
       <!-- Flashcard Interactive Box -->
       <div class="relative w-full max-w-2xl mx-auto">
-        <div id="flashcard-container" class="perspective-1000 w-full h-[470px] sm:h-[490px] cursor-pointer select-none" onclick="flipCard(event)">
+        <div id="flashcard-container" class="perspective-1000 w-full h-[500px] sm:h-[520px] cursor-pointer select-none" onclick="flipCard(event)">
           <div id="flashcard-inner" class="w-full h-full relative transform-style-3d card-transition">
             
             <!-- FRONT OF CARD -->
-            <div class="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-b from-slate-900 to-slate-900/95 border-2 border-slate-800 hover:border-emerald-500/40 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
+            <div class="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-b from-slate-900 to-slate-900/95 border-2 border-slate-800 hover:border-emerald-500/40 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl overflow-y-auto">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2 flex-wrap">
                   <span id="card-badge" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">Level 3-4 必背</span>
@@ -326,7 +344,7 @@
                 <span id="card-status-pill" class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-400">未溫習</span>
               </div>
 
-              <div class="text-center my-auto space-y-3.5">
+              <div class="text-center my-auto space-y-3.5 py-2">
                 <!-- Syllable breakdown for easy spelling -->
                 <p id="card-syllable" class="text-xs uppercase tracking-widest text-emerald-400 font-semibold font-mono">ben • e • fi • cial</p>
                 <h2 id="card-word" class="text-4xl sm:text-5xl font-black tracking-tight text-white break-words">beneficial</h2>
@@ -339,22 +357,22 @@
                 </div>
 
                 <!-- Safe Replacement Pill (Level 2 -> Level 3/4) -->
-                <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs max-w-full">
+                <div id="front-replace-pill" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs max-w-full">
                   <span class="font-bold">⚡ 戒除平庸字：取代</span>
                   <span id="front-replace-basic" class="font-bold text-white underline decoration-amber-400">good / helpful</span>
                 </div>
 
-                <!-- Preposition Trap Alert Badge -->
+                <!-- Preposition Trap Alert Badge (只在精選詞且有專屬考官捉錯位時顯示，3000隨機字不顯示) -->
                 <div id="front-prep-alert" class="block">
-                  <span class="px-3 py-1 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold">
-                    ⚠️ 考官捉錯位：必須配對介詞 <span id="front-prep-word" class="underline font-bold text-white">to</span> (beneficial to...)
+                  <span class="px-3 py-1 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold inline-block">
+                    ⚠️ 考官捉錯位：<span id="front-prep-word" class="underline font-bold text-white">beneficial TO</span>
                   </span>
                 </div>
               </div>
 
               <div class="text-center">
                 <p class="text-xs text-slate-400">
-                  👆 點擊卡片翻面看中文釋義、常用搭配詞與 DSE 實戰安全造句
+                  👆 點擊卡片翻面看中文釋義、搭配詞與實戰用法
                 </p>
               </div>
             </div>
@@ -381,24 +399,22 @@
                   <p id="back-def-en" class="text-xs text-slate-300 mt-0.5">helpful, useful, or producing good results</p>
                 </div>
 
-                <!-- Preposition & Grammar Trap (Crucial for Band 2) -->
-                <div class="bg-rose-500/10 border border-rose-500/30 rounded-2xl p-3">
+                <!-- Preposition & Grammar Trap (3000隨機字或無特定陷阱時自動隱藏) -->
+                <div id="back-trap-box" class="bg-rose-500/10 border border-rose-500/30 rounded-2xl p-3">
                   <span class="text-xs font-bold text-rose-300 block mb-1">🚨 評卷員扣分黑點（千祈咪寫錯！）：</span>
-                  <p id="back-trap-tip" class="text-xs text-slate-200 leading-relaxed font-medium">
-                    beneficial 後面一定要跟 <strong>to</strong>，千祈唔好寫 *beneficial for* 或者 *beneficial with*！
-                  </p>
+                  <p id="back-trap-tip" class="text-xs text-slate-200 leading-relaxed font-medium"></p>
                 </div>
 
                 <!-- Safe Level 3/4 Collocations -->
-                <div>
+                <div id="back-collocations-box">
                   <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">🔗 保分安全搭配詞（點擊發聲跟讀）</span>
                   <div id="back-collocations" class="flex flex-wrap gap-1.5"></div>
                 </div>
 
-                <!-- DSE Exam Context / Safe Sentence -->
-                <div class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-3">
+                <!-- DSE Exam Context / Safe Sentence (如沒有真實例句則自動隱藏，絕不生成重複罐頭句) -->
+                <div id="back-example-box" class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-3">
                   <div class="flex items-center justify-between mb-1">
-                    <span class="text-xs font-semibold text-amber-400">📝 DSE Level 4 示範例句（穩拿文法分）</span>
+                    <span class="text-xs font-semibold text-amber-400">📝 實戰示範例句</span>
                     <button onclick="speakCurrentExample(event)" class="px-2.5 py-0.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition flex items-center gap-1">
                       🔊 朗讀例句
                     </button>
@@ -435,7 +451,7 @@
             <label for="user-note-input" class="text-xs font-medium text-slate-400">💡 考生造句練習（輸入後自動儲存，加深印象）：</label>
             <span id="note-saved-indicator" class="text-xs text-emerald-400 opacity-0 transition">✓ 已保存</span>
           </div>
-          <input id="user-note-input" type="text" oninput="saveUserNote(this.value)" placeholder="試下用呢個生字同介詞造一句短句..." class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-slate-200 placeholder-slate-500 outline-none transition" />
+          <input id="user-note-input" type="text" oninput="saveUserNote(this.value)" placeholder="試下用呢個生字造一句短句或記低筆記..." class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-slate-200 placeholder-slate-500 outline-none transition" />
         </div>
       </div>
     </section>
@@ -574,7 +590,7 @@
   <footer class="border-t border-slate-800/80 bg-slate-900/90 py-4 px-4 mt-8 transition-colors">
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
       <div class="font-semibold text-slate-300">
-        HKDSE 英文 Level 3-4 保底穩衝系統 • 3000+ 智能詞彙庫
+        CAC DSE Eng 保3衝4 系統 • 3000+ 智能詞彙庫
       </div>
       <div class="flex items-center gap-2 font-medium">
         <span>版權所有 ： <strong class="text-emerald-400">CAC LawSir</strong></span>
@@ -791,10 +807,9 @@
     ];
 
     // ========================================================
-    // 2. PAPER 2 WRITING SAFETY TEMPLATES (零失分萬用句構 - 擴充至 20 組)
+    // 2. PAPER 2 WRITING SAFETY TEMPLATES (零失分萬用句構 - 20 組)
     // ========================================================
     const DSE_SAFETY_SENTENCES = [
-      // --- 開首與背景 (intro) ---
       {
         group: "intro",
         category: "🎬 開首段：引出社會熱話背景",
@@ -819,8 +834,6 @@
         zh_trans: "從我的角度來看，參與義務工作的優點遠遠大於其缺點，原因如下。",
         dse_tip: "放在第一段最後一句作點題句（Thesis Statement），清晰告訴考官你的立場，結構分即加！"
       },
-
-      // --- 成因、影響與擴展 (body) ---
       {
         group: "body",
         category: "🔗 提出主要成因 (Cause)",
@@ -869,8 +882,6 @@
         zh_trans: "廣泛閱讀不僅能幫助學生豐富詞彙量，還能讓他們擴闊視野。",
         dse_tip: "這是唯一建議熟背的「安全版 Not only 倒裝句」，只要背熟 'Not only does X help..., but it also...' 就萬無一失！"
       },
-
-      // --- 讓步與反駁 (rebut) ---
       {
         group: "rebut",
         category: "⚖️ 讓步轉折 (Concession)",
@@ -887,8 +898,6 @@
         zh_trans: "有些人可能會爭辯說電子學習成本高昂；然而，這種觀點忽略了一個事實：長遠而言它能省下龐大的印刷與交通開支。",
         dse_tip: "考評局極重視考生的 Counter-argument（反駁能力），用 'overlooks the fact that...' 能展現成熟的批判思維。"
       },
-
-      // --- 建議與結尾 (sol) ---
       {
         group: "sol",
         category: "💡 提出政府/校方建議 (Solution 1)",
@@ -921,8 +930,6 @@
         zh_trans: "現在是我們採取立即行動減少塑膠廢物的時候了，否則將為時已晚。",
         dse_tip: "注意 'It is high time that we took...' 裡面的 took 用過去式是道地英文慣用法，考官看到必定加分！"
       },
-
-      // --- 實用文體專用句 (genre) ---
       {
         group: "genre",
         category: "✉️ 讀者來信 (Letter to the Editor) 開首與結尾",
@@ -966,10 +973,9 @@
     ];
 
     // ========================================================
-    // 3. PAPER 1 READING STEMS & TONES (閱讀常見提問與語氣詞 - 擴充至 26 組)
+    // 3. PAPER 1 READING STEMS & TONES (閱讀常見提問與語氣詞 - 26 組)
     // ========================================================
     const DSE_READING_ITEMS = [
-      // --- 正面 / 支持態度詞 (pos) ---
       {
         group: "pos",
         term: "approving / supportive",
@@ -1005,8 +1011,6 @@
         zh: "同情的；富同理心的；體恤的",
         tip: "作者對弱勢社群、受災者或受苦動物表達憐憫與理解，常見字眼如 'feel sorry for', 'heartbreaking plight', 'pitiful'。"
       },
-
-      // --- 負面 / 批評 / 質疑態度詞 (neg) ---
       {
         group: "neg",
         term: "skeptical / doubtful",
@@ -1056,8 +1060,6 @@
         zh: "憂慮的；擔心的；憂心忡忡的",
         tip: "作者針對社會問題（如青年精神健康、環境污染）提出警告，常見 'alarming', 'deeply troubling', 'pose a threat'。"
       },
-
-      // --- 中立 / 複雜情緒詞 (neu) ---
       {
         group: "neu",
         term: "objective / neutral / impartial",
@@ -1100,8 +1102,6 @@
         zh: "審慎的；小心翼翼的；有所保留的",
         tip: "作者不急於下定論，呼籲大家先觀察更多證據或小心潛在風險（如 'proceed with caution', 'Wait and see'）。"
       },
-
-      // --- Paper 1 必考題型拆解攻略 (stem) ---
       {
         group: "stem",
         term: "What does 'X' (it / they / this) refer to?",
@@ -1170,6 +1170,7 @@
     let currentAccent = localStorage.getItem('dse_l34_accent') || 'en-GB';
     let speechRate = parseFloat(localStorage.getItem('dse_l34_rate') || '0.85');
     let currentTheme = localStorage.getItem('dse_l34_theme') || 'dark';
+    let currentFontSize = localStorage.getItem('dse_l34_fontsize') || 'md';
     let reviewFilter = 'core';
 
     // Dictation state
@@ -1177,7 +1178,8 @@
     let currentDictationWord = null;
 
     const LS_KEY = 'dse_l34_progress_v1';
-    const LS_DICT_CACHE_KEY = 'dse_l34_dict_cache_v1';
+    // 升級快取鍵至 v2，徹底清除舊版曾經產生的重複罐頭例句與預設捉錯位字串
+    const LS_DICT_CACHE_KEY = 'dse_l34_dict_cache_v2';
     let progressMap = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
     let dictCache = JSON.parse(localStorage.getItem(LS_DICT_CACHE_KEY) || '{}');
 
@@ -1193,6 +1195,40 @@
         banner.classList.add('hidden');
         banner.classList.remove('flex');
       }, 2500);
+    }
+
+    // 四段式字體大小調整 (A- / 標準 / A+ / 特大)
+    function setFontSize(sizeKey, silent = false) {
+      const sizeMap = {
+        sm: '14px',
+        md: '16px',
+        lg: '18.5px',
+        xl: '21px'
+      };
+      const labelMap = {
+        sm: '細字體 (A-)',
+        md: '標準字體',
+        lg: '大字體 (A+)',
+        xl: '特大字體'
+      };
+      if (!sizeMap[sizeKey]) sizeKey = 'md';
+      currentFontSize = sizeKey;
+      localStorage.setItem('dse_l34_fontsize', sizeKey);
+      document.documentElement.style.fontSize = sizeMap[sizeKey];
+
+      ['sm', 'md', 'lg', 'xl'].forEach(k => {
+        const btn = document.getElementById('font-' + k);
+        if (!btn) return;
+        if (k === sizeKey) {
+          btn.className = 'font-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition';
+        } else {
+          btn.className = 'font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition';
+        }
+      });
+
+      if (!silent) {
+        showToast(`🔤 已切換至「${labelMap[sizeKey]}」`);
+      }
     }
 
     // 自動為雲端單字進行自然音節拆解，方便拼讀記憶
@@ -1242,6 +1278,7 @@
     function normalizeWordItem(raw, idx = 0) {
       const wordStr = (raw.word || '').trim();
       const key = wordStr.toLowerCase();
+      const isRandom = Boolean(raw.isCloud);
       return {
         id: raw.id || ('w_' + key.replace(/[^a-z0-9]/g, '') + '_' + idx),
         word: wordStr,
@@ -1251,11 +1288,14 @@
         topic: raw.topic || 'Campus & Youth',
         def_zh: raw.def_zh || raw.def || '',
         def_en: raw.def_en || '',
-        basic_word: raw.basic_word || 'everyday word',
-        prep_trap: raw.prep_trap || '',
-        collocations: Array.isArray(raw.collocations) ? raw.collocations : [wordStr],
-        example: raw.example || `Using "${wordStr}" accurately in context helps you secure steady marks in HKDSE.`,
-        isCloud: Boolean(raw.isCloud),
+        basic_word: raw.basic_word || '',
+        // 3000 隨機字不出「考官捉錯位」
+        prep_trap: isRandom ? '' : (raw.prep_trap || ''),
+        collocations: Array.isArray(raw.collocations) ? raw.collocations : [],
+        // 如沒有真實例句則留空，絕不生成重複罐頭例句
+        example: raw.example || '',
+        isCloud: isRandom,
+        isRandom3000: isRandom,
         stats: progressMap[key] || createDefaultStats()
       };
     }
@@ -1324,25 +1364,25 @@
       renderWordBank();
     }
 
-    // 當抽考雲端生字時，自動即時載入音標、英文解釋、例句與繁體中文翻譯
+    // 當抽考 3000 雲端生字時，自動即時載入真實音標、中英解釋與字典真實例句（絕不生成罐頭例句或考官捉錯位）
     async function ensureWordDetailsLoaded(item) {
       if (!item || !item.isCloud) return;
       const key = item.word.toLowerCase();
 
       if (dictCache[key]) {
-        Object.assign(item, dictCache[key], { isCloud: false });
+        Object.assign(item, dictCache[key], { isCloud: false, isRandom3000: true });
         return;
       }
 
       const fetched = {
-        phonetic: '/DSE/',
-        pos: 'core word',
+        phonetic: '',
+        pos: 'word',
         def_zh: '載入中文釋義中...',
-        def_en: `High-frequency HKDSE vocabulary item ("${item.word}") for Reading and Writing.`,
-        basic_word: 'basic expression',
-        prep_trap: '留意詞性及前後搭配，避免中式英文直譯',
-        collocations: [`use ${item.word} properly`, `common ${item.word}`],
-        example: `Students should master the word "${item.word}" to express their ideas clearly in HKDSE Paper 2.`
+        def_en: '',
+        basic_word: '',
+        prep_trap: '', // 3000隨機字不出考官捉錯位
+        collocations: [],
+        example: ''    // 如字典無真實例句則留空，不生成重複罐頭句
       };
 
       try {
@@ -1351,17 +1391,36 @@
           const data = await dictRes.json();
           const first = data[0];
           if (first) {
-            fetched.phonetic = first.phonetic || (first.phonetics?.find(p => p.text)?.text) || '/DSE/';
-            if (first.meanings && first.meanings.length > 0) {
+            fetched.phonetic = first.phonetic || (first.phonetics?.find(p => p.text)?.text) || '';
+            if (Array.isArray(first.meanings) && first.meanings.length > 0) {
               const m = first.meanings[0];
               fetched.pos = m.partOfSpeech || 'word';
-              if (m.synonyms && m.synonyms.length > 0) {
-                fetched.basic_word = m.synonyms.slice(0, 2).join(' / ');
+
+              // 收集同義詞
+              const syns = [];
+              first.meanings.forEach(meaning => {
+                if (Array.isArray(meaning.synonyms)) {
+                  meaning.synonyms.forEach(s => {
+                    if (s && syns.length < 3 && !syns.includes(s)) syns.push(s);
+                  });
+                }
+              });
+              if (syns.length > 0) {
+                fetched.basic_word = syns.slice(0, 2).join(' / ');
               }
-              if (m.definitions && m.definitions.length > 0) {
-                fetched.def_en = m.definitions[0].definition || fetched.def_en;
-                const exObj = m.definitions.find(d => d.example);
-                if (exObj && exObj.example) fetched.example = exObj.example;
+
+              // 取得英文定義與真實例句（搜尋所有釋義，若無真實例句則保持空白）
+              if (Array.isArray(m.definitions) && m.definitions.length > 0) {
+                fetched.def_en = m.definitions[0].definition || '';
+              }
+              for (const meaning of first.meanings) {
+                if (Array.isArray(meaning.definitions)) {
+                  const foundEx = meaning.definitions.find(d => d.example && d.example.trim().length > 0);
+                  if (foundEx) {
+                    fetched.example = foundEx.example.trim();
+                    break;
+                  }
+                }
               }
             }
           }
@@ -1379,10 +1438,10 @@
       } catch (_) {}
 
       if (fetched.def_zh === '載入中文釋義中...') {
-        fetched.def_zh = '（請參考下方英文釋義與示範例句）';
+        fetched.def_zh = fetched.def_en ? '（請參考下方英文釋義）' : item.word;
       }
 
-      Object.assign(item, fetched, { isCloud: false });
+      Object.assign(item, fetched, { isCloud: false, isRandom3000: true });
       dictCache[key] = fetched;
       const cacheKeys = Object.keys(dictCache);
       if (cacheKeys.length > 400) delete dictCache[cacheKeys[0]];
@@ -1397,6 +1456,7 @@
 
     function initApp() {
       applyTheme(currentTheme);
+      setFontSize(currentFontSize, true);
       setAccent(currentAccent, true);
       setSpeechRate(speechRate, true);
 
@@ -1418,7 +1478,7 @@
     }
 
     function updateDashboardStats() {
-      const dueCount = words.filter(w => !w.isCloud && isWordDue(w)).length;
+      const dueCount = words.filter(w => !w.isRandom3000 && isWordDue(w)).length;
       const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
       const learningCount = words.filter(w => w.stats?.status === 'learning').length;
       const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
@@ -1451,15 +1511,15 @@
 
     function buildReviewQueue() {
       if (reviewFilter === 'core') {
-        reviewQueue = words.filter(w => !w.isCloud);
+        reviewQueue = words.filter(w => !w.isRandom3000);
       } else if (reviewFilter === 'hard') {
         reviewQueue = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
         if (reviewQueue.length === 0) {
           showToast('🎉 目前未有「唔熟」生字，已自動切換回精選必背核心詞！');
-          reviewQueue = words.filter(w => !w.isCloud);
+          reviewQueue = words.filter(w => !w.isRandom3000);
         }
       } else if (reviewFilter === 'prep') {
-        reviewQueue = words.filter(w => !w.isCloud && w.prep_trap && !w.prep_trap.includes('無特別'));
+        reviewQueue = words.filter(w => !w.isRandom3000 && w.prep_trap && !w.prep_trap.includes('無特別'));
       } else {
         reviewQueue = [...words].sort(() => Math.random() - 0.5);
       }
@@ -1473,11 +1533,24 @@
       document.getElementById('card-syllable').textContent = item.syllable;
       document.getElementById('card-word').textContent = item.word;
       document.getElementById('card-phonetic').textContent = item.phonetic || '';
-      document.getElementById('front-replace-basic').textContent = item.basic_word;
 
+      // 替換平庸字標籤（如有同義詞才顯示）
+      const replacePill = document.getElementById('front-replace-pill');
+      const replaceBasic = document.getElementById('front-replace-basic');
+      if (item.basic_word && item.basic_word.trim() !== '') {
+        replacePill.classList.remove('hidden');
+        replacePill.classList.add('inline-flex');
+        replaceBasic.textContent = item.basic_word;
+      } else {
+        replacePill.classList.add('hidden');
+        replacePill.classList.remove('inline-flex');
+      }
+
+      // 考官捉錯位：在 3000 隨機字模式或屬於 3000 擴充字庫時，完全不顯示「考官捉錯位」
+      const showPrepTrap = !item.isRandom3000 && reviewFilter !== 'all' && Boolean(item.prep_trap);
       const prepAlert = document.getElementById('front-prep-alert');
       const prepWord = document.getElementById('front-prep-word');
-      if (item.prep_trap) {
+      if (showPrepTrap) {
         prepAlert.classList.remove('hidden');
         prepWord.textContent = item.prep_trap;
       } else {
@@ -1504,25 +1577,49 @@
       document.getElementById('back-pos').textContent = item.pos;
       document.getElementById('back-syllable-display').textContent = `音節: ${item.syllable}`;
       document.getElementById('back-def-zh').textContent = item.def_zh || '載入中文解釋中...';
-      document.getElementById('back-def-en').textContent = item.def_en || 'Loading English definition...';
-      document.getElementById('back-trap-tip').innerHTML = item.prep_trap 
-        ? `⚠️ 介詞與扣分點：<strong>${item.prep_trap}</strong>`
-        : `💡 注意拼寫與詞性轉換，切勿在動詞後亂加無關介詞。`;
-      document.getElementById('back-example').textContent = item.example;
+      document.getElementById('back-def-en').textContent = item.def_en || '';
 
+      // 背面「評卷員扣分黑點 / 考官捉錯位」：3000隨機字不顯示
+      const backTrapBox = document.getElementById('back-trap-box');
+      const backTrapTip = document.getElementById('back-trap-tip');
+      if (showPrepTrap) {
+        backTrapBox.classList.remove('hidden');
+        backTrapTip.innerHTML = `⚠️ 介詞與扣分點：<strong>${item.prep_trap}</strong>`;
+      } else {
+        backTrapBox.classList.add('hidden');
+      }
+
+      // 搭配詞區塊（如有搭配詞才顯示）
+      const collBox = document.getElementById('back-collocations-box');
       const collContainer = document.getElementById('back-collocations');
       collContainer.innerHTML = '';
-      (item.collocations || []).forEach(col => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-600 border border-emerald-500/30 text-emerald-200 hover:text-white text-xs font-medium transition flex items-center gap-1';
-        btn.innerHTML = `<span>🔊 ${col}</span>`;
-        btn.onclick = (e) => {
-          e.stopPropagation();
-          speakText(col);
-        };
-        collContainer.appendChild(btn);
-      });
+      if (Array.isArray(item.collocations) && item.collocations.length > 0) {
+        collBox.classList.remove('hidden');
+        item.collocations.forEach(col => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-600 border border-emerald-500/30 text-emerald-200 hover:text-white text-xs font-medium transition flex items-center gap-1';
+          btn.innerHTML = `<span>🔊 ${col}</span>`;
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            speakText(col);
+          };
+          collContainer.appendChild(btn);
+        });
+      } else {
+        collBox.classList.add('hidden');
+      }
+
+      // 背面例句區塊：如沒有真實例句則直接隱藏，不生成重複罐頭例句
+      const exampleBox = document.getElementById('back-example-box');
+      const exampleText = document.getElementById('back-example');
+      if (item.example && item.example.trim() !== '') {
+        exampleBox.classList.remove('hidden');
+        exampleText.textContent = item.example;
+      } else {
+        exampleBox.classList.add('hidden');
+        exampleText.textContent = '';
+      }
 
       const curInterval = item.stats?.interval || 0;
       const nextEasyDays = curInterval === 0 ? 3 : Math.round(curInterval * 2.2);
@@ -1684,7 +1781,7 @@
     // 6. PAPER 3 LISTENING DICTATION (必考串字特訓)
     // ========================================================
     function nextDictationQuestion() {
-      const corePool = words.filter(w => !w.isCloud && w.def_zh);
+      const corePool = words.filter(w => !w.isRandom3000 && w.def_zh);
       if (corePool.length === 0) return;
       currentDictationWord = corePool[Math.floor(Math.random() * corePool.length)];
 
@@ -1867,7 +1964,7 @@
       const topicFilter = document.getElementById('bank-topic-filter')?.value || 'all';
 
       const filtered = words.filter(w => {
-        if (topicFilter === 'core' && w.isCloud) return false;
+        if (topicFilter === 'core' && w.isRandom3000) return false;
         if (!['all', 'core'].includes(topicFilter) && w.topic !== topicFilter) return false;
         if (!query) return true;
         return (
@@ -1893,6 +1990,7 @@
       slice.forEach(item => {
         const safeWord = item.word.replace(/'/g, "\\'");
         const safeEx = (item.example || '').replace(/'/g, "\\'");
+        const hasExample = Boolean(item.example && item.example.trim() !== '');
 
         const card = document.createElement('div');
         card.className = 'bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between gap-2.5 transition';
@@ -1908,14 +2006,14 @@
                 🔊 發音
               </button>
             </div>
-            <p class="text-sm font-bold text-emerald-300 mt-1">${item.def_zh || '（點擊「考此字」自動載入雲端中英詳解）'}</p>
-            <p class="text-xs text-amber-300 mt-0.5">⚡ 取代平庸字：${item.basic_word}</p>
-            ${item.prep_trap ? `<p class="text-xs text-rose-300 mt-0.5">⚠️ 介詞：${item.prep_trap}</p>` : ''}
+            <p class="text-sm font-bold text-emerald-300 mt-1">${item.def_zh || '（點擊「考此字」自動載入中英釋義）'}</p>
+            ${item.basic_word ? `<p class="text-xs text-amber-300 mt-0.5">⚡ 取代平庸字：${item.basic_word}</p>` : ''}
+            ${(!item.isRandom3000 && item.prep_trap) ? `<p class="text-xs text-rose-300 mt-0.5">⚠️ 介詞：${item.prep_trap}</p>` : ''}
           </div>
           <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between gap-2 text-xs text-slate-400">
-            <span class="truncate italic text-slate-300">${item.example}</span>
+            <span class="truncate italic text-slate-300">${hasExample ? item.example : ''}</span>
             <div class="flex items-center gap-1.5 shrink-0">
-              <button onclick="speakText('${safeEx}')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white transition">🔊 例句</button>
+              ${hasExample ? `<button onclick="speakText('${safeEx}')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white transition">🔊 例句</button>` : ''}
               <button onclick="jumpToCard('${item.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition">
                 考此字
               </button>
