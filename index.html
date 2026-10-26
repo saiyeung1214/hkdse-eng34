@@ -494,12 +494,24 @@
          ======================================================== -->
     <section id="view-safety" class="hidden space-y-4">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-5">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">🛡️ 專為 DSE 考生打造的寫作保分骨架</span>
-          <h2 class="text-xl font-black text-white mt-0.5">DSE Paper 2 零失分安全萬用句型 (點擊即可發聲)</h2>
-          <p class="text-xs text-slate-400 mt-1">
-            目標 Level 3-4 不需要寫過長過險的倒裝句。掌握以下結構嚴謹、考官挑不出文法毛病的金句框架，足以讓 Language 分數穩袋 4 分：
-          </p>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">🛡️ 專為 DSE 考生打造的寫作保分骨架 (共 20 組必背句構)</span>
+            <h2 class="text-xl font-black text-white mt-0.5">DSE Paper 2 零失分安全萬用句型 (點擊即可發聲)</h2>
+            <p class="text-xs text-slate-400 mt-1">
+              目標 Level 3-4 不需要寫過長過險的倒裝句。掌握以下結構嚴謹、考官挑不出文法毛病的 20 組金句框架，足以讓 Language 與 Organization 分數穩袋 4 分：
+            </p>
+          </div>
+        </div>
+
+        <!-- Safety Category Filter Pills -->
+        <div class="flex flex-wrap gap-1.5 pt-1 border-b border-slate-800 pb-3">
+          <button onclick="filterSafety('all')" id="safety-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition">全部句型 (20)</button>
+          <button onclick="filterSafety('intro')" id="safety-btn-intro" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🎬 開首與背景</button>
+          <button onclick="filterSafety('body')" id="safety-btn-body" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🔗 成因、影響與擴展</button>
+          <button onclick="filterSafety('rebut')" id="safety-btn-rebut" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⚖️ 讓步與反駁</button>
+          <button onclick="filterSafety('sol')" id="safety-btn-sol" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">💡 建議與結尾</button>
+          <button onclick="filterSafety('genre')" id="safety-btn-genre" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✉️ 實用文體專用 (信件/演講/建議書)</button>
         </div>
 
         <div id="safety-list" class="space-y-3.5"></div>
@@ -512,9 +524,18 @@
     <section id="view-reading" class="hidden space-y-4">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-4">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-sky-400">📖 Paper 1 閱讀卷看懂題目關鍵</span>
-          <h2 class="text-xl font-black text-white mt-0.5">DSE 常見問法 (Question Stems) 與基本語氣態度</h2>
-          <p class="text-xs text-slate-400 mt-1">很多同學不是文章讀不懂，而是題目問什麼都看錯！點擊可聽讀音：</p>
+          <span class="text-xs font-bold uppercase tracking-wider text-sky-400">📖 Paper 1 閱讀卷看懂題目與態度關鍵 (共 26 組核心考點)</span>
+          <h2 class="text-xl font-black text-white mt-0.5">DSE 常見語氣態度詞 (Tone & Attitude) 與必考題型拆解</h2>
+          <p class="text-xs text-slate-400 mt-1">很多同學不是文章讀不懂，而是題目問法看錯或態度詞不認識！點擊分類可篩選溫習，點擊發音可跟讀：</p>
+        </div>
+
+        <!-- Reading Filter Pills -->
+        <div class="flex flex-wrap gap-1.5 pt-1 border-b border-slate-800 pb-3">
+          <button onclick="filterReading('all')" id="reading-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white transition">全部考點 (26)</button>
+          <button onclick="filterReading('pos')" id="reading-btn-pos" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-emerald-300 hover:bg-slate-700 transition">🟢 正面 / 支持態度詞</button>
+          <button onclick="filterReading('neg')" id="reading-btn-neg" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-rose-300 hover:bg-slate-700 transition">🔴 負面 / 批評 / 質疑態度詞</button>
+          <button onclick="filterReading('neu')" id="reading-btn-neu" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-amber-300 hover:bg-slate-700 transition">🟡 中立 / 複雜情緒詞</button>
+          <button onclick="filterReading('stem')" id="reading-btn-stem" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-sky-300 hover:bg-slate-700 transition">🎯 Paper 1 必考題型拆解攻略</button>
         </div>
 
         <div id="reading-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1"></div>
@@ -589,383 +610,553 @@
 
   <script>
     // ========================================================
-    // 1. LEVEL 3-4 TAILORED CORE VOCABULARY DATABASE (60+ 精選高頻核心字 + 自動擴充 3000 字)
+    // 1. DSE LEVEL 3-4 CORE VOCABULARY & PAPER 3 TRAPS (核心必背詞庫)
     // ========================================================
     const DSE_L34_WORDS = [
       {
         id: "l34_001", word: "beneficial", syllable: "ben • e • fi • cial", phonetic: "/ˌben.ɪˈfɪʃ.əl/", pos: "adjective",
-        topic: "Campus & Youth", def_zh: "有益的；有利的", def_en: "helpful, useful, or producing good results",
-        basic_word: "good / helpful", prep_trap: "to (千祈唔好寫 beneficial for/with)",
-        collocations: ["highly beneficial to", "beneficial effect", "mutually beneficial"],
-        example: "Regular physical exercise is highly beneficial to students' mental health and academic focus."
+        topic: "Health & Lifestyle", def_zh: "有益的；有利的", def_en: "helpful, useful, or producing good results",
+        basic_word: "good / helpful", prep_trap: "beneficial TO (切忌寫 beneficial for!)",
+        collocations: ["beneficial to mental health", "mutually beneficial", "prove beneficial to students"],
+        example: "Doing regular physical exercise is extremely beneficial to both our physical and mental health."
       },
       {
-        id: "l34_002", word: "contribute", syllable: "con • trib • ute", phonetic: "/kənˈtrɪb.juːt/", pos: "verb",
-        topic: "Social Issues", def_zh: "促成；導致；捐獻", def_en: "to help to cause an event or situation",
-        basic_word: "help / cause", prep_trap: "to + V-ing / 名詞 (千祈咪跟動詞原形！)",
-        collocations: ["contribute to global warming", "contribute significantly to", "contribute to society"],
-        example: "Excessive consumption of fast food directly contributes to rising obesity rates among teenagers."
+        id: "l34_002", word: "detrimental", syllable: "det • ri • men • tal", phonetic: "/ˌdet.rɪˈmen.təl/", pos: "adjective",
+        topic: "Health & Lifestyle", def_zh: "有害的；不利的", def_en: "causing harm or damage",
+        basic_word: "bad / harmful", prep_trap: "detrimental TO (必須配介詞 to)",
+        collocations: ["detrimental to health", "have a detrimental effect on", "detrimental impact on"],
+        example: "Lack of sleep can have a detrimental effect on students' academic performance."
       },
       {
-        id: "l34_003", word: "participate", syllable: "par • tic • i • pate", phonetic: "/pɑːˈtɪs.ɪ.peɪt/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "參加；參與", def_en: "to take part in or become involved in an activity",
-        basic_word: "join / take part in", prep_trap: "in (千祈唔好漏咗 in！)",
-        collocations: ["actively participate in", "participate in extracurricular activities", "reluctant to participate in"],
-        example: "Schools should encourage all students to actively participate in community voluntary services."
+        id: "l34_003", word: "contribute", syllable: "con • trib • ute", phonetic: "/kənˈtrɪb.juːt/", pos: "verb",
+        topic: "Social Issues", def_zh: "促成；導致；作出貢獻", def_en: "to help to cause an event or situation; to give something",
+        basic_word: "cause / help", prep_trap: "contribute TO + V-ing / 名詞 (這裡的 to 是介詞，後面動詞必須加 -ing!)",
+        collocations: ["contribute to global warming", "contribute to improving", "contribute to society"],
+        example: "Excessive plastic waste contributes to polluting our oceans and marine life."
       },
       {
-        id: "l34_004", word: "significant", syllable: "sig • nif • i • cant", phonetic: "/sɪɡˈnɪf.ɪ.kənt/", pos: "adjective",
-        topic: "Social Issues", def_zh: "顯著的；重要的；重大的", def_en: "important or noticeable",
-        basic_word: "very big / very important", prep_trap: "play a significant role IN (留意副詞為 significantly)",
-        collocations: ["play a significant role in", "significant increase in", "significant difference"],
-        example: "Parental guidance plays a significant role in shaping children's values and moral character."
+        id: "l34_004", word: "participate", syllable: "par • tic • i • pate", phonetic: "/pɑːˈtɪs.ɪ.peɪt/", pos: "verb",
+        topic: "Campus & Youth", def_zh: "參與；參加", def_en: "to take part in or become involved in an activity",
+        basic_word: "join / take part in", prep_trap: "participate IN (必須加 in)",
+        collocations: ["participate in extracurricular activities", "actively participate in", "encourage students to participate in"],
+        example: "Students are encouraged to actively participate in voluntary work to broaden their horizons."
       },
       {
-        id: "l34_005", word: "tackle", syllable: "tack • le", phonetic: "/ˈtæk.əl/", pos: "verb",
-        topic: "Social Issues", def_zh: "對付；處理；著手解決", def_en: "to try to deal with something difficult",
-        basic_word: "solve / deal with", prep_trap: "及物動詞，後面直接加問題 (唔好寫 tackle with！)",
-        collocations: ["tackle the problem", "tackle youth unemployment", "effective ways to tackle"],
-        example: "The government must implement practical policies to tackle the problem of housing shortages."
+        id: "l34_005", word: "indulge", syllable: "in • dulge", phonetic: "/ɪnˈdʌldʒ/", pos: "verb",
+        topic: "Campus & Youth", def_zh: "沉迷於；縱容", def_en: "to allow yourself to have or do something enjoyable, often too much",
+        basic_word: "play too much / addicted to", prep_trap: "indulge IN + V-ing / 名詞",
+        collocations: ["indulge in online games", "indulge in social media", "over-indulge in"],
+        example: "Many teenagers indulge in playing mobile games and neglect their schoolwork."
       },
       {
-        id: "l34_006", word: "accommodate", syllable: "ac • com • mo • date", phonetic: "/əˈkɒm.ə.deɪt/", pos: "verb",
-        topic: "Paper 3 Traps", def_zh: "容納；提供住宿；迎合", def_en: "to provide with a place to live or to be stored",
-        basic_word: "hold / have space for", prep_trap: "Paper 3 必考拼字！記得有兩個 c、兩個 m (accommodation)",
-        collocations: ["accommodate students", "provide accommodation", "accommodate diverse needs"],
-        example: "The new community hall is spacious enough to accommodate over five hundred participants."
+        id: "l34_006", word: "indispensable", syllable: "in • dis • pen • sa • ble", phonetic: "/ˌɪn.dɪˈspen.sə.bəl/", pos: "adjective",
+        topic: "Campus & Youth", def_zh: "不可或缺的；絕對必要的", def_en: "so good or important that you could not manage without it",
+        basic_word: "very important / necessary", prep_trap: "indispensable TO / FOR + 名詞",
+        collocations: ["play an indispensable role in", "an indispensable part of", "indispensable to success"],
+        example: "Smartphones have become an indispensable part of our daily communication."
       },
       {
-        id: "l34_007", word: "environment", syllable: "en • vi • ron • ment", phonetic: "/ɪnˈvaɪ.rən.mənt/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "環境；自然界", def_en: "the air, water, and land in or on which people, animals, and plants live",
-        basic_word: "surroundings", prep_trap: "Paper 3 極常漏寫中段個 'n' (en-vi-ron-ment)！",
-        collocations: ["protect the environment", "learning environment", "harmful to the environment"],
-        example: "Creating a harmonious learning environment allows students to thrive without excessive anxiety."
+        id: "l34_007", word: "alleviate", syllable: "al • le • vi • ate", phonetic: "/əˈliː.vi.eɪt/", pos: "verb",
+        topic: "Social Issues", def_zh: "減輕；緩解（壓力、痛楚或問題）", def_en: "to make something bad such as pain or problems less severe",
+        basic_word: "reduce / make less", prep_trap: "直接跟名詞 (alleviate stress)，切勿加 to 或 with",
+        collocations: ["alleviate academic stress", "alleviate traffic congestion", "alleviate poverty"],
+        example: "Listening to soft music is an effective way to alleviate academic stress before exams."
       },
       {
-        id: "l34_008", word: "government", syllable: "gov • ern • ment", phonetic: "/ˈɡʌv.ən.mənt/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "政府；當局", def_en: "the group of people with the official power to govern a country or state",
-        basic_word: "authorities", prep_trap: "全港每年數千人漏寫個 'n' (gov-ern-ment)！",
-        collocations: ["the government should", "government policy", "rely on government funding"],
-        example: "The government should allocate more financial subsidies to support underprivileged families."
+        id: "l34_008", word: "cultivate", syllable: "cul • ti • vate", phonetic: "/ˈkʌl.tɪ.veɪt/", pos: "verb",
+        topic: "Campus & Youth", def_zh: "培養；建立（習慣、興趣或品格）", def_en: "to try to develop and improve something",
+        basic_word: "develop / build", prep_trap: "直接跟名詞 (cultivate a habit of...)",
+        collocations: ["cultivate a reading habit", "cultivate teamwork spirit", "cultivate positive values"],
+        example: "Schools should organize more reading schemes to help students cultivate a lifelong reading habit."
       },
       {
-        id: "l34_009", word: "convenient", syllable: "con • ven • i • ent", phonetic: "/kənˈviː.ni.ənt/", pos: "adjective",
-        topic: "Health & Lifestyle", def_zh: "方便的；省事的", def_en: "suitable for your purposes and needs and causing the least difficulty",
-        basic_word: "easy to use", prep_trap: "主詞唔可以用人！(不能說 I am convenient，要用 It is convenient for me)",
-        collocations: ["convenient for commuters", "highly convenient", "convenient public transport"],
-        example: "The extensive railway network makes it extremely convenient for residents to travel across the city."
+        id: "l34_009", word: "broaden", syllable: "broad • en", phonetic: "/ˈbrɔː.dən/", pos: "verb",
+        topic: "Campus & Youth", def_zh: "擴闊；拓寬（視野或知識）", def_en: "to increase your knowledge, experience, or range of activities",
+        basic_word: "open / widen", prep_trap: "broaden one's horizons (horizons 必須加 s!)",
+        collocations: ["broaden our horizons", "broaden students' minds", "broaden one's perspective"],
+        example: "Joining overseas exchange tours can broaden students' horizons and enhance their independence."
       },
       {
-        id: "l34_010", word: "necessary", syllable: "nec • es • sa • ry", phonetic: "/ˈnes.ə.ser.i/", pos: "adjective",
-        topic: "Paper 3 Traps", def_zh: "必需的；不可或缺的", def_en: "needed in order to achieve a particular result",
-        basic_word: "must have / needed", prep_trap: "拼字口訣：1 件衫 (1 個 c)，2 對襪 (2 個 s)",
-        collocations: ["it is necessary to", "take necessary measures", "necessary skills"],
-        example: "It is necessary for teenagers to cultivate time management skills to handle heavy schoolwork."
+        id: "l34_010", word: "relieve", syllable: "re • lieve", phonetic: "/rɪˈliːv/", pos: "verb",
+        topic: "Health & Lifestyle", def_zh: "紓緩；減輕（壓力或焦慮）", def_en: "to make an unpleasant feeling, such as pain or worry, less strong",
+        basic_word: "reduce stress / relax", prep_trap: "注意拼法是 i 在 e 前 (re-lie-ve)，名詞是 relief",
+        collocations: ["relieve pressure", "relieve anxiety and stress", "effective way to relieve"],
+        example: "Talking to trusted friends or teachers can help teenagers relieve their emotional pressure."
       },
       {
-        id: "l34_011", word: "encourage", syllable: "en • cour • age", phonetic: "/ɪnˈkʌr.ɪdʒ/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "鼓勵；促進", def_en: "to make someone more likely to do something",
-        basic_word: "tell someone to do", prep_trap: "encourage sb TO do sth (一定要跟 to-infinitive)",
-        collocations: ["encourage students to read", "encourage active participation", "strongly encourage"],
-        example: "Teachers should actively encourage students to voice their opinions during group discussions."
+        id: "l34_011", word: "enhance", syllable: "en • hance", phonetic: "/ɪnˈhɑːns/", pos: "verb",
+        topic: "Campus & Youth", def_zh: "提升；加強；增進", def_en: "to improve the quality, amount, or strength of something",
+        basic_word: "improve / make better", prep_trap: "直接跟名詞 (enhance efficiency)，切勿寫 enhance to",
+        collocations: ["enhance learning efficiency", "enhance public awareness", "enhance competitiveness"],
+        example: "Using interactive tablets in class can significantly enhance students' learning motivation."
       },
       {
-        id: "l34_012", word: "consequence", syllable: "con • se • quence", phonetic: "/ˈkɒn.sɪ.kwəns/", pos: "noun",
-        topic: "Social Issues", def_zh: "後果；結果（多指負面）", def_en: "a result of a particular action or situation",
-        basic_word: "bad result", prep_trap: "as a consequence OF... / suffer the consequences",
-        collocations: ["face serious consequences", "as a consequence", "negative consequences"],
-        example: "Ignoring mental health issues in school will lead to severe consequences for teenagers' growth."
-      },
-      {
-        id: "l34_013", word: "opportunity", syllable: "op • por • tu • ni • ty", phonetic: "/ˌɒp.əˈtʃuː.nə.ti/", pos: "noun",
-        topic: "Campus & Youth", def_zh: "機會；良機", def_en: "an occasion or situation that makes it possible to do something",
-        basic_word: "chance", prep_trap: "記得是 op-por-tu-ni-ty (兩個 p)；provide an opportunity FOR sb TO do sth",
-        collocations: ["provide an opportunity to", "seize the opportunity", "equal opportunities"],
-        example: "Voluntary work provides teenagers with a valuable opportunity to broaden their social horizons."
-      },
-      {
-        id: "l34_014", word: "essential", syllable: "es • sen • tial", phonetic: "/ɪˈsen.ʃəl/", pos: "adjective",
-        topic: "Health & Lifestyle", def_zh: "不可或缺的；極其重要的", def_en: "necessary or needed",
-        basic_word: "very important", prep_trap: "essential TO / FOR (不要寫 essential with)",
-        collocations: ["play an essential role", "essential for good health", "essential component"],
-        example: "Sufficient sleep is essential for teenagers to maintain physical wellness and academic productivity."
-      },
-      {
-        id: "l34_015", word: "disadvantage", syllable: "dis • ad • van • tage", phonetic: "/ˌdɪs.ədˈvɑːn.tɪdʒ/", pos: "noun",
-        topic: "Social Issues", def_zh: "缺點；弊處；不利條件", def_en: "a condition or situation that causes problems",
-        basic_word: "bad point", prep_trap: "disadvantage OF (好處是 advantage OF)",
-        collocations: ["the main disadvantage of", "outweigh the disadvantages", "put sb at a disadvantage"],
-        example: "One major disadvantage of online learning is the noticeable lack of face-to-face social interaction."
-      },
-      {
-        id: "l34_016", word: "phenomenon", syllable: "phe • nom • e • non", phonetic: "/fəˈnɒm.ɪ.nən/", pos: "noun",
-        topic: "Social Issues", def_zh: "現象", def_en: "something that exists and can be seen, felt, or experienced",
-        basic_word: "thing happening", prep_trap: "單數是 phenomenon，複數是 phenomena（DSE常考！）",
-        collocations: ["widespread phenomenon", "social phenomenon", "alarming phenomenon"],
-        example: "Phubbing (looking at smartphones constantly) has become a widespread phenomenon among local students."
-      },
-      {
-        id: "l34_017", word: "preference", syllable: "pref • er • ence", phonetic: "/ˈpref.ər.əns/", pos: "noun",
-        topic: "Campus & Youth", def_zh: "偏好；喜好", def_en: "the fact that you like something or someone more than another thing or person",
-        basic_word: "like more", prep_trap: "have a preference FOR (動詞 prefer A TO B)",
-        collocations: ["show a preference for", "personal preference", "have no preference"],
-        example: "Many youngsters today show a clear preference for flexible freelance work over rigid office jobs."
-      },
-      {
-        id: "l34_018", word: "investigate", syllable: "in • ves • ti • gate", phonetic: "/ɪnˈves.tɪ.ɡeɪt/", pos: "verb",
-        topic: "Social Issues", def_zh: "調查；審查；研究", def_en: "to examine a crime, problem, or statement carefully to discover the truth",
-        basic_word: "look into / find out", prep_trap: "及物動詞，後面直接加對象 (千祈唔好寫 investigate into！)",
-        collocations: ["investigate the causes of", "thoroughly investigate", "investigate a complaint"],
-        example: "School authorities should thoroughly investigate the root causes of campus bullying."
-      },
-      {
-        id: "l34_019", word: "efficient", syllable: "ef • fi • cient", phonetic: "/ɪˈfɪʃ.ənt/", pos: "adjective",
-        topic: "Health & Lifestyle", def_zh: "高效率的；省時省力的", def_en: "working or operating quickly and effectively in an organized way",
-        basic_word: "fast and good", prep_trap: "注意同 effective (有效果的) 分別；efficient 是指不浪費時間資源",
-        collocations: ["highly efficient", "efficient use of time", "energy-efficient"],
-        example: "Using a daily planner allows busy secondary students to be more efficient with their revision."
-      },
-      {
-        id: "l34_020", word: "recommendation", syllable: "rec • om • men • da • tion", phonetic: "/ˌrek.ə.menˈdeɪ.ʃən/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "建議；提議；推薦", def_en: "a suggestion that something is good or that a particular action is desirable",
-        basic_word: "advice / suggestion", prep_trap: "Paper 3 實用文寫 Proposal 必用！記得是 1 個 c、2 個 m！",
-        collocations: ["make a recommendation", "follow the recommendations", "strong recommendation"],
-        example: "The report makes several constructive recommendations on how to improve school canteen hygiene."
-      },
-      {
-        id: "l34_021", word: "awareness", syllable: "a • ware • ness", phonetic: "/əˈweə.nəs/", pos: "noun",
-        topic: "Social Issues", def_zh: "意識；認識；關注", def_en: "knowledge that something exists, or understanding of a situation",
-        basic_word: "knowing about", prep_trap: "raise public awareness OF (不可數名詞，唔好加 a 或 s！)",
+        id: "l34_012", word: "awareness", syllable: "a • ware • ness", phonetic: "/əˈweə.nəs/", pos: "noun",
+        topic: "Social Issues", def_zh: "意識；關注；認知", def_en: "knowledge that something exists, or understanding of a situation",
+        basic_word: "know more about", prep_trap: "raise public awareness OF (配介詞 of)",
         collocations: ["raise public awareness of", "arouse awareness of", "environmental awareness"],
-        example: "The charity campaign aims to raise public awareness of mental health issues among secondary students."
+        example: "The government should launch publicity campaigns to raise public awareness of food waste."
       },
       {
-        id: "l34_022", word: "emphasize", syllable: "em • pha • size", phonetic: "/ˈem.fə.saɪz/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "強調；著重", def_en: "to show that something is very important or worth giving attention to",
-        basic_word: "say it is important", prep_trap: "動詞後直接加賓語，千祈唔好寫 emphasize on！(名詞才用 put emphasis on)",
-        collocations: ["emphasize the importance of", "strongly emphasize", "repeatedly emphasize"],
-        example: "Principals often emphasize the importance of striking a balance between academics and extracurricular activities."
+        id: "l34_013", word: "concentrate", syllable: "con • cen • trate", phonetic: "/ˈkɒn.sən.treɪt/", pos: "verb",
+        topic: "Campus & Youth", def_zh: "專注；集中精神", def_en: "to direct your attention or your efforts towards a particular activity",
+        basic_word: "focus", prep_trap: "concentrate ON + V-ing / 名詞",
+        collocations: ["concentrate on their studies", "find it hard to concentrate on", "concentrate in class"],
+        example: "If students do not get enough sleep, they will find it hard to concentrate on their lessons."
       },
       {
-        id: "l34_023", word: "lack", syllable: "lack", phonetic: "/læk/", pos: "noun / verb",
-        topic: "Health & Lifestyle", def_zh: "缺乏；不足", def_en: "the fact that something is not available or that there is not enough of it",
-        basic_word: "not enough", prep_trap: "作動詞直接跟名詞 (lack money)；作名詞才跟 of (a lack OF money)",
-        collocations: ["a lack of sleep", "lack confidence", "due to a lack of funding"],
-        example: "A chronic lack of sleep can severely impair students' concentration and memory in class."
+        id: "l34_014", word: "accommodation", syllable: "ac • com • mo • da • tion", phonetic: "/əˌkɒm.əˈdeɪ.ʃən/", pos: "noun",
+        topic: "Paper 3 Traps", def_zh: "住宿；住處", def_en: "a place to live, work, stay, etc. in",
+        basic_word: "place to stay / hotel", prep_trap: "Paper 3 必考拼字：雙 c 雙 m (ac-com-mo-dation)，且為不可數名詞(不加s)！",
+        collocations: ["book accommodation", "student accommodation", "provide free accommodation"],
+        example: "The summer camp fee already includes meals, transport, and hotel accommodation."
       },
       {
-        id: "l34_024", word: "schedule", syllable: "sched • ule", phonetic: "/ˈʃed.juːl/", pos: "noun",
+        id: "l34_015", word: "environment", syllable: "en • vi • ron • ment", phonetic: "/ɪnˈvaɪ.rən.mənt/", pos: "noun",
+        topic: "Paper 3 Traps", def_zh: "環境；自然環境", def_en: "the air, water, and land in or on which people, animals, and plants live",
+        basic_word: "nature / surroundings", prep_trap: "Paper 3 必考拼字：千祈唔好漏咗中間個 n (vi-roN-ment)！",
+        collocations: ["protect the environment", "learning environment", "environmentally friendly"],
+        example: "Everyone has a responsibility to protect the environment by reducing single-use plastics."
+      },
+      {
+        id: "l34_016", word: "government", syllable: "gov • ern • ment", phonetic: "/ˈɡʌv.ən.mənt/", pos: "noun",
+        topic: "Paper 3 Traps", def_zh: "政府；當局", def_en: "the group of people who officially control a country",
+        basic_word: "authorities", prep_trap: "Paper 3 & 2 必考拼字：千萬不要漏寫 r 後面的 n (goverN-ment)！",
+        collocations: ["the government should", "government subsidies", "local government"],
+        example: "The government should allocate more resources to support underprivileged families."
+      },
+      {
+        id: "l34_017", word: "necessary", syllable: "nec • es • sar • y", phonetic: "/ˈnes.ə.ser.i/", pos: "adjective",
+        topic: "Paper 3 Traps", def_zh: "必要的；必需的", def_en: "needed in order to achieve a particular result",
+        basic_word: "needed / must", prep_trap: "口訣：1 件襯衫 (1 個 c：c) 配 2 隻襪 (2 個 s：ss) ➔ ne-C-e-SS-ary！",
+        collocations: ["it is necessary for sb to", "take necessary action", "if necessary"],
+        example: "It is necessary for schools to provide professional counselling services for stressed students."
+      },
+      {
+        id: "l34_018", word: "schedule", syllable: "sched • ule", phonetic: "/ˈʃedʒ.uːl/", pos: "noun",
         topic: "Paper 3 Traps", def_zh: "時間表；日程安排", def_en: "a list of planned activities or things to be done showing the times",
-        basic_word: "timetable / plan", prep_trap: "Paper 3 極常考聽音拼字！留意開頭是 sch-，配介詞 on schedule / ahead of schedule",
-        collocations: ["hectic schedule", "tight schedule", "according to schedule"],
-        example: "Despite having a hectic revision schedule, students should still set aside time for daily exercise."
+        basic_word: "timetable / plan", prep_trap: "Paper 3 常考：s-c-h-e-d-u-l-e，配介詞 on schedule (準時) / behind schedule",
+        collocations: ["hectic schedule", "tight schedule", "ahead of schedule"],
+        example: "Despite having a hectic study schedule, we should still squeeze time for physical exercise."
       },
       {
-        id: "l34_025", word: "definitely", syllable: "def • i • nite • ly", phonetic: "/ˈdef.ɪ.nət.li/", pos: "adverb",
-        topic: "Paper 3 Traps", def_zh: "肯定地；絕對地", def_en: "without any doubt; certainly",
-        basic_word: "surely / really", prep_trap: "中段是 fi-nite (de-fi-nite-ly)，千祈唔好串錯做 definately！",
-        collocations: ["definitely benefit from", "definitely worth visiting", "will definitely improve"],
-        example: "Joining the English debate team will definitely boost your confidence in public speaking."
-      },
-      {
-        id: "l34_026", word: "restaurant", syllable: "res • tau • rant", phonetic: "/ˈres.trɒnt/", pos: "noun",
+        id: "l34_019", word: "restaurant", syllable: "res • tau • rant", phonetic: "/ˈres.trɒnt/", pos: "noun",
         topic: "Paper 3 Traps", def_zh: "餐廳；食肆", def_en: "a place where meals are prepared and served to customers",
-        basic_word: "eating place", prep_trap: "Paper 3 聽力常考！中間係 tau (res-tau-rant)，唔好漏寫 u！",
-        collocations: ["local restaurant", "fast-food restaurant", "fine dining restaurant"],
-        example: "Many local restaurants have started offering plant-based menus to promote healthy eating."
+        basic_word: "eating place", prep_trap: "Paper 3 必考拼字：中間是 a-u (res-TAU-rant)，結尾是 -ant！",
+        collocations: ["local restaurant", "fast-food restaurant", "vegetarian restaurant"],
+        example: "More local restaurants are offering plant-based menus to promote healthy eating."
       },
       {
-        id: "l34_027", word: "relieve", syllable: "re • lieve", phonetic: "/rɪˈliːv/", pos: "verb",
-        topic: "Health & Lifestyle", def_zh: "緩解；減輕（壓力或痛楚）", def_en: "to make an unpleasant feeling, such as pain or worry, less strong",
-        basic_word: "make less stress", prep_trap: "拼字順序是 i before e (re-lie-ve)；名詞是 relief",
-        collocations: ["relieve stress", "relieve academic pressure", "relieve traffic congestion"],
-        example: "Listening to soothing music is an effective way for students to relieve exam stress."
+        id: "l34_020", word: "committee", syllable: "com • mit • tee", phonetic: "/kəˈmɪt.i/", pos: "noun",
+        topic: "Paper 3 Traps", def_zh: "委員會", def_en: "a small group of people chosen to represent a larger organization",
+        basic_word: "group / board", prep_trap: "Paper 3 終極陷阱：雙 m、雙 t、雙 e (co-MM-i-TT-EE)！",
+        collocations: ["organizing committee", "student union committee", "committee members"],
+        example: "The organizing committee held a meeting to discuss the budget for the annual school gala."
       },
       {
-        id: "l34_028", word: "harmful", syllable: "harm • ful", phonetic: "/ˈhɑːm.fəl/", pos: "adjective",
-        topic: "Environment & Tech", def_zh: "有害的；造成傷害的", def_en: "causing harm or damage",
-        basic_word: "bad for", prep_trap: "harmful TO (同 beneficial TO 一樣配 to，唔好寫 harmful for)",
-        collocations: ["harmful to eyesight", "harmful chemicals", "harmful effects on"],
-        example: "Staring at smartphone screens in the dark is extremely harmful to teenagers' eyesight."
+        id: "l34_021", word: "questionnaire", syllable: "ques • tion • naire", phonetic: "/ˌkwes.tʃəˈneər/", pos: "noun",
+        topic: "Paper 3 Traps", def_zh: "問卷；調查表", def_en: "a list of questions that several people are asked so that information can be collected",
+        basic_word: "survey form", prep_trap: "Paper 3 常考：question + naire (注意雙 n：question-Naire)！",
+        collocations: ["fill in a questionnaire", "distribute questionnaires", "online questionnaire"],
+        example: "We distributed 200 questionnaires to collect students' opinions on the new canteen menu."
       },
       {
-        id: "l34_029", word: "addicted", syllable: "ad • dict • ed", phonetic: "/əˈdɪk.tɪd/", pos: "adjective",
-        topic: "Environment & Tech", def_zh: "沉迷的；上癮的", def_en: "unable to stop doing or using something as a habit",
-        basic_word: "cannot stop playing", prep_trap: "be addicted TO + V-ing / 名詞 (例如 addicted to playing online games)",
-        collocations: ["become addicted to", "heavily addicted to social media", "addicted to gambling"],
-        example: "Many adolescents have become heavily addicted to scrolling through short videos on social media."
+        id: "l34_022", word: "maintenance", syllable: "main • te • nance", phonetic: "/ˈmeɪn.tən.əns/", pos: "noun",
+        topic: "Paper 3 Traps", def_zh: "維修；保養；維持", def_en: "the work needed to keep a road, building, machine, etc. in good condition",
+        basic_word: "repair / keep", prep_trap: "動詞是 maintain，但名詞中間變成 -ten- (main-TEN-ance)，千祈咪寫 maintainance！",
+        collocations: ["regular maintenance", "facility maintenance", "maintenance fee"],
+        example: "The swimming pool will be temporarily closed next Monday for regular maintenance."
       },
       {
-        id: "l34_030", word: "independent", syllable: "in • de • pend • ent", phonetic: "/ˌɪn.dɪˈpen.dənt/", pos: "adjective",
-        topic: "Campus & Youth", def_zh: "獨立的；自主的", def_en: "not influenced or controlled in any way by other people or things",
-        basic_word: "do things by oneself", prep_trap: "尾段全部係 e (in-de-pend-ent)，千祈唔好寫成 independant！配介詞 independent OF",
-        collocations: ["independent thinking", "financially independent", "become more independent"],
-        example: "Participating in overseas exchange programmes helps students become more independent and mature."
+        id: "l34_023", word: "convenient", syllable: "con • ve • ni • ent", phonetic: "/kənˈviː.ni.ənt/", pos: "adjective",
+        topic: "Environment & Tech", def_zh: "方便的；便利的", def_en: "suitable for your purposes and needs and causing the least difficulty",
+        basic_word: "easy to use", prep_trap: "主詞不能是人！錯：I am convenient. 正確：It is convenient for me to...",
+        collocations: ["convenient public transport", "convenient for commuters", "fast and convenient"],
+        example: "Online shopping is extremely convenient for busy city dwellers."
       },
       {
-        id: "l34_031", word: "Strengthen", syllable: "strength • en", phonetic: "/ˈstreŋ.θən/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "加強；鞏固；強化", def_en: "to make something stronger or more effective",
-        basic_word: "make stronger", prep_trap: "注意串法是 strength + en (唔好漏咗 g 或 h)",
-        collocations: ["strengthen family bonds", "strengthen law enforcement", "strengthen cooperation"],
-        example: "Having dinner together every evening can effectively strengthen family bonds and communication."
+        id: "l34_024", word: "phenomenon", syllable: "phe • nom • e • non", phonetic: "/fəˈnɒm.ɪ.nən/", pos: "noun",
+        topic: "Social Issues", def_zh: "現象；跡象", def_en: "something that exists and can be seen, felt, tasted, etc., especially something unusual",
+        basic_word: "situation / trend", prep_trap: "單數是 phenomenon (配 is/has)，切記留意拼法 phe-no-me-non",
+        collocations: ["common phenomenon", "alarming social phenomenon", "global phenomenon"],
+        example: "Cyberbullying has become an alarming social phenomenon among secondary school students."
       },
       {
-        id: "l34_032", word: "broaden", syllable: "broad • en", phonetic: "/ˈbrɔː.dən/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "擴闊；拓寬（視野或知識）", def_en: "to increase your knowledge, experience, or interests",
-        basic_word: "make wider / learn more", prep_trap: "DSE 萬用王牌片語：broaden one's horizons (記得 horizons 要加 s！)",
-        collocations: ["broaden our horizons", "broaden students' perspectives", "broaden knowledge"],
-        example: "Reading extensively across different genres can broaden students' horizons and enrich their vocabulary."
-      },
-      {
-        id: "l34_033", word: "cultivate", syllable: "cul • ti • vate", phonetic: "/ˈkʌl.tɪ.veɪt/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "培養；建立（良好習慣或品質）", def_en: "to try to develop and improve something",
-        basic_word: "build / develop", prep_trap: "極佳 Level 4 動詞！取代 develop a good habit -> cultivate a positive habit",
-        collocations: ["cultivate a reading habit", "cultivate critical thinking", "cultivate good citizenship"],
-        example: "Primary schools should organize reading schemes to cultivate a lifelong reading habit among pupils."
-      },
-      {
-        id: "l34_034", word: "alleviate", syllable: "al • le • vi • ate", phonetic: "/əˈliː.vi.eɪt/", pos: "verb",
-        topic: "Social Issues", def_zh: "紓緩；減輕（問題、壓力或貧窮）", def_en: "to make something bad such as pain or problems less severe",
-        basic_word: "make less bad / reduce", prep_trap: "記得有兩個 l (al-le-vi-ate)，後面直接跟問題或壓力",
-        collocations: ["alleviate the problem of", "alleviate academic burden", "alleviate poverty"],
-        example: "Building more public rental housing is crucial to alleviate the housing plight of grass-roots citizens."
-      },
-      {
-        id: "l34_035", word: "deteriorate", syllable: "de • te • ri • o • rate", phonetic: "/dɪˈtɪə.ri.ə.reɪt/", pos: "verb",
-        topic: "Health & Lifestyle", def_zh: "惡化；變差；退化", def_en: "to become worse",
-        basic_word: "get worse", prep_trap: "不及物動詞，直接寫 A deteriorates (唔好用被動式 is deteriorated！)",
-        collocations: ["health deteriorates", "air quality deteriorates", "rapidly deteriorate"],
-        example: "Without regular physical activity, office workers' physical fitness will gradually deteriorate."
-      },
-      {
-        id: "l34_036", word: "Obesity", syllable: "o • be • si • ty", phonetic: "/əʊˈbiː.sə.ti/", pos: "noun",
-        topic: "Health & Lifestyle", def_zh: "肥胖症；過度肥胖", def_en: "the fact of being extremely fat, in a way that is dangerous for health",
-        basic_word: "being too fat", prep_trap: "obesity 是名詞 (childhood obesity)；形容詞是 obese (obese children)",
-        collocations: ["childhood obesity", "rising obesity rates", "combat obesity"],
-        example: "High-sugar beverages and sedentary lifestyles are the primary culprits behind childhood obesity."
-      },
-      {
-        id: "l34_037", word: "nutritious", syllable: "nu • tri • tious", phonetic: "/njuːˈtrɪʃ.əs/", pos: "adjective",
-        topic: "Health & Lifestyle", def_zh: "有營養的；滋養的", def_en: "very good for you, containing many substances that help the body grow",
-        basic_word: "healthy food", prep_trap: "形容食物用 nutritious (a nutritious meal)；名詞「營養」是 nutrition",
-        collocations: ["nutritious meals", "nutritious school lunch", "affordable and nutritious"],
-        example: "School canteens should provide freshly cooked, nutritious meals instead of deep-fried snacks."
-      },
-      {
-        id: "l34_038", word: "sustainable", syllable: "sus • tain • a • ble", phonetic: "/səˈsteɪ.nə.bəl/", pos: "adjective",
-        topic: "Environment & Tech", def_zh: "可持續的；環保長遠的", def_en: "causing little or no damage to the environment and therefore able to continue",
-        basic_word: "can last long / green", prep_trap: "DSE 環境題必寫：sustainable development (可持續發展)",
-        collocations: ["sustainable development", "sustainable lifestyle", "environmentally sustainable"],
-        example: "Promoting green tourism is vital for achieving sustainable development in Hong Kong's country parks."
-      },
-      {
-        id: "l34_039", word: "renewable", syllable: "re • new • a • ble", phonetic: "/rɪˈnjuː.ə.bəl/", pos: "adjective",
-        topic: "Environment & Tech", def_zh: "可再生的（能源）", def_en: "renewable forms of energy can be produced as quickly as they are used",
-        basic_word: "clean energy", prep_trap: "常配搭 renewable energy (太陽能、風能等可再生能源)",
-        collocations: ["renewable energy sources", "invest in renewable energy", "shift to renewable power"],
-        example: "Countries worldwide are investing heavily in renewable energy to reduce carbon emissions."
-      },
-      {
-        id: "l34_040", word: "cyberbullying", syllable: "cy • ber • bul • ly • ing", phonetic: "/ˈsaɪ.bəˌbʊl.i.ɪŋ/", pos: "noun",
-        topic: "Environment & Tech", def_zh: "網絡欺凌", def_en: "the activity of using the internet to harm or frighten another person",
-        basic_word: "bullying online", prep_trap: "不可數名詞，常配搭 victims of cyberbullying / combat cyberbullying",
-        collocations: ["victims of cyberbullying", "prevent cyberbullying", "severe cyberbullying"],
-        example: "Schools should hold regular seminars to educate students on how to protect themselves against cyberbullying."
+        id: "l34_025", word: "opportunity", syllable: "op • por • tu • ni • ty", phonetic: "/ˌɒp.əˈtjuː.nə.ti/", pos: "noun",
+        topic: "Campus & Youth", def_zh: "機會；良機", def_en: "an occasion or situation that makes it possible to do something",
+        basic_word: "chance", prep_trap: "provide an opportunity FOR sb TO do sth (雙 p：op-por-tunity)",
+        collocations: ["golden opportunity", "seize the opportunity", "equal opportunity"],
+        example: "The internship programme provides a golden opportunity for students to gain workplace experience."
       }
     ];
 
     // ========================================================
-    // 2. PAPER 2 WRITING SAFETY TEMPLATES (零失分萬用句構)
+    // 2. PAPER 2 WRITING SAFETY TEMPLATES (零失分萬用句構 - 擴充至 20 組)
     // ========================================================
     const DSE_SAFETY_SENTENCES = [
+      // --- 開首與背景 (intro) ---
       {
-        category: "提出問題與背景 (Introduction)",
-        formula: "It is widely acknowledged that [問題] has aroused public concern.",
-        demo: "It is widely acknowledged that excessive smartphone usage among teenagers has aroused profound public concern.",
-        zh_trans: "眾所周知，青少年過度使用智能手機已引起公眾廣泛關注。",
-        dse_tip: "最穩陣的第一段背景句，文法絕對正確，可取代小學生的 'Nowadays, many people use phones.'"
+        group: "intro",
+        category: "🎬 開首段：引出社會熱話背景",
+        formula: "It is widely acknowledged that [問題/現象] has aroused widespread public concern in recent years.",
+        demo: "It is widely acknowledged that excessive smartphone usage among teenagers has aroused widespread public concern in recent years.",
+        zh_trans: "眾所周知，近年青少年過度使用智能手機已引起公眾廣泛關注。",
+        dse_tip: "最穩陣的第一段開頭句，文法 100% 穩妥，徹底取代小學生的 'Nowadays, many people use phones.'"
       },
       {
-        category: "提出主要成因 (Cause)",
-        formula: "One of the primary factors contributing to [問題] is [名詞/V-ing].",
-        demo: "One of the primary factors contributing to adolescent anxiety is the immense academic pressure from examinations.",
-        zh_trans: "導致青少年焦慮的主要因素之一，是來自考試的巨大課業壓力。",
-        dse_tip: "避免寫錯 'contribute to'。後面的名詞片語簡潔有力，考官給分爽快。"
+        group: "intro",
+        category: "🎬 開首段：指出正反爭議 (雙面討論題)",
+        formula: "Opinions are divided on whether [某做法/政策] brings more benefits than drawbacks to our society.",
+        demo: "Opinions are divided on whether abolishing homework brings more benefits than drawbacks to primary school students.",
+        zh_trans: "對於廢除功課對小學生而言是利多於弊還是弊多於利，社會各界意見不一。",
+        dse_tip: "遇到 'Do the advantages outweigh the disadvantages?' 題型時，這句能完美引出正反討論。"
       },
       {
-        category: "提出解決方法 (Solution)",
-        formula: "In order to address this issue, it is recommended that the government should [動詞原形]...",
-        demo: "In order to address this issue, it is recommended that the school authority should organize more stress-relief workshops.",
-        zh_trans: "為了應對這個問題，建議校方應該舉辦更多減壓工作坊。",
-        dse_tip: "提出建議必背！'In order to address this issue' 比普通 'To solve this' 成熟且不易錯。"
+        group: "intro",
+        category: "🎬 開首段：表明個人立場 (Thesis Statement)",
+        formula: "From my perspective, the merits of [某事物/V-ing] far outweigh its shortcomings for the following reasons.",
+        demo: "From my perspective, the merits of participating in voluntary work far outweigh its shortcomings for the following reasons.",
+        zh_trans: "從我的角度來看，參與義務工作的優點遠遠大於其缺點，原因如下。",
+        dse_tip: "放在第一段最後一句作點題句（Thesis Statement），清晰告訴考官你的立場，結構分即加！"
+      },
+
+      // --- 成因、影響與擴展 (body) ---
+      {
+        group: "body",
+        category: "🔗 提出主要成因 (Cause)",
+        formula: "One of the primary factors contributing to [問題] is [名詞 / V-ing].",
+        demo: "One of the primary factors contributing to adolescent anxiety is the immense academic pressure from public examinations.",
+        zh_trans: "導致青少年焦慮的主要因素之一，是來自公開考試的巨大課業壓力。",
+        dse_tip: "牢記 'contributing to' 後面一定要跟名詞或 V-ing，考官看到這個準確搭配會非常讚賞。"
       },
       {
-        category: "雙重論點擴展 (Addition)",
-        formula: "Apart from [論點A], another significant benefit is that...",
-        demo: "Apart from improving physical wellness, another significant benefit of exercising is that it sharpens mental focus.",
-        zh_trans: "除了改善身體健康，做運動另一個顯著好處是能提升精神專注度。",
-        dse_tip: "比只會寫 'Moreover' 或 'Secondly' 自然得多，展示句式變化（Sentence Variety）。"
+        group: "body",
+        category: "🔗 強調重要性 (Topic Sentence 首句)",
+        formula: "First and foremost, [名詞 / V-ing] plays an indispensable role in [V-ing + 名詞].",
+        demo: "First and foremost, regular physical exercise plays an indispensable role in maintaining both physical and mental wellness.",
+        zh_trans: "首先，定期進行體能運動在維持身心健康方面扮演著不可或缺的角色。",
+        dse_tip: "用來寫正文第一段的主題句（Topic Sentence），比寫 'Firstly, exercise is very good' 高出兩個 Grade！"
       },
       {
-        category: "讓步轉折 (Concession)",
-        formula: "Although it is true that [對方看法], it must be noted that [我方反駁].",
-        demo: "Although it is true that tutorial classes offer exam tips, it must be noted that self-discipline is far more crucial for success.",
-        zh_trans: "雖然補習班確實提供應試技巧，但必須指出，自律對於成功更為關鍵。",
-        dse_tip: "寫議論文反駁段（Counter-argument）的安全神句，主句絕對不會寫成 'Although... but...' 這個致命中式文法！"
+        group: "body",
+        category: "🔗 雙重論點遞進擴展 (Addition)",
+        formula: "Apart from [好處A (V-ing)], another significant benefit of [主題] is that it enables students to [動詞原形]...",
+        demo: "Apart from relieving academic stress, another significant benefit of playing team sports is that it enables students to cultivate teamwork skills.",
+        zh_trans: "除了紓緩學業壓力外，參與隊際運動的另一個顯著好處是能讓學生培養團隊合作精神。",
+        dse_tip: "放在正文第二段開頭，做到自然承上啟下（Cohesion），比死板地寫 'Secondly' 流暢得多。"
+      },
+      {
+        group: "body",
+        category: "🔗 具體舉例支持論點 (Giving Examples)",
+        formula: "A notable example is that [主詞 + 動詞], which clearly illustrates how [結論].",
+        demo: "A notable example is that many students suffer from sleep deprivation, which clearly illustrates how heavy workloads harm their health.",
+        zh_trans: "一個顯著的例子是許多學生長期睡眠不足，這清楚說明了繁重的功課如何損害他們的健康。",
+        dse_tip: "避免寫出不完整的句子（如 'For example, sleep deprivation.' 這是文法錯句！），用這個句型保證有主詞有動詞。"
+      },
+      {
+        group: "body",
+        category: "🔗 分析負面惡果 (Negative Consequence)",
+        formula: "If this alarming trend continues, it will inevitably lead to severe consequences for [對象].",
+        demo: "If this alarming trend continues, it will inevitably lead to severe consequences for teenagers' interpersonal relationships.",
+        zh_trans: "如果這個令人擔憂的趨勢持續下去，將無可避免地對青少年的社交關係帶來嚴重後果。",
+        dse_tip: "採用真實條件句（First Conditional: If + 現在式, will + 原形），用於段尾強調問題的嚴重性。"
+      },
+      {
+        group: "body",
+        category: "🔗 說明正面成效 (Positive Effect)",
+        formula: "Not only does [名詞/V-ing] help students [動詞原形 A], but it also allows them to [動詞原形 B].",
+        demo: "Not only does reading extensively help students enrich their vocabulary, but it also allows them to broaden their horizons.",
+        zh_trans: "廣泛閱讀不僅能幫助學生豐富詞彙量，還能讓他們擴闊視野。",
+        dse_tip: "這是唯一建議熟背的「安全版 Not only 倒裝句」，只要背熟 'Not only does X help..., but it also...' 就萬無一失！"
+      },
+
+      // --- 讓步與反駁 (rebut) ---
+      {
+        group: "rebut",
+        category: "⚖️ 讓步轉折 (Concession)",
+        formula: "Although it is true that [對方合理之處], it must be noted that [我方反駁觀點].",
+        demo: "Although it is true that part-time jobs provide pocket money, it must be noted that working long hours can distract students from their studies.",
+        zh_trans: "雖然兼職工作確實能提供零用錢，但必須指出，長時間工作會令學生無心向學。",
+        dse_tip: "寫議論文必備！切記英文有了 Although 就千萬不要在後面加 but，用逗號接 'it must be noted that' 最安全！"
+      },
+      {
+        group: "rebut",
+        category: "⚖️ 駁斥反方觀點 (Refutation)",
+        formula: "Some people may argue that [反方觀點]; however, this view overlooks the fact that [我方有力證據].",
+        demo: "Some people may argue that e-learning is costly; however, this view overlooks the fact that it saves massive printing and commuting expenses in the long run.",
+        zh_trans: "有些人可能會爭辯說電子學習成本高昂；然而，這種觀點忽略了一個事實：長遠而言它能省下龐大的印刷與交通開支。",
+        dse_tip: "考評局極重視考生的 Counter-argument（反駁能力），用 'overlooks the fact that...' 能展現成熟的批判思維。"
+      },
+
+      // --- 建議與結尾 (sol) ---
+      {
+        group: "sol",
+        category: "💡 提出政府/校方建議 (Solution 1)",
+        formula: "In order to tackle this problem effectively, it is necessary for [the government / schools] to [動詞原形]...",
+        demo: "In order to tackle this problem effectively, it is necessary for schools to organize more mental health workshops for students.",
+        zh_trans: "為了有效解決這個問題，校方有必要為學生舉辦更多精神健康工作坊。",
+        dse_tip: "用 'It is necessary for sb to do sth' 結構清晰，不會犯下主詞與動詞不一致的錯誤。"
+      },
+      {
+        group: "sol",
+        category: "💡 強調多方攜手合作 (Joint Effort)",
+        formula: "Only when the government, schools, and parents join hands can we create a better environment for [對象].",
+        demo: "Only when the government, schools, and parents join hands can we create a healthier learning environment for our next generation.",
+        zh_trans: "唯有當政府、學校和家長攜手合作，我們才能為下一代創造更健康的學習環境。",
+        dse_tip: "極受歡迎的結尾金句（萬能三方合作：政府、學校、家長），放在最後一段能瞬間拉高文章立意！"
+      },
+      {
+        group: "sol",
+        category: "💡 總結全文觀點 (Conclusion)",
+        formula: "Taking all the above factors into consideration, I firmly believe that [重申核心立場].",
+        demo: "Taking all the above factors into consideration, I firmly believe that promoting green lifestyles in schools is both urgent and beneficial.",
+        zh_trans: "綜合考慮上述所有因素，我深信在校園推廣綠色生活既迫切又有益。",
+        dse_tip: "取代老套的 'In conclusion, I think...'，用 'Taking all the above factors into consideration' 字數夠、氣勢足！"
+      },
+      {
+        group: "sol",
+        category: "💡 結尾呼籲行動 (Call to Action)",
+        formula: "It is high time that we took immediate action to [動詞原形] before it is too late.",
+        demo: "It is high time that we took immediate action to reduce plastic waste before it is too late.",
+        zh_trans: "現在是我們採取立即行動減少塑膠廢物的時候了，否則將為時已晚。",
+        dse_tip: "注意 'It is high time that we took...' 裡面的 took 用過去式是道地英文慣用法，考官看到必定加分！"
+      },
+
+      // --- 實用文體專用句 (genre) ---
+      {
+        group: "genre",
+        category: "✉️ 讀者來信 (Letter to the Editor) 開首與結尾",
+        formula: "I am writing to express my deep concern over [議題] and suggest practical ways to address it.",
+        demo: "I am writing to express my deep concern over the rising problem of youth cyberbullying and suggest practical ways to address it.",
+        zh_trans: "本人致函是為了表達對青少年網絡欺凌問題日益嚴重的深切關注，並提出切實可行的解決建議。",
+        dse_tip: "DSE 最常考體裁 Letter to the Editor 的標準第一句，直接交代寫信目的（Purpose of writing）。"
+      },
+      {
+        group: "genre",
+        category: "🎤 演講辭 (Speech) 開首互動句",
+        formula: "Good morning Principal, teachers, and fellow schoolmates. Today, I am honoured to share my views on [主題].",
+        demo: "Good morning Principal, teachers, and fellow schoolmates. Today, I am honoured to share my views on how to strike a balance between study and rest.",
+        zh_trans: "校長、各位老師、各位同學早安。今天我很榮幸能與大家分享我對「如何平衡學業與作息」的看法。",
+        dse_tip: "寫 Speech 必須有清晰的招呼語（Greeting），否則 Tone & Register（語體）會被扣分！"
+      },
+      {
+        group: "genre",
+        category: "🎤 演講辭 (Speech) 結尾句",
+        formula: "Thank you for your kind attention, and I hope you will join me in [V-ing] starting from today!",
+        demo: "Thank you for your kind attention, and I hope you will join me in cherishing our mental health starting from today!",
+        zh_trans: "感謝大家的細心聆聽，希望大家從今天起與我一起重視我們的精神健康！",
+        dse_tip: "演講辭結尾切記不可寫 'Yours faithfully'，一定要用這句感謝聽眾並作出號召！"
+      },
+      {
+        group: "genre",
+        category: "📋 建議書 (Proposal) 開首目的與結尾",
+        formula: "The purpose of this proposal is to suggest effective measures to [目標], and I hope these recommendations will be given due consideration.",
+        demo: "The purpose of this proposal is to suggest effective measures to revamp the school library, and I hope these recommendations will be given due consideration.",
+        zh_trans: "本建議書旨在提出翻新學校圖書館的有效措施，期望上述建議能獲予以考慮。",
+        dse_tip: "寫 Proposal 或 Report 時，最適合用小標題（Subheadings）配搭這類莊重客觀的句子。"
+      },
+      {
+        group: "genre",
+        category: "📰 校園雜誌文章 (Article) 吸引讀者開首",
+        formula: "Have you ever wondered why an increasing number of teenagers are struggling with [問題]? Let's take a closer look at this trend.",
+        demo: "Have you ever wondered why an increasing number of teenagers are struggling with smartphone addiction? Let's take a closer look at this trend.",
+        zh_trans: "你有沒有想過，為什麼越來越多青少年深受手機成癮困擾？讓我們一起深入探討這個趨勢。",
+        dse_tip: "寫 Magazine Article 最忌沉悶，用一條提問句（Rhetorical Question）開頭最能拿高 Tone 分數！"
       }
     ];
 
     // ========================================================
-    // 3. PAPER 1 READING STEMS & TONES (閱讀常見提問與語氣詞)
+    // 3. PAPER 1 READING STEMS & TONES (閱讀常見提問與語氣詞 - 擴充至 26 組)
     // ========================================================
     const DSE_READING_ITEMS = [
+      // --- 正面 / 支持態度詞 (pos) ---
       {
-        term: "skeptical / doubtful",
-        type: "負面 / 質疑態度",
-        zh: "懷疑的；半信半疑的",
-        tip: "當文章出現 'questionable', 'hard to believe', 'remains to be seen' 時，作者態度就是 skeptical。"
-      },
-      {
+        group: "pos",
         term: "approving / supportive",
-        type: "正面 / 支持態度",
+        type: "🟢 正面 / 支持態度",
         zh: "贊成的；支持的；肯定的",
-        tip: "當作者列舉某政策或現象的多項好處，並用 'welcome move', 'commendable' 時選此項。"
+        tip: "當作者列舉某政策或現象的多項好處，並使用 'welcome move', 'beneficial', 'a step in the right direction' 時選此項。"
       },
       {
-        term: "objective / neutral",
-        type: "中立 / 客觀態度",
-        zh: "客觀的；中立不偏頗的",
-        tip: "常見於新聞報導或研究報告，只陳述正反雙方數據而不加入個人情緒字眼。"
+        group: "pos",
+        term: "optimistic / hopeful",
+        type: "🟢 正面 / 樂觀態度",
+        zh: "樂觀的；抱有希望的",
+        tip: "作者對未來發展抱有信心，文中常出現 'promising future', 'bright prospect', 'light at the end of the tunnel'。"
       },
       {
+        group: "pos",
+        term: "enthusiastic / eager",
+        type: "🟢 正面 / 熱情態度",
+        zh: "熱情的；熱切的；充滿熱忱的",
+        tip: "語氣非常興奮積極，常出現感嘆號或強烈正面形容詞（如 'thrilled', 'exciting breakthrough', 'cannot wait to'）。"
+      },
+      {
+        group: "pos",
+        term: "appreciative / grateful",
+        type: "🟢 正面 / 感激讚賞",
+        zh: "感激的；欣賞的；讚賞的",
+        tip: "作者對某人（如醫護、義工、父母）的付出表示感謝與肯定，常見字眼有 'thankful', 'owe a debt of gratitude', 'admire'。"
+      },
+      {
+        group: "pos",
+        term: "sympathetic / compassionate",
+        type: "🟢 正面 / 同理關懷",
+        zh: "同情的；富同理心的；體恤的",
+        tip: "作者對弱勢社群、受災者或受苦動物表達憐憫與理解，常見字眼如 'feel sorry for', 'heartbreaking plight', 'pitiful'。"
+      },
+
+      // --- 負面 / 批評 / 質疑態度詞 (neg) ---
+      {
+        group: "neg",
+        term: "skeptical / doubtful",
+        type: "🔴 負面 / 質疑態度 (極常考！)",
+        zh: "懷疑的；半信半疑的",
+        tip: "當文章出現 'questionable', 'hard to believe', 'remains to be seen', 'so-called (所謂的)' 時，作者態度就是 skeptical。"
+      },
+      {
+        group: "neg",
+        term: "critical / disapproving",
+        type: "🔴 負面 / 批評反對",
+        zh: "批評的；不贊成的；指責的",
+        tip: "作者指出某做法的諸多弊端或錯誤，常出現 'short-sighted (短視)', 'flawed', 'unacceptable', 'fail to'。"
+      },
+      {
+        group: "neg",
+        term: "pessimistic / gloomy",
+        type: "🔴 負面 / 悲觀態度",
+        zh: "悲觀的；感到灰暗無望的",
+        tip: "作者認為問題無法解決或情況只會越來越差，常見字眼有 'bleak future', 'hopeless', 'doomed to fail'。"
+      },
+      {
+        group: "neg",
         term: "ironic / sarcastic",
-        type: "反諷 / 挖苦語氣",
-        zh: "諷刺的；說反話的",
-        tip: "表面用正面字眼（如 'What a brilliant idea!'），但實際上在批評一件愚蠢或糟糕的事。"
+        type: "🔴 負面 / 反諷挖苦 (Part B2 必考)",
+        zh: "諷刺的；挖苦的；說反話的",
+        tip: "表面用正面字眼（如 'What a brilliant idea!' 或加上引號的 'experts'），但實際上下文是在批評一件愚蠢的事。"
       },
       {
-        term: "concerned / worried",
-        type: "憂慮 / 關注態度",
-        zh: "憂慮的；擔心的",
-        tip: "作者針對社會問題（如青年精神健康、環境污染）提出警告（'alarming', 'deeply troubling'）。"
+        group: "neg",
+        term: "indignant / outraged",
+        type: "🔴 負面 / 憤慨不平",
+        zh: "憤慨的；義憤填膺的",
+        tip: "作者因為社會不公義、欺凌或欺詐行為而感到憤怒，語氣強烈（如 'shameful', 'disgraceful', 'intolerable'）。"
       },
       {
-        term: "What does 'X' refer to?",
-        type: "Paper 1 必考代名詞題",
-        zh: "代名詞指代題（前文尋寶）",
-        tip: "答案 95% 在該代名詞（it / they / this issue）的前一句或同一句前半部分，切記檢查單複數是否一致！"
+        group: "neg",
+        term: "dismissive / contemptuous",
+        type: "🔴 負面 / 輕視不屑",
+        zh: "不屑一顧的；輕視的；敷衍的",
+        tip: "作者認為某個建議或想法毫無價值、不值得討論，常見字眼如 'ridiculous', 'nonsense', 'not worth considering'。"
       },
       {
-        term: "Which word means the same as...",
-        type: "Paper 1 必考同義詞題",
-        zh: "段落同義詞配對題",
-        tip: "必定要檢查題目要求的詞性（Verb / Noun / Adj）及時態（-ed / -ing / 複數 s），詞性不對直接 0 分！"
+        group: "neg",
+        term: "concerned / worried / alarmed",
+        type: "🔴 憂慮 / 關注態度",
+        zh: "憂慮的；擔心的；憂心忡忡的",
+        tip: "作者針對社會問題（如青年精神健康、環境污染）提出警告，常見 'alarming', 'deeply troubling', 'pose a threat'。"
+      },
+
+      // --- 中立 / 複雜情緒詞 (neu) ---
+      {
+        group: "neu",
+        term: "objective / neutral / impartial",
+        type: "🟡 中立 / 客觀態度",
+        zh: "客觀的；中立不偏頗的",
+        tip: "常見於新聞報導或科學研究，只陳述正反雙方數據與專家引述，不加入作者個人情緒字眼。"
       },
       {
-        term: "What is the main purpose of paragraph X?",
-        type: "Paper 1 段落主旨題",
-        zh: "詢問該段的寫作目的",
-        tip: "重點看該段的第一句（Topic Sentence）及最後一句：常見答案包括 to illustrate（舉例說明）、to contrast（對比）。"
+        group: "neu",
+        term: "ambivalent / mixed feelings",
+        type: "🟡 複雜 / 矛盾態度 (高頻考點)",
+        zh: "矛盾的；喜憂參半的；既愛又怕的",
+        tip: "當作者一方面讚賞某事物（如 AI 科技）的便利，同時又深深擔憂其風險，無法一刀切說是好是壞時選此項！"
+      },
+      {
+        group: "neu",
+        term: "indifferent / apathetic",
+        type: "🟡 冷漠 / 不關心態度",
+        zh: "漠不關心的；冷淡的；無動於衷的",
+        tip: "指某人對發生的事情毫不在乎（如 'could not care less', 'turn a blind eye to', 'shrug off'）。"
+      },
+      {
+        group: "neu",
+        term: "nostalgic / reminiscent",
+        type: "🟡 懷舊 / 感慨態度",
+        zh: "懷舊的；依戀往昔美好時光的",
+        tip: "常見於描寫老香港、舊街坊、童年回憶或傳統手藝消逝的文章，充滿溫暖但帶點惋惜的語氣。"
+      },
+      {
+        group: "neu",
+        term: "humorous / light-hearted",
+        type: "🟡 輕鬆 / 幽默語氣",
+        zh: "幽默風趣的；輕鬆詼諧的",
+        tip: "作者透過自嘲、誇張笑話或有趣的生活小故事來吸引讀者，氣氛輕鬆不嚴肅。"
+      },
+      {
+        group: "neu",
+        term: "cautious / guarded",
+        type: "🟡 審慎 / 保留態度",
+        zh: "審慎的；小心翼翼的；有所保留的",
+        tip: "作者不急於下定論，呼籲大家先觀察更多證據或小心潛在風險（如 'proceed with caution', 'Wait and see'）。"
+      },
+
+      // --- Paper 1 必考題型拆解攻略 (stem) ---
+      {
+        group: "stem",
+        term: "What does 'X' (it / they / this) refer to?",
+        type: "🎯 Paper 1 必考代名詞題",
+        zh: "代名詞指代題（前文尋寶法則）",
+        tip: "答案 95% 在該代名詞的前一句或同一句前半部分！切記：若題目問 'they/these'，你的答案必須是複數名詞；且不要直接照抄整句！"
+      },
+      {
+        group: "stem",
+        term: "Find a word / phrase in paragraph X that means...",
+        type: "🎯 Paper 1 同義詞配對題",
+        zh: "段落同義詞搜尋題（詞性定生死）",
+        tip: "第一件事必定要先看題目定義的詞性！題目是 'to + 原形動詞' 你就要找動詞；題目是 '-ing' 或複數名詞，抄答案時必須完全對齊型態！"
+      },
+      {
+        group: "stem",
+        term: "True / False / Not Given (T/F/NG)",
+        type: "🎯 Paper 1 必考判斷題",
+        zh: "三選一邏輯判斷題（小心比較級陷阱）",
+        tip: "與原文意思相同＝True；與原文直接矛盾相反＝False；原文完全沒提及或「無從比較（如原文只說很受歡迎，題目說『最』受歡迎）」＝Not Given！"
+      },
+      {
+        group: "stem",
+        term: "What is the main purpose / main idea of paragraph X?",
+        type: "🎯 Paper 1 段落主旨題",
+        zh: "詢問段落寫作目的或中心思想",
+        tip: "重點看該段的【第一句 Topic Sentence】及【轉折詞 However 後面的一句】。常見動詞：to illustrate（舉例說明）、to contrast（對比）、to refute（反駁）。"
+      },
+      {
+        group: "stem",
+        term: "Why does the writer mention [某例子/人物]?",
+        type: "🎯 Paper 1 作者意圖題",
+        zh: "詢問作者提及某例子的目的",
+        tip: "作者舉例子從來不是為了講故事，而是為了支持例子【前一句】的論點！答案通常寫：To show / illustrate / prove that + 前一句的核心論點。"
+      },
+      {
+        group: "stem",
+        term: "What does the phrase '[比喻/成語]' suggest / mean?",
+        type: "🎯 Paper 1 隱喻與言外之意題",
+        zh: "解釋修辭比喻或言外之意 (Inference)",
+        tip: "千萬不要只解釋字面意思（Literal meaning）！必須結合上下文，寫出它背後的實際情況（例如 'a double-edged sword' 代表既有好處亦有壞處）。"
+      },
+      {
+        group: "stem",
+        term: "Summary Cloze (填充摘要題)",
+        type: "🎯 Paper 1 詞性轉換填空題",
+        zh: "根據文章內容完成摘要填空",
+        tip: "先看空格前後判斷需要 Noun / Verb / Adj，回原文定位後，特別注意【主詞單複數 (加 s)】、【時態 (加 ed)】或【動名詞 (preposition 後改 V-ing)】！"
+      },
+      {
+        group: "stem",
+        term: "Match the subheadings to the paragraphs",
+        type: "🎯 Paper 1 小標題配對題",
+        zh: "為各段落配對合適的小標題",
+        tip: "先劃掉已使用的例子，圈出每個選項的關鍵字（Keywords）。小心「字眼陷阱」：某段出現了標題的同一個字，往往只是細節，要看全段大意是否吻合！"
       }
     ];
 
@@ -1559,18 +1750,39 @@
     // ========================================================
     // 7. PAPER 2 SAFETY SENTENCES & PAPER 1 READING RENDERING
     // ========================================================
+    let currentSafetyFilter = 'all';
+    let currentReadingFilter = 'all';
+
+    function filterSafety(group) {
+      currentSafetyFilter = group;
+      ['all', 'intro', 'body', 'rebut', 'sol', 'genre'].forEach(g => {
+        const btn = document.getElementById('safety-btn-' + g);
+        if (!btn) return;
+        if (g === group) {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+        }
+      });
+      renderSafetySection();
+    }
+
     function renderSafetySection() {
       const container = document.getElementById('safety-list');
       if (!container) return;
       container.innerHTML = '';
 
-      DSE_SAFETY_SENTENCES.forEach(item => {
+      const filtered = currentSafetyFilter === 'all'
+        ? DSE_SAFETY_SENTENCES
+        : DSE_SAFETY_SENTENCES.filter(item => item.group === currentSafetyFilter);
+
+      filtered.forEach((item, idx) => {
         const safeDemo = item.demo.replace(/'/g, "\\'");
         const box = document.createElement('div');
         box.className = 'p-4 sm:p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5';
         box.innerHTML = `
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="text-xs px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">${item.category}</span>
+            <span class="text-xs px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">#${idx + 1} • ${item.category}</span>
             <button onclick="speakText('${safeDemo}')" class="px-3 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center gap-1 shadow">
               🔊 朗讀示範句
             </button>
@@ -1586,19 +1798,49 @@
       });
     }
 
+    function filterReading(group) {
+      currentReadingFilter = group;
+      const styles = {
+        all: 'text-slate-300',
+        pos: 'text-emerald-300',
+        neg: 'text-rose-300',
+        neu: 'text-amber-300',
+        stem: 'text-sky-300'
+      };
+      ['all', 'pos', 'neg', 'neu', 'stem'].forEach(g => {
+        const btn = document.getElementById('reading-btn-' + g);
+        if (!btn) return;
+        if (g === group) {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white transition';
+        } else {
+          btn.className = `px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 ${styles[g]} hover:bg-slate-700 transition`;
+        }
+      });
+      renderReadingSection();
+    }
+
     function renderReadingSection() {
       const container = document.getElementById('reading-cards-container');
       if (!container) return;
       container.innerHTML = '';
 
-      DSE_READING_ITEMS.forEach(item => {
+      const filtered = currentReadingFilter === 'all'
+        ? DSE_READING_ITEMS
+        : DSE_READING_ITEMS.filter(item => item.group === currentReadingFilter);
+
+      filtered.forEach(item => {
         const cleanSpeech = item.term.split('/')[0].replace(/[^a-zA-Z\s]/g, '').trim();
+        let pillStyle = 'bg-sky-500/15 text-sky-300 border-sky-500/30';
+        if (item.group === 'pos') pillStyle = 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+        if (item.group === 'neg') pillStyle = 'bg-rose-500/15 text-rose-300 border-rose-500/30';
+        if (item.group === 'neu') pillStyle = 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+
         const card = document.createElement('div');
         card.className = 'p-4 rounded-2xl bg-slate-950/90 border border-slate-800 space-y-2 flex flex-col justify-between';
         card.innerHTML = `
           <div class="space-y-1.5">
             <div class="flex items-center justify-between gap-2">
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30 font-semibold">${item.type}</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full border font-semibold ${pillStyle}">${item.type}</span>
               <button onclick="speakText('${cleanSpeech}')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white text-xs font-medium transition">
                 🔊 發音
               </button>
