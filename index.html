@@ -1314,10 +1314,10 @@ async function loadCloud3000Words() {
   if (pill) pill.textContent = '載入官方 2000+ 字庫中...';
 
   // 👉 將此處換成你的 GitHub Raw 或 jsDelivr 連結：
-  const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/saiyeung1214/hkdse-eng34/refs/heads/main/dse_eng_vocab_all_2000.json';
+  const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/saiyeung1214/hkdse-eng34/refs/heads/main/dse_eng_vocab_all_3000.json';
 
   try {
-    const res = await fetch('./dse_eng_vocab_all_2000.json', { cache: 'no-store' });
+    const res = await fetch('./dse_eng_vocab_all_3000.json', { cache: 'no-store' });
     if (res.ok) {
       const cloudData = await res.json();
       if (Array.isArray(cloudData) && cloudData.length > 0) {
