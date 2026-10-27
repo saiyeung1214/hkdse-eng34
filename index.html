@@ -1306,64 +1306,54 @@
       } catch (_) {}
     }
 
-    // 自動從雲端字庫擴充至 3,000+ 個適合 DSE Level 3-4 的常用高頻詞彙
-    async function loadCloud3000Words() {
-      const pill = document.getElementById('cloud-status-pill');
-      try {
-        try {
-          const localRes = await fetch('./words.json', { cache: 'no-store' });
-          if (localRes.ok) {
-            const localData = await localRes.json();
-            if (Array.isArray(localData) && localData.length > 0) {
-              const existingSet = new Set(words.map(w => w.word.toLowerCase()));
-              localData.forEach((raw, idx) => {
-                if (raw && raw.word && !existingSet.has(raw.word.toLowerCase())) {
-                  words.push(normalizeWordItem(raw, idx));
-                  existingSet.add(raw.word.toLowerCase());
-                }
-              });
-            }
-          }
-        } catch (_) {}
 
-        if (words.length < 3000) {
-          const res = await fetch('https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-usa-no-swears-medium.txt');
-          if (res.ok) {
-            const text = await res.text();
-            const rawList = text.split('\n')
-              .map(w => w.trim().toLowerCase())
-              .filter(w => w.length >= 5 && w.length <= 12 && /^[a-z]+$/.test(w));
 
-            const existingSet = new Set(words.map(w => w.word.toLowerCase()));
-            const topics = ['Campus & Youth', 'Social Issues', 'Health & Lifestyle', 'Environment & Tech'];
-            for (const w of rawList) {
-              if (!existingSet.has(w)) {
-                existingSet.add(w);
-                words.push(normalizeWordItem({
-                  word: w,
-                  topic: topics[words.length % topics.length],
-                  isCloud: true
-                }, words.length));
-              }
-              if (words.length >= 3050) break;
-            }
+// 自動從 GitHub 預設載入你的專屬 DSE 字庫
+async function loadCloud3000Words() {
+  const pill = document.getElementById('cloud-status-pill');
+  if (pill) pill.textContent = '載入官方 2000+ 字庫中...';
+
+  // 👉 將此處換成你的 GitHub Raw 或 jsDelivr 連結：
+  const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/saiyeung1214/hkdse-eng34/refs/heads/main/dse_eng_vocab_all_2000.json';
+
+  try {
+    const res = await fetch('./dse_eng_vocab_all_2000.json', { cache: 'no-store' });
+    if (res.ok) {
+      const cloudData = await res.json();
+      if (Array.isArray(cloudData) && cloudData.length > 0) {
+        const existingSet = new Set(words.map(w => w.word.toLowerCase()));
+        let addedCount = 0;
+
+        cloudData.forEach((raw, idx) => {
+          if (raw && raw.word && !existingSet.has(raw.word.toLowerCase())) {
+            // 自動標準化單字並排入詞庫
+            words.push(normalizeWordItem(raw, idx));
+            existingSet.add(raw.word.toLowerCase());
+            addedCount++;
           }
-        }
+        });
 
         if (pill) {
-          pill.textContent = `已載入 ${words.length} 字庫`;
+          pill.textContent = `已載入 ${words.length} 個必背詞彙`;
         }
-      } catch (err) {
-        if (pill) {
-          pill.textContent = `精選核心字庫 (${words.length} 字)`;
-        }
+        showToast(`🎉 成功同步載入 ${addedCount} 個 DSE 核心詞彙！`);
       }
-
-      updateDashboardStats();
-      if (reviewFilter === 'all') buildReviewQueue();
-      renderWordBank();
+    } else {
+      throw new Error('GitHub 讀取失敗');
     }
+  } catch (err) {
+    console.warn('雲端字庫載入異常，使用本地核心字庫：', err);
+    if (pill) {
+      pill.textContent = `精選核心字庫 (${words.length} 字)`;
+    }
+  }
 
+  // 重新計算進度指標與更新介面
+  updateDashboardStats();
+  buildReviewQueue();
+  renderCurrentCard();
+  renderWordBank();
+}
     // 當抽考 3000 雲端生字時，自動即時載入真實音標、中英解釋與字典真實例句（絕不生成罐頭例句或考官捉錯位）
     async function ensureWordDetailsLoaded(item) {
       if (!item || !item.isCloud) return;
