@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>CAC DSE Eng 保3衝4 系統2.0</title>
+  <title>CAC DSE Eng 保3衝4 系統 3.0</title>
   <!-- iOS Web App (PWA) 專屬全螢幕運作設定 -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="CAC 保3衝42.0" />
+  <meta name="apple-mobile-web-app-title" content="CAC 保3衝4 3.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
@@ -35,7 +35,6 @@
 
     /* =========================================================
        ☀️ 白底護眼 / 模擬考場模式 (Light Mode) 智能優化樣式
-       徹底解決漸層背景與淺色標籤在白底看不清的問題
        ========================================================= */
     html.light body {
       background-color: #f1f5f9 !important;
@@ -46,7 +45,6 @@
       background-color: rgba(255, 255, 255, 0.96) !important;
       border-color: #cbd5e1 !important;
     }
-    /* 修正閃卡正面漸層在白底模式未變白的問題 */
     html.light .bg-gradient-to-b,
     html.light .from-slate-900,
     html.light .to-slate-900\/95 {
@@ -82,7 +80,6 @@
     html.light .border-slate-700\/70 {
       border-color: #cbd5e1 !important;
     }
-    /* 確保所有淺色文字在白底轉為高對比深色 */
     html.light .text-white,
     html.light .text-slate-100,
     html.light .text-slate-200 {
@@ -115,7 +112,6 @@
     html.light .text-rose-200 {
       color: #9f1239 !important;
     }
-    /* 強化白底模式下的半透明色塊底色，令文字更清晰 */
     html.light .bg-emerald-500\/10,
     html.light .bg-emerald-500\/15,
     html.light .bg-emerald-500\/20 {
@@ -143,7 +139,6 @@
       border-color: #7dd3fc !important;
       color: #0369a1 !important;
     }
-    /* 保持實心彩色按鈕在白底模式下依然顯示純白字 */
     html.light .bg-emerald-600,
     html.light .bg-sky-600,
     html.light .bg-indigo-600,
@@ -155,11 +150,51 @@
     html.light .hover\:bg-sky-600:hover {
       color: #ffffff !important;
     }
-    html.light .bg-emerald-600 *,
-    html.light .bg-sky-600 *,
-    html.light .bg-amber-600 *,
-    html.light .bg-rose-600 * {
-      color: #ffffff !important;
+
+    /* =========================================================
+       🖨️ A4 實體工作紙 / 默書紙列印專屬樣式 (@media print)
+       ========================================================= */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      header,
+      footer,
+      #toast-banner,
+      #dashboard-stats-strip,
+      #view-review,
+      #view-blitz,
+      #view-dictation,
+      #view-safety,
+      #view-reading,
+      #view-speaking,
+      #view-bank,
+      .no-print {
+        display: none !important;
+      }
+      main {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #view-toolkit {
+        display: block !important;
+      }
+      #printable-worksheet-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      #worksheet-preview-paper {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
     }
   </style>
 </head>
@@ -168,22 +203,24 @@
   <!-- Top Navigation Header -->
   <header class="border-b border-slate-800/80 bg-slate-900/90 backdrop-blur-md sticky top-0 z-30 transition-colors">
     <div class="max-w-5xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-2">
-      <!-- Brand Logo / Badge -->
       <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-sky-600 flex items-center justify-center font-black text-white shadow-lg shadow-emerald-500/20 text-sm">
-          3-4
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-sky-600 flex items-center justify-center font-black text-white shadow-lg shadow-emerald-500/20 text-xs">
+          3.0
         </div>
         <div>
           <h1 class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center flex-wrap gap-2">
-            CAC DSE Eng 保3衝4 系統2.0
+            CAC DSE Eng 保3衝4 系統 3.0
             <span id="cloud-status-pill" class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">載入 3000+ 字庫中...</span>
           </h1>
-          <p class="text-[11px] text-slate-400">介詞避伏 • 零失分升Grade替換 • Paper 3 必備聽音拼字 • 寫作保分骨架</p>
+          <p class="text-[11px] text-slate-400">介詞排雷 • PEEL 積木造句 • 搭車連播 • Paper 4 口試 • 溫習打卡與錯題默書紙</p>
         </div>
       </div>
 
-      <!-- Quick Actions (Theme, Import, Backup) -->
       <div class="flex items-center gap-1.5 sm:gap-2">
+        <button onclick="switchTab('toolkit')" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="生成溫習打卡圖或列印個人化錯題默書紙">
+          <span>🎫 打卡 / 印默書紙</span>
+        </button>
+
         <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm" title="切換黑底夜間模式或白底考場模式">
           <span id="theme-icon">☀️</span>
           <span id="theme-label">白底考場</span>
@@ -203,7 +240,6 @@
     <!-- Voice Accent, Speech Speed & Font Size Control Bar -->
     <div class="max-w-5xl mx-auto px-4 py-1.5 border-t border-slate-800/50 flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="flex flex-wrap items-center gap-3">
-        <!-- 發音選擇 -->
         <div class="flex items-center gap-1.5">
           <span class="text-slate-400 font-medium">發音：</span>
           <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
@@ -216,7 +252,6 @@
           </div>
         </div>
 
-        <!-- 字體大小調整 -->
         <div class="flex items-center gap-1.5">
           <span class="text-slate-400 font-medium">字體大小：</span>
           <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
@@ -228,7 +263,6 @@
         </div>
       </div>
 
-      <!-- 語速調整 -->
       <div class="flex items-center gap-1">
         <span class="text-slate-400 font-medium">語速：</span>
         <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
@@ -245,6 +279,10 @@
         <span>📇 保分閃卡</span>
         <span id="due-badge" class="px-1.5 py-0.5 text-[10px] rounded-full bg-emerald-500/20 text-emerald-300 font-bold">0</span>
       </button>
+      <button onclick="switchTab('blitz')" id="tab-blitz" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
+        <span>⚠️ 介詞排雷快閃</span>
+        <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-rose-500/20 text-rose-300 font-bold">NEW</span>
+      </button>
       <button onclick="switchTab('dictation')" id="tab-dictation" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
         <span>🎧 Paper 3 必串生字特訓</span>
       </button>
@@ -253,6 +291,14 @@
       </button>
       <button onclick="switchTab('reading')" id="tab-reading" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
         <span>📖 Paper 1 提問與態度詞</span>
+      </button>
+      <button onclick="switchTab('speaking')" id="tab-speaking" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
+        <span>🎙️ Paper 4 口試特訓</span>
+        <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-sky-500/20 text-sky-300 font-bold">NEW</span>
+      </button>
+      <button onclick="switchTab('toolkit')" id="tab-toolkit" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
+        <span>🎓 交功課與錯題紙</span>
+        <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-500/20 text-amber-300 font-bold">NEW</span>
       </button>
       <button onclick="switchTab('bank')" id="tab-bank" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
         <span>📚 3000核心字庫</span>
@@ -270,7 +316,7 @@
   <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-5 space-y-5">
 
     <!-- Progress Dashboard Strip -->
-    <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+    <section id="dashboard-stats-strip" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
       <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex flex-col justify-between">
         <span class="text-xs text-slate-400 font-medium">今日待溫習</span>
         <div class="mt-1 flex items-baseline justify-between">
@@ -305,7 +351,6 @@
          VIEW 1: LEVEL 3-4 FLASHCARD REVIEW (保分閃卡)
          ======================================================== -->
     <section id="view-review" class="space-y-4">
-      <!-- Filter Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-2.5 rounded-2xl">
         <div class="flex flex-wrap items-center gap-1.5">
           <span class="text-xs text-slate-400 mr-1">目標：</span>
@@ -322,14 +367,28 @@
             🎲 全部 3000 字隨機
           </button>
         </div>
-        <div class="flex items-center gap-2 text-xs text-slate-400">
+        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-400">
+          <button onclick="toggleAutoPlayLoop()" id="btn-autoplay-loop" class="px-3 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-600 text-sky-300 hover:text-white border border-sky-500/30 font-bold transition flex items-center gap-1 shadow-sm" title="免動手自動循環播放：英文單字 ➔ 中文意思 ➔ 英文例句">
+            <span id="autoplay-icon">🎧</span>
+            <span id="autoplay-label">搭車自動連播</span>
+          </button>
           <button onclick="prevCard()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">⬅️ 上一個</button>
           <span id="card-counter" class="text-slate-200 font-bold">1 / 1</span>
           <button onclick="nextCardManual()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">下一個 ➡️</button>
         </div>
       </div>
 
-      <!-- Flashcard Interactive Box -->
+      <!-- 搭車自動連播狀態提示列 -->
+      <div id="autoplay-banner" class="hidden max-w-2xl mx-auto bg-sky-500/15 border border-sky-500/40 rounded-2xl px-4 py-2.5 items-center justify-between gap-2 text-xs text-sky-300">
+        <div class="flex items-center gap-2 font-semibold">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping"></span>
+          <span id="autoplay-step-text">🎧 搭車磨耳朵連播中：正在朗讀單字...</span>
+        </div>
+        <button onclick="stopAutoPlayLoop()" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold transition">
+          ⏹️ 停止連播
+        </button>
+      </div>
+
       <div class="relative w-full max-w-2xl mx-auto">
         <div id="flashcard-container" class="perspective-1000 w-full h-[500px] sm:h-[520px] cursor-pointer select-none" onclick="flipCard(event)">
           <div id="flashcard-inner" class="w-full h-full relative transform-style-3d card-transition">
@@ -345,7 +404,6 @@
               </div>
 
               <div class="text-center my-auto space-y-3.5 py-2">
-                <!-- Syllable breakdown for easy spelling -->
                 <p id="card-syllable" class="text-xs uppercase tracking-widest text-emerald-400 font-semibold font-mono">ben • e • fi • cial</p>
                 <h2 id="card-word" class="text-4xl sm:text-5xl font-black tracking-tight text-white break-words">beneficial</h2>
                 
@@ -356,13 +414,11 @@
                   </button>
                 </div>
 
-                <!-- Safe Replacement Pill (Level 2 -> Level 3/4) -->
                 <div id="front-replace-pill" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs max-w-full">
                   <span class="font-bold">⚡ 戒除平庸字：取代</span>
                   <span id="front-replace-basic" class="font-bold text-white underline decoration-amber-400">good / helpful</span>
                 </div>
 
-                <!-- Preposition Trap Alert Badge (只在精選詞且有專屬考官捉錯位時顯示，3000隨機字不顯示) -->
                 <div id="front-prep-alert" class="block">
                   <span class="px-3 py-1 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold inline-block">
                     ⚠️ 考官捉錯位：<span id="front-prep-word" class="underline font-bold text-white">beneficial TO</span>
@@ -371,16 +427,13 @@
               </div>
 
               <div class="text-center">
-                <p class="text-xs text-slate-400">
-                  👆 點擊卡片翻面看中文釋義、搭配詞與實戰用法
-                </p>
+                <p class="text-xs text-slate-400">👆 點擊卡片翻面看中文釋義、搭配詞與實戰用法</p>
               </div>
             </div>
 
             <!-- BACK OF CARD -->
             <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-slate-900 border-2 border-emerald-500/40 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-2xl overflow-y-auto">
               <div class="space-y-3">
-                <!-- Header on back -->
                 <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2">
                   <div class="flex items-center gap-2">
                     <h3 id="back-word" class="text-xl sm:text-2xl font-bold text-white">beneficial</h3>
@@ -392,26 +445,22 @@
                   <span id="back-syllable-display" class="text-xs text-slate-400 font-mono">音節: ben-e-fi-cial</span>
                 </div>
 
-                <!-- Definition Box -->
                 <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3">
                   <span class="text-[11px] font-semibold text-emerald-400 block mb-0.5">📖 中文準確釋義</span>
                   <p id="back-def-zh" class="text-base sm:text-lg font-bold text-emerald-300">有益的；有利的</p>
                   <p id="back-def-en" class="text-xs text-slate-300 mt-0.5">helpful, useful, or producing good results</p>
                 </div>
 
-                <!-- Preposition & Grammar Trap (3000隨機字或無特定陷阱時自動隱藏) -->
                 <div id="back-trap-box" class="bg-rose-500/10 border border-rose-500/30 rounded-2xl p-3">
                   <span class="text-xs font-bold text-rose-300 block mb-1">🚨 評卷員扣分黑點（千祈咪寫錯！）：</span>
                   <p id="back-trap-tip" class="text-xs text-slate-200 leading-relaxed font-medium"></p>
                 </div>
 
-                <!-- Safe Level 3/4 Collocations -->
                 <div id="back-collocations-box">
                   <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">🔗 保分安全搭配詞（點擊發聲跟讀）</span>
                   <div id="back-collocations" class="flex flex-wrap gap-1.5"></div>
                 </div>
 
-                <!-- DSE Exam Context / Safe Sentence (如沒有真實例句則自動隱藏，絕不生成重複罐頭句) -->
                 <div id="back-example-box" class="bg-slate-950/80 border border-slate-800/90 rounded-2xl p-3">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-semibold text-amber-400">📝 實戰示範例句</span>
@@ -429,7 +478,6 @@
           </div>
         </div>
 
-        <!-- Rating Buttons (SRS) -->
         <div class="mt-4 grid grid-cols-3 gap-3">
           <button onclick="rateCard('forgot')" class="group py-3 px-3 rounded-2xl bg-rose-500/15 hover:bg-rose-600 border border-rose-500/30 hover:border-rose-500 text-rose-300 hover:text-white transition flex flex-col items-center justify-center shadow-md active:scale-95">
             <span class="font-bold text-sm sm:text-base">❌ 唔熟 (1)</span>
@@ -445,13 +493,91 @@
           </button>
         </div>
 
-        <!-- Personal Sentence Practice -->
         <div class="mt-3 bg-slate-900/70 border border-slate-800 rounded-2xl p-3.5">
           <div class="flex items-center justify-between mb-1.5">
             <label for="user-note-input" class="text-xs font-medium text-slate-400">💡 考生造句練習（輸入後自動儲存，加深印象）：</label>
             <span id="note-saved-indicator" class="text-xs text-emerald-400 opacity-0 transition">✓ 已保存</span>
           </div>
           <input id="user-note-input" type="text" oninput="saveUserNote(this.value)" placeholder="試下用呢個生字造一句短句或記低筆記..." class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-slate-200 placeholder-slate-500 outline-none transition" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         VIEW 1.5 (NEW IN 3.0): GRAMMAR & PREP TRAP BLITZ (介詞快閃四選一)
+         ======================================================== -->
+    <section id="view-blitz" class="hidden max-w-2xl mx-auto space-y-5">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">3.0 語法搶分新功能</span>
+              <span id="blitz-pool-count" class="text-xs text-slate-400 font-medium">題庫載入中...</span>
+            </div>
+            <h2 class="text-xl font-black text-white mt-1">⚠️ 介詞與搭配詞快閃排雷 (Prep & Collocation Blitz)</h2>
+            <p class="text-xs text-slate-400 mt-0.5">專治 Paper 2 寫錯介詞！答錯自動納入「唔熟」清單。</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="setBlitzMode('endless')" id="blitz-mode-endless" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition">
+              ♾️ 無限刷題
+            </button>
+            <button onclick="startBlitzTimed60()" id="blitz-mode-timed" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-amber-600 text-slate-200 hover:text-white border border-slate-700 transition">
+              ⏱️ 60秒挑戰
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2.5 bg-slate-950/90 border border-slate-800 rounded-2xl p-3 text-center">
+          <div>
+            <span class="text-[11px] text-slate-400 block">目前連勝 (Streak)</span>
+            <span id="blitz-streak" class="text-xl sm:text-2xl font-black text-emerald-400">0 🔥</span>
+          </div>
+          <div class="border-x border-slate-800">
+            <span class="text-[11px] text-slate-400 block">答題準確率</span>
+            <span id="blitz-accuracy" class="text-xl sm:text-2xl font-black text-sky-400">100%</span>
+          </div>
+          <div>
+            <span id="blitz-timer-label" class="text-[11px] text-slate-400 block">最佳連勝紀錄</span>
+            <span id="blitz-timer-display" class="text-xl sm:text-2xl font-black text-amber-400">0 🏆</span>
+          </div>
+        </div>
+
+        <div id="blitz-question-box" class="bg-slate-950 border-2 border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span id="blitz-target-word" class="px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-black text-sm">beneficial</span>
+              <span id="blitz-target-pos" class="text-xs font-mono text-slate-400">adj.</span>
+              <span id="blitz-target-zh" class="text-xs font-bold text-amber-300">有益的</span>
+            </div>
+            <button onclick="speakBlitzSentence()" class="px-3 py-1 rounded-xl bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white text-xs font-semibold transition flex items-center gap-1">
+              <span>🔊 聽原句發音</span>
+            </button>
+          </div>
+
+          <div class="py-3">
+            <p id="blitz-sentence" class="text-base sm:text-lg font-semibold text-white leading-relaxed tracking-wide">
+              Doing regular physical exercise is extremely beneficial <span class="px-3 py-0.5 mx-1 rounded-lg bg-amber-500/20 border-b-2 border-amber-400 text-amber-300 font-mono">____</span> both our physical and mental health.
+            </p>
+          </div>
+
+          <div id="blitz-options" class="grid grid-cols-2 gap-3 pt-1"></div>
+        </div>
+
+        <div id="blitz-feedback-box" class="hidden rounded-2xl p-4 space-y-2 border">
+          <div class="flex items-center justify-between">
+            <span id="blitz-feedback-title" class="font-extrabold text-sm"></span>
+            <button onclick="nextBlitzQuestion()" class="px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow">
+              下一題 (Space / Enter) →
+            </button>
+          </div>
+          <p id="blitz-feedback-trap" class="text-xs text-slate-200 leading-relaxed"></p>
+          <p id="blitz-feedback-collocations" class="text-xs text-emerald-300 font-mono"></p>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+          <span>💡 支援快捷鍵：按 <strong class="text-slate-200">1 - 4</strong> 選答案，按 <strong class="text-slate-200">Space</strong> 下一題</span>
+          <button onclick="nextBlitzQuestion()" class="text-slate-300 hover:text-white font-semibold underline">跳過此題 →</button>
         </div>
       </div>
     </section>
@@ -465,7 +591,7 @@
           <div>
             <span class="text-xs font-semibold uppercase tracking-wider text-rose-400">Paper 3 必備保分特訓</span>
             <h2 class="text-xl font-bold text-white mt-0.5">🎧 DSE 聽音拼字特訓 (最常串錯重災區)</h2>
-            <p class="text-xs text-slate-400 mt-1">DSE 考生常在聽力填空漏掉 'n' 或雙寫字母，差一個字母就無 1 分！</p>
+            <p class="text-xs text-slate-400 mt-1">DSE 考生常在聽力填空漏掉字母，差一個字母就無 1 分！</p>
           </div>
           <div class="text-right">
             <span class="text-xs text-slate-400 block">連續答啱</span>
@@ -487,7 +613,6 @@
           <p id="dict-cloze-sentence" class="text-xs sm:text-sm text-slate-300 italic pt-1"></p>
         </div>
 
-        <!-- Input Box -->
         <div class="space-y-3">
           <div class="flex gap-2">
             <input id="dict-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="請輸入英文單字..." onkeydown="if(event.key==='Enter') checkDictation()" class="flex-1 bg-slate-950 border-2 border-slate-800 focus:border-emerald-500 rounded-2xl px-4 py-3 text-base font-mono text-white outline-none transition" />
@@ -506,31 +631,113 @@
     </section>
 
     <!-- ========================================================
-         VIEW 3: PAPER 2 SAFETY SENTENCE TEMPLATES (零失分萬用句構)
+         VIEW 3: PAPER 2 SAFETY SENTENCES & PEEL BUILDER (句構 + 積木造句與平庸字雷達)
          ======================================================== -->
     <section id="view-safety" class="hidden space-y-4">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-5">
-        <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">🛡️ 專為 DSE 考生打造的寫作保分骨架 (共 20 組必背句構)</span>
-            <h2 class="text-xl font-black text-white mt-0.5">DSE Paper 2 零失分安全萬用句型 (點擊即可發聲)</h2>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">🛡️ Paper 2 寫作保 3 衝 4 雙引擎</span>
+            <h2 class="text-xl font-black text-white mt-0.5">DSE 零失分萬用句構 • PEEL 積木造句與平庸字雷達</h2>
             <p class="text-xs text-slate-400 mt-1">
-              目標 Level 3-4 不需要寫過長過險的倒裝句。掌握以下結構嚴謹、考官挑不出文法毛病的 20 組金句框架，足以讓 Language 與 Organization 分數穩袋 4 分：
+              掌握 20 組零失分金句框架，或使用全新「積木造句工作台」一鍵組裝段落並自動掃描平庸字！
             </p>
+          </div>
+
+          <div class="flex items-center bg-slate-950 p-1 rounded-2xl border border-slate-800">
+            <button onclick="switchSafetySubmode('templates')" id="safety-submode-templates" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition flex items-center gap-1.5 shadow">
+              <span>📋 20組必背句構</span>
+            </button>
+            <button onclick="switchSafetySubmode('builder')" id="safety-submode-builder" class="px-3.5 py-2 rounded-xl text-xs font-bold text-amber-300 hover:text-white transition flex items-center gap-1.5">
+              <span>✍️ 積木造句 & 平庸字雷達</span>
+              <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">NEW</span>
+            </button>
           </div>
         </div>
 
-        <!-- Safety Category Filter Pills -->
-        <div class="flex flex-wrap gap-1.5 pt-1 border-b border-slate-800 pb-3">
-          <button onclick="filterSafety('all')" id="safety-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition">全部句型 (20)</button>
-          <button onclick="filterSafety('intro')" id="safety-btn-intro" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🎬 開首與背景</button>
-          <button onclick="filterSafety('body')" id="safety-btn-body" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🔗 成因、影響與擴展</button>
-          <button onclick="filterSafety('rebut')" id="safety-btn-rebut" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⚖️ 讓步與反駁</button>
-          <button onclick="filterSafety('sol')" id="safety-btn-sol" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">💡 建議與結尾</button>
-          <button onclick="filterSafety('genre')" id="safety-btn-genre" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✉️ 實用文體專用 (信件/演講/建議書)</button>
+        <!-- SUBVIEW 3A: 20 SAFETY SENTENCE TEMPLATES -->
+        <div id="safety-subview-templates" class="space-y-4">
+          <div class="flex flex-wrap gap-1.5 pt-1 border-b border-slate-800 pb-3">
+            <button onclick="filterSafety('all')" id="safety-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition">全部句型 (20)</button>
+            <button onclick="filterSafety('intro')" id="safety-btn-intro" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🎬 開首與背景</button>
+            <button onclick="filterSafety('body')" id="safety-btn-body" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🔗 成因、影響與擴展</button>
+            <button onclick="filterSafety('rebut')" id="safety-btn-rebut" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⚖️ 讓步與反駁</button>
+            <button onclick="filterSafety('sol')" id="safety-btn-sol" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">💡 建議與結尾</button>
+            <button onclick="filterSafety('genre')" id="safety-btn-genre" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">✉️ 實用文體專用</button>
+          </div>
+
+          <div id="safety-list" class="space-y-3.5"></div>
         </div>
 
-        <div id="safety-list" class="space-y-3.5"></div>
+        <!-- SUBVIEW 3B (NEW): PEEL PARAGRAPH BUILDER & WEAK WORD RADAR -->
+        <div id="safety-subview-builder" class="hidden space-y-5">
+          <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-xs font-bold text-emerald-400">STEP 1：選擇 DSE 常見議論文主題（點擊下方積木即可插入段落）</span>
+              <button onclick="loadSampleWeakParagraph()" class="px-3 py-1 rounded-xl bg-amber-500/15 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-semibold transition">
+                🧪 載入「充滿平庸字」示範段落試玩雷達
+              </button>
+            </div>
+            <div class="flex flex-wrap gap-2" id="peel-topic-tabs">
+              <button onclick="selectPeelTopic('stress')" id="peel-topic-stress" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition">🧠 學業壓力與精神健康</button>
+              <button onclick="selectPeelTopic('tech')" id="peel-topic-tech" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">📱 智能手機與電子學習</button>
+              <button onclick="selectPeelTopic('env')" id="peel-topic-env" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🌱 環保減塑與綠色生活</button>
+              <button onclick="selectPeelTopic('youth')" id="peel-topic-youth" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🎓 課外活動與兼職實習</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="peel-blocks-grid"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+            <div class="lg:col-span-7 bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-white">📝 段落組裝與寫作練習區</span>
+                  <span id="peel-word-count" class="px-2 py-0.5 rounded-full bg-slate-800 text-emerald-400 text-[11px] font-mono font-bold">0 words</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="speakBuilderParagraph()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1">
+                    🔊 朗讀全段
+                  </button>
+                  <button onclick="copyBuilderParagraph()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition">
+                    📋 複製
+                  </button>
+                  <button onclick="clearBuilderParagraph()" class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-600 text-rose-300 hover:text-white text-xs font-medium transition">
+                    清空
+                  </button>
+                </div>
+              </div>
+
+              <textarea id="peel-editor" rows="7" oninput="analyzeBuilderParagraph()" placeholder="點擊上方 PEEL 積木組裝段落，或在此直接輸入/貼上你的英文作文段落..." class="w-full bg-slate-900/90 border border-slate-800 focus:border-emerald-500 rounded-xl p-3.5 text-sm text-slate-100 placeholder-slate-500 leading-relaxed outline-none transition resize-y"></textarea>
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 pt-1">
+                <span>💡 目標：每段議論文正文建議寫 <strong>80 - 120 字</strong></span>
+                <span id="peel-structure-badge" class="text-emerald-400 font-semibold"></span>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div>
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-sm">📡</span>
+                    <h3 class="text-xs sm:text-sm font-extrabold text-amber-300">平庸字與港式英語雷達</h3>
+                  </div>
+                  <span id="radar-issue-count" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">0 個可升級位</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-2">
+                  自動偵測文中的平庸字。點擊綠色膠囊即可<strong>一鍵替換成 Level 4 高分字</strong>：
+                </p>
+
+                <div id="radar-suggestions-list" class="mt-3 space-y-2.5 max-h-[270px] overflow-y-auto pr-1"></div>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800/90 text-[11px] text-slate-400">
+                🎯 <strong class="text-slate-200">評卷員貼士：</strong>每段換走 3–4 個平庸字，Language 分即刻坐 3 望 4！
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -542,19 +749,142 @@
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-sky-400">📖 Paper 1 閱讀卷看懂題目與態度關鍵 (共 26 組核心考點)</span>
           <h2 class="text-xl font-black text-white mt-0.5">DSE 常見語氣態度詞 (Tone & Attitude) 與必考題型拆解</h2>
-          <p class="text-xs text-slate-400 mt-1">很多同學不是文章讀不懂，而是題目問法看錯或態度詞不認識！點擊分類可篩選溫習，點擊發音可跟讀：</p>
+          <p class="text-xs text-slate-400 mt-1">點擊分類可篩選溫習，點擊發音可跟讀：</p>
         </div>
 
-        <!-- Reading Filter Pills -->
         <div class="flex flex-wrap gap-1.5 pt-1 border-b border-slate-800 pb-3">
           <button onclick="filterReading('all')" id="reading-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white transition">全部考點 (26)</button>
           <button onclick="filterReading('pos')" id="reading-btn-pos" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-emerald-300 hover:bg-slate-700 transition">🟢 正面 / 支持態度詞</button>
-          <button onclick="filterReading('neg')" id="reading-btn-neg" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-rose-300 hover:bg-slate-700 transition">🔴 負面 / 批評 / 質疑態度詞</button>
+          <button onclick="filterReading('neg')" id="reading-btn-neg" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-rose-300 hover:bg-slate-700 transition">🔴 負面 / 批評態度詞</button>
           <button onclick="filterReading('neu')" id="reading-btn-neu" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-amber-300 hover:bg-slate-700 transition">🟡 中立 / 複雜情緒詞</button>
           <button onclick="filterReading('stem')" id="reading-btn-stem" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-sky-300 hover:bg-slate-700 transition">🎯 Paper 1 必考題型拆解攻略</button>
         </div>
 
         <div id="reading-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1"></div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         VIEW 4.5 (NEW): PAPER 4 SPEAKING SURVIVAL KIT & TIMER (口試計時器、真題抽籤與救命句)
+         ======================================================== -->
+    <section id="view-speaking" class="hidden space-y-5">
+      <!-- Top Grid: Timer + Prompt Generator & Recorder -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <!-- Left 5 Cols: Real DSE Speaking Exam Timer -->
+        <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 flex flex-col justify-between space-y-4 shadow-xl">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-sky-400">⏱️ DSE 考場真實計時器</span>
+              <span id="spk-timer-status" class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-[11px] font-semibold">準備就緒</span>
+            </div>
+            <h2 class="text-lg font-black text-white mt-0.5">Paper 4 倒數計時 (連響鈴提示)</h2>
+
+            <!-- Mode Selector Buttons -->
+            <div class="grid grid-cols-3 gap-1.5 mt-3 bg-slate-950 p-1 rounded-2xl border border-slate-800">
+              <button onclick="setSpeakingTimerMode(600, '📝 10分鐘備試')" id="spk-mode-600" class="px-2 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition">
+                10m 備試
+              </button>
+              <button onclick="setSpeakingTimerMode(480, '👥 8分鐘小組討論')" id="spk-mode-480" class="px-2 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition">
+                8m 小組GI
+              </button>
+              <button onclick="setSpeakingTimerMode(60, '🗣️ 1分鐘個人回應')" id="spk-mode-60" class="px-2 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition shadow">
+                1m 個人IR
+              </button>
+            </div>
+          </div>
+
+          <!-- Giant Digital Clock Display -->
+          <div id="spk-clock-box" class="bg-slate-950 border-2 border-slate-800 rounded-3xl py-6 px-4 text-center space-y-2 transition-colors">
+            <span id="spk-mode-label" class="text-xs font-bold text-emerald-400 block">🗣️ 1分鐘個人回應 (Individual Response)</span>
+            <div id="spk-time-display" class="text-5xl sm:text-6xl font-black font-mono tracking-wider text-white">01:00</div>
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mt-2">
+              <div id="spk-progress-bar" class="bg-emerald-500 h-full transition-all duration-300" style="width: 100%"></div>
+            </div>
+            <p id="spk-timer-hint" class="text-[11px] text-slate-400 pt-1">💡 最後 15 秒會轉為黃色提醒你總結收尾</p>
+          </div>
+
+          <!-- Start / Pause / Reset Controls -->
+          <div class="grid grid-cols-3 gap-2.5">
+            <button onclick="toggleSpeakingTimer()" id="spk-start-btn" class="col-span-2 py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg active:scale-95 flex items-center justify-center gap-1.5">
+              <span>▶️ 開始計時</span>
+            </button>
+            <button onclick="resetSpeakingTimer()" class="py-3 px-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition border border-slate-700">
+              🔄 重設
+            </button>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: DSE Mock Question Generator + 1-Min Voice Self-Recorder -->
+        <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 flex flex-col justify-between space-y-4 shadow-xl">
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-400">🎲 DSE 口試模擬真題庫 & 錄音自測</span>
+                <h3 id="spk-prompt-title" class="text-base sm:text-lg font-black text-white mt-0.5">主題：青少年精神健康與減壓</h3>
+              </div>
+              <button onclick="nextSpeakingPrompt()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-bold transition flex items-center gap-1">
+                <span>🎲 抽下一題真題</span>
+              </button>
+            </div>
+
+            <!-- GI Prompt & 3 Bullet Points -->
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-400">👥 Part A: Group Interaction 討論題目</span>
+                <button onclick="speakCurrentPrompt()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white text-xs font-medium transition">
+                  🔊 聽題目
+                </button>
+              </div>
+              <p id="spk-gi-context" class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed"></p>
+              <ul id="spk-gi-bullets" class="text-xs text-slate-300 space-y-1 pl-4 list-disc"></ul>
+            </div>
+
+            <!-- IR 3 Questions -->
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-2">
+              <span class="text-xs font-bold text-sky-400 block">🗣️ Part B: Individual Response (1分鐘考官提問，點擊可發聲)</span>
+              <div id="spk-ir-list" class="space-y-1.5"></div>
+            </div>
+          </div>
+
+          <!-- Browser Voice Recorder Bar -->
+          <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span id="rec-dot" class="w-3 h-3 rounded-full bg-slate-600"></span>
+              <div>
+                <span id="rec-status-text" class="text-xs font-bold text-slate-200 block">🎙️ 開口錄音自測（免上傳，保存在瀏覽器）</span>
+                <span class="text-[11px] text-slate-400">邊計時邊錄低自己嘅 1 分鐘回答，即場重溫流暢度與尾音！</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="toggleVoiceRecording()" id="btn-voice-rec" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow flex items-center gap-1">
+                <span>🔴 開始錄音</span>
+              </button>
+              <audio id="spk-audio-player" controls class="hidden h-8 max-w-[200px]"></audio>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Paper 4 Survival Phrases Bank -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-4 shadow-xl">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">🛟 Paper 4 零失分「開口救命句構」庫 (共 24 組考場實戰句)</span>
+          <h3 class="text-xl font-black text-white mt-0.5">戒掉只講 "I agree with you"！點擊句子即可發聲跟讀</h3>
+          <p class="text-xs text-slate-400 mt-1">按考場不同時機分類，熟讀每組 2–3 句，小組討論與個人回應即刻穩袋 Level 4：</p>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap gap-1.5 pt-1 border-b border-slate-800 pb-3">
+          <button onclick="filterSpeakingPhrases('all')" id="spk-phrase-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition">全部救命句 (24)</button>
+          <button onclick="filterSpeakingPhrases('start')" id="spk-phrase-btn-start" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🚀 開首搶飲頭啖湯</button>
+          <button onclick="filterSpeakingPhrases('agree')" id="spk-phrase-btn-agree" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🤝 贊同並推進討論</button>
+          <button onclick="filterSpeakingPhrases('disagree')" id="spk-phrase-btn-disagree" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">⚖️ 禮貌反對與轉折</button>
+          <button onclick="filterSpeakingPhrases('invite')" id="spk-phrase-btn-invite" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">👋 拯救靜場 / 邀請隊友</button>
+          <button onclick="filterSpeakingPhrases('stall')" id="spk-phrase-btn-stall" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🧠 腦袋空白拖延5秒</button>
+          <button onclick="filterSpeakingPhrases('sum')" id="spk-phrase-btn-sum" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">🏁 轉移焦點與總結</button>
+        </div>
+
+        <div id="speaking-phrases-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1"></div>
       </div>
     </section>
 
@@ -584,13 +914,140 @@
       <div id="word-bank-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
     </section>
 
+    <!-- ========================================================
+         VIEW 6 (NEW): STUDY CHECK-IN PASS & PRINTABLE WORKSHEET (溫習打卡證 & 錯題默書紙)
+         ======================================================== -->
+    <section id="view-toolkit" class="hidden space-y-6">
+      <!-- Part A: Student Check-in Pass Image Generator (Hidden when printing) -->
+      <div class="no-print bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-5 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">🎫 免伺服器交功課神器 • 溫習打卡證明圖生成器</span>
+            <h2 class="text-xl font-black text-white mt-0.5">一鍵生成「今日溫習成績單」圖片（連防偽驗證碼）</h2>
+            <p class="text-xs text-slate-400 mt-1">輸入班別學號及姓名後，系統會即時繪製高清打卡證。下載圖片或截圖即可交上 Google Classroom 或 WhatsApp 群組！</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+          <!-- Left 5 Cols: Student Info Inputs & Actions -->
+          <div class="lg:col-span-5 space-y-3.5 bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-5">
+            <div>
+              <label for="pass-student-class" class="text-xs font-bold text-slate-300 block mb-1">🏫 班別及學號 (Class & No.)：</label>
+              <input id="pass-student-class" type="text" placeholder="例如：6A (12)" oninput="saveStudentProfileAndRender()" class="w-full bg-slate-900 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 outline-none transition" />
+            </div>
+
+            <div>
+              <label for="pass-student-name" class="text-xs font-bold text-slate-300 block mb-1">👤 學生姓名 (Student Name)：</label>
+              <input id="pass-student-name" type="text" placeholder="例如：Chan Tai Man 陳大文" oninput="saveStudentProfileAndRender()" class="w-full bg-slate-900 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 outline-none transition" />
+            </div>
+
+            <div>
+              <label for="pass-student-goal" class="text-xs font-bold text-slate-300 block mb-1">🎯 今日溫習宣言 / 備註：</label>
+              <input id="pass-student-goal" type="text" placeholder="例如：已完成今日 20 個核心字及介詞排雷！" oninput="saveStudentProfileAndRender()" class="w-full bg-slate-900 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 outline-none transition" />
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row gap-2.5">
+              <button onclick="downloadStudyPass()" class="flex-1 py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm transition shadow-lg flex items-center justify-center gap-1.5 active:scale-95">
+                <span>💾 下載高清打卡圖 (PNG)</span>
+              </button>
+              <button onclick="renderStudyPassCanvas(); showToast('🔄 已刷新最新溫習數據與時間！')" class="py-3 px-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition border border-slate-700">
+                🔄 刷新時間
+              </button>
+            </div>
+          </div>
+
+          <!-- Right 7 Cols: Live HTML5 Canvas Preview -->
+          <div class="lg:col-span-7 flex flex-col items-center justify-center bg-slate-950/80 border border-slate-800 rounded-2xl p-3 sm:p-4">
+            <canvas id="study-pass-canvas" width="800" height="460" class="w-full max-w-[560px] h-auto rounded-2xl shadow-2xl border border-slate-800"></canvas>
+            <span class="text-[11px] text-slate-400 mt-2">💡 手機用家亦可直接長按上方圖片儲存至相簿，或點擊「下載高清打卡圖」</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part B: Personalized Printable Worksheet / Dictation Sheet -->
+      <div id="printable-worksheet-card" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 space-y-5 shadow-xl">
+        <div class="no-print flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-400">🖨️ 個人化錯題默書紙與溫習表生成器</span>
+            <h2 class="text-xl font-black text-white mt-0.5">一鍵輸出 A4 實體默書紙 / 錯題溫習表（支援直接列印或存為 PDF）</h2>
+            <p class="text-xs text-slate-400 mt-1">自動抽取你標記為「❌ 唔熟 / 🤔 勉強記得」的弱點生字（或指定核心範圍），秒速生成專屬工作紙！</p>
+          </div>
+          <button onclick="triggerPrintWorksheet()" class="px-5 py-2.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs sm:text-sm transition shadow-lg flex items-center gap-2 active:scale-95">
+            <span>🖨️ 立即列印 / 儲存為 PDF</span>
+          </button>
+        </div>
+
+        <!-- Worksheet Configuration Bar (Hidden when printing) -->
+        <div class="no-print grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-950 border border-slate-800 rounded-2xl p-4">
+          <div>
+            <label for="ws-source-select" class="text-xs font-bold text-slate-400 block mb-1.5">1️⃣ 選擇出卷詞庫範圍：</label>
+            <select id="ws-source-select" onchange="renderWorksheetPreview()" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none">
+              <option value="weak">❌ 我的個人錯題庫 (唔熟 + 勉強記得)</option>
+              <option value="core">🌟 精選必背核心詞 (Level 3-4 核心)</option>
+              <option value="paper3">🎧 Paper 3 聽力必串生字重災區</option>
+              <option value="prep">⚠️ 介詞與搭配詞易錯重災區</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="ws-mode-select" class="text-xs font-bold text-slate-400 block mb-1.5">2️⃣ 選擇工作紙模式：</label>
+            <select id="ws-mode-select" onchange="renderWorksheetPreview()" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none">
+              <option value="dict_en">✍️ 英文默書紙 (看中文釋義 ➔ 默寫英文單字)</option>
+              <option value="dict_zh">🧐 閱讀詞義小測 (看英文與例句 ➔ 寫中文意思)</option>
+              <option value="study">📖 完整中英對照溫習表 (連音節及介詞排雷提示)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="ws-count-select" class="text-xs font-bold text-slate-400 block mb-1.5">3️⃣ 題目數量：</label>
+            <select id="ws-count-select" onchange="renderWorksheetPreview()" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none">
+              <option value="15">15 題 (一頁 A4 剛剛好)</option>
+              <option value="20" selected>20 題 (標準堂課小測)</option>
+              <option value="30">30 題 (進階溫習份量)</option>
+              <option value="50">50 題 (大測驗總複習)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- A4 Paper Live Preview Box (Becomes the actual printed page) -->
+        <div id="worksheet-preview-paper" class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 shadow-inner border border-slate-300 max-h-[620px] overflow-y-auto">
+          <!-- Worksheet Header -->
+          <div class="border-b-2 border-slate-900 pb-3 mb-4 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-widest text-slate-600">CAC HKDSE English Level 3–4 Mastery System 3.0</p>
+              <h3 id="ws-paper-title" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">DSE 個人化重點詞彙默書紙</h3>
+            </div>
+            <div class="text-xs sm:text-sm font-medium text-slate-800 space-y-1">
+              <div>姓名 Name：<span id="ws-header-name" class="inline-block border-b border-slate-800 min-w-[130px] font-bold px-1"></span></div>
+              <div class="flex gap-4">
+                <span>班別 Class：<span id="ws-header-class" class="inline-block border-b border-slate-800 min-w-[60px] font-bold px-1"></span></span>
+                <span>日期 Date：<span id="ws-header-date" class="inline-block border-b border-slate-800 min-w-[85px] font-mono px-1"></span></span>
+                <span>分數 Score：<span class="inline-block border-b border-slate-800 min-w-[55px] font-bold text-right">/ 20</span></span>
+              </div>
+            </div>
+          </div>
+
+          <p id="ws-paper-subtitle" class="text-xs text-slate-600 mb-3 italic"></p>
+
+          <!-- Worksheet Table Content -->
+          <div id="ws-table-container" class="w-full"></div>
+
+          <!-- Worksheet Footer -->
+          <div class="mt-6 pt-3 border-t border-slate-300 flex items-center justify-between text-[11px] text-slate-500">
+            <span>CAC DSE Eng 保3衝4 系統 3.0 • 自動生成個人化溫習工作紙</span>
+            <span>版權所有：CAC LawSir (lsy@cactm.edu.hk)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- COPYRIGHT FOOTER -->
   <footer class="border-t border-slate-800/80 bg-slate-900/90 py-4 px-4 mt-8 transition-colors">
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
       <div class="font-semibold text-slate-300">
-        CAC DSE Eng 保3衝4 系統2.0 • 3000+ 智能詞彙庫
+        CAC DSE Eng 保3衝4 系統 3.0 • 3000+ 智能詞彙庫與語法排雷
       </div>
       <div class="flex items-center gap-2 font-medium">
         <span>版權所有 ： <strong class="text-emerald-400">CAC LawSir</strong></span>
@@ -608,7 +1065,7 @@
         <button onclick="closeModal('backup-modal')" class="text-slate-400 hover:text-white text-sm">✕</button>
       </div>
       <p class="text-xs text-slate-400 leading-relaxed">
-        你的進度保存在手機/電腦瀏覽器內。複製下方代碼可在不同手機之間轉移溫習進度：
+        你的進度保存在瀏覽器內。複製下方代碼可在不同裝置之間轉移進度：
       </p>
       <textarea id="backup-json-area" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-300 outline-none"></textarea>
       <div id="backup-msg" class="text-xs text-emerald-400 hidden"></div>
@@ -626,34 +1083,39 @@
 
   <script>
     // ========================================================
-    // 1. DSE LEVEL 3-4 CORE VOCABULARY & PAPER 3 TRAPS (核心必背詞庫)
+    // 1. DATASETS & GLOBAL STATE VARIABLES DECLARATION
     // ========================================================
+    let currentSafetyFilter = 'all';
+    let currentReadingFilter = 'all';
+    let currentSafetySubmode = 'templates';
+    let currentPeelTopic = 'stress';
+
     const DSE_L34_WORDS = [
       {
         id: "l34_001", word: "beneficial", syllable: "ben • e • fi • cial", phonetic: "/ˌben.ɪˈfɪʃ.əl/", pos: "adjective",
         topic: "Health & Lifestyle", def_zh: "有益的；有利的", def_en: "helpful, useful, or producing good results",
-        basic_word: "good / helpful", prep_trap: "beneficial TO (切忌寫 beneficial for!)",
+        basic_word: "good / helpful", prep_trap: "beneficial TO",
         collocations: ["beneficial to mental health", "mutually beneficial", "prove beneficial to students"],
         example: "Doing regular physical exercise is extremely beneficial to both our physical and mental health."
       },
       {
         id: "l34_002", word: "detrimental", syllable: "det • ri • men • tal", phonetic: "/ˌdet.rɪˈmen.təl/", pos: "adjective",
         topic: "Health & Lifestyle", def_zh: "有害的；不利的", def_en: "causing harm or damage",
-        basic_word: "bad / harmful", prep_trap: "detrimental TO (必須配介詞 to)",
+        basic_word: "bad / harmful", prep_trap: "detrimental TO",
         collocations: ["detrimental to health", "have a detrimental effect on", "detrimental impact on"],
         example: "Lack of sleep can have a detrimental effect on students' academic performance."
       },
       {
         id: "l34_003", word: "contribute", syllable: "con • trib • ute", phonetic: "/kənˈtrɪb.juːt/", pos: "verb",
         topic: "Social Issues", def_zh: "促成；導致；作出貢獻", def_en: "to help to cause an event or situation; to give something",
-        basic_word: "cause / help", prep_trap: "contribute TO + V-ing / 名詞 (這裡的 to 是介詞，後面動詞必須加 -ing!)",
+        basic_word: "cause / help", prep_trap: "contribute TO + V-ing / 名詞",
         collocations: ["contribute to global warming", "contribute to improving", "contribute to society"],
         example: "Excessive plastic waste contributes to polluting our oceans and marine life."
       },
       {
         id: "l34_004", word: "participate", syllable: "par • tic • i • pate", phonetic: "/pɑːˈtɪs.ɪ.peɪt/", pos: "verb",
         topic: "Campus & Youth", def_zh: "參與；參加", def_en: "to take part in or become involved in an activity",
-        basic_word: "join / take part in", prep_trap: "participate IN (必須加 in)",
+        basic_word: "join / take part in", prep_trap: "participate IN",
         collocations: ["participate in extracurricular activities", "actively participate in", "encourage students to participate in"],
         example: "Students are encouraged to actively participate in voluntary work to broaden their horizons."
       },
@@ -667,501 +1129,385 @@
       {
         id: "l34_006", word: "indispensable", syllable: "in • dis • pen • sa • ble", phonetic: "/ˌɪn.dɪˈspen.sə.bəl/", pos: "adjective",
         topic: "Campus & Youth", def_zh: "不可或缺的；絕對必要的", def_en: "so good or important that you could not manage without it",
-        basic_word: "very important / necessary", prep_trap: "indispensable TO / FOR + 名詞",
+        basic_word: "very important / necessary", prep_trap: "indispensable TO / FOR",
         collocations: ["play an indispensable role in", "an indispensable part of", "indispensable to success"],
         example: "Smartphones have become an indispensable part of our daily communication."
       },
       {
         id: "l34_007", word: "alleviate", syllable: "al • le • vi • ate", phonetic: "/əˈliː.vi.eɪt/", pos: "verb",
         topic: "Social Issues", def_zh: "減輕；緩解（壓力、痛楚或問題）", def_en: "to make something bad such as pain or problems less severe",
-        basic_word: "reduce / make less", prep_trap: "直接跟名詞 (alleviate stress)，切勿加 to 或 with",
+        basic_word: "reduce / make less", prep_trap: "alleviate (直接接名詞)",
         collocations: ["alleviate academic stress", "alleviate traffic congestion", "alleviate poverty"],
         example: "Listening to soft music is an effective way to alleviate academic stress before exams."
       },
       {
         id: "l34_008", word: "cultivate", syllable: "cul • ti • vate", phonetic: "/ˈkʌl.tɪ.veɪt/", pos: "verb",
         topic: "Campus & Youth", def_zh: "培養；建立（習慣、興趣或品格）", def_en: "to try to develop and improve something",
-        basic_word: "develop / build", prep_trap: "直接跟名詞 (cultivate a habit of...)",
+        basic_word: "develop / build", prep_trap: "cultivate (直接接名詞)",
         collocations: ["cultivate a reading habit", "cultivate teamwork spirit", "cultivate positive values"],
         example: "Schools should organize more reading schemes to help students cultivate a lifelong reading habit."
       },
       {
         id: "l34_009", word: "broaden", syllable: "broad • en", phonetic: "/ˈbrɔː.dən/", pos: "verb",
         topic: "Campus & Youth", def_zh: "擴闊；拓寬（視野或知識）", def_en: "to increase your knowledge, experience, or range of activities",
-        basic_word: "open / widen", prep_trap: "broaden one's horizons (horizons 必須加 s!)",
+        basic_word: "open / widen", prep_trap: "broaden one's horizons",
         collocations: ["broaden our horizons", "broaden students' minds", "broaden one's perspective"],
         example: "Joining overseas exchange tours can broaden students' horizons and enhance their independence."
       },
       {
         id: "l34_010", word: "relieve", syllable: "re • lieve", phonetic: "/rɪˈliːv/", pos: "verb",
         topic: "Health & Lifestyle", def_zh: "紓緩；減輕（壓力或焦慮）", def_en: "to make an unpleasant feeling, such as pain or worry, less strong",
-        basic_word: "reduce stress / relax", prep_trap: "注意拼法是 i 在 e 前 (re-lie-ve)，名詞是 relief",
+        basic_word: "reduce stress / relax", prep_trap: "relieve (直接接名詞)",
         collocations: ["relieve pressure", "relieve anxiety and stress", "effective way to relieve"],
         example: "Talking to trusted friends or teachers can help teenagers relieve their emotional pressure."
-      },
-      {
-        id: "l34_011", word: "enhance", syllable: "en • hance", phonetic: "/ɪnˈhɑːns/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "提升；加強；增進", def_en: "to improve the quality, amount, or strength of something",
-        basic_word: "improve / make better", prep_trap: "直接跟名詞 (enhance efficiency)，切勿寫 enhance to",
-        collocations: ["enhance learning efficiency", "enhance public awareness", "enhance competitiveness"],
-        example: "Using interactive tablets in class can significantly enhance students' learning motivation."
-      },
-      {
-        id: "l34_012", word: "awareness", syllable: "a • ware • ness", phonetic: "/əˈweə.nəs/", pos: "noun",
-        topic: "Social Issues", def_zh: "意識；關注；認知", def_en: "knowledge that something exists, or understanding of a situation",
-        basic_word: "know more about", prep_trap: "raise public awareness OF (配介詞 of)",
-        collocations: ["raise public awareness of", "arouse awareness of", "environmental awareness"],
-        example: "The government should launch publicity campaigns to raise public awareness of food waste."
-      },
-      {
-        id: "l34_013", word: "concentrate", syllable: "con • cen • trate", phonetic: "/ˈkɒn.sən.treɪt/", pos: "verb",
-        topic: "Campus & Youth", def_zh: "專注；集中精神", def_en: "to direct your attention or your efforts towards a particular activity",
-        basic_word: "focus", prep_trap: "concentrate ON + V-ing / 名詞",
-        collocations: ["concentrate on their studies", "find it hard to concentrate on", "concentrate in class"],
-        example: "If students do not get enough sleep, they will find it hard to concentrate on their lessons."
-      },
-      {
-        id: "l34_014", word: "accommodation", syllable: "ac • com • mo • da • tion", phonetic: "/əˌkɒm.əˈdeɪ.ʃən/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "住宿；住處", def_en: "a place to live, work, stay, etc. in",
-        basic_word: "place to stay / hotel", prep_trap: "Paper 3 必考拼字：雙 c 雙 m (ac-com-mo-dation)，且為不可數名詞(不加s)！",
-        collocations: ["book accommodation", "student accommodation", "provide free accommodation"],
-        example: "The summer camp fee already includes meals, transport, and hotel accommodation."
-      },
-      {
-        id: "l34_015", word: "environment", syllable: "en • vi • ron • ment", phonetic: "/ɪnˈvaɪ.rən.mənt/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "環境；自然環境", def_en: "the air, water, and land in or on which people, animals, and plants live",
-        basic_word: "nature / surroundings", prep_trap: "Paper 3 必考拼字：千祈唔好漏咗中間個 n (vi-roN-ment)！",
-        collocations: ["protect the environment", "learning environment", "environmentally friendly"],
-        example: "Everyone has a responsibility to protect the environment by reducing single-use plastics."
-      },
-      {
-        id: "l34_016", word: "government", syllable: "gov • ern • ment", phonetic: "/ˈɡʌv.ən.mənt/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "政府；當局", def_en: "the group of people who officially control a country",
-        basic_word: "authorities", prep_trap: "Paper 3 & 2 必考拼字：千萬不要漏寫 r 後面的 n (goverN-ment)！",
-        collocations: ["the government should", "government subsidies", "local government"],
-        example: "The government should allocate more resources to support underprivileged families."
-      },
-      {
-        id: "l34_017", word: "necessary", syllable: "nec • es • sar • y", phonetic: "/ˈnes.ə.ser.i/", pos: "adjective",
-        topic: "Paper 3 Traps", def_zh: "必要的；必需的", def_en: "needed in order to achieve a particular result",
-        basic_word: "needed / must", prep_trap: "口訣：1 件襯衫 (1 個 c：c) 配 2 隻襪 (2 個 s：ss) ➔ ne-C-e-SS-ary！",
-        collocations: ["it is necessary for sb to", "take necessary action", "if necessary"],
-        example: "It is necessary for schools to provide professional counselling services for stressed students."
-      },
-      {
-        id: "l34_018", word: "schedule", syllable: "sched • ule", phonetic: "/ˈʃedʒ.uːl/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "時間表；日程安排", def_en: "a list of planned activities or things to be done showing the times",
-        basic_word: "timetable / plan", prep_trap: "Paper 3 常考：s-c-h-e-d-u-l-e，配介詞 on schedule (準時) / behind schedule",
-        collocations: ["hectic schedule", "tight schedule", "ahead of schedule"],
-        example: "Despite having a hectic study schedule, we should still squeeze time for physical exercise."
-      },
-      {
-        id: "l34_019", word: "restaurant", syllable: "res • tau • rant", phonetic: "/ˈres.trɒnt/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "餐廳；食肆", def_en: "a place where meals are prepared and served to customers",
-        basic_word: "eating place", prep_trap: "Paper 3 必考拼字：中間是 a-u (res-TAU-rant)，結尾是 -ant！",
-        collocations: ["local restaurant", "fast-food restaurant", "vegetarian restaurant"],
-        example: "More local restaurants are offering plant-based menus to promote healthy eating."
-      },
-      {
-        id: "l34_020", word: "committee", syllable: "com • mit • tee", phonetic: "/kəˈmɪt.i/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "委員會", def_en: "a small group of people chosen to represent a larger organization",
-        basic_word: "group / board", prep_trap: "Paper 3 終極陷阱：雙 m、雙 t、雙 e (co-MM-i-TT-EE)！",
-        collocations: ["organizing committee", "student union committee", "committee members"],
-        example: "The organizing committee held a meeting to discuss the budget for the annual school gala."
-      },
-      {
-        id: "l34_021", word: "questionnaire", syllable: "ques • tion • naire", phonetic: "/ˌkwes.tʃəˈneər/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "問卷；調查表", def_en: "a list of questions that several people are asked so that information can be collected",
-        basic_word: "survey form", prep_trap: "Paper 3 常考：question + naire (注意雙 n：question-Naire)！",
-        collocations: ["fill in a questionnaire", "distribute questionnaires", "online questionnaire"],
-        example: "We distributed 200 questionnaires to collect students' opinions on the new canteen menu."
-      },
-      {
-        id: "l34_022", word: "maintenance", syllable: "main • te • nance", phonetic: "/ˈmeɪn.tən.əns/", pos: "noun",
-        topic: "Paper 3 Traps", def_zh: "維修；保養；維持", def_en: "the work needed to keep a road, building, machine, etc. in good condition",
-        basic_word: "repair / keep", prep_trap: "動詞是 maintain，但名詞中間變成 -ten- (main-TEN-ance)，千祈咪寫 maintainance！",
-        collocations: ["regular maintenance", "facility maintenance", "maintenance fee"],
-        example: "The swimming pool will be temporarily closed next Monday for regular maintenance."
-      },
-      {
-        id: "l34_023", word: "convenient", syllable: "con • ve • ni • ent", phonetic: "/kənˈviː.ni.ənt/", pos: "adjective",
-        topic: "Environment & Tech", def_zh: "方便的；便利的", def_en: "suitable for your purposes and needs and causing the least difficulty",
-        basic_word: "easy to use", prep_trap: "主詞不能是人！錯：I am convenient. 正確：It is convenient for me to...",
-        collocations: ["convenient public transport", "convenient for commuters", "fast and convenient"],
-        example: "Online shopping is extremely convenient for busy city dwellers."
-      },
-      {
-        id: "l34_024", word: "phenomenon", syllable: "phe • nom • e • non", phonetic: "/fəˈnɒm.ɪ.nən/", pos: "noun",
-        topic: "Social Issues", def_zh: "現象；跡象", def_en: "something that exists and can be seen, felt, tasted, etc., especially something unusual",
-        basic_word: "situation / trend", prep_trap: "單數是 phenomenon (配 is/has)，切記留意拼法 phe-no-me-non",
-        collocations: ["common phenomenon", "alarming social phenomenon", "global phenomenon"],
-        example: "Cyberbullying has become an alarming social phenomenon among secondary school students."
-      },
-      {
-        id: "l34_025", word: "opportunity", syllable: "op • por • tu • ni • ty", phonetic: "/ˌɒp.əˈtjuː.nə.ti/", pos: "noun",
-        topic: "Campus & Youth", def_zh: "機會；良機", def_en: "an occasion or situation that makes it possible to do something",
-        basic_word: "chance", prep_trap: "provide an opportunity FOR sb TO do sth (雙 p：op-por-tunity)",
-        collocations: ["golden opportunity", "seize the opportunity", "equal opportunity"],
-        example: "The internship programme provides a golden opportunity for students to gain workplace experience."
       }
     ];
 
-    // ========================================================
-    // 2. PAPER 2 WRITING SAFETY TEMPLATES (零失分萬用句構 - 20 組)
-    // ========================================================
     const DSE_SAFETY_SENTENCES = [
       {
-        group: "intro",
-        category: "🎬 開首段：引出社會熱話背景",
+        group: "intro", category: "🎬 開首段：引出社會熱話背景",
         formula: "It is widely acknowledged that [問題/現象] has aroused widespread public concern in recent years.",
         demo: "It is widely acknowledged that excessive smartphone usage among teenagers has aroused widespread public concern in recent years.",
         zh_trans: "眾所周知，近年青少年過度使用智能手機已引起公眾廣泛關注。",
-        dse_tip: "最穩陣的第一段開頭句，文法 100% 穩妥，徹底取代小學生的 'Nowadays, many people use phones.'"
+        dse_tip: "最穩陣的第一段開頭句，文法 100% 穩妥。"
       },
       {
-        group: "intro",
-        category: "🎬 開首段：指出正反爭議 (雙面討論題)",
-        formula: "Opinions are divided on whether [某做法/政策] brings more benefits than drawbacks to our society.",
-        demo: "Opinions are divided on whether abolishing homework brings more benefits than drawbacks to primary school students.",
-        zh_trans: "對於廢除功課對小學生而言是利多於弊還是弊多於利，社會各界意見不一。",
-        dse_tip: "遇到 'Do the advantages outweigh the disadvantages?' 題型時，這句能完美引出正反討論。"
-      },
-      {
-        group: "intro",
-        category: "🎬 開首段：表明個人立場 (Thesis Statement)",
-        formula: "From my perspective, the merits of [某事物/V-ing] far outweigh its shortcomings for the following reasons.",
-        demo: "From my perspective, the merits of participating in voluntary work far outweigh its shortcomings for the following reasons.",
-        zh_trans: "從我的角度來看，參與義務工作的優點遠遠大於其缺點，原因如下。",
-        dse_tip: "放在第一段最後一句作點題句（Thesis Statement），清晰告訴考官你的立場，結構分即加！"
-      },
-      {
-        group: "body",
-        category: "🔗 提出主要成因 (Cause)",
-        formula: "One of the primary factors contributing to [問題] is [名詞 / V-ing].",
-        demo: "One of the primary factors contributing to adolescent anxiety is the immense academic pressure from public examinations.",
-        zh_trans: "導致青少年焦慮的主要因素之一，是來自公開考試的巨大課業壓力。",
-        dse_tip: "牢記 'contributing to' 後面一定要跟名詞或 V-ing，考官看到這個準確搭配會非常讚賞。"
-      },
-      {
-        group: "body",
-        category: "🔗 強調重要性 (Topic Sentence 首句)",
+        group: "body", category: "🔗 強調重要性 (Topic Sentence 首句)",
         formula: "First and foremost, [名詞 / V-ing] plays an indispensable role in [V-ing + 名詞].",
         demo: "First and foremost, regular physical exercise plays an indispensable role in maintaining both physical and mental wellness.",
         zh_trans: "首先，定期進行體能運動在維持身心健康方面扮演著不可或缺的角色。",
-        dse_tip: "用來寫正文第一段的主題句（Topic Sentence），比寫 'Firstly, exercise is very good' 高出兩個 Grade！"
+        dse_tip: "用來寫正文第一段的主題句。"
       },
       {
-        group: "body",
-        category: "🔗 雙重論點遞進擴展 (Addition)",
-        formula: "Apart from [好處A (V-ing)], another significant benefit of [主題] is that it enables students to [動詞原形]...",
-        demo: "Apart from relieving academic stress, another significant benefit of playing team sports is that it enables students to cultivate teamwork skills.",
-        zh_trans: "除了紓緩學業壓力外，參與隊際運動的另一個顯著好處是能讓學生培養團隊合作精神。",
-        dse_tip: "放在正文第二段開頭，做到自然承上啟下（Cohesion），比死板地寫 'Secondly' 流暢得多。"
-      },
-      {
-        group: "body",
-        category: "🔗 具體舉例支持論點 (Giving Examples)",
-        formula: "A notable example is that [主詞 + 動詞], which clearly illustrates how [結論].",
-        demo: "A notable example is that many students suffer from sleep deprivation, which clearly illustrates how heavy workloads harm their health.",
-        zh_trans: "一個顯著的例子是許多學生長期睡眠不足，這清楚說明了繁重的功課如何損害他們的健康。",
-        dse_tip: "避免寫出不完整的句子（如 'For example, sleep deprivation.' 這是文法錯句！），用這個句型保證有主詞有動詞。"
-      },
-      {
-        group: "body",
-        category: "🔗 分析負面惡果 (Negative Consequence)",
-        formula: "If this alarming trend continues, it will inevitably lead to severe consequences for [對象].",
-        demo: "If this alarming trend continues, it will inevitably lead to severe consequences for teenagers' interpersonal relationships.",
-        zh_trans: "如果這個令人擔憂的趨勢持續下去，將無可避免地對青少年的社交關係帶來嚴重後果。",
-        dse_tip: "採用真實條件句（First Conditional: If + 現在式, will + 原形），用於段尾強調問題的嚴重性。"
-      },
-      {
-        group: "body",
-        category: "🔗 說明正面成效 (Positive Effect)",
-        formula: "Not only does [名詞/V-ing] help students [動詞原形 A], but it also allows them to [動詞原形 B].",
-        demo: "Not only does reading extensively help students enrich their vocabulary, but it also allows them to broaden their horizons.",
-        zh_trans: "廣泛閱讀不僅能幫助學生豐富詞彙量，還能讓他們擴闊視野。",
-        dse_tip: "這是唯一建議熟背的「安全版 Not only 倒裝句」，只要背熟 'Not only does X help..., but it also...' 就萬無一失！"
-      },
-      {
-        group: "rebut",
-        category: "⚖️ 讓步轉折 (Concession)",
-        formula: "Although it is true that [對方合理之處], it must be noted that [我方反駁觀點].",
-        demo: "Although it is true that part-time jobs provide pocket money, it must be noted that working long hours can distract students from their studies.",
-        zh_trans: "雖然兼職工作確實能提供零用錢，但必須指出，長時間工作會令學生無心向學。",
-        dse_tip: "寫議論文必備！切記英文有了 Although 就千萬不要在後面加 but，用逗號接 'it must be noted that' 最安全！"
-      },
-      {
-        group: "rebut",
-        category: "⚖️ 駁斥反方觀點 (Refutation)",
-        formula: "Some people may argue that [反方觀點]; however, this view overlooks the fact that [我方有力證據].",
-        demo: "Some people may argue that e-learning is costly; however, this view overlooks the fact that it saves massive printing and commuting expenses in the long run.",
-        zh_trans: "有些人可能會爭辯說電子學習成本高昂；然而，這種觀點忽略了一個事實：長遠而言它能省下龐大的印刷與交通開支。",
-        dse_tip: "考評局極重視考生的 Counter-argument（反駁能力），用 'overlooks the fact that...' 能展現成熟的批判思維。"
-      },
-      {
-        group: "sol",
-        category: "💡 提出政府/校方建議 (Solution 1)",
-        formula: "In order to tackle this problem effectively, it is necessary for [the government / schools] to [動詞原形]...",
-        demo: "In order to tackle this problem effectively, it is necessary for schools to organize more mental health workshops for students.",
-        zh_trans: "為了有效解決這個問題，校方有必要為學生舉辦更多精神健康工作坊。",
-        dse_tip: "用 'It is necessary for sb to do sth' 結構清晰，不會犯下主詞與動詞不一致的錯誤。"
-      },
-      {
-        group: "sol",
-        category: "💡 強調多方攜手合作 (Joint Effort)",
-        formula: "Only when the government, schools, and parents join hands can we create a better environment for [對象].",
-        demo: "Only when the government, schools, and parents join hands can we create a healthier learning environment for our next generation.",
-        zh_trans: "唯有當政府、學校和家長攜手合作，我們才能為下一代創造更健康的學習環境。",
-        dse_tip: "極受歡迎的結尾金句（萬能三方合作：政府、學校、家長），放在最後一段能瞬間拉高文章立意！"
-      },
-      {
-        group: "sol",
-        category: "💡 總結全文觀點 (Conclusion)",
+        group: "sol", category: "💡 總結全文觀點 (Conclusion)",
         formula: "Taking all the above factors into consideration, I firmly believe that [重申核心立場].",
         demo: "Taking all the above factors into consideration, I firmly believe that promoting green lifestyles in schools is both urgent and beneficial.",
         zh_trans: "綜合考慮上述所有因素，我深信在校園推廣綠色生活既迫切又有益。",
-        dse_tip: "取代老套的 'In conclusion, I think...'，用 'Taking all the above factors into consideration' 字數夠、氣勢足！"
-      },
-      {
-        group: "sol",
-        category: "💡 結尾呼籲行動 (Call to Action)",
-        formula: "It is high time that we took immediate action to [動詞原形] before it is too late.",
-        demo: "It is high time that we took immediate action to reduce plastic waste before it is too late.",
-        zh_trans: "現在是我們採取立即行動減少塑膠廢物的時候了，否則將為時已晚。",
-        dse_tip: "注意 'It is high time that we took...' 裡面的 took 用過去式是道地英文慣用法，考官看到必定加分！"
-      },
-      {
-        group: "genre",
-        category: "✉️ 讀者來信 (Letter to the Editor) 開首與結尾",
-        formula: "I am writing to express my deep concern over [議題] and suggest practical ways to address it.",
-        demo: "I am writing to express my deep concern over the rising problem of youth cyberbullying and suggest practical ways to address it.",
-        zh_trans: "本人致函是為了表達對青少年網絡欺凌問題日益嚴重的深切關注，並提出切實可行的解決建議。",
-        dse_tip: "DSE 最常考體裁 Letter to the Editor 的標準第一句，直接交代寫信目的（Purpose of writing）。"
-      },
-      {
-        group: "genre",
-        category: "🎤 演講辭 (Speech) 開首互動句",
-        formula: "Good morning Principal, teachers, and fellow schoolmates. Today, I am honoured to share my views on [主題].",
-        demo: "Good morning Principal, teachers, and fellow schoolmates. Today, I am honoured to share my views on how to strike a balance between study and rest.",
-        zh_trans: "校長、各位老師、各位同學早安。今天我很榮幸能與大家分享我對「如何平衡學業與作息」的看法。",
-        dse_tip: "寫 Speech 必須有清晰的招呼語（Greeting），否則 Tone & Register（語體）會被扣分！"
-      },
-      {
-        group: "genre",
-        category: "🎤 演講辭 (Speech) 結尾句",
-        formula: "Thank you for your kind attention, and I hope you will join me in [V-ing] starting from today!",
-        demo: "Thank you for your kind attention, and I hope you will join me in cherishing our mental health starting from today!",
-        zh_trans: "感謝大家的細心聆聽，希望大家從今天起與我一起重視我們的精神健康！",
-        dse_tip: "演講辭結尾切記不可寫 'Yours faithfully'，一定要用這句感謝聽眾並作出號召！"
-      },
-      {
-        group: "genre",
-        category: "📋 建議書 (Proposal) 開首目的與結尾",
-        formula: "The purpose of this proposal is to suggest effective measures to [目標], and I hope these recommendations will be given due consideration.",
-        demo: "The purpose of this proposal is to suggest effective measures to revamp the school library, and I hope these recommendations will be given due consideration.",
-        zh_trans: "本建議書旨在提出翻新學校圖書館的有效措施，期望上述建議能獲予以考慮。",
-        dse_tip: "寫 Proposal 或 Report 時，最適合用小標題（Subheadings）配搭這類莊重客觀的句子。"
-      },
-      {
-        group: "genre",
-        category: "📰 校園雜誌文章 (Article) 吸引讀者開首",
-        formula: "Have you ever wondered why an increasing number of teenagers are struggling with [問題]? Let's take a closer look at this trend.",
-        demo: "Have you ever wondered why an increasing number of teenagers are struggling with smartphone addiction? Let's take a closer look at this trend.",
-        zh_trans: "你有沒有想過，為什麼越來越多青少年深受手機成癮困擾？讓我們一起深入探討這個趨勢。",
-        dse_tip: "寫 Magazine Article 最忌沉悶，用一條提問句（Rhetorical Question）開頭最能拿高 Tone 分數！"
+        dse_tip: "氣勢十足的總結句。"
       }
     ];
 
-    // ========================================================
-    // 3. PAPER 1 READING STEMS & TONES (閱讀常見提問與語氣詞 - 26 組)
-    // ========================================================
     const DSE_READING_ITEMS = [
       {
-        group: "pos",
-        term: "approving / supportive",
-        type: "🟢 正面 / 支持態度",
-        zh: "贊成的；支持的；肯定的",
-        tip: "當作者列舉某政策或現象的多項好處，並使用 'welcome move', 'beneficial', 'a step in the right direction' 時選此項。"
+        group: "pos", term: "approving / supportive", type: "🟢 正面 / 支持態度",
+        zh: "贊成的；支持的", tip: "當文章使用 'welcome move', 'beneficial' 時選此項。"
       },
       {
-        group: "pos",
-        term: "optimistic / hopeful",
-        type: "🟢 正面 / 樂觀態度",
-        zh: "樂觀的；抱有希望的",
-        tip: "作者對未來發展抱有信心，文中常出現 'promising future', 'bright prospect', 'light at the end of the tunnel'。"
+        group: "neg", term: "skeptical / doubtful", type: "🔴 負面 / 質疑態度",
+        zh: "懷疑的；半信半疑的", tip: "當文章出現 'questionable', 'remains to be seen' 時選此項。"
       },
       {
-        group: "pos",
-        term: "enthusiastic / eager",
-        type: "🟢 正面 / 熱情態度",
-        zh: "熱情的；熱切的；充滿熱忱的",
-        tip: "語氣非常興奮積極，常出現感嘆號或強烈正面形容詞（如 'thrilled', 'exciting breakthrough', 'cannot wait to'）。"
+        group: "neu", term: "ambivalent / mixed feelings", type: "🟡 複雜 / 矛盾態度",
+        zh: "矛盾的；喜憂參半的", tip: "既讚賞好處同時又擔憂風險時選此項。"
       },
       {
-        group: "pos",
-        term: "appreciative / grateful",
-        type: "🟢 正面 / 感激讚賞",
-        zh: "感激的；欣賞的；讚賞的",
-        tip: "作者對某人（如醫護、義工、父母）的付出表示感謝與肯定，常見字眼有 'thankful', 'owe a debt of gratitude', 'admire'。"
+        group: "stem", term: "What does 'X' refer to?", type: "🎯 Paper 1 代名詞題",
+        zh: "代名詞指代題", tip: "答案 95% 在該代名詞的前一句或同一句前半部分！"
+      }
+    ];
+
+    const PEEL_TOPIC_DATA = {
+      stress: {
+        name: "🧠 學業壓力與精神健康",
+        blocks: [
+          {
+            step: "P", title: "Point 主題句", color: "emerald",
+            items: [
+              { zh: "定期運動對紓緩壓力不可或缺", en: "First and foremost, regular physical exercise plays an indispensable role in alleviating academic stress." },
+              { zh: "睡眠不足對身心健康有害", en: "To begin with, chronic sleep deprivation is highly detrimental to teenagers' physical and mental well-being." }
+            ]
+          },
+          {
+            step: "E", title: "Explanation 解釋成因與影響", color: "sky",
+            items: [
+              { zh: "運動促進安多酚分泌", en: "Not only does aerobic exercise help students release endorphins, but it also enables them to concentrate better on their studies." }
+            ]
+          },
+          {
+            step: "E", title: "Example 具體實例", color: "amber",
+            items: [
+              { zh: "每天慢跑30分鐘為例", en: "A notable example is that students who engage in thirty minutes of jogging report significantly lower exam anxiety." }
+            ]
+          },
+          {
+            step: "L", title: "Link 段尾小結", color: "rose",
+            items: [
+              { zh: "因此應平衡作息", en: "Therefore, it is imperative for schools and parents to help teenagers strike a healthy balance between study and rest." }
+            ]
+          }
+        ]
+      },
+      tech: {
+        name: "📱 智能手機與電子學習",
+        blocks: [
+          {
+            step: "P", title: "Point 主題句", color: "emerald",
+            items: [
+              { zh: "電子學習能顯著提升學習動機", en: "First and foremost, integrating interactive technology into classrooms can significantly enhance students' learning motivation." }
+            ]
+          },
+          {
+            step: "E", title: "Explanation 解釋成因", color: "sky",
+            items: [
+              { zh: "隨時隨地存取資源", en: "Online learning platforms enable students to access multimedia educational resources anytime and learn at their own pace." }
+            ]
+          },
+          {
+            step: "E", title: "Example 具體實例", color: "amber",
+            items: [
+              { zh: "使用平板電腦互動小測", en: "For instance, using tablets for gamified quizzes in English lessons stimulates students' interest." }
+            ]
+          },
+          {
+            step: "L", title: "Link 段尾小結", color: "rose",
+            items: [
+              { zh: "善用科技能帶來莫大裨益", en: "Hence, the judicious use of digital technology is conducive to creating a more engaging learning environment." }
+            ]
+          }
+        ]
+      },
+      env: {
+        name: "🌱 環保減塑與綠色生活",
+        blocks: [
+          {
+            step: "P", title: "Point 主題句", color: "emerald",
+            items: [
+              { zh: "減少即棄塑膠是當務之急", en: "First and foremost, curbing the use of single-use plastics plays a pivotal role in protecting our marine ecosystem." }
+            ]
+          },
+          {
+            step: "E", title: "Explanation 解釋成因", color: "sky",
+            items: [
+              { zh: "塑膠垃圾無法自然分解", en: "Non-biodegradable plastic waste not only takes centuries to break down, but it also contributes to polluting our oceans." }
+            ]
+          },
+          {
+            step: "E", title: "Example 具體實例", color: "amber",
+            items: [
+              { zh: "自備環保袋及水樽", en: "For example, bringing reusable shopping bags and water bottles can eliminate millions of disposable plastic items." }
+            ]
+          },
+          {
+            step: "L", title: "Link 段尾小結", color: "rose",
+            items: [
+              { zh: "應立即行動保育地球", en: "In short, it is high time that every citizen took immediate action to reduce our carbon footprint." }
+            ]
+          }
+        ]
+      },
+      youth: {
+        name: "🎓 課外活動與實習",
+        blocks: [
+          {
+            step: "P", title: "Point 主題句", color: "emerald",
+            items: [
+              { zh: "課外活動對全人發展不可或缺", en: "First and foremost, participating in extracurricular activities is indispensable to students' holistic development." }
+            ]
+          },
+          {
+            step: "E", title: "Explanation 解釋成因", color: "sky",
+            items: [
+              { zh: "擴闊視野並培養團隊精神", en: "Not only does joining clubs broaden students' horizons, but it also allows them to cultivate teamwork spirit." }
+            ]
+          },
+          {
+            step: "E", title: "Example 具體實例", color: "amber",
+            items: [
+              { zh: "參與義務工作探訪長者", en: "A notable example is that students who participate in voluntary work develop stronger empathy and interpersonal skills." }
+            ]
+          },
+          {
+            step: "L", title: "Link 段尾小結", color: "rose",
+            items: [
+              { zh: "利遠大於弊", en: "Taking all the above factors into consideration, the merits of stepping out of the classroom far outweigh its drawbacks." }
+            ]
+          }
+        ]
+      }
+    };
+
+    const WEAK_WORD_RULES = [
+      { pattern: /\bvery important\b/gi, label: "very important", upgrades: ["indispensable", "crucial", "vital"], tip: "議論文中用 indispensable (不可或缺的) 更高分！" },
+      { pattern: /\bimportant\b/gi, label: "important", upgrades: ["crucial", "vital", "significant"], tip: "搭配 role 時建議寫 play a vital / indispensable role。" },
+      { pattern: /\bgood for\b/gi, label: "good for", upgrades: ["beneficial to", "conducive to"], tip: "切記改為 beneficial TO 後，介詞是 to 而非 for！" },
+      { pattern: /\bbad for\b/gi, label: "bad for", upgrades: ["detrimental to", "harmful to"], tip: "detrimental TO (對…有害) 是保 4 衝 5 標誌詞。" },
+      { pattern: /\bnowadays\b/gi, label: "Nowadays", upgrades: ["In contemporary society", "In recent years"], tip: "避免第一隻字寫 Nowadays。" },
+      { pattern: /\bmany\b/gi, label: "many", upgrades: ["numerous", "a wide array of", "a growing number of"], tip: "修飾可數複數名詞時用 numerous。" },
+      { pattern: /\ba lot of\b/gi, label: "a lot of", upgrades: ["a substantial amount of", "a plethora of"], tip: "正式公函與議論文盡量避免 a lot of。" },
+      { pattern: /\bmoreover\b/gi, label: "Moreover", upgrades: ["Furthermore", "In addition", "What is more"], tip: "可用 Furthermore 承上啟下。" },
+      { pattern: /\bi think\b/gi, label: "I think", upgrades: ["From my perspective", "I firmly believe that"], tip: "表達立場時用 From my perspective 更具說服力。" },
+      { pattern: /\bsolve the problem\b/gi, label: "solve the problem", upgrades: ["tackle the problem", "alleviate the problem"], tip: "用 alleviate (紓緩) 或 tackle (處理) 更準確嚴謹。" },
+      { pattern: /\bjoin\b/gi, label: "join", upgrades: ["participate in", "engage in"], tip: "接活動時用 participate in 或 engage in。" },
+      { pattern: /\bmake\b/gi, label: "make", upgrades: ["enable", "allow", "render"], tip: "切忌寫 make students can learn，應改為 enable students to learn。" },
+      { pattern: /\bhelp\b/gi, label: "help", upgrades: ["facilitate", "enable", "assist"], tip: "可升級為 enable sb do 或 facilitate + 名詞。" },
+      { pattern: /\bimprove\b/gi, label: "improve", upgrades: ["enhance", "boost", "strengthen"], tip: "搭配效率或意識時用 enhance。" },
+      { pattern: /\breduce\b/gi, label: "reduce", upgrades: ["alleviate", "mitigate", "curb"], tip: "減輕壓力用 relieve / alleviate stress。" }
+    ];
+
+    // Paper 4 口試模擬真題庫
+    const DSE_SPEAKING_PROMPTS = [
+      {
+        title: "主題一：青少年精神健康與減壓 (Mental Health & Stress)",
+        gi_context: "Your school is planning a 'Mental Wellness Week' to help students cope with academic pressure. Discuss with your group how to make this week effective.",
+        bullets: [
+          "What kinds of stress-relief activities should be organized",
+          "How to encourage reluctant or shy students to participate",
+          "Whether homework and tests should be cancelled during that week"
+        ],
+        ir_questions: [
+          "1. (Easy) What do you usually do to relax after a long day at school?",
+          "2. (Medium) Do you think secondary school students in Hong Kong have too much homework?",
+          "3. (Level 4+) Why do some teenagers feel reluctant to talk to parents or social workers about their stress?"
+        ]
       },
       {
-        group: "pos",
-        term: "sympathetic / compassionate",
-        type: "🟢 正面 / 同理關懷",
-        zh: "同情的；富同理心的；體恤的",
-        tip: "作者對弱勢社群、受災者或受苦動物表達憐憫與理解，常見字眼如 'feel sorry for', 'heartbreaking plight', 'pitiful'。"
+        title: "主題二：智能手機與人工智能學習 (AI & E-Learning)",
+        gi_context: "The Student Union is discussing whether the school should allow students to use smartphones and AI chatbots freely during lessons.",
+        bullets: [
+          "How digital tools and AI can facilitate classroom learning",
+          "Potential drawbacks such as distraction and plagiarism",
+          "What rules or guidelines should be set for students"
+        ],
+        ir_questions: [
+          "1. (Easy) How many hours do you spend on your smartphone every day?",
+          "2. (Medium) Do you prefer reading printed textbooks or electronic books on a tablet?",
+          "3. (Level 4+) Will artificial intelligence replace human teachers in the future? Why or why not?"
+        ]
       },
       {
-        group: "neg",
-        term: "skeptical / doubtful",
-        type: "🔴 負面 / 質疑態度 (極常考！)",
-        zh: "懷疑的；半信半疑的",
-        tip: "當文章出現 'questionable', 'hard to believe', 'remains to be seen', 'so-called (所謂的)' 時，作者態度就是 skeptical。"
+        title: "主題三：校園環保與走塑生活 (Green Living & Plastic Ban)",
+        gi_context: "Your school Green Club wants to reduce single-use plastic waste on campus. You are discussing the best initiatives to launch next term.",
+        bullets: [
+          "How to reduce plastic waste at the school canteen and tuck shop",
+          "What incentives or rewards can motivate students to bring their own containers",
+          "Whether strict penalties or education is more effective"
+        ],
+        ir_questions: [
+          "1. (Easy) Do you usually bring your own water bottle when you go out?",
+          "2. (Medium) Why do so many people in Hong Kong still order takeaway food with plastic cutlery?",
+          "3. (Level 4+) Should the government impose heavier fines on citizens who do not recycle? Why?"
+        ]
       },
       {
-        group: "neg",
-        term: "critical / disapproving",
-        type: "🔴 負面 / 批評反對",
-        zh: "批評的；不贊成的；指責的",
-        tip: "作者指出某做法的諸多弊端或錯誤，常出現 'short-sighted (短視)', 'flawed', 'unacceptable', 'fail to'。"
+        title: "主題四：課外活動與暑期實習 (ECA & Summer Internships)",
+        gi_context: "The Careers Committee is organizing a summer programme for Secondary 4 and 5 students. Discuss what activities would benefit students most.",
+        bullets: [
+          "Whether workplace internships or overseas study tours are more useful",
+          "How to help underprivileged students afford the programme fee",
+          "What soft skills students need most for their future careers"
+        ],
+        ir_questions: [
+          "1. (Easy) What extracurricular activities do you take part in at school?",
+          "2. (Medium) Do you think Secondary 5 students should do part-time jobs during the school term?",
+          "3. (Level 4+) Which is more important for future success: academic qualifications or interpersonal skills?"
+        ]
       },
       {
-        group: "neg",
-        term: "pessimistic / gloomy",
-        type: "🔴 負面 / 悲觀態度",
-        zh: "悲觀的；感到灰暗無望的",
-        tip: "作者認為問題無法解決或情況只會越來越差，常見字眼有 'bleak future', 'hopeless', 'doomed to fail'。"
+        title: "主題五：推廣香港地道旅遊 (Promoting Local Tourism)",
+        gi_context: "The Hong Kong Tourism Board is inviting students to suggest new ways to attract young overseas tourists to visit Hong Kong.",
+        bullets: [
+          "What cultural heritage sites or eco-tourism spots should be promoted",
+          "How social media influencers can help promote Hong Kong",
+          "What improvements local shops and restaurants should make"
+        ],
+        ir_questions: [
+          "1. (Easy) Where would you take an overseas friend who is visiting Hong Kong for the first time?",
+          "2. (Medium) Do you think night markets are attractive to young tourists?",
+          "3. (Level 4+) How can Hong Kong strike a balance between tourism development and preserving local neighbourhoods?"
+        ]
+      }
+    ];
+
+    // Paper 4 口試零失分救命句庫
+    const DSE_SPEAKING_PHRASES = [
+      {
+        group: "start", tag: "🚀 開首破冰",
+        en: "Good morning everyone. To kick off our discussion today, I would like to share my thoughts on the first point.",
+        zh: "大家早安。為了展開今天的討論，我想先分享我對第一點的看法。",
+        tip: "搶做第一個開口的考生（開球手），語氣自然自信，Interaction 即刻留低好印象！"
       },
       {
-        group: "neg",
-        term: "ironic / sarcastic",
-        type: "🔴 負面 / 反諷挖苦 (Part B2 必考)",
-        zh: "諷刺的；挖苦的；說反話的",
-        tip: "表面用正面字眼（如 'What a brilliant idea!' 或加上引號的 'experts'），但實際上下文是在批評一件愚蠢的事。"
+        group: "start", tag: "🚀 點題開場",
+        en: "Today we are here to discuss how to make this programme a success. Shall we start by looking at the target participants?",
+        zh: "今天我們聚在一起討論如何令這個活動成功。我們不如先從目標參加者開始傾起？",
+        tip: "用問句邀請全組進入第一個議程，展現領導才能（Leadership）。"
       },
       {
-        group: "neg",
-        term: "indignant / outraged",
-        type: "🔴 負面 / 憤慨不平",
-        zh: "憤慨的；義憤填膺的",
-        tip: "作者因為社會不公義、欺凌或欺詐行為而感到憤怒，語氣強烈（如 'shameful', 'disgraceful', 'intolerable'）。"
+        group: "agree", tag: "🤝 贊同並補充",
+        en: "I couldn't agree more with what you just said, and I would like to add that it is also very cost-effective.",
+        zh: "我非常認同你剛才所說的，而且我想補充一點，這樣做非常具成本效益。",
+        tip: "千祈唔好只講 'I agree with you' 就停！一定要用 'and I would like to add that...' 加上自己嘅新論點。"
       },
       {
-        group: "neg",
-        term: "dismissive / contemptuous",
-        type: "🔴 負面 / 輕視不屑",
-        zh: "不屑一顧的；輕視的；敷衍的",
-        tip: "作者認為某個建議或想法毫無價值、不值得討論，常見字眼如 'ridiculous', 'nonsense', 'not worth considering'。"
+        group: "agree", tag: "🤝 引用隊友觀點",
+        en: "Building on your point about students' mental health, I think organizing a music café would help them unwind.",
+        zh: "順著你剛才關於學生精神健康的觀點，我認為舉辦音樂咖啡座能幫助他們放鬆身心。",
+        tip: "考官最愛聽 'Building on your point...'，證明你有留心聽隊友講嘢，唔係只顧背自己張紙！"
       },
       {
-        group: "neg",
-        term: "concerned / worried / alarmed",
-        type: "🔴 憂慮 / 關注態度",
-        zh: "憂慮的；擔心的；憂心忡忡的",
-        tip: "作者針對社會問題（如青年精神健康、環境污染）提出警告，常見 'alarming', 'deeply troubling', 'pose a threat'。"
+        group: "agree", tag: "🤝 強烈認同",
+        en: "You have raised a very valid point. Indeed, hands-on experience is indispensable to teenagers.",
+        zh: "你提出了一個非常有道理的觀點。的確，實戰經驗對青少年是不可或缺的。",
+        tip: "用 'raised a very valid point' 讚賞隊友，自然流暢。"
       },
       {
-        group: "neu",
-        term: "objective / neutral / impartial",
-        type: "🟡 中立 / 客觀態度",
-        zh: "客觀的；中立不偏頗的",
-        tip: "常見於新聞報導或科學研究，只陳述正反雙方數據與專家引述，不加入作者個人情緒字眼。"
+        group: "disagree", tag: "⚖️ 禮貌提出反面憂慮",
+        en: "I see where you are coming from, but have we considered the tight budget of our Student Union?",
+        zh: "我明白你的出發點，但我們有沒有考慮過學生會緊絀的財政預算呢？",
+        tip: "先講 'I see where you are coming from' 肯定對方，再用問句溫和反駁，禮貌得體！"
       },
       {
-        group: "neu",
-        term: "ambivalent / mixed feelings",
-        type: "🟡 複雜 / 矛盾態度 (高頻考點)",
-        zh: "矛盾的；喜憂參半的；既愛又怕的",
-        tip: "當作者一方面讚賞某事物（如 AI 科技）的便利，同時又深深擔憂其風險，無法一刀切說是好是壞時選此項！"
+        group: "disagree", tag: "⚖️ 溫和轉折",
+        en: "That sounds like an interesting idea on paper; however, in practice, it might be quite difficult to supervise.",
+        zh: "這在理論上聽起來很有趣；然而在實際執行上，可能會頗難監管。",
+        tip: "'on paper... however, in practice...' 是極高分的對比結構！"
       },
       {
-        group: "neu",
-        term: "indifferent / apathetic",
-        type: "🟡 冷漠 / 不關心態度",
-        zh: "漠不關心的；冷淡的；無動於衷的",
-        tip: "指某人對發生的事情毫不在乎（如 'could not care less', 'turn a blind eye to', 'shrug off'）。"
+        group: "disagree", tag: "⚖️ 提出折衷方案",
+        en: "While I understand your concern about safety, perhaps we could strike a balance by hiring a qualified instructor.",
+        zh: "雖然我理解你對安全的憂慮，但或許我們可以聘請合資格教練，以取得平衡。",
+        tip: "幫兩個爭持不下的隊友「打圓場」提出折衷方案，是衝 Level 4–5 的秘技！"
       },
       {
-        group: "neu",
-        term: "nostalgic / reminiscent",
-        type: "🟡 懷舊 / 感慨態度",
-        zh: "懷舊的；依戀往昔美好時光的",
-        tip: "常見於描寫老香港、舊街坊、童年回憶或傳統手藝消逝的文章，充滿溫暖但帶點惋惜的語氣。"
+        group: "invite", tag: "👋 邀請沉默隊友",
+        en: "We haven't heard from you yet, Candidate B. What is your take on this suggestion?",
+        zh: "B 同學，我們還沒聽過你的意見呢。你對這個建議有什麼看法？",
+        tip: "如果同組有隊友緊張唔敢出聲，主動救佢會令你嘅 Interaction 分數大幅加分！"
       },
       {
-        group: "neu",
-        term: "humorous / light-hearted",
-        type: "🟡 輕鬆 / 幽默語氣",
-        zh: "幽默風趣的；輕鬆詼諧的",
-        tip: "作者透過自嘲、誇張笑話或有趣的生活小故事來吸引讀者，氣氛輕鬆不嚴肅。"
+        group: "invite", tag: "👋 打破靜場 (Dead Air)",
+        en: "Since we all seem to agree on the venue, shall we move on to discuss how to promote the event?",
+        zh: "既然我們似乎都對場地達成共識，不如我們推進去討論如何宣傳這個活動吧？",
+        tip: "當全組講完一點突然靜晒（Dead air），即刻用呢句帶動節奏！"
       },
       {
-        group: "neu",
-        term: "cautious / guarded",
-        type: "🟡 審慎 / 保留態度",
-        zh: "審慎的；小心翼翼的；有所保留的",
-        tip: "作者不急於下定論，呼籲大家先觀察更多證據或小心潛在風險（如 'proceed with caution', 'Wait and see'）。"
+        group: "stall", tag: "🧠 爭取 5 秒思考時間 (IR 救命)",
+        en: "That is a very thought-provoking question. Well, if I look at it from a student's perspective, I believe...",
+        zh: "這是一條非常發人深省的問題。嗯，如果我從學生的角度來看，我認為…",
+        tip: "在 1 分鐘個人回應 (IR) 考官問完難題時，千萬不要呆坐 5 秒！用這句自然爭取思考時間。"
       },
       {
-        group: "stem",
-        term: "What does 'X' (it / they / this) refer to?",
-        type: "🎯 Paper 1 必考代名詞題",
-        zh: "代名詞指代題（前文尋寶法則）",
-        tip: "答案 95% 在該代名詞的前一句或同一句前半部分！切記：若題目問 'they/these'，你的答案必須是複數名詞；且不要直接照抄整句！"
+        group: "stall", tag: "🧠 分兩層次回答 (IR 萬能起手)",
+        en: "Well, there are two main reasons why I hold this view. First and foremost...",
+        zh: "嗯，我抱持這個觀點主要有兩個原因。首先…",
+        tip: "1 分鐘 IR 只要清晰講出兩個原因加一個個人例子，就已經穩拿 Level 4！"
       },
       {
-        group: "stem",
-        term: "Find a word / phrase in paragraph X that means...",
-        type: "🎯 Paper 1 同義詞配對題",
-        zh: "段落同義詞搜尋題（詞性定生死）",
-        tip: "第一件事必定要先看題目定義的詞性！題目是 'to + 原形動詞' 你就要找動詞；題目是 '-ing' 或複數名詞，抄答案時必須完全對齊型態！"
+        group: "sum", tag: "🏁 段尾完美總結",
+        en: "As time is running short, let's briefly wrap up our discussion. We have all agreed that...",
+        zh: "由於時間差不多了，讓我們簡短總結一下討論。我們一致同意…",
+        tip: "在計時器剩餘 20 秒時主動幫全組總結，展現極佳的時間感與組織能力！"
       },
       {
-        group: "stem",
-        term: "True / False / Not Given (T/F/NG)",
-        type: "🎯 Paper 1 必考判斷題",
-        zh: "三選一邏輯判斷題（小心比較級陷阱）",
-        tip: "與原文意思相同＝True；與原文直接矛盾相反＝False；原文完全沒提及或「無從比較（如原文只說很受歡迎，題目說『最』受歡迎）」＝Not Given！"
-      },
-      {
-        group: "stem",
-        term: "What is the main purpose / main idea of paragraph X?",
-        type: "🎯 Paper 1 段落主旨題",
-        zh: "詢問段落寫作目的或中心思想",
-        tip: "重點看該段的【第一句 Topic Sentence】及【轉折詞 However 後面的一句】。常見動詞：to illustrate（舉例說明）、to contrast（對比）、to refute（反駁）。"
-      },
-      {
-        group: "stem",
-        term: "Why does the writer mention [某例子/人物]?",
-        type: "🎯 Paper 1 作者意圖題",
-        zh: "詢問作者提及某例子的目的",
-        tip: "作者舉例子從來不是為了講故事，而是為了支持例子【前一句】的論點！答案通常寫：To show / illustrate / prove that + 前一句的核心論點。"
-      },
-      {
-        group: "stem",
-        term: "What does the phrase '[比喻/成語]' suggest / mean?",
-        type: "🎯 Paper 1 隱喻與言外之意題",
-        zh: "解釋修辭比喻或言外之意 (Inference)",
-        tip: "千萬不要只解釋字面意思（Literal meaning）！必須結合上下文，寫出它背後的實際情況（例如 'a double-edged sword' 代表既有好處亦有壞處）。"
-      },
-      {
-        group: "stem",
-        term: "Summary Cloze (填充摘要題)",
-        type: "🎯 Paper 1 詞性轉換填空題",
-        zh: "根據文章內容完成摘要填空",
-        tip: "先看空格前後判斷需要 Noun / Verb / Adj，回原文定位後，特別注意【主詞單複數 (加 s)】、【時態 (加 ed)】或【動名詞 (preposition 後改 V-ing)】！"
-      },
-      {
-        group: "stem",
-        term: "Match the subheadings to the paragraphs",
-        type: "🎯 Paper 1 小標題配對題",
-        zh: "為各段落配對合適的小標題",
-        tip: "先劃掉已使用的例子，圈出每個選項的關鍵字（Keywords）。小心「字眼陷阱」：某段出現了標題的同一個字，往往只是細節，要看全段大意是否吻合！"
+        group: "sum", tag: "🏁 個人回應收尾句",
+        en: "So, all in all, I firmly believe that the benefits of this measure far outweigh its drawbacks. Thank you.",
+        zh: "總括而言，我深信這項措施的利遠大於弊。多謝。",
+        tip: "在 1 分鐘 IR 聽到計時器響起前，用這句瀟灑收尾，給考官完整結構感！"
       }
     ];
 
     // ========================================================
-    // 4. APP STATE, PERSISTENCE & 3000+ CLOUD LOADER
+    // 2. STATE & INIT
     // ========================================================
     let words = [];
     let reviewQueue = [];
@@ -1173,15 +1519,43 @@
     let currentFontSize = localStorage.getItem('dse_l34_fontsize') || 'md';
     let reviewFilter = 'core';
 
-    // Dictation state
     let dictationStreak = 0;
     let currentDictationWord = null;
 
+    // 搭車自動連播狀態
+    let isAutoPlaying = false;
+    let autoPlayTimer = null;
+
+    // Paper 4 口試特訓狀態
+    let spkTimerTotal = 60;
+    let spkTimerRemaining = 60;
+    let spkTimerInterval = null;
+    let spkTimerRunning = false;
+    let currentSpkPromptIdx = 0;
+    let currentSpkPhraseFilter = 'all';
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let isRecordingVoice = false;
+
+    let blitzMode = 'endless';
+    let blitzQueue = [];
+    let blitzCurrentIdx = 0;
+    let blitzStreak = 0;
+    let blitzCorrectCount = 0;
+    let blitzTotalCount = 0;
+    let blitzAnsweredCurrent = false;
+    let currentBlitzItem = null;
+    let blitzTimerSec = 60;
+    let blitzTimerInterval = null;
+    let blitzBestStreak = parseInt(localStorage.getItem('dse_blitz_best') || '0', 10);
+
     const LS_KEY = 'dse_l34_progress_v1';
-    // 升級快取鍵至 v2，徹底清除舊版曾經產生的重複罐頭例句與預設捉錯位字串
     const LS_DICT_CACHE_KEY = 'dse_l34_dict_cache_v2';
     let progressMap = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
     let dictCache = JSON.parse(localStorage.getItem(LS_DICT_CACHE_KEY) || '{}');
+
+    // 學生個人資料（用於打卡證與工作紙）
+    let studentProfile = JSON.parse(localStorage.getItem('dse_l34_student_profile') || '{"classNo":"","name":"","goal":"全力以赴，英文坐3望4！"}');
 
     function showToast(msg) {
       const banner = document.getElementById('toast-banner');
@@ -1197,20 +1571,9 @@
       }, 2500);
     }
 
-    // 四段式字體大小調整 (A- / 標準 / A+ / 特大)
     function setFontSize(sizeKey, silent = false) {
-      const sizeMap = {
-        sm: '14px',
-        md: '16px',
-        lg: '18.5px',
-        xl: '21px'
-      };
-      const labelMap = {
-        sm: '細字體 (A-)',
-        md: '標準字體',
-        lg: '大字體 (A+)',
-        xl: '特大字體'
-      };
+      const sizeMap = { sm: '14px', md: '16px', lg: '18.5px', xl: '21px' };
+      const labelMap = { sm: '細字體 (A-)', md: '標準字體', lg: '大字體 (A+)', xl: '特大字體' };
       if (!sizeMap[sizeKey]) sizeKey = 'md';
       currentFontSize = sizeKey;
       localStorage.setItem('dse_l34_fontsize', sizeKey);
@@ -1226,12 +1589,9 @@
         }
       });
 
-      if (!silent) {
-        showToast(`🔤 已切換至「${labelMap[sizeKey]}」`);
-      }
+      if (!silent) showToast(`🔤 已切換至「${labelMap[sizeKey]}」`);
     }
 
-    // 自動為雲端單字進行自然音節拆解，方便拼讀記憶
     function autoSyllabify(word) {
       if (!word || word.length <= 4) return word;
       const parts = word.toLowerCase().match(/[^aeiouy]*[aeiouy]+(?:[^aeiouy](?![aeiouy]))*/g);
@@ -1261,18 +1621,11 @@
     function toggleTheme() {
       const next = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(next);
-      showToast(next === 'light' ? '☀️ 已切換至「白底考場模式」(高對比清晰文字)' : '🌙 已切換至「黑底護眼模式」');
+      showToast(next === 'light' ? '☀️ 已切換至「白底考場模式」' : '🌙 已切換至「黑底護眼模式」');
     }
 
     function createDefaultStats() {
-      return {
-        status: 'new',
-        interval: 0,
-        ease: 2.5,
-        nextReview: Date.now(),
-        lastReviewed: null,
-        note: ''
-      };
+      return { status: 'new', interval: 0, ease: 2.5, nextReview: Date.now(), lastReviewed: null, note: '' };
     }
 
     function normalizeWordItem(raw, idx = 0) {
@@ -1289,10 +1642,8 @@
         def_zh: raw.def_zh || raw.def || '',
         def_en: raw.def_en || '',
         basic_word: raw.basic_word || '',
-        // 3000 隨機字不出「考官捉錯位」
         prep_trap: isRandom ? '' : (raw.prep_trap || ''),
         collocations: Array.isArray(raw.collocations) ? raw.collocations : [],
-        // 如沒有真實例句則留空，絕不生成重複罐頭例句
         example: raw.example || '',
         isCloud: isRandom,
         isRandom3000: isRandom,
@@ -1301,115 +1652,97 @@
     }
 
     function saveProgressMap() {
+      try { localStorage.setItem(LS_KEY, JSON.stringify(progressMap)); } catch (_) {}
+    }
+
+    async function loadCloud3000Words() {
+      const pill = document.getElementById('cloud-status-pill');
+      if (pill) pill.textContent = '載入字庫中...';
+
+      const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/saiyeung1214/hkdse-eng34/refs/heads/main/dse_eng_vocab_all_3000.json';
+
       try {
-        localStorage.setItem(LS_KEY, JSON.stringify(progressMap));
-      } catch (_) {}
-    }
-
-
-
-// 自動從 GitHub 預設載入你的專屬 DSE 字庫
-async function loadCloud3000Words() {
-  const pill = document.getElementById('cloud-status-pill');
-  if (pill) pill.textContent = '載入官方 2000+ 字庫中...';
-
-  // 👉 將此處換成你的 GitHub Raw 或 jsDelivr 連結：
-  const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/saiyeung1214/hkdse-eng34/refs/heads/main/dse_eng_vocab_all_3000.json';
-
-  try {
-    const res = await fetch('./dse_eng_vocab_all_3000.json', { cache: 'no-store' });
-    if (res.ok) {
-      const cloudData = await res.json();
-      if (Array.isArray(cloudData) && cloudData.length > 0) {
-        const existingSet = new Set(words.map(w => w.word.toLowerCase()));
-        let addedCount = 0;
-
-        cloudData.forEach((raw, idx) => {
-          if (raw && raw.word && !existingSet.has(raw.word.toLowerCase())) {
-            // 自動標準化單字並排入詞庫
-            words.push(normalizeWordItem(raw, idx));
-            existingSet.add(raw.word.toLowerCase());
-            addedCount++;
+        const res = await fetch('./dse_eng_vocab_all_3000.json', { cache: 'no-store' });
+        if (res.ok) {
+          const cloudData = await res.json();
+          if (Array.isArray(cloudData) && cloudData.length > 0) {
+            processCloudData(cloudData);
+            return;
           }
-        });
-
-        if (pill) {
-          pill.textContent = `已載入 ${words.length} 個必背詞彙`;
         }
-        showToast(`🎉 成功同步載入 ${addedCount} 個 DSE 核心詞彙！`);
+        throw new Error('Local fetch failed');
+      } catch (_) {
+        try {
+          const res2 = await fetch(GITHUB_JSON_URL, { cache: 'no-store' });
+          if (res2.ok) {
+            const cloudData2 = await res2.json();
+            if (Array.isArray(cloudData2) && cloudData2.length > 0) {
+              processCloudData(cloudData2);
+              return;
+            }
+          }
+        } catch (err2) {
+          console.warn('Fallback GitHub load error:', err2);
+        }
       }
-    } else {
-      throw new Error('GitHub 讀取失敗');
-    }
-  } catch (err) {
-    console.warn('雲端字庫載入異常，使用本地核心字庫：', err);
-    if (pill) {
-      pill.textContent = `精選核心字庫 (${words.length} 字)`;
-    }
-  }
 
-  // 重新計算進度指標與更新介面
-  updateDashboardStats();
-  buildReviewQueue();
-  renderCurrentCard();
-  renderWordBank();
-}
-    // 當抽考 3000 雲端生字時，自動即時載入真實音標、中英解釋與字典真實例句（絕不生成罐頭例句或考官捉錯位）
+      if (pill) pill.textContent = `精選核心字庫 (${words.length} 字)`;
+      updateDashboardStats();
+      buildReviewQueue();
+      renderCurrentCard();
+      renderWordBank();
+      initBlitzQueue();
+    }
+
+    function processCloudData(cloudData) {
+      const existingSet = new Set(words.map(w => w.word.toLowerCase()));
+      let addedCount = 0;
+
+      cloudData.forEach((raw, idx) => {
+        if (raw && raw.word && !existingSet.has(raw.word.toLowerCase())) {
+          words.push(normalizeWordItem({ ...raw, isCloud: true }, idx));
+          existingSet.add(raw.word.toLowerCase());
+          addedCount++;
+        }
+      });
+
+      const pill = document.getElementById('cloud-status-pill');
+      if (pill) pill.textContent = `已載入 ${words.length} 個必背詞彙`;
+      showToast(`🎉 成功載入 ${words.length} 個 DSE 核心詞彙！`);
+
+      updateDashboardStats();
+      buildReviewQueue();
+      renderCurrentCard();
+      renderWordBank();
+      initBlitzQueue();
+    }
+
     async function ensureWordDetailsLoaded(item) {
       if (!item || !item.isCloud) return;
       const key = item.word.toLowerCase();
-
       if (dictCache[key]) {
         Object.assign(item, dictCache[key], { isCloud: false, isRandom3000: true });
         return;
       }
 
-      const fetched = {
-        phonetic: '',
-        pos: 'word',
-        def_zh: '載入中文釋義中...',
-        def_en: '',
-        basic_word: '',
-        prep_trap: '', // 3000隨機字不出考官捉錯位
-        collocations: [],
-        example: ''    // 如字典無真實例句則留空，不生成重複罐頭句
-      };
-
+      const fetched = { phonetic: '', pos: 'word', def_zh: item.def_zh || item.word, def_en: '', basic_word: '', prep_trap: '', collocations: [], example: '' };
       try {
         const dictRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(key)}`);
         if (dictRes.ok) {
           const data = await dictRes.json();
           const first = data[0];
           if (first) {
-            fetched.phonetic = first.phonetic || (first.phonetics?.find(p => p.text)?.text) || '';
+            fetched.phonetic = first.phonetic || '';
             if (Array.isArray(first.meanings) && first.meanings.length > 0) {
               const m = first.meanings[0];
               fetched.pos = m.partOfSpeech || 'word';
-
-              // 收集同義詞
-              const syns = [];
-              first.meanings.forEach(meaning => {
-                if (Array.isArray(meaning.synonyms)) {
-                  meaning.synonyms.forEach(s => {
-                    if (s && syns.length < 3 && !syns.includes(s)) syns.push(s);
-                  });
-                }
-              });
-              if (syns.length > 0) {
-                fetched.basic_word = syns.slice(0, 2).join(' / ');
-              }
-
-              // 取得英文定義與真實例句（搜尋所有釋義，若無真實例句則保持空白）
               if (Array.isArray(m.definitions) && m.definitions.length > 0) {
                 fetched.def_en = m.definitions[0].definition || '';
               }
               for (const meaning of first.meanings) {
                 if (Array.isArray(meaning.definitions)) {
                   const foundEx = meaning.definitions.find(d => d.example && d.example.trim().length > 0);
-                  if (foundEx) {
-                    fetched.example = foundEx.example.trim();
-                    break;
-                  }
+                  if (foundEx) { fetched.example = foundEx.example.trim(); break; }
                 }
               }
             }
@@ -1417,33 +1750,18 @@ async function loadCloud3000Words() {
         }
       } catch (_) {}
 
-      try {
-        const trRes = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(key)}&langpair=en|zh-TW`);
-        if (trRes.ok) {
-          const trData = await trRes.json();
-          if (trData?.responseData?.translatedText) {
-            fetched.def_zh = trData.responseData.translatedText;
-          }
-        }
-      } catch (_) {}
-
-      if (fetched.def_zh === '載入中文釋義中...') {
-        fetched.def_zh = fetched.def_en ? '（請參考下方英文釋義）' : item.word;
-      }
-
       Object.assign(item, fetched, { isCloud: false, isRandom3000: true });
       dictCache[key] = fetched;
-      const cacheKeys = Object.keys(dictCache);
-      if (cacheKeys.length > 400) delete dictCache[cacheKeys[0]];
-      try {
-        localStorage.setItem(LS_DICT_CACHE_KEY, JSON.stringify(dictCache));
-      } catch (_) {}
+      try { localStorage.setItem(LS_DICT_CACHE_KEY, JSON.stringify(dictCache)); } catch (_) {}
 
       if (reviewQueue[currentCardIndex]?.word === item.word) {
         populateCardDOM(item);
       }
     }
 
+    // ========================================================
+    // 3. INITIALIZATION
+    // ========================================================
     function initApp() {
       applyTheme(currentTheme);
       setFontSize(currentFontSize, true);
@@ -1458,10 +1776,318 @@ async function loadCloud3000Words() {
       renderReadingSection();
       renderWordBank();
       nextDictationQuestion();
+      renderSpeakingPrompt();
+      renderSpeakingPhrases();
+
+      // 載入學生打卡名字設定並初始化打卡證與工作紙
+      const clsInp = document.getElementById('pass-student-class');
+      const nameInp = document.getElementById('pass-student-name');
+      const goalInp = document.getElementById('pass-student-goal');
+      if (clsInp) clsInp.value = studentProfile.classNo || '';
+      if (nameInp) nameInp.value = studentProfile.name || '';
+      if (goalInp) goalInp.value = studentProfile.goal || '全力以赴，英文坐3望4！';
+      renderStudyPassCanvas();
+      renderWorksheetPreview();
 
       loadCloud3000Words();
     }
 
+    // ========================================================
+    // 3.5 (NEW): STUDY CHECK-IN PASS CANVAS & PRINTABLE WORKSHEET
+    // ========================================================
+    function saveStudentProfileAndRender() {
+      const clsVal = document.getElementById('pass-student-class')?.value || '';
+      const nameVal = document.getElementById('pass-student-name')?.value || '';
+      const goalVal = document.getElementById('pass-student-goal')?.value || '';
+      studentProfile = { classNo: clsVal, name: nameVal, goal: goalVal };
+      try {
+        localStorage.setItem('dse_l34_student_profile', JSON.stringify(studentProfile));
+      } catch (_) {}
+      renderStudyPassCanvas();
+      renderWorksheetPreview();
+    }
+
+    function generateVerifyHash(str) {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return (h >>> 0).toString(16).toUpperCase().padStart(8, '0');
+    }
+
+    function renderStudyPassCanvas() {
+      const canvas = document.getElementById('study-pass-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      // 統計數據
+      const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
+      const learningCount = words.filter(w => w.stats?.status === 'learning').length;
+      const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
+      const totalReviewed = masteredCount + learningCount + forgotCount;
+
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      const stuClass = (studentProfile.classNo || '未填班別').trim();
+      const stuName = (studentProfile.name || 'DSE 考生').trim();
+      const stuGoal = (studentProfile.goal || '全力以赴，英文坐3望4！').trim();
+
+      const rawCode = `${stuClass}|${stuName}|${dateStr.slice(0, 10)}|M:${masteredCount}|L:${learningCount}|B:${blitzBestStreak}|D:${dictationStreak}`;
+      const verifyCode = `CAC-${generateVerifyHash(rawCode)}`;
+
+      // 1. 繪製深色漸層背景
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0, '#0f172a');
+      bgGrad.addColorStop(0.6, '#1e293b');
+      bgGrad.addColorStop(1, '#064e3b');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // 裝飾幾何光暈
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.12)';
+      ctx.beginPath();
+      ctx.arc(W - 80, 80, 140, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 外框線
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.45)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(16, 16, W - 32, H - 32);
+
+      // 2. 頂部標題列
+      ctx.fillStyle = '#10b981';
+      ctx.font = 'bold 15px Inter, system-ui, sans-serif';
+      ctx.fillText('🎓 CAC HKDSE ENGLISH MASTERY SYSTEM 3.0 • 溫習進度打卡證', 38, 52);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '13px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(`打卡時間: ${dateStr}`, W - 38, 52);
+      ctx.textAlign = 'left';
+
+      // 3. 學生姓名與班別大字顯示
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 32px Inter, system-ui, sans-serif';
+      ctx.fillText(`${stuName}`, 38, 102);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 18px Inter, system-ui, sans-serif';
+      ctx.fillText(`班別 / 學號：${stuClass}`, 38, 132);
+
+      ctx.fillStyle = '#fcd34d';
+      ctx.font = '14px Inter, system-ui, sans-serif';
+      ctx.fillText(`💬 溫習目標：「${stuGoal.slice(0, 36)}」`, 38, 160);
+
+      // 分隔線
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(38, 182);
+      ctx.lineTo(W - 38, 182);
+      ctx.stroke();
+
+      // 4. 四格核心數據統計卡
+      const boxes = [
+        { label: '✅ 完全搞掂 (已熟記)', val: `${masteredCount} 字`, color: '#34d399', bg: 'rgba(16, 185, 129, 0.14)' },
+        { label: '🤔 勉強記得 (鞏固中)', val: `${learningCount} 字`, color: '#fbbf24', bg: 'rgba(245, 158, 11, 0.14)' },
+        { label: '⚠️ 介詞排雷最高連勝', val: `${blitzBestStreak} 題 🔥`, color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.14)' },
+        { label: '🎧 Paper 3 串字連勝', val: `${dictationStreak} 題 🎯`, color: '#f43f5e', bg: 'rgba(244, 63, 94, 0.14)' }
+      ];
+
+      const boxW = (W - 76 - 36) / 4;
+      const boxY = 205;
+      const boxH = 115;
+
+      boxes.forEach((b, idx) => {
+        const bx = 38 + idx * (boxW + 12);
+        ctx.fillStyle = b.bg;
+        ctx.fillRect(bx, boxY, boxW, boxH);
+        ctx.strokeStyle = b.color;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(bx, boxY, boxW, boxH);
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = 'bold 12px Inter, system-ui, sans-serif';
+        ctx.fillText(b.label, bx + 12, boxY + 32);
+
+        ctx.fillStyle = b.color;
+        ctx.font = '900 28px Inter, system-ui, sans-serif';
+        ctx.fillText(b.val, bx + 12, boxY + 80);
+      });
+
+      // 5. 底部統計與防偽驗證碼
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+      ctx.fillRect(38, 345, W - 76, 75);
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+      ctx.strokeRect(38, 345, W - 76, 75);
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = 'bold 14px Inter, system-ui, sans-serif';
+      ctx.fillText(`📊 累計已溫習生字總數：${totalReviewed} 個  |  ❌ 待攻堅生字：${forgotCount} 個`, 54, 375);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '12px monospace';
+      ctx.fillText(`🔐 防偽驗證碼 (Verification Code): ${verifyCode}   •   版權所有: CAC LawSir`, 54, 402);
+    }
+
+    function downloadStudyPass() {
+      renderStudyPassCanvas();
+      const canvas = document.getElementById('study-pass-canvas');
+      if (!canvas) return;
+      const stuName = (studentProfile.name || 'Student').replace(/\s+/g, '_');
+      const link = document.createElement('a');
+      link.download = `DSE_StudyPass_${stuName}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('🎉 已下載高清溫習打卡圖！可直接提交功課！');
+    }
+
+    function renderWorksheetPreview() {
+      const container = document.getElementById('ws-table-container');
+      if (!container) return;
+
+      const source = document.getElementById('ws-source-select')?.value || 'weak';
+      const mode = document.getElementById('ws-mode-select')?.value || 'dict_en';
+      const count = parseInt(document.getElementById('ws-count-select')?.value || '20', 10);
+
+      // 更新試卷抬頭資料
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      document.getElementById('ws-header-name').textContent = studentProfile.name || '';
+      document.getElementById('ws-header-class').textContent = studentProfile.classNo || '';
+      document.getElementById('ws-header-date').textContent = dateStr;
+
+      let pool = [];
+      let subtitle = '';
+      if (source === 'weak') {
+        pool = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
+        if (pool.length === 0) {
+          pool = words.filter(w => !w.isRandom3000);
+          subtitle = '（目前個人錯題庫為空，系統已自動為你載入 DSE Level 3–4 精選必背核心詞）';
+        } else {
+          subtitle = `（共篩選出 ${pool.length} 個你標記為「唔熟」或「勉強記得」的個人弱點生字）`;
+        }
+      } else if (source === 'paper3') {
+        pool = words.filter(w => w.topic === 'Paper 3 Traps' || (!w.isRandom3000 && w.prep_trap));
+        subtitle = '（專攻 DSE Paper 3 聽力綜合卷最常串錯及漏寫字母的高危單字）';
+      } else if (source === 'prep') {
+        pool = words.filter(w => w.prep_trap && w.prep_trap.trim() !== '');
+        subtitle = '（專攻 DSE Paper 2 寫作最易用錯介詞與動名詞 V-ing 的核心詞彙）';
+      } else {
+        pool = words.filter(w => !w.isRandom3000);
+        subtitle = '（涵蓋 DSE Level 3–4 寫作與閱讀必背高分替換詞）';
+      }
+
+      if (pool.length === 0) pool = [...words];
+      const selected = pool.slice(0, count);
+
+      const titleMap = {
+        dict_en: '✍️ DSE 英文生字默書紙 (看中文默英文)',
+        dict_zh: '🧐 DSE 閱讀詞義理解小測 (看英文寫中文)',
+        study: '📖 DSE 個人化重點詞彙中英對照溫習表'
+      };
+      document.getElementById('ws-paper-title').textContent = titleMap[mode] || 'DSE 重點詞彙工作紙';
+      document.getElementById('ws-paper-subtitle').textContent = subtitle;
+
+      let rowsHtml = '';
+      if (mode === 'dict_en') {
+        rowsHtml = `
+          <table class="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b-2 border-slate-800 bg-slate-100 text-left">
+                <th class="py-2 px-2 w-10">#</th>
+                <th class="py-2 px-2">中文釋義与詞性 (Meaning & POS)</th>
+                <th class="py-2 px-2 w-28">字首與長度提示</th>
+                <th class="py-2 px-2 w-56">請默寫英文單字 (Spelling)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${selected.map((item, i) => {
+                const hint = `${item.word[0].toUpperCase()} _ _ (${item.word.length} letters)`;
+                return `
+                  <tr class="border-b border-slate-300">
+                    <td class="py-2.5 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
+                    <td class="py-2.5 px-2 font-semibold text-slate-900">${item.def_zh || item.word} <span class="text-xs font-mono text-slate-500">(${item.pos})</span></td>
+                    <td class="py-2.5 px-2 font-mono text-xs text-slate-600">${hint}</td>
+                    <td class="py-2.5 px-2 font-mono text-slate-400">____________________________</td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        `;
+      } else if (mode === 'dict_zh') {
+        rowsHtml = `
+          <table class="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b-2 border-slate-800 bg-slate-100 text-left">
+                <th class="py-2 px-2 w-10">#</th>
+                <th class="py-2 px-2 w-44">英文單字 (Word)</th>
+                <th class="py-2 px-2">實戰語境例句 (Context Sentence)</th>
+                <th class="py-2 px-2 w-44">請寫出中文意思</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${selected.map((item, i) => `
+                <tr class="border-b border-slate-300">
+                  <td class="py-2.5 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
+                  <td class="py-2.5 px-2 font-bold text-slate-900">${item.word} <span class="text-xs font-mono text-slate-500">(${item.pos})</span></td>
+                  <td class="py-2.5 px-2 text-xs text-slate-700 italic">${item.example || '-'}</td>
+                  <td class="py-2.5 px-2 font-mono text-slate-400">____________________</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      } else {
+        rowsHtml = `
+          <table class="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b-2 border-slate-800 bg-slate-100 text-left">
+                <th class="py-2 px-2 w-8">#</th>
+                <th class="py-2 px-2 w-44">單字與音節拆解</th>
+                <th class="py-2 px-2 w-48">中文釋義與平庸字替換</th>
+                <th class="py-2 px-2">考官介詞排雷 / 實戰例句</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${selected.map((item, i) => `
+                <tr class="border-b border-slate-300">
+                  <td class="py-2 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
+                  <td class="py-2 px-2">
+                    <div class="font-black text-slate-900 text-sm">${item.word}</div>
+                    <div class="text-[11px] font-mono text-slate-500">${item.syllable} (${item.pos})</div>
+                  </td>
+                  <td class="py-2 px-2">
+                    <div class="font-bold text-slate-900">${item.def_zh || ''}</div>
+                    ${item.basic_word ? `<div class="text-[11px] text-slate-600">⚡ 取代: ${item.basic_word}</div>` : ''}
+                  </td>
+                  <td class="py-2 px-2 text-xs text-slate-800">
+                    ${item.prep_trap ? `<div class="font-semibold text-rose-800">⚠️ ${item.prep_trap}</div>` : ''}
+                    <div class="italic text-slate-600">${item.example || ''}</div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+
+      container.innerHTML = rowsHtml;
+    }
+
+    function triggerPrintWorksheet() {
+      renderWorksheetPreview();
+      window.print();
+    }
+
+    // ========================================================
+    // 4. FLASHCARD & REVIEW LOGIC
+    // ========================================================
     function isWordDue(w) {
       if (!w.stats) return true;
       return w.stats.nextReview <= Date.now();
@@ -1482,6 +2108,7 @@ async function loadCloud3000Words() {
         : '0%';
       document.getElementById('stat-learning').textContent = learningCount;
       document.getElementById('stat-forgot').textContent = forgotCount;
+      renderStudyPassCanvas();
     }
 
     function setReviewFilter(mode) {
@@ -1505,11 +2132,10 @@ async function loadCloud3000Words() {
       } else if (reviewFilter === 'hard') {
         reviewQueue = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
         if (reviewQueue.length === 0) {
-          showToast('🎉 目前未有「唔熟」生字，已自動切換回精選必背核心詞！');
           reviewQueue = words.filter(w => !w.isRandom3000);
         }
       } else if (reviewFilter === 'prep') {
-        reviewQueue = words.filter(w => !w.isRandom3000 && w.prep_trap && !w.prep_trap.includes('無特別'));
+        reviewQueue = words.filter(w => !w.isRandom3000 && w.prep_trap);
       } else {
         reviewQueue = [...words].sort(() => Math.random() - 0.5);
       }
@@ -1524,7 +2150,6 @@ async function loadCloud3000Words() {
       document.getElementById('card-word').textContent = item.word;
       document.getElementById('card-phonetic').textContent = item.phonetic || '';
 
-      // 替換平庸字標籤（如有同義詞才顯示）
       const replacePill = document.getElementById('front-replace-pill');
       const replaceBasic = document.getElementById('front-replace-basic');
       if (item.basic_word && item.basic_word.trim() !== '') {
@@ -1536,7 +2161,6 @@ async function loadCloud3000Words() {
         replacePill.classList.remove('inline-flex');
       }
 
-      // 考官捉錯位：在 3000 隨機字模式或屬於 3000 擴充字庫時，完全不顯示「考官捉錯位」
       const showPrepTrap = !item.isRandom3000 && reviewFilter !== 'all' && Boolean(item.prep_trap);
       const prepAlert = document.getElementById('front-prep-alert');
       const prepWord = document.getElementById('front-prep-word');
@@ -1553,7 +2177,7 @@ async function loadCloud3000Words() {
         statusPill.textContent = '✅ 完全搞掂';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
       } else if (st === 'forgot') {
-        statusPill.textContent = '❌ 唔熟 (保底攻堅)';
+        statusPill.textContent = '❌ 唔熟';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-rose-500/15 text-rose-300 border border-rose-500/30';
       } else if (st === 'learning') {
         statusPill.textContent = '🤔 勉強記得';
@@ -1566,10 +2190,9 @@ async function loadCloud3000Words() {
       document.getElementById('back-word').textContent = item.word;
       document.getElementById('back-pos').textContent = item.pos;
       document.getElementById('back-syllable-display').textContent = `音節: ${item.syllable}`;
-      document.getElementById('back-def-zh').textContent = item.def_zh || '載入中文解釋中...';
+      document.getElementById('back-def-zh').textContent = item.def_zh || '載入中...';
       document.getElementById('back-def-en').textContent = item.def_en || '';
 
-      // 背面「評卷員扣分黑點 / 考官捉錯位」：3000隨機字不顯示
       const backTrapBox = document.getElementById('back-trap-box');
       const backTrapTip = document.getElementById('back-trap-tip');
       if (showPrepTrap) {
@@ -1579,7 +2202,6 @@ async function loadCloud3000Words() {
         backTrapBox.classList.add('hidden');
       }
 
-      // 搭配詞區塊（如有搭配詞才顯示）
       const collBox = document.getElementById('back-collocations-box');
       const collContainer = document.getElementById('back-collocations');
       collContainer.innerHTML = '';
@@ -1590,17 +2212,13 @@ async function loadCloud3000Words() {
           btn.type = 'button';
           btn.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-600 border border-emerald-500/30 text-emerald-200 hover:text-white text-xs font-medium transition flex items-center gap-1';
           btn.innerHTML = `<span>🔊 ${col}</span>`;
-          btn.onclick = (e) => {
-            e.stopPropagation();
-            speakText(col);
-          };
+          btn.onclick = (e) => { e.stopPropagation(); speakText(col); };
           collContainer.appendChild(btn);
         });
       } else {
         collBox.classList.add('hidden');
       }
 
-      // 背面例句區塊：如沒有真實例句則直接隱藏，不生成重複罐頭例句
       const exampleBox = document.getElementById('back-example-box');
       const exampleText = document.getElementById('back-example');
       if (item.example && item.example.trim() !== '') {
@@ -1628,9 +2246,7 @@ async function loadCloud3000Words() {
       isFlipped = false;
       document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
       populateCardDOM(item);
-      if (item.isCloud) {
-        ensureWordDetailsLoaded(item);
-      }
+      if (item.isCloud) { ensureWordDetailsLoaded(item); }
     }
 
     function prevCard() {
@@ -1647,11 +2263,8 @@ async function loadCloud3000Words() {
       if (event && event.target.closest('button')) return;
       isFlipped = !isFlipped;
       const inner = document.getElementById('flashcard-inner');
-      if (isFlipped) {
-        inner.classList.add('rotate-y-180');
-      } else {
-        inner.classList.remove('rotate-y-180');
-      }
+      if (isFlipped) inner.classList.add('rotate-y-180');
+      else inner.classList.remove('rotate-y-180');
     }
 
     function rateCard(rating) {
@@ -1681,9 +2294,7 @@ async function loadCloud3000Words() {
       updateDashboardStats();
 
       currentCardIndex++;
-      if (currentCardIndex >= reviewQueue.length) {
-        buildReviewQueue();
-      }
+      if (currentCardIndex >= reviewQueue.length) buildReviewQueue();
       renderCurrentCard();
     }
 
@@ -1703,7 +2314,175 @@ async function loadCloud3000Words() {
     }
 
     // ========================================================
-    // 5. AUDIO SYSTEM & SPEED CONTROL
+    // 5. GRAMMAR & PREP TRAP BLITZ
+    // ========================================================
+    function initBlitzQueue() {
+      blitzQueue = words.filter(w => w.prep_trap && w.prep_trap.trim() !== '');
+      if (blitzQueue.length === 0) blitzQueue = [...words];
+      blitzQueue.sort(() => Math.random() - 0.5);
+      blitzCurrentIdx = 0;
+      blitzStreak = 0;
+      blitzCorrectCount = 0;
+      blitzTotalCount = 0;
+      document.getElementById('blitz-pool-count').textContent = `題庫共 ${blitzQueue.length} 題`;
+      document.getElementById('blitz-timer-display').textContent = `${blitzBestStreak} 🏆`;
+      renderBlitzQuestion();
+    }
+
+    function setBlitzMode(mode) {
+      blitzMode = mode;
+      if (blitzTimerInterval) clearInterval(blitzTimerInterval);
+      document.getElementById('blitz-mode-endless').className = mode === 'endless' ? 'px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition' : 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-200 transition';
+      document.getElementById('blitz-mode-timed').className = mode === 'timed' ? 'px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white transition' : 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-200 transition';
+      document.getElementById('blitz-timer-label').textContent = mode === 'timed' ? '剩餘時間 (秒)' : '最佳連勝紀錄';
+      document.getElementById('blitz-timer-display').textContent = mode === 'timed' ? '60 ⏱️' : `${blitzBestStreak} 🏆`;
+      initBlitzQueue();
+    }
+
+    function startBlitzTimed60() {
+      setBlitzMode('timed');
+      blitzTimerSec = 60;
+      document.getElementById('blitz-timer-display').textContent = `${blitzTimerSec} ⏱️`;
+      if (blitzTimerInterval) clearInterval(blitzTimerInterval);
+      blitzTimerInterval = setInterval(() => {
+        blitzTimerSec--;
+        document.getElementById('blitz-timer-display').textContent = `${blitzTimerSec} ⏱️`;
+        if (blitzTimerSec <= 0) {
+          clearInterval(blitzTimerInterval);
+          showToast(`⏱️ 60秒挑戰結束！你一共答對 ${blitzCorrectCount} 題！`);
+          setBlitzMode('endless');
+        }
+      }, 1000);
+    }
+
+    function renderBlitzQuestion() {
+      blitzAnsweredCurrent = false;
+      document.getElementById('blitz-feedback-box').classList.add('hidden');
+
+      if (blitzQueue.length === 0) initBlitzQueue();
+      if (blitzCurrentIdx >= blitzQueue.length) {
+        blitzQueue.sort(() => Math.random() - 0.5);
+        blitzCurrentIdx = 0;
+      }
+
+      const item = blitzQueue[blitzCurrentIdx];
+      currentBlitzItem = item;
+
+      document.getElementById('blitz-target-word').textContent = item.word;
+      document.getElementById('blitz-target-pos').textContent = item.pos || 'adj.';
+      document.getElementById('blitz-target-zh').textContent = item.def_zh || '';
+
+      let sentence = item.example || `Doing regular exercises is extremely ${item.word} _____ our health.`;
+      let prepTarget = 'to';
+      if (item.prep_trap) {
+        const parts = item.prep_trap.split(' ');
+        if (parts.length > 1) prepTarget = parts[parts.length - 1].replace(/[^a-zA-Z]/g, '').toLowerCase();
+      }
+
+      if (!sentence.toLowerCase().includes(prepTarget)) {
+        sentence = `Students must be very ${item.word} _____ this important matter.`;
+        prepTarget = 'about';
+      }
+
+      const escapedWord = item.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`\\b${escapedWord}\\b`, 'gi');
+      const clozeSentence = sentence.replace(regex, `<strong class="text-emerald-400 underline">${item.word}</strong>`);
+      const finalSentence = clozeSentence.replace(new RegExp(`\\b${prepTarget}\\b`, 'gi'), '<span class="px-3 py-0.5 mx-1 rounded-lg bg-amber-500/20 border-b-2 border-amber-400 text-amber-300 font-mono">____</span>');
+
+      document.getElementById('blitz-sentence').innerHTML = finalSentence;
+      currentBlitzItem.clozeSentenceText = sentence;
+      currentBlitzItem.correctPrep = prepTarget;
+
+      const distractors = ['to', 'for', 'with', 'in', 'on', 'about', 'from', 'at'].filter(d => d !== prepTarget);
+      distractors.sort(() => Math.random() - 0.5);
+      const options = [prepTarget, distractors[0], distractors[1], distractors[2]].sort(() => Math.random() - 0.5);
+      currentBlitzItem.currentOptions = options;
+
+      const optContainer = document.getElementById('blitz-options');
+      optContainer.innerHTML = '';
+      options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-mono text-sm font-bold transition flex items-center justify-between group';
+        btn.innerHTML = `<span><strong class="text-slate-500 mr-2">[${idx + 1}]</strong> ${opt}</span><span class="text-xs text-slate-500 group-hover:text-white">選擇 ➔</span>`;
+        btn.onclick = () => checkBlitzAnswer(opt, idx);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function checkBlitzAnswer(selectedOpt, btnIdx) {
+      if (blitzAnsweredCurrent || !currentBlitzItem) return;
+      blitzAnsweredCurrent = true;
+      blitzTotalCount++;
+
+      const correct = currentBlitzItem.correctPrep;
+      const isCorrect = selectedOpt.toLowerCase() === correct.toLowerCase();
+
+      const optButtons = document.getElementById('blitz-options').children;
+      for (let i = 0; i < optButtons.length; i++) {
+        const btn = optButtons[i];
+        btn.disabled = true;
+        const optText = currentBlitzItem.currentOptions[i];
+        if (optText.toLowerCase() === correct.toLowerCase()) {
+          btn.className = 'py-3 px-4 rounded-xl bg-emerald-500/20 border-2 border-emerald-500 text-emerald-300 font-mono text-sm font-bold flex items-center justify-between';
+        } else if (i === btnIdx && !isCorrect) {
+          btn.className = 'py-3 px-4 rounded-xl bg-rose-500/20 border-2 border-rose-500 text-rose-300 font-mono text-sm font-bold flex items-center justify-between';
+        } else {
+          btn.className = 'py-3 px-4 rounded-xl bg-slate-900/50 border border-slate-800 text-slate-500 font-mono text-sm font-bold flex items-center justify-between opacity-50';
+        }
+      }
+
+      const fbBox = document.getElementById('blitz-feedback-box');
+      const fbTitle = document.getElementById('blitz-feedback-title');
+      const fbTrap = document.getElementById('blitz-feedback-trap');
+      const fbCol = document.getElementById('blitz-feedback-collocations');
+      fbBox.classList.remove('hidden');
+
+      if (isCorrect) {
+        blitzCorrectCount++;
+        blitzStreak++;
+        if (blitzStreak > blitzBestStreak) {
+          blitzBestStreak = blitzStreak;
+          localStorage.setItem('dse_blitz_best', String(blitzBestStreak));
+          if (blitzMode !== 'timed') document.getElementById('blitz-timer-display').textContent = `${blitzBestStreak} 🏆`;
+        }
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-emerald-500/10 border-emerald-500/30 text-emerald-300';
+        fbTitle.textContent = `✅ 答啱啦！連勝 ${blitzStreak} 🔥`;
+        fbTrap.textContent = `考官提點：${currentBlitzItem.word} 搭配介詞 "${correct}" 非常地道！`;
+      } else {
+        blitzStreak = 0;
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-rose-500/10 border-rose-500/30 text-rose-300';
+        fbTitle.textContent = `❌ 答錯喇！正確應為：${correct}`;
+        fbTrap.textContent = `🚨 評卷員扣分黑點：${currentBlitzItem.word} 正確配搭為 "${currentBlitzItem.prep_trap || (currentBlitzItem.word + ' ' + correct)}"。已自動將此字加入「唔熟」閃卡複習！`;
+
+        const key = currentBlitzItem.word.toLowerCase();
+        if (!progressMap[key]) progressMap[key] = createDefaultStats();
+        progressMap[key].status = 'forgot';
+        saveProgressMap();
+        updateDashboardStats();
+      }
+
+      document.getElementById('blitz-streak').textContent = `${blitzStreak} 🔥`;
+      const acc = Math.round((blitzCorrectCount / blitzTotalCount) * 100);
+      document.getElementById('blitz-accuracy').textContent = `${acc}%`;
+
+      fbCol.textContent = `🔗 實戰搭配：${(currentBlitzItem.collocations || []).join(' • ') || currentBlitzItem.word}`;
+      speakText(currentBlitzItem.clozeSentenceText);
+    }
+
+    function nextBlitzQuestion() {
+      blitzCurrentIdx++;
+      renderBlitzQuestion();
+    }
+
+    function speakBlitzSentence() {
+      if (currentBlitzItem && currentBlitzItem.clozeSentenceText) {
+        speakText(currentBlitzItem.clozeSentenceText);
+      }
+    }
+
+    // ========================================================
+    // 6. AUDIO & DICTATION SYSTEM
     // ========================================================
     function setAccent(lang, silent = false) {
       currentAccent = lang;
@@ -1768,8 +2547,396 @@ async function loadCloud3000Words() {
     }
 
     // ========================================================
-    // 6. PAPER 3 LISTENING DICTATION (必考串字特訓)
+    // 6.5 (NEW): HANDS-FREE COMMUTE AUTO-PLAY LOOP (搭車自動中英連播)
     // ========================================================
+    function speakWithCallback(text, lang, rate, onEnd) {
+      if (!('speechSynthesis' in window) || !text) {
+        if (onEnd) setTimeout(onEnd, 400);
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+        const clean = text.replace(/^["']|["']$/g, '');
+        const utter = new SpeechSynthesisUtterance(clean);
+        utter.lang = lang;
+        utter.rate = rate;
+        const voices = window.speechSynthesis.getVoices();
+        if (voices && voices.length > 0) {
+          const preferred = voices.find(v => v.lang && v.lang.replace('_', '-').toLowerCase().startsWith(lang.toLowerCase())) ||
+                            voices.find(v => v.lang && v.lang.startsWith(lang.split('-')[0]));
+          if (preferred) utter.voice = preferred;
+        }
+        let finished = false;
+        const done = () => {
+          if (finished) return;
+          finished = true;
+          if (onEnd) onEnd();
+        };
+        utter.onend = done;
+        utter.onerror = done;
+        window.speechSynthesis.speak(utter);
+        // 安全保護逾時機制，避免部分手機瀏覽器未觸發 onend
+        const estMs = Math.max(2200, Math.min(12000, clean.length * 110));
+        setTimeout(done, estMs);
+      } catch (_) {
+        if (onEnd) setTimeout(onEnd, 500);
+      }
+    }
+
+    function toggleAutoPlayLoop() {
+      if (isAutoPlaying) {
+        stopAutoPlayLoop();
+      } else {
+        startAutoPlayLoop();
+      }
+    }
+
+    function startAutoPlayLoop() {
+      isAutoPlaying = true;
+      const btn = document.getElementById('btn-autoplay-loop');
+      const icon = document.getElementById('autoplay-icon');
+      const label = document.getElementById('autoplay-label');
+      const banner = document.getElementById('autoplay-banner');
+
+      if (btn) btn.className = 'px-3 py-1 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold transition flex items-center gap-1 shadow';
+      if (icon) icon.textContent = '⏹️';
+      if (label) label.textContent = '停止連播';
+      if (banner) {
+        banner.classList.remove('hidden');
+        banner.classList.add('flex');
+      }
+      showToast('🎧 已啟動「搭車自動連播」：英文單字 ➔ 中文釋義 ➔ 例句');
+      runAutoPlayStep();
+    }
+
+    function stopAutoPlayLoop() {
+      isAutoPlaying = false;
+      clearTimeout(autoPlayTimer);
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+      const btn = document.getElementById('btn-autoplay-loop');
+      const icon = document.getElementById('autoplay-icon');
+      const label = document.getElementById('autoplay-label');
+      const banner = document.getElementById('autoplay-banner');
+
+      if (btn) btn.className = 'px-3 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-600 text-sky-300 hover:text-white border border-sky-500/30 font-bold transition flex items-center gap-1 shadow-sm';
+      if (icon) icon.textContent = '🎧';
+      if (label) label.textContent = '搭車自動連播';
+      if (banner) {
+        banner.classList.add('hidden');
+        banner.classList.remove('flex');
+      }
+    }
+
+    async function runAutoPlayStep() {
+      if (!isAutoPlaying) return;
+      const item = reviewQueue[currentCardIndex];
+      if (!item) return;
+
+      if (item.isCloud) {
+        await ensureWordDetailsLoaded(item);
+      }
+      if (!isAutoPlaying) return;
+
+      const stepText = document.getElementById('autoplay-step-text');
+      // Step 1: 確保在正面並朗讀英文單字
+      isFlipped = false;
+      document.getElementById('flashcard-inner')?.classList.remove('rotate-y-180');
+      if (stepText) stepText.textContent = `🎧 連播中 (${currentCardIndex + 1}/${reviewQueue.length})：正在讀單字 "${item.word}"...`;
+
+      speakWithCallback(item.word, currentAccent, speechRate, () => {
+        if (!isAutoPlaying) return;
+        autoPlayTimer = setTimeout(() => {
+          if (!isAutoPlaying) return;
+          // Step 2: 翻到背面並朗讀中文釋義
+          isFlipped = true;
+          document.getElementById('flashcard-inner')?.classList.add('rotate-y-180');
+          const zhText = (item.def_zh || '').replace(/[（(].*?[）)]/g, '').trim();
+          if (stepText) stepText.textContent = `🎧 連播中：中文釋義「${zhText || item.word}」...`;
+
+          speakWithCallback(zhText || item.word, 'zh-HK', 1.0, () => {
+            if (!isAutoPlaying) return;
+            autoPlayTimer = setTimeout(() => {
+              if (!isAutoPlaying) return;
+              // Step 3: 朗讀英文例句（如有）
+              if (item.example && item.example.trim() !== '') {
+                if (stepText) stepText.textContent = `🎧 連播中：朗讀實戰例句...`;
+                speakWithCallback(item.example, currentAccent, speechRate, () => {
+                  if (!isAutoPlaying) return;
+                  autoPlayTimer = setTimeout(() => {
+                    if (!isAutoPlaying) return;
+                    currentCardIndex = (currentCardIndex + 1) % reviewQueue.length;
+                    renderCurrentCard();
+                    runAutoPlayStep();
+                  }, 1100);
+                });
+              } else {
+                currentCardIndex = (currentCardIndex + 1) % reviewQueue.length;
+                renderCurrentCard();
+                runAutoPlayStep();
+              }
+            }, 600);
+          });
+        }, 550);
+      });
+    }
+
+    // ========================================================
+    // 6.8 (NEW): PAPER 4 SPEAKING TIMER, BEEP, PROMPTS & RECORDER
+    // ========================================================
+    function playTimerBeep(freq = 880, duration = 0.25) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (_) {}
+    }
+
+    function setSpeakingTimerMode(seconds, labelText) {
+      if (spkTimerInterval) clearInterval(spkTimerInterval);
+      spkTimerRunning = false;
+      spkTimerTotal = seconds;
+      spkTimerRemaining = seconds;
+
+      [600, 480, 60].forEach(s => {
+        const btn = document.getElementById('spk-mode-' + s);
+        if (!btn) return;
+        if (s === seconds) {
+          btn.className = 'px-2 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition shadow';
+        } else {
+          btn.className = 'px-2 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition';
+        }
+      });
+
+      document.getElementById('spk-mode-label').textContent = labelText;
+      document.getElementById('spk-start-btn').innerHTML = '<span>▶️ 開始計時</span>';
+      document.getElementById('spk-timer-status').textContent = '準備就緒';
+      updateSpeakingClockUI();
+    }
+
+    function updateSpeakingClockUI() {
+      const mins = String(Math.floor(spkTimerRemaining / 60)).padStart(2, '0');
+      const secs = String(spkTimerRemaining % 60).padStart(2, '0');
+      const disp = document.getElementById('spk-time-display');
+      const bar = document.getElementById('spk-progress-bar');
+      const box = document.getElementById('spk-clock-box');
+      const hint = document.getElementById('spk-timer-hint');
+
+      if (disp) disp.textContent = `${mins}:${secs}`;
+      const pct = spkTimerTotal > 0 ? Math.max(0, (spkTimerRemaining / spkTimerTotal) * 100) : 0;
+      if (bar) bar.style.width = `${pct}%`;
+
+      if (spkTimerRemaining === 0) {
+        if (box) box.className = 'bg-rose-500/15 border-2 border-rose-500 rounded-3xl py-6 px-4 text-center space-y-2 transition-colors';
+        if (bar) bar.className = 'bg-rose-500 h-full transition-all duration-300';
+        if (hint) hint.textContent = '⏰ 時間到！請用一句總結句禮貌收尾 ("Thank you.")';
+      } else if (spkTimerRemaining <= 15) {
+        if (box) box.className = 'bg-amber-500/15 border-2 border-amber-500 rounded-3xl py-6 px-4 text-center space-y-2 transition-colors';
+        if (bar) bar.className = 'bg-amber-400 h-full transition-all duration-300';
+        if (hint) hint.textContent = '⚠️ 最後 15 秒！準備講最後一句小結 (Wrap up)';
+      } else {
+        if (box) box.className = 'bg-slate-950 border-2 border-slate-800 rounded-3xl py-6 px-4 text-center space-y-2 transition-colors';
+        if (bar) bar.className = 'bg-emerald-500 h-full transition-all duration-300';
+        if (hint) hint.textContent = '💡 保持眼神交流與清晰語速，善用下方救命句構';
+      }
+    }
+
+    function toggleSpeakingTimer() {
+      const startBtn = document.getElementById('spk-start-btn');
+      const statusEl = document.getElementById('spk-timer-status');
+
+      if (spkTimerRunning) {
+        clearInterval(spkTimerInterval);
+        spkTimerRunning = false;
+        if (startBtn) startBtn.innerHTML = '<span>▶️ 繼續計時</span>';
+        if (statusEl) statusEl.textContent = '已暫停';
+        return;
+      }
+
+      if (spkTimerRemaining <= 0) {
+        spkTimerRemaining = spkTimerTotal;
+      }
+      spkTimerRunning = true;
+      playTimerBeep(660, 0.15);
+      if (startBtn) startBtn.innerHTML = '<span>⏸️ 暫停計時</span>';
+      if (statusEl) statusEl.textContent = '計時進行中...';
+
+      spkTimerInterval = setInterval(() => {
+        spkTimerRemaining--;
+        if (spkTimerRemaining === 15) {
+          playTimerBeep(740, 0.2);
+          showToast('⚠️ 口試剩餘最後 15 秒！準備總結收尾！');
+        }
+        if (spkTimerRemaining <= 0) {
+          spkTimerRemaining = 0;
+          clearInterval(spkTimerInterval);
+          spkTimerRunning = false;
+          playTimerBeep(880, 0.45);
+          setTimeout(() => playTimerBeep(880, 0.45), 280);
+          if (startBtn) startBtn.innerHTML = '<span>▶️ 重新開始</span>';
+          if (statusEl) statusEl.textContent = '⏰ 時間到！';
+          showToast('⏰ 時間到！請完成最後一句總結！');
+        }
+        updateSpeakingClockUI();
+      }, 1000);
+    }
+
+    function resetSpeakingTimer() {
+      if (spkTimerInterval) clearInterval(spkTimerInterval);
+      spkTimerRunning = false;
+      spkTimerRemaining = spkTimerTotal;
+      document.getElementById('spk-start-btn').innerHTML = '<span>▶️ 開始計時</span>';
+      document.getElementById('spk-timer-status').textContent = '準備就緒';
+      updateSpeakingClockUI();
+    }
+
+    function renderSpeakingPrompt() {
+      const p = DSE_SPEAKING_PROMPTS[currentSpkPromptIdx] || DSE_SPEAKING_PROMPTS[0];
+      const titleEl = document.getElementById('spk-prompt-title');
+      const ctxEl = document.getElementById('spk-gi-context');
+      const bulletsEl = document.getElementById('spk-gi-bullets');
+      const irEl = document.getElementById('spk-ir-list');
+      if (!titleEl || !ctxEl || !bulletsEl || !irEl) return;
+
+      titleEl.textContent = p.title;
+      ctxEl.textContent = p.gi_context;
+      bulletsEl.innerHTML = p.bullets.map(b => `<li>${b}</li>`).join('');
+
+      irEl.innerHTML = p.ir_questions.map(q => {
+        const cleanQ = q.replace(/^\d+\.\s*\([^)]+\)\s*/, '').replace(/'/g, "\\'");
+        return `
+          <button type="button" onclick="speakText('${cleanQ}')" class="w-full text-left px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-200 flex items-center justify-between gap-2 transition">
+            <span>${q}</span>
+            <span class="text-sky-400 shrink-0 font-semibold">🔊 聽考官問</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function nextSpeakingPrompt() {
+      currentSpkPromptIdx = (currentSpkPromptIdx + 1) % DSE_SPEAKING_PROMPTS.length;
+      renderSpeakingPrompt();
+      showToast('🎲 已切換下一套 DSE 口試模擬真題！');
+    }
+
+    function speakCurrentPrompt() {
+      const p = DSE_SPEAKING_PROMPTS[currentSpkPromptIdx];
+      if (p) speakText(p.gi_context);
+    }
+
+    async function toggleVoiceRecording() {
+      const btn = document.getElementById('btn-voice-rec');
+      const dot = document.getElementById('rec-dot');
+      const statusText = document.getElementById('rec-status-text');
+      const player = document.getElementById('spk-audio-player');
+
+      if (isRecordingVoice && mediaRecorder) {
+        mediaRecorder.stop();
+        isRecordingVoice = false;
+        if (btn) {
+          btn.innerHTML = '<span>🔴 重新錄音</span>';
+          btn.className = 'px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow flex items-center gap-1';
+        }
+        if (dot) dot.className = 'w-3 h-3 rounded-full bg-emerald-400';
+        if (statusText) statusText.textContent = '✅ 錄音完成！點擊右側播放器即可重溫自己嘅發音：';
+        return;
+      }
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showToast('⚠️ 你的瀏覽器環境未支援麥克風錄音功能');
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+        };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+          const url = URL.createObjectURL(blob);
+          if (player) {
+            player.src = url;
+            player.classList.remove('hidden');
+          }
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        isRecordingVoice = true;
+        if (btn) {
+          btn.innerHTML = '<span>⏹️ 停止錄音</span>';
+          btn.className = 'px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition shadow flex items-center gap-1';
+        }
+        if (dot) dot.className = 'w-3 h-3 rounded-full bg-rose-500 animate-ping';
+        if (statusText) statusText.textContent = '🎙️ 正在錄音中... 請對住麥克風開口回答！';
+
+        if (!spkTimerRunning) {
+          setSpeakingTimerMode(60, '🗣️ 1分鐘個人回應');
+          toggleSpeakingTimer();
+        }
+      } catch (err) {
+        showToast('⚠️ 無法啟用麥克風，請允許瀏覽器麥克風權限');
+      }
+    }
+
+    function filterSpeakingPhrases(group) {
+      currentSpkPhraseFilter = group;
+      ['all', 'start', 'agree', 'disagree', 'invite', 'stall', 'sum'].forEach(g => {
+        const btn = document.getElementById('spk-phrase-btn-' + g);
+        if (!btn) return;
+        if (g === group) {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+        }
+      });
+      renderSpeakingPhrases();
+    }
+
+    function renderSpeakingPhrases() {
+      const grid = document.getElementById('speaking-phrases-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const filtered = currentSpkPhraseFilter === 'all'
+        ? DSE_SPEAKING_PHRASES
+        : DSE_SPEAKING_PHRASES.filter(item => item.group === currentSpkPhraseFilter);
+
+      filtered.forEach(item => {
+        const safeEn = item.en.replace(/'/g, "\\'");
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 flex flex-col justify-between';
+        card.innerHTML = `
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-bold">${item.tag}</span>
+              <button onclick="speakText('${safeEn}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow">
+                🔊 跟讀發音
+              </button>
+            </div>
+            <p class="text-sm font-bold text-white leading-relaxed pt-1">"${item.en}"</p>
+            <p class="text-xs text-slate-400">${item.zh}</p>
+          </div>
+          <p class="text-[11px] text-amber-300 pt-2 border-t border-slate-800/80">
+            💡 <strong>考場秘技：</strong>${item.tip}
+          </p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
     function nextDictationQuestion() {
       const corePool = words.filter(w => !w.isRandom3000 && w.def_zh);
       if (corePool.length === 0) return;
@@ -1782,8 +2949,7 @@ async function loadCloud3000Words() {
       const maskedEx = (currentDictationWord.example || '').replace(regex, '________');
       document.getElementById('dict-cloze-sentence').textContent = maskedEx ? `"${maskedEx}"` : '';
 
-      const inp = document.getElementById('dict-input');
-      inp.value = '';
+      document.getElementById('dict-input').value = '';
       document.getElementById('dict-feedback').classList.add('hidden');
     }
 
@@ -1792,15 +2958,13 @@ async function loadCloud3000Words() {
     }
 
     function speakDictationSentence() {
-      if (currentDictationWord && currentDictationWord.example) {
-        speakText(currentDictationWord.example);
-      }
+      if (currentDictationWord && currentDictationWord.example) speakText(currentDictationWord.example);
     }
 
     function showDictationHint() {
       if (!currentDictationWord) return;
       const w = currentDictationWord.word;
-      const hint = `${w[0].toUpperCase()}${w[1] || ''}... (共 ${w.length} 個字母，結尾為 "${w[w.length - 1]}")`;
+      const hint = `${w[0].toUpperCase()}${w[1] || ''}... (共 ${w.length} 個字母)`;
       showToast(`💡 拼字提示：${hint}`);
     }
 
@@ -1820,11 +2984,11 @@ async function loadCloud3000Words() {
       if (userVal === target) {
         dictationStreak++;
         fb.className = 'rounded-2xl p-4 text-sm font-medium bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 block';
-        fb.innerHTML = `✅ 恭喜完全串啱！<strong>${currentDictationWord.word}</strong><br><span class="text-xs opacity-90 mt-1 block">音節：${currentDictationWord.syllable} • 介詞搭配：${currentDictationWord.prep_trap || '無特別'}</span>`;
+        fb.innerHTML = `✅ 恭喜完全串啱！<strong>${currentDictationWord.word}</strong>`;
       } else {
         dictationStreak = 0;
         fb.className = 'rounded-2xl p-4 text-sm font-medium bg-rose-500/15 border border-rose-500/40 text-rose-300 block';
-        fb.innerHTML = `❌ 串錯咗少少！你輸入了 <del class="opacity-75">${userVal}</del>，正確拼法為：<strong class="text-base underline">${currentDictationWord.word}</strong><br><span class="text-xs opacity-90 mt-1 block">音節拆解助記：${currentDictationWord.syllable}。已為你排入「唔熟」清單，多聽幾次！</span>`;
+        fb.innerHTML = `❌ 正確拼法為：<strong class="text-base underline">${currentDictationWord.word}</strong>`;
         if (!currentDictationWord.stats) currentDictationWord.stats = createDefaultStats();
         currentDictationWord.stats.status = 'forgot';
         progressMap[target] = currentDictationWord.stats;
@@ -1835,21 +2999,211 @@ async function loadCloud3000Words() {
     }
 
     // ========================================================
-    // 7. PAPER 2 SAFETY SENTENCES & PAPER 1 READING RENDERING
+    // 7. PAPER 2 SAFETY, PEEL BUILDER & RADAR
     // ========================================================
-    let currentSafetyFilter = 'all';
-    let currentReadingFilter = 'all';
+    function switchSafetySubmode(mode) {
+      currentSafetySubmode = mode;
+      const tplView = document.getElementById('safety-subview-templates');
+      const bldView = document.getElementById('safety-subview-builder');
+      const tplBtn = document.getElementById('safety-submode-templates');
+      const bldBtn = document.getElementById('safety-submode-builder');
+
+      if (mode === 'builder') {
+        tplView.classList.add('hidden');
+        bldView.classList.remove('hidden');
+        bldBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition flex items-center gap-1.5 shadow';
+        tplBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition flex items-center gap-1.5';
+        renderPeelBuilder();
+        analyzeBuilderParagraph();
+      } else {
+        bldView.classList.add('hidden');
+        tplView.classList.remove('hidden');
+        tplBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition flex items-center gap-1.5 shadow';
+        bldBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold text-amber-300 hover:text-white transition flex items-center gap-1.5';
+      }
+    }
+
+    function selectPeelTopic(topicKey) {
+      currentPeelTopic = topicKey;
+      ['stress', 'tech', 'env', 'youth'].forEach(k => {
+        const btn = document.getElementById('peel-topic-' + k);
+        if (!btn) return;
+        if (k === topicKey) btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition';
+        else btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+      });
+      renderPeelBuilder();
+    }
+
+    function renderPeelBuilder() {
+      const grid = document.getElementById('peel-blocks-grid');
+      if (!grid) return;
+      const topicObj = PEEL_TOPIC_DATA[currentPeelTopic] || PEEL_TOPIC_DATA.stress;
+      grid.innerHTML = '';
+
+      const badgeColors = {
+        emerald: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+        sky: 'bg-sky-500/20 text-sky-300 border-sky-500/30',
+        amber: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+        rose: 'bg-rose-500/20 text-rose-300 border-rose-500/30'
+      };
+
+      topicObj.blocks.forEach(block => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5 space-y-2.5';
+        const itemsHtml = block.items.map(it => {
+          const safeEn = it.en.replace(/'/g, "\\'");
+          return `
+            <button type="button" onclick="insertPeelSentence('${safeEn}')" class="w-full text-left p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-500/50 transition group space-y-1">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="font-bold text-emerald-400">${it.zh}</span>
+                <span class="text-slate-400 group-hover:text-white font-semibold">＋ 插入段落</span>
+              </div>
+              <p class="text-xs text-slate-200 leading-relaxed">${it.en}</p>
+            </button>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg border font-black text-xs flex items-center justify-center ${badgeColors[block.color]}">${block.step}</span>
+            <h4 class="text-xs font-extrabold text-white">${block.title}</h4>
+          </div>
+          <div class="space-y-2">${itemsHtml}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function insertPeelSentence(sentence) {
+      const editor = document.getElementById('peel-editor');
+      if (!editor) return;
+      const cur = editor.value.trim();
+      editor.value = cur ? (cur + ' ' + sentence) : sentence;
+      analyzeBuilderParagraph();
+      speakText(sentence);
+      showToast('🧱 已插入積木句型並自動朗讀！');
+    }
+
+    function loadSampleWeakParagraph() {
+      const editor = document.getElementById('peel-editor');
+      if (!editor) return;
+      editor.value = "Nowadays, many students face academic stress. I think doing regular exercise is very important and good for our mental health. Moreover, lack of sleep is bad for our studies. Schools should help students solve the problem and encourage them to join more outdoor activities to reduce pressure.";
+      analyzeBuilderParagraph();
+      showToast('📡 已載入示範段落！');
+    }
+
+    function analyzeBuilderParagraph() {
+      const editor = document.getElementById('peel-editor');
+      if (!editor) return;
+      const text = editor.value;
+      const wordsArr = text.trim() ? text.trim().split(/\s+/) : [];
+      const wordCount = wordsArr.length;
+
+      const countEl = document.getElementById('peel-word-count');
+      if (countEl) {
+        countEl.textContent = `${wordCount} words`;
+        countEl.className = (wordCount >= 70 && wordCount <= 135)
+          ? 'px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-mono font-bold'
+          : 'px-2 py-0.5 rounded-full bg-slate-800 text-amber-300 text-[11px] font-mono font-bold';
+      }
+
+      const structEl = document.getElementById('peel-structure-badge');
+      if (structEl) {
+        if (wordCount === 0) structEl.textContent = '';
+        else if (wordCount < 60) structEl.textContent = '📈 建議再加 1-2 句例子或解釋';
+        else if (wordCount <= 135) structEl.textContent = '✅ 段落字數非常理想';
+        else structEl.textContent = '⚠️ 段落稍長';
+      }
+
+      const listEl = document.getElementById('radar-suggestions-list');
+      const badgeEl = document.getElementById('radar-issue-count');
+      if (!listEl || !badgeEl) return;
+
+      const detected = [];
+      WEAK_WORD_RULES.forEach((rule, idx) => {
+        rule.pattern.lastIndex = 0;
+        const match = rule.pattern.exec(text);
+        if (match) detected.push({ ruleIdx: idx, matchedText: match[0], rule });
+      });
+
+      badgeEl.textContent = `${detected.length} 個可升級位`;
+      badgeEl.className = detected.length > 0
+        ? 'px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold'
+        : 'px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold';
+
+      if (detected.length === 0) {
+        listEl.innerHTML = text.trim()
+          ? `<div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 font-semibold">🎉 太棒了！目前段落沒有偵測到平庸字。</div>`
+          : `<div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-400">👈 請在左側輸入英文句子。</div>`;
+        return;
+      }
+
+      listEl.innerHTML = detected.map(item => {
+        const btns = item.rule.upgrades.map(up => {
+          const safeUp = up.replace(/'/g, "\\'");
+          return `<button type="button" onclick="replaceWeakWord(${item.ruleIdx}, '${safeUp}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-sm">⚡ 換成 ${up}</button>`;
+        }).join('');
+
+        return `
+          <div class="p-3 rounded-xl bg-slate-900 border border-amber-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-rose-300">⚠️ 偵測到：<span class="underline">${item.matchedText}</span></span>
+              <span class="text-[10px] text-slate-400">${item.rule.label}</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">${btns}</div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">💡 ${item.rule.tip}</p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function replaceWeakWord(ruleIdx, replacement) {
+      const editor = document.getElementById('peel-editor');
+      const rule = WEAK_WORD_RULES[ruleIdx];
+      if (!editor || !rule) return;
+
+      rule.pattern.lastIndex = 0;
+      const match = rule.pattern.exec(editor.value);
+      if (match) {
+        const original = match[0];
+        const isCapitalized = original[0] === original[0].toUpperCase() && original[0] !== original[0].toLowerCase();
+        const finalRep = isCapitalized
+          ? replacement.charAt(0).toUpperCase() + replacement.slice(1)
+          : replacement;
+
+        editor.value = editor.value.replace(rule.pattern, finalRep);
+        analyzeBuilderParagraph();
+        speakText(finalRep);
+        showToast(`✨ 已將 "${original}" 升級為 "${finalRep}"！`);
+      }
+    }
+
+    function speakBuilderParagraph() {
+      const val = document.getElementById('peel-editor')?.value.trim();
+      if (!val) { showToast('⚠️ 請先輸入英文段落'); return; }
+      speakText(val);
+    }
+
+    function copyBuilderParagraph() {
+      const editor = document.getElementById('peel-editor');
+      if (!editor || !editor.value.trim()) { showToast('⚠️ 內容為空'); return; }
+      editor.select();
+      document.execCommand('copy');
+      showToast('📋 已複製整段英文！');
+    }
+
+    function clearBuilderParagraph() {
+      const editor = document.getElementById('peel-editor');
+      if (editor) { editor.value = ''; analyzeBuilderParagraph(); }
+    }
 
     function filterSafety(group) {
       currentSafetyFilter = group;
       ['all', 'intro', 'body', 'rebut', 'sol', 'genre'].forEach(g => {
         const btn = document.getElementById('safety-btn-' + g);
         if (!btn) return;
-        if (g === group) {
-          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition';
-        } else {
-          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
-        }
+        if (g === group) btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white transition';
+        else btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
       });
       renderSafetySection();
     }
@@ -1887,21 +3241,12 @@ async function loadCloud3000Words() {
 
     function filterReading(group) {
       currentReadingFilter = group;
-      const styles = {
-        all: 'text-slate-300',
-        pos: 'text-emerald-300',
-        neg: 'text-rose-300',
-        neu: 'text-amber-300',
-        stem: 'text-sky-300'
-      };
+      const styles = { all: 'text-slate-300', pos: 'text-emerald-300', neg: 'text-rose-300', neu: 'text-amber-300', stem: 'text-sky-300' };
       ['all', 'pos', 'neg', 'neu', 'stem'].forEach(g => {
         const btn = document.getElementById('reading-btn-' + g);
         if (!btn) return;
-        if (g === group) {
-          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white transition';
-        } else {
-          btn.className = `px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 ${styles[g]} hover:bg-slate-700 transition`;
-        }
+        if (g === group) btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-600 text-white transition';
+        else btn.className = `px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 ${styles[g]} hover:bg-slate-700 transition`;
       });
       renderReadingSection();
     }
@@ -1944,7 +3289,7 @@ async function loadCloud3000Words() {
     }
 
     // ========================================================
-    // 9. WORD BANK & SEARCH (支援 3000+ 字庫極速搜尋)
+    // 8. WORD BANK & SEARCH
     // ========================================================
     function renderWordBank() {
       const container = document.getElementById('word-bank-list');
@@ -1964,12 +3309,9 @@ async function loadCloud3000Words() {
         );
       });
 
-      const limit = query ? 120 : 60;
-      const slice = filtered.slice(0, limit);
+      const slice = filtered.slice(0, 60);
       const infoEl = document.getElementById('bank-showing-info');
-      if (infoEl) {
-        infoEl.textContent = `共收錄 ${filtered.length} 個單字（目前顯示前 ${slice.length} 個，可透過上方搜尋框快速查找任何單字）`;
-      }
+      if (infoEl) infoEl.textContent = `共收錄 ${filtered.length} 個單字（目前顯示前 ${slice.length} 個）`;
 
       container.innerHTML = '';
       if (slice.length === 0) {
@@ -1996,9 +3338,8 @@ async function loadCloud3000Words() {
                 🔊 發音
               </button>
             </div>
-            <p class="text-sm font-bold text-emerald-300 mt-1">${item.def_zh || '（點擊「考此字」自動載入中英釋義）'}</p>
+            <p class="text-sm font-bold text-emerald-300 mt-1">${item.def_zh || '（載入中...）'}</p>
             ${item.basic_word ? `<p class="text-xs text-amber-300 mt-0.5">⚡ 取代平庸字：${item.basic_word}</p>` : ''}
-            ${(!item.isRandom3000 && item.prep_trap) ? `<p class="text-xs text-rose-300 mt-0.5">⚠️ 介詞：${item.prep_trap}</p>` : ''}
           </div>
           <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between gap-2 text-xs text-slate-400">
             <span class="truncate italic text-slate-300">${hasExample ? item.example : ''}</span>
@@ -2032,7 +3373,7 @@ async function loadCloud3000Words() {
         try {
           const parsed = JSON.parse(e.target.result);
           if (!Array.isArray(parsed) || parsed.length === 0) {
-            showToast('⚠️ JSON 格式不正確：需要是陣列 [...]');
+            showToast('⚠️ JSON 格式不正確');
             return;
           }
           const existingSet = new Set(words.map(w => w.word.toLowerCase()));
@@ -2050,7 +3391,7 @@ async function loadCloud3000Words() {
           renderWordBank();
           showToast(`🎉 成功匯入 ${addedCount} 個新單字！`);
         } catch (err) {
-          showToast('⚠️ 無法解析 JSON 檔案。');
+          showToast('⚠️ JSON 解析失敗');
         } finally {
           event.target.value = '';
         }
@@ -2059,16 +3400,24 @@ async function loadCloud3000Words() {
     }
 
     // ========================================================
-    // 10. TABS & BACKUP MODAL
+    // 9. TABS & MODALS
     // ========================================================
     function switchTab(tabName) {
-      ['review', 'dictation', 'safety', 'reading', 'bank'].forEach(t => {
+      if (tabName !== 'review' && isAutoPlaying) {
+        stopAutoPlayLoop();
+      }
+      ['review', 'blitz', 'dictation', 'safety', 'reading', 'speaking', 'toolkit', 'bank'].forEach(t => {
         const view = document.getElementById('view-' + t);
         const tabBtn = document.getElementById('tab-' + t);
         if (!view || !tabBtn) return;
         if (t === tabName) {
           view.classList.remove('hidden');
           tabBtn.className = 'tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold border-b-2 border-emerald-500 text-emerald-400 whitespace-nowrap flex items-center gap-1.5';
+          if (t === 'blitz') initBlitzQueue();
+          if (t === 'toolkit') {
+            renderStudyPassCanvas();
+            renderWorksheetPreview();
+          }
         } else {
           view.classList.add('hidden');
           tabBtn.className = 'tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5';
@@ -2097,7 +3446,7 @@ async function loadCloud3000Words() {
       area.select();
       document.execCommand('copy');
       const msg = document.getElementById('backup-msg');
-      msg.textContent = '✓ 已複製進度代碼到剪貼簿！';
+      msg.textContent = '✓ 已複製進度代碼！';
       msg.classList.remove('hidden');
     }
 
@@ -2116,12 +3465,12 @@ async function loadCloud3000Words() {
           updateDashboardStats();
           renderCurrentCard();
           renderWordBank();
-          msg.textContent = '✓ 成功還原學習進度！';
+          msg.textContent = '✓ 還原成功！';
           msg.classList.remove('hidden');
         }
       } catch (e) {
-        msg.textContent = '⚠️ 代碼格式錯誤，請檢查後重試。';
-        msg.classList.remove('hidden');
+        msg.textContent = '⚠️ 代碼格式錯誤';
+        msg.classList.add('hidden');
       }
     }
 
@@ -2134,12 +3483,26 @@ async function loadCloud3000Words() {
       renderCurrentCard();
       renderWordBank();
       closeModal('backup-modal');
-      showToast('🗑️ 已重置所有溫習進度！');
+      showToast('🗑️ 已重置所有進度！');
     }
 
-    // Keyboard shortcuts
     window.addEventListener('keydown', (e) => {
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+
+      const blitzVisible = !document.getElementById('view-blitz').classList.contains('hidden');
+      if (blitzVisible) {
+        if (['1', '2', '3', '4'].includes(e.key) && !blitzAnsweredCurrent && currentBlitzItem?.currentOptions) {
+          const idx = parseInt(e.key, 10) - 1;
+          if (currentBlitzItem.currentOptions[idx]) {
+            checkBlitzAnswer(currentBlitzItem.currentOptions[idx], idx);
+          }
+        } else if ((e.code === 'Space' || e.key === 'Enter') && blitzAnsweredCurrent) {
+          e.preventDefault();
+          nextBlitzQuestion();
+        }
+        return;
+      }
+
       const reviewVisible = !document.getElementById('view-review').classList.contains('hidden');
       if (!reviewVisible) return;
 
