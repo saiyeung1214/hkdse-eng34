@@ -241,13 +241,25 @@
     <div class="max-w-5xl mx-auto px-4 py-1.5 border-t border-slate-800/50 flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="flex flex-wrap items-center gap-3">
         <div class="flex items-center gap-1.5">
-          <span class="text-slate-400 font-medium">發音：</span>
+          <span class="text-slate-400 font-medium">英文：</span>
           <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
             <button id="btn-accent-gb" onclick="setAccent('en-GB')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white">
               🇬🇧 英音
             </button>
             <button id="btn-accent-us" onclick="setAccent('en-US')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white">
               🇺🇸 美音
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 font-medium">中文連播：</span>
+          <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+            <button id="btn-zh-hk" onclick="setZhVoice('zh-HK')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white" title="搭車連播時以廣東話朗讀中文意思">
+              🗣️ 廣東話
+            </button>
+            <button id="btn-zh-cn" onclick="setZhVoice('zh-CN')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white" title="搭車連播時以普通話朗讀中文意思">
+              🗣️ 普通話
             </button>
           </div>
         </div>
@@ -379,14 +391,24 @@
       </div>
 
       <!-- 搭車自動連播狀態提示列 -->
-      <div id="autoplay-banner" class="hidden max-w-2xl mx-auto bg-sky-500/15 border border-sky-500/40 rounded-2xl px-4 py-2.5 items-center justify-between gap-2 text-xs text-sky-300">
+      <div id="autoplay-banner" class="hidden max-w-2xl mx-auto bg-sky-500/15 border border-sky-500/40 rounded-2xl px-4 py-2.5 flex-wrap items-center justify-between gap-2 text-xs text-sky-300">
         <div class="flex items-center gap-2 font-semibold">
           <span class="inline-block w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping"></span>
           <span id="autoplay-step-text">🎧 搭車磨耳朵連播中：正在朗讀單字...</span>
         </div>
-        <button onclick="stopAutoPlayLoop()" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold transition">
-          ⏹️ 停止連播
-        </button>
+        <div class="flex items-center gap-2">
+          <div class="flex items-center bg-slate-900/90 p-0.5 rounded-lg border border-sky-500/30">
+            <button id="banner-btn-zh-hk" onclick="setZhVoice('zh-HK')" class="px-2 py-0.5 rounded font-bold transition bg-sky-600 text-white text-[11px]">
+              廣東話
+            </button>
+            <button id="banner-btn-zh-cn" onclick="setZhVoice('zh-CN')" class="px-2 py-0.5 rounded font-medium transition text-slate-400 hover:text-white text-[11px]">
+              普通話
+            </button>
+          </div>
+          <button onclick="stopAutoPlayLoop()" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold transition">
+            ⏹️ 停止連播
+          </button>
+        </div>
       </div>
 
       <div class="relative w-full max-w-2xl mx-auto">
@@ -1514,6 +1536,7 @@
     let currentCardIndex = 0;
     let isFlipped = false;
     let currentAccent = localStorage.getItem('dse_l34_accent') || 'en-GB';
+    let currentZhVoice = localStorage.getItem('dse_l34_zh_voice') || 'zh-HK';
     let speechRate = parseFloat(localStorage.getItem('dse_l34_rate') || '0.85');
     let currentTheme = localStorage.getItem('dse_l34_theme') || 'dark';
     let currentFontSize = localStorage.getItem('dse_l34_fontsize') || 'md';
@@ -1766,6 +1789,7 @@
       applyTheme(currentTheme);
       setFontSize(currentFontSize, true);
       setAccent(currentAccent, true);
+      setZhVoice(currentZhVoice, true);
       setSpeechRate(speechRate, true);
 
       words = DSE_L34_WORDS.map((w, i) => normalizeWordItem(w, i));
@@ -2499,6 +2523,33 @@
       if (!silent) speakCurrentWord();
     }
 
+    function setZhVoice(lang, silent = false) {
+      currentZhVoice = lang;
+      localStorage.setItem('dse_l34_zh_voice', lang);
+
+      const hkBtn = document.getElementById('btn-zh-hk');
+      const cnBtn = document.getElementById('btn-zh-cn');
+      const bannerHkBtn = document.getElementById('banner-btn-zh-hk');
+      const bannerCnBtn = document.getElementById('banner-btn-zh-cn');
+
+      if (lang === 'zh-HK') {
+        if (hkBtn) hkBtn.className = 'px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white';
+        if (cnBtn) cnBtn.className = 'px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white';
+        if (bannerHkBtn) bannerHkBtn.className = 'px-2 py-0.5 rounded font-bold transition bg-sky-600 text-white text-[11px]';
+        if (bannerCnBtn) bannerCnBtn.className = 'px-2 py-0.5 rounded font-medium transition text-slate-400 hover:text-white text-[11px]';
+      } else {
+        if (cnBtn) cnBtn.className = 'px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white';
+        if (hkBtn) hkBtn.className = 'px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white';
+        if (bannerCnBtn) bannerCnBtn.className = 'px-2 py-0.5 rounded font-bold transition bg-sky-600 text-white text-[11px]';
+        if (bannerHkBtn) bannerHkBtn.className = 'px-2 py-0.5 rounded font-medium transition text-slate-400 hover:text-white text-[11px]';
+      }
+
+      if (!silent) {
+        const label = lang === 'zh-HK' ? '🗣️ 廣東話 (粵語)' : '🗣️ 普通話';
+        showToast(`🎧 中文連播語音已切換至「${label}」`);
+      }
+    }
+
     function setSpeechRate(rate, silent = false) {
       speechRate = rate;
       localStorage.setItem('dse_l34_rate', String(rate));
@@ -2549,6 +2600,33 @@
     // ========================================================
     // 6.5 (NEW): HANDS-FREE COMMUTE AUTO-PLAY LOOP (搭車自動中英連播)
     // ========================================================
+    function findBestVoice(lang) {
+      if (!('speechSynthesis' in window)) return null;
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) return null;
+
+      const norm = lang.replace('_', '-').toLowerCase();
+      if (norm === 'zh-hk') {
+        return (
+          voices.find(v => v.lang && (v.lang.replace('_', '-').toLowerCase() === 'zh-hk' || v.lang.toLowerCase().includes('yue'))) ||
+          voices.find(v => v.name && /hong kong|cantonese|sin-ji|tracy|danny|粵|廣東/i.test(v.name)) ||
+          voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'))
+        );
+      }
+      if (norm === 'zh-cn') {
+        return (
+          voices.find(v => v.lang && v.lang.replace('_', '-').toLowerCase() === 'zh-cn') ||
+          voices.find(v => v.name && /ting-ting|meijia|yaoyao|kangkang|huihui|mandarin|putonghua|普通話|國語/i.test(v.name)) ||
+          voices.find(v => v.lang && v.lang.replace('_', '-').toLowerCase() === 'zh-tw') ||
+          voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'))
+        );
+      }
+      return (
+        voices.find(v => v.lang && v.lang.replace('_', '-').toLowerCase() === norm) ||
+        voices.find(v => v.lang && v.lang.toLowerCase().startsWith(norm.split('-')[0]))
+      );
+    }
+
     function speakWithCallback(text, lang, rate, onEnd) {
       if (!('speechSynthesis' in window) || !text) {
         if (onEnd) setTimeout(onEnd, 400);
@@ -2560,12 +2638,9 @@
         const utter = new SpeechSynthesisUtterance(clean);
         utter.lang = lang;
         utter.rate = rate;
-        const voices = window.speechSynthesis.getVoices();
-        if (voices && voices.length > 0) {
-          const preferred = voices.find(v => v.lang && v.lang.replace('_', '-').toLowerCase().startsWith(lang.toLowerCase())) ||
-                            voices.find(v => v.lang && v.lang.startsWith(lang.split('-')[0]));
-          if (preferred) utter.voice = preferred;
-        }
+        const preferred = findBestVoice(lang);
+        if (preferred) utter.voice = preferred;
+
         let finished = false;
         const done = () => {
           if (finished) return;
@@ -2605,7 +2680,8 @@
         banner.classList.remove('hidden');
         banner.classList.add('flex');
       }
-      showToast('🎧 已啟動「搭車自動連播」：英文單字 ➔ 中文釋義 ➔ 例句');
+      const zhName = currentZhVoice === 'zh-HK' ? '廣東話' : '普通話';
+      showToast(`🎧 已啟動「搭車自動連播」（${zhName}）：英文單字 ➔ 中文釋義 ➔ 例句`);
       runAutoPlayStep();
     }
 
@@ -2652,9 +2728,10 @@
           isFlipped = true;
           document.getElementById('flashcard-inner')?.classList.add('rotate-y-180');
           const zhText = (item.def_zh || '').replace(/[（(].*?[）)]/g, '').trim();
-          if (stepText) stepText.textContent = `🎧 連播中：中文釋義「${zhText || item.word}」...`;
+          const zhLangLabel = currentZhVoice === 'zh-HK' ? '廣東話' : '普通話';
+          if (stepText) stepText.textContent = `🎧 連播中（${zhLangLabel}）：中文釋義「${zhText || item.word}」...`;
 
-          speakWithCallback(zhText || item.word, 'zh-HK', 1.0, () => {
+          speakWithCallback(zhText || item.word, currentZhVoice, 1.0, () => {
             if (!isAutoPlaying) return;
             autoPlayTimer = setTimeout(() => {
               if (!isAutoPlaying) return;
