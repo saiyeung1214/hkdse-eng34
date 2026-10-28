@@ -1220,46 +1220,353 @@
       }
     ];
 
+    // Paper 2 零失分萬用句構（完整 20 組）
     const DSE_SAFETY_SENTENCES = [
       {
-        group: "intro", category: "🎬 開首段：引出社會熱話背景",
+        group: "intro",
+        category: "🎬 開首段：引出社會熱話背景",
         formula: "It is widely acknowledged that [問題/現象] has aroused widespread public concern in recent years.",
         demo: "It is widely acknowledged that excessive smartphone usage among teenagers has aroused widespread public concern in recent years.",
         zh_trans: "眾所周知，近年青少年過度使用智能手機已引起公眾廣泛關注。",
-        dse_tip: "最穩陣的第一段開頭句，文法 100% 穩妥。"
+        dse_tip: "最穩陣的第一段開頭句，文法 100% 穩妥，徹底取代小學生的 'Nowadays, many people use phones.'"
       },
       {
-        group: "body", category: "🔗 強調重要性 (Topic Sentence 首句)",
+        group: "intro",
+        category: "🎬 開首段：指出正反爭議 (雙面討論題)",
+        formula: "Opinions are divided on whether [某做法/政策] brings more benefits than drawbacks to our society.",
+        demo: "Opinions are divided on whether abolishing homework brings more benefits than drawbacks to primary school students.",
+        zh_trans: "對於廢除功課對小學生而言是利多於弊還是弊多於利，社會各界意見不一。",
+        dse_tip: "遇到 'Do the advantages outweigh the disadvantages?' 題型時，這句能完美引出正反討論。"
+      },
+      {
+        group: "intro",
+        category: "🎬 開首段：表明個人立場 (Thesis Statement)",
+        formula: "From my perspective, the merits of [某事物/V-ing] far outweigh its shortcomings for the following reasons.",
+        demo: "From my perspective, the merits of participating in voluntary work far outweigh its shortcomings for the following reasons.",
+        zh_trans: "從我的角度來看，參與義務工作的優點遠遠大於其缺點，原因如下。",
+        dse_tip: "放在第一段最後一句作點題句（Thesis Statement），清晰告訴考官你的立場，結構分即加！"
+      },
+      {
+        group: "body",
+        category: "🔗 提出主要成因 (Cause)",
+        formula: "One of the primary factors contributing to [問題] is [名詞 / V-ing].",
+        demo: "One of the primary factors contributing to adolescent anxiety is the immense academic pressure from public examinations.",
+        zh_trans: "導致青少年焦慮的主要因素之一，是來自公開考試的巨大課業壓力。",
+        dse_tip: "牢記 'contributing to' 後面一定要跟名詞或 V-ing，考官看到這個準確搭配會非常讚賞。"
+      },
+      {
+        group: "body",
+        category: "🔗 強調重要性 (Topic Sentence 首句)",
         formula: "First and foremost, [名詞 / V-ing] plays an indispensable role in [V-ing + 名詞].",
         demo: "First and foremost, regular physical exercise plays an indispensable role in maintaining both physical and mental wellness.",
         zh_trans: "首先，定期進行體能運動在維持身心健康方面扮演著不可或缺的角色。",
-        dse_tip: "用來寫正文第一段的主題句。"
+        dse_tip: "用來寫正文第一段的主題句（Topic Sentence），比寫 'Firstly, exercise is very good' 高出兩個 Grade！"
       },
       {
-        group: "sol", category: "💡 總結全文觀點 (Conclusion)",
+        group: "body",
+        category: "🔗 雙重論點遞進擴展 (Addition)",
+        formula: "Apart from [好處A (V-ing)], another significant benefit of [主題] is that it enables students to [動詞原形]...",
+        demo: "Apart from relieving academic stress, another significant benefit of playing team sports is that it enables students to cultivate teamwork skills.",
+        zh_trans: "除了紓緩學業壓力外，參與隊際運動的另一個顯著好處是能讓學生培養團隊合作精神。",
+        dse_tip: "放在正文第二段開頭，做到自然承上啟下（Cohesion），比死板地寫 'Secondly' 流暢得多。"
+      },
+      {
+        group: "body",
+        category: "🔗 具體舉例支持論點 (Giving Examples)",
+        formula: "A notable example is that [主詞 + 動詞], which clearly illustrates how [結論].",
+        demo: "A notable example is that many students suffer from sleep deprivation, which clearly illustrates how heavy workloads harm their health.",
+        zh_trans: "一個顯著的例子是許多學生長期睡眠不足，這清楚說明了繁重的功課如何損害他們的健康。",
+        dse_tip: "避免寫出不完整的句子（如 'For example, sleep deprivation.' 這是文法錯句！），用這個句型保證有主詞有動詞。"
+      },
+      {
+        group: "body",
+        category: "🔗 分析負面惡果 (Negative Consequence)",
+        formula: "If this alarming trend continues, it will inevitably lead to severe consequences for [對象].",
+        demo: "If this alarming trend continues, it will inevitably lead to severe consequences for teenagers' interpersonal relationships.",
+        zh_trans: "如果這個令人擔憂的趨勢持續下去，將無可避免地對青少年的社交關係帶來嚴重後果。",
+        dse_tip: "採用真實條件句（First Conditional: If + 現在式, will + 原形），用於段尾強調問題的嚴重性。"
+      },
+      {
+        group: "body",
+        category: "🔗 說明正面成效 (Positive Effect)",
+        formula: "Not only does [名詞/V-ing] help students [動詞原形 A], but it also allows them to [動詞原形 B].",
+        demo: "Not only does reading extensively help students enrich their vocabulary, but it also allows them to broaden their horizons.",
+        zh_trans: "廣泛閱讀不僅能幫助學生豐富詞彙量，還能讓他們擴闊視野。",
+        dse_tip: "這是唯一建議熟背的「安全版 Not only 倒裝句」，只要背熟 'Not only does X help..., but it also...' 就萬無一失！"
+      },
+      {
+        group: "rebut",
+        category: "⚖️ 讓步轉折 (Concession)",
+        formula: "Although it is true that [對方合理之處], it must be noted that [我方反駁觀點].",
+        demo: "Although it is true that part-time jobs provide pocket money, it must be noted that working long hours can distract students from their studies.",
+        zh_trans: "雖然兼職工作確實能提供零用錢，但必須指出，長時間工作會令學生無心向學。",
+        dse_tip: "寫議論文必備！切記英文有了 Although 就千萬不要在後面加 but，用逗號接 'it must be noted that' 最安全！"
+      },
+      {
+        group: "rebut",
+        category: "⚖️ 駁斥反方觀點 (Refutation)",
+        formula: "Some people may argue that [反方觀點]; however, this view overlooks the fact that [我方有力證據].",
+        demo: "Some people may argue that e-learning is costly; however, this view overlooks the fact that it saves massive printing and commuting expenses in the long run.",
+        zh_trans: "有些人可能會爭辯說電子學習成本高昂；然而，這種觀點忽略了一個事實：長遠而言它能省下龐大的印刷與交通開支。",
+        dse_tip: "考評局極重視考生的 Counter-argument（反駁能力），用 'overlooks the fact that...' 能展現成熟的批判思維。"
+      },
+      {
+        group: "sol",
+        category: "💡 提出政府/校方建議 (Solution 1)",
+        formula: "In order to tackle this problem effectively, it is necessary for [the government / schools] to [動詞原形]...",
+        demo: "In order to tackle this problem effectively, it is necessary for schools to organize more mental health workshops for students.",
+        zh_trans: "為了有效解決這個問題，校方有必要為學生舉辦更多精神健康工作坊。",
+        dse_tip: "用 'It is necessary for sb to do sth' 結構清晰，不會犯下主詞與動詞不一致的錯誤。"
+      },
+      {
+        group: "sol",
+        category: "💡 強調多方攜手合作 (Joint Effort)",
+        formula: "Only when the government, schools, and parents join hands can we create a better environment for [對象].",
+        demo: "Only when the government, schools, and parents join hands can we create a healthier learning environment for our next generation.",
+        zh_trans: "唯有當政府、學校和家長攜手合作，我們才能為下一代創造更健康的學習環境。",
+        dse_tip: "極受歡迎的結尾金句（萬能三方合作：政府、學校、家長），放在最後一段能瞬間拉高文章立意！"
+      },
+      {
+        group: "sol",
+        category: "💡 總結全文觀點 (Conclusion)",
         formula: "Taking all the above factors into consideration, I firmly believe that [重申核心立場].",
         demo: "Taking all the above factors into consideration, I firmly believe that promoting green lifestyles in schools is both urgent and beneficial.",
         zh_trans: "綜合考慮上述所有因素，我深信在校園推廣綠色生活既迫切又有益。",
-        dse_tip: "氣勢十足的總結句。"
+        dse_tip: "取代老套的 'In conclusion, I think...'，用 'Taking all the above factors into consideration' 字數夠、氣勢足！"
+      },
+      {
+        group: "sol",
+        category: "💡 結尾呼籲行動 (Call to Action)",
+        formula: "It is high time that we took immediate action to [動詞原形] before it is too late.",
+        demo: "It is high time that we took immediate action to reduce plastic waste before it is too late.",
+        zh_trans: "現在是我們採取立即行動減少塑膠廢物的時候了，否則將為時已晚。",
+        dse_tip: "注意 'It is high time that we took...' 裡面的 took 用過去式是道地英文慣用法，考官看到必定加分！"
+      },
+      {
+        group: "genre",
+        category: "✉️ 讀者來信 (Letter to the Editor) 開首與結尾",
+        formula: "I am writing to express my deep concern over [議題] and suggest practical ways to address it.",
+        demo: "I am writing to express my deep concern over the rising problem of youth cyberbullying and suggest practical ways to address it.",
+        zh_trans: "本人致函是為了表達對青少年網絡欺凌問題日益嚴重的深切關注，並提出切實可行的解決建議。",
+        dse_tip: "DSE 最常考體裁 Letter to the Editor 的標準第一句，直接交代寫信目的（Purpose of writing）。"
+      },
+      {
+        group: "genre",
+        category: "🎤 演講辭 (Speech) 開首互動句",
+        formula: "Good morning Principal, teachers, and fellow schoolmates. Today, I am honoured to share my views on [主題].",
+        demo: "Good morning Principal, teachers, and fellow schoolmates. Today, I am honoured to share my views on how to strike a balance between study and rest.",
+        zh_trans: "校長、各位老師、各位同學早安。今天我很榮幸能與大家分享我對「如何平衡學業與作息」的看法。",
+        dse_tip: "寫 Speech 必須有清晰的招呼語（Greeting），否則 Tone & Register（語體）會被扣分！"
+      },
+      {
+        group: "genre",
+        category: "🎤 演講辭 (Speech) 結尾句",
+        formula: "Thank you for your kind attention, and I hope you will join me in [V-ing] starting from today!",
+        demo: "Thank you for your kind attention, and I hope you will join me in cherishing our mental health starting from today!",
+        zh_trans: "感謝大家的細心聆聽，希望大家從今天起與我一起重視我們的精神健康！",
+        dse_tip: "演講辭結尾切記不可寫 'Yours faithfully'，一定要用這句感謝聽眾並作出號召！"
+      },
+      {
+        group: "genre",
+        category: "📋 建議書 (Proposal) 開首目的與結尾",
+        formula: "The purpose of this proposal is to suggest effective measures to [目標], and I hope these recommendations will be given due consideration.",
+        demo: "The purpose of this proposal is to suggest effective measures to revamp the school library, and I hope these recommendations will be given due consideration.",
+        zh_trans: "本建議書旨在提出翻新學校圖書館的有效措施，期望上述建議能獲予以考慮。",
+        dse_tip: "寫 Proposal 或 Report 時，最適合用小標題（Subheadings）配搭這類莊重客觀的句子。"
+      },
+      {
+        group: "genre",
+        category: "📰 校園雜誌文章 (Article) 吸引讀者開首",
+        formula: "Have you ever wondered why an increasing number of teenagers are struggling with [問題]? Let's take a closer look at this trend.",
+        demo: "Have you ever wondered why an increasing number of teenagers are struggling with smartphone addiction? Let's take a closer look at this trend.",
+        zh_trans: "你有沒有想過，為什麼越來越多青少年深受手機成癮困擾？讓我們一起深入探討這個趨勢。",
+        dse_tip: "寫 Magazine Article 最忌沉悶，用一條提問句（Rhetorical Question）開頭最能拿高 Tone 分數！"
       }
     ];
 
+    // Paper 1 閱讀常見提問與語氣態度詞（完整 26 組）
     const DSE_READING_ITEMS = [
       {
-        group: "pos", term: "approving / supportive", type: "🟢 正面 / 支持態度",
-        zh: "贊成的；支持的", tip: "當文章使用 'welcome move', 'beneficial' 時選此項。"
+        group: "pos",
+        term: "approving / supportive",
+        type: "🟢 正面 / 支持態度",
+        zh: "贊成的；支持的；肯定的",
+        tip: "當作者列舉某政策或現象的多項好處，並使用 'welcome move', 'beneficial', 'a step in the right direction' 時選此項。"
       },
       {
-        group: "neg", term: "skeptical / doubtful", type: "🔴 負面 / 質疑態度",
-        zh: "懷疑的；半信半疑的", tip: "當文章出現 'questionable', 'remains to be seen' 時選此項。"
+        group: "pos",
+        term: "optimistic / hopeful",
+        type: "🟢 正面 / 樂觀態度",
+        zh: "樂觀的；抱有希望的",
+        tip: "作者對未來發展抱有信心，文中常出現 'promising future', 'bright prospect', 'light at the end of the tunnel'。"
       },
       {
-        group: "neu", term: "ambivalent / mixed feelings", type: "🟡 複雜 / 矛盾態度",
-        zh: "矛盾的；喜憂參半的", tip: "既讚賞好處同時又擔憂風險時選此項。"
+        group: "pos",
+        term: "enthusiastic / eager",
+        type: "🟢 正面 / 熱情態度",
+        zh: "熱情的；熱切的；充滿熱忱的",
+        tip: "語氣非常興奮積極，常出現感嘆號或強烈正面形容詞（如 'thrilled', 'exciting breakthrough', 'cannot wait to'）。"
       },
       {
-        group: "stem", term: "What does 'X' refer to?", type: "🎯 Paper 1 代名詞題",
-        zh: "代名詞指代題", tip: "答案 95% 在該代名詞的前一句或同一句前半部分！"
+        group: "pos",
+        term: "appreciative / grateful",
+        type: "🟢 正面 / 感激讚賞",
+        zh: "感激的；欣賞的；讚賞的",
+        tip: "作者對某人（如醫護、義工、父母）的付出表示感謝與肯定，常見字眼有 'thankful', 'owe a debt of gratitude', 'admire'。"
+      },
+      {
+        group: "pos",
+        term: "sympathetic / compassionate",
+        type: "🟢 正面 / 同理關懷",
+        zh: "同情的；富同理心的；體恤的",
+        tip: "作者對弱勢社群、受災者或受苦動物表達憐憫與理解，常見字眼如 'feel sorry for', 'heartbreaking plight', 'pitiful'。"
+      },
+      {
+        group: "neg",
+        term: "skeptical / doubtful",
+        type: "🔴 負面 / 質疑態度 (極常考！)",
+        zh: "懷疑的；半信半疑的",
+        tip: "當文章出現 'questionable', 'hard to believe', 'remains to be seen', 'so-called (所謂的)' 時，作者態度就是 skeptical。"
+      },
+      {
+        group: "neg",
+        term: "critical / disapproving",
+        type: "🔴 負面 / 批評反對",
+        zh: "批評的；不贊成的；指責的",
+        tip: "作者指出某做法的諸多弊端或錯誤，常出現 'short-sighted (短視)', 'flawed', 'unacceptable', 'fail to'。"
+      },
+      {
+        group: "neg",
+        term: "pessimistic / gloomy",
+        type: "🔴 負面 / 悲觀態度",
+        zh: "悲觀的；感到灰暗無望的",
+        tip: "作者認為問題無法解決或情況只會越來越差，常見字眼有 'bleak future', 'hopeless', 'doomed to fail'。"
+      },
+      {
+        group: "neg",
+        term: "ironic / sarcastic",
+        type: "🔴 負面 / 反諷挖苦 (Part B2 必考)",
+        zh: "諷刺的；挖苦的；說反話的",
+        tip: "表面用正面字眼（如 'What a brilliant idea!' 或加上引號的 'experts'），但實際上下文是在批評一件愚蠢的事。"
+      },
+      {
+        group: "neg",
+        term: "indignant / outraged",
+        type: "🔴 負面 / 憤慨不平",
+        zh: "憤慨的；義憤填膺的",
+        tip: "作者因為社會不公義、欺凌或欺詐行為而感到憤怒，語氣強烈（如 'shameful', 'disgraceful', 'intolerable'）。"
+      },
+      {
+        group: "neg",
+        term: "dismissive / contemptuous",
+        type: "🔴 負面 / 輕視不屑",
+        zh: "不屑一顧的；輕視的；敷衍的",
+        tip: "作者認為某個建議或想法毫無價值、不值得討論，常見字眼如 'ridiculous', 'nonsense', 'not worth considering'。"
+      },
+      {
+        group: "neg",
+        term: "concerned / worried / alarmed",
+        type: "🔴 憂慮 / 關注態度",
+        zh: "憂慮的；擔心的；憂心忡忡的",
+        tip: "作者針對社會問題（如青年精神健康、環境污染）提出警告，常見 'alarming', 'deeply troubling', 'pose a threat'。"
+      },
+      {
+        group: "neu",
+        term: "objective / neutral / impartial",
+        type: "🟡 中立 / 客觀態度",
+        zh: "客觀的；中立不偏頗的",
+        tip: "常見於新聞報導或科學研究，只陳述正反雙方數據與專家引述，不加入作者個人情緒字眼。"
+      },
+      {
+        group: "neu",
+        term: "ambivalent / mixed feelings",
+        type: "🟡 複雜 / 矛盾態度 (高頻考點)",
+        zh: "矛盾的；喜憂參半的；既愛又怕的",
+        tip: "當作者一方面讚賞某事物（如 AI 科技）的便利，同時又深深擔憂其風險，無法一刀切說是好是壞時選此項！"
+      },
+      {
+        group: "neu",
+        term: "indifferent / apathetic",
+        type: "🟡 冷漠 / 不關心態度",
+        zh: "漠不關心的；冷淡的；無動於衷的",
+        tip: "指某人對發生的事情毫不在乎（如 'could not care less', 'turn a blind eye to', 'shrug off'）。"
+      },
+      {
+        group: "neu",
+        term: "nostalgic / reminiscent",
+        type: "🟡 懷舊 / 感慨態度",
+        zh: "懷舊的；依戀往昔美好時光的",
+        tip: "常見於描寫老香港、舊街坊、童年回憶或傳統手藝消逝的文章，充滿溫暖但帶點惋惜的語氣。"
+      },
+      {
+        group: "neu",
+        term: "humorous / light-hearted",
+        type: "🟡 輕鬆 / 幽默語氣",
+        zh: "幽默風趣的；輕鬆詼諧的",
+        tip: "作者透過自嘲、誇張笑話或有趣的生活小故事來吸引讀者，氣氛輕鬆不嚴肅。"
+      },
+      {
+        group: "neu",
+        term: "cautious / guarded",
+        type: "🟡 審慎 / 保留態度",
+        zh: "審慎的；小心翼翼的；有所保留的",
+        tip: "作者不急於下定論，呼籲大家先觀察更多證據或小心潛在風險（如 'proceed with caution', 'Wait and see'）。"
+      },
+      {
+        group: "stem",
+        term: "What does 'X' (it / they / this) refer to?",
+        type: "🎯 Paper 1 必考代名詞題",
+        zh: "代名詞指代題（前文尋寶法則）",
+        tip: "答案 95% 在該代名詞的前一句或同一句前半部分！切記：若題目問 'they/these'，你的答案必須是複數名詞；且不要直接照抄整句！"
+      },
+      {
+        group: "stem",
+        term: "Find a word / phrase in paragraph X that means...",
+        type: "🎯 Paper 1 同義詞配對題",
+        zh: "段落同義詞搜尋題（詞性定生死）",
+        tip: "第一件事必定要先看題目定義的詞性！題目是 'to + 原形動詞' 你就要找動詞；題目是 '-ing' 或複數名詞，抄答案時必須完全對齊型態！"
+      },
+      {
+        group: "stem",
+        term: "True / False / Not Given (T/F/NG)",
+        type: "🎯 Paper 1 必考判斷題",
+        zh: "三選一邏輯判斷題（小心比較級陷阱）",
+        tip: "與原文意思相同＝True；與原文直接矛盾相反＝False；原文完全沒提及或「無從比較（如原文只說很受歡迎，題目說『最』受歡迎）」＝Not Given！"
+      },
+      {
+        group: "stem",
+        term: "What is the main purpose / main idea of paragraph X?",
+        type: "🎯 Paper 1 段落主旨題",
+        zh: "詢問段落寫作目的或中心思想",
+        tip: "重點看該段的【第一句 Topic Sentence】及【轉折詞 However 後面的一句】。常見動詞：to illustrate（舉例說明）、to contrast（對比）、to refute（反駁）。"
+      },
+      {
+        group: "stem",
+        term: "Why does the writer mention [某例子/人物]?",
+        type: "🎯 Paper 1 作者意圖題",
+        zh: "詢問作者提及某例子的目的",
+        tip: "作者舉例子從來不是為了講故事，而是為了支持例子【前一句】的論點！答案通常寫：To show / illustrate / prove that + 前一句的核心論點。"
+      },
+      {
+        group: "stem",
+        term: "What does the phrase '[比喻/成語]' suggest / mean?",
+        type: "🎯 Paper 1 隱喻與言外之意題",
+        zh: "解釋修辭比喻或言外之意 (Inference)",
+        tip: "千萬不要只解釋字面意思（Literal meaning）！必須結合上下文，寫出它背後的實際情況（例如 'a double-edged sword' 代表既有好處亦有壞處）。"
+      },
+      {
+        group: "stem",
+        term: "Summary Cloze (填充摘要題)",
+        type: "🎯 Paper 1 詞性轉換填空題",
+        zh: "根據文章內容完成摘要填空",
+        tip: "先看空格前後判斷需要 Noun / Verb / Adj，回原文定位後，特別注意【主詞單複數 (加 s)】、【時態 (加 ed)】或【動名詞 (preposition 後改 V-ing)】！"
+      },
+      {
+        group: "stem",
+        term: "Match the subheadings to the paragraphs",
+        type: "🎯 Paper 1 小標題配對題",
+        zh: "為各段落配對合適的小標題",
+        tip: "先劃掉已使用的例子，圈出每個選項的關鍵字（Keywords）。小心「字眼陷阱」：某段出現了標題的同一個字，往往只是細節，要看全段大意是否吻合！"
       }
     ];
 
