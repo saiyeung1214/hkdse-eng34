@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>CAC DSE Eng 保3衝4 系統 3.0</title>
+  <title>CAC DSE Eng 保3衝4 系統 3.1</title>
   <!-- iOS Web App (PWA) 專屬全螢幕運作設定 -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="CAC 保3衝4 3.0" />
+  <meta name="apple-mobile-web-app-title" content="CAC 保3衝4 3.1" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
@@ -150,9 +150,15 @@
     html.light .hover\:bg-sky-600:hover {
       color: #ffffff !important;
     }
+    html.light .bg-emerald-600 *,
+    html.light .bg-sky-600 *,
+    html.light .bg-amber-600 *,
+    html.light .bg-rose-600 * {
+      color: #ffffff !important;
+    }
 
     /* =========================================================
-       🖨️ A4 實體工作紙 / 默書紙列印專屬樣式 (@media print)
+       🖨️ A4 實體默書紙列印專屬樣式 (@media print)
        ========================================================= */
     @media print {
       body {
@@ -183,138 +189,152 @@
       }
       #printable-worksheet-card {
         border: none !important;
-        box-shadow: none !important;
         padding: 0 !important;
-        background: #ffffff !important;
-        color: #000000 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
       }
       #worksheet-preview-paper {
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
         max-height: none !important;
         overflow: visible !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
       }
     }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-200">
 
-  <!-- Top Navigation Header -->
-  <header class="border-b border-slate-800/80 bg-slate-900/90 backdrop-blur-md sticky top-0 z-30 transition-colors">
-    <div class="max-w-5xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-sky-600 flex items-center justify-center font-black text-white shadow-lg shadow-emerald-500/20 text-xs">
-          3.0
+  <!-- Top Navigation Header (Compact & Mobile-Friendly v3.1) -->
+  <header class="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+    <div class="max-w-5xl mx-auto px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-sky-600 flex items-center justify-center font-black text-white shadow-md shadow-emerald-500/20 text-xs">
+          3.1
         </div>
-        <div>
-          <h1 class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center flex-wrap gap-2">
-            CAC DSE Eng 保3衝4 系統 3.0
-            <span id="cloud-status-pill" class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">載入 3000+ 字庫中...</span>
-          </h1>
-          <p class="text-[11px] text-slate-400">介詞排雷 • PEEL 積木造句 • 搭車連播 • Paper 4 口試 • 溫習打卡與錯題默書紙</p>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <h1 class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate">
+              CAC DSE Eng 保3衝4 3.1
+            </h1>
+            <span id="cloud-status-pill" class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold whitespace-nowrap">載入中...</span>
+          </div>
+          <p class="hidden md:block text-[11px] text-slate-400 truncate">介詞排雷 • PEEL 積木造句 • 搭車連播 • Paper 4 口試 • 溫習打卡與錯題默書紙</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-1.5 sm:gap-2">
-        <button onclick="switchTab('toolkit')" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-bold transition flex items-center gap-1 shadow-sm" title="生成溫習打卡圖或列印個人化錯題默書紙">
-          <span>🎫 打卡 / 印默書紙</span>
+      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <button onclick="toggleStatsStrip()" id="btn-stats-toggle" class="px-2 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] sm:text-xs font-semibold transition flex items-center gap-1 shadow-sm" title="顯示或隱藏進度統計列以騰出更多手機空間">
+          <span>📊</span>
+          <span class="hidden md:inline">數據</span>
         </button>
 
-        <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm" title="切換黑底夜間模式或白底考場模式">
+        <button onclick="switchTab('toolkit')" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-[11px] sm:text-xs font-bold transition flex items-center gap-1 shadow-sm" title="生成溫習打卡圖或列印個人化錯題默書紙">
+          <span>🎫</span>
+          <span class="hidden sm:inline">打卡 / 印卷</span>
+        </button>
+
+        <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] sm:text-xs font-semibold transition flex items-center gap-1 shadow-sm" title="切換黑底夜間模式或白底考場模式">
           <span id="theme-icon">☀️</span>
-          <span id="theme-label">白底考場</span>
+          <span id="theme-label" class="hidden sm:inline">白底考場</span>
         </button>
 
-        <button onclick="document.getElementById('l34-file-upload').click()" class="px-2.5 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-medium transition flex items-center gap-1" title="匯入外部 .json 字庫檔">
-          <span>📂 匯入</span>
+        <button onclick="toggleHeaderSettings()" id="btn-settings-drawer" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] sm:text-xs font-bold transition flex items-center gap-1 shadow-sm" title="展開或收起語音、字體及備份設定">
+          <span>⚙️</span>
+          <span>設定</span>
+          <span id="settings-chevron" class="text-[10px] transition-transform duration-200">▼</span>
         </button>
         <input id="l34-file-upload" type="file" accept=".json" class="hidden" onchange="handleJsonFileUpload(event)" />
-
-        <button onclick="openModal('backup-modal')" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium transition flex items-center gap-1" title="備份或還原進度">
-          <span>💾 備份進度</span>
-        </button>
       </div>
     </div>
 
-    <!-- Voice Accent, Speech Speed & Font Size Control Bar -->
-    <div class="max-w-5xl mx-auto px-4 py-1.5 border-t border-slate-800/50 flex flex-wrap items-center justify-between gap-2 text-xs">
-      <div class="flex flex-wrap items-center gap-3">
-        <div class="flex items-center gap-1.5">
-          <span class="text-slate-400 font-medium">英文：</span>
-          <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
-            <button id="btn-accent-gb" onclick="setAccent('en-GB')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white">
-              🇬🇧 英音
-            </button>
-            <button id="btn-accent-us" onclick="setAccent('en-US')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white">
-              🇺🇸 美音
-            </button>
+    <!-- Collapsible Settings Drawer (Hidden by default to save vertical space on mobile) -->
+    <div id="header-settings-drawer" class="hidden border-t border-slate-800/80 bg-slate-950/95 px-3 sm:px-4 py-2.5 transition-all">
+      <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-2.5 text-xs">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div class="flex items-center gap-1">
+            <span class="text-slate-400 font-medium">英文：</span>
+            <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+              <button id="btn-accent-gb" onclick="setAccent('en-GB')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white">
+                🇬🇧 英音
+              </button>
+              <button id="btn-accent-us" onclick="setAccent('en-US')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white">
+                🇺🇸 美音
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <span class="text-slate-400 font-medium">連播：</span>
+            <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+              <button id="btn-zh-hk" onclick="setZhVoice('zh-HK')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white">
+                🗣️ 粵語
+              </button>
+              <button id="btn-zh-cn" onclick="setZhVoice('zh-CN')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white">
+                🗣️ 普通話
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <span class="text-slate-400 font-medium">字體：</span>
+            <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+              <button onclick="setFontSize('sm')" id="font-sm" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition">A-</button>
+              <button onclick="setFontSize('md')" id="font-md" class="font-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition">標準</button>
+              <button onclick="setFontSize('lg')" id="font-lg" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition">A+</button>
+              <button onclick="setFontSize('xl')" id="font-xl" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition">特大</button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <span class="text-slate-400 font-medium">語速：</span>
+            <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
+              <button onclick="setSpeechRate(0.65)" id="rate-0.65" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">0.65x</button>
+              <button onclick="setSpeechRate(0.85)" id="rate-0.85" class="rate-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition">0.85x</button>
+              <button onclick="setSpeechRate(1.0)" id="rate-1" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">1.0x</button>
+            </div>
           </div>
         </div>
 
         <div class="flex items-center gap-1.5">
-          <span class="text-slate-400 font-medium">中文連播：</span>
-          <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
-            <button id="btn-zh-hk" onclick="setZhVoice('zh-HK')" class="px-2 py-1 rounded-md font-semibold transition bg-emerald-600 text-white" title="搭車連播時以廣東話朗讀中文意思">
-              🗣️ 廣東話
-            </button>
-            <button id="btn-zh-cn" onclick="setZhVoice('zh-CN')" class="px-2 py-1 rounded-md font-medium transition text-slate-400 hover:text-white" title="搭車連播時以普通話朗讀中文意思">
-              🗣️ 普通話
-            </button>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-1.5">
-          <span class="text-slate-400 font-medium">字體大小：</span>
-          <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
-            <button onclick="setFontSize('sm')" id="font-sm" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition" title="細字體">A-</button>
-            <button onclick="setFontSize('md')" id="font-md" class="font-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition" title="標準字體">標準</button>
-            <button onclick="setFontSize('lg')" id="font-lg" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition" title="大字體">A+</button>
-            <button onclick="setFontSize('xl')" id="font-xl" class="font-btn px-2 py-1 rounded-md font-medium text-slate-400 hover:text-white transition" title="特大字體">特大</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-1">
-        <span class="text-slate-400 font-medium">語速：</span>
-        <div class="flex items-center bg-slate-800/90 p-0.5 rounded-lg border border-slate-700/70">
-          <button onclick="setSpeechRate(0.65)" id="rate-0.65" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">0.65x 慢速</button>
-          <button onclick="setSpeechRate(0.85)" id="rate-0.85" class="rate-btn px-2 py-1 rounded-md font-semibold bg-emerald-600 text-white transition">0.85x 適中</button>
-          <button onclick="setSpeechRate(1.0)" id="rate-1" class="rate-btn px-2 py-1 rounded-md font-medium text-slate-400 transition">1.0x 原速</button>
+          <button onclick="document.getElementById('l34-file-upload').click()" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 font-medium transition flex items-center gap-1">
+            <span>📂 匯入字庫</span>
+          </button>
+          <button onclick="openModal('backup-modal')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium transition flex items-center gap-1">
+            <span>💾 備份進度</span>
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- Navigation Tabs -->
-    <div class="max-w-5xl mx-auto px-4 flex gap-1 sm:gap-2 overflow-x-auto pt-1">
-      <button onclick="switchTab('review')" id="tab-review" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold border-b-2 border-emerald-500 text-emerald-400 whitespace-nowrap flex items-center gap-1.5">
-        <span>📇 保分閃卡</span>
-        <span id="due-badge" class="px-1.5 py-0.5 text-[10px] rounded-full bg-emerald-500/20 text-emerald-300 font-bold">0</span>
+    <!-- Navigation Tabs (Compact Horizontal Scroll) -->
+    <div class="max-w-5xl mx-auto px-2 sm:px-4 flex gap-0.5 sm:gap-1.5 overflow-x-auto border-t border-slate-800/40">
+      <button onclick="switchTab('review')" id="tab-review" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-semibold border-b-2 border-emerald-500 text-emerald-400 whitespace-nowrap flex items-center gap-1">
+        <span>📇 閃卡</span>
+        <span id="due-badge" class="px-1.5 py-0.2 text-[10px] rounded-full bg-emerald-500/20 text-emerald-300 font-bold">0</span>
       </button>
-      <button onclick="switchTab('blitz')" id="tab-blitz" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>⚠️ 介詞排雷快閃</span>
-        <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-rose-500/20 text-rose-300 font-bold">NEW</span>
+      <button onclick="switchTab('blitz')" id="tab-blitz" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>⚠️ 介詞排雷</span>
       </button>
-      <button onclick="switchTab('dictation')" id="tab-dictation" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>🎧 Paper 3 必串生字特訓</span>
+      <button onclick="switchTab('dictation')" id="tab-dictation" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>🎧 P3串字</span>
       </button>
-      <button onclick="switchTab('safety')" id="tab-safety" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>🛡️ Paper 2 零失分萬用句構</span>
+      <button onclick="switchTab('safety')" id="tab-safety" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>🛡️ P2句構</span>
       </button>
-      <button onclick="switchTab('reading')" id="tab-reading" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>📖 Paper 1 提問與態度詞</span>
+      <button onclick="switchTab('reading')" id="tab-reading" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>📖 P1態度詞</span>
       </button>
-      <button onclick="switchTab('speaking')" id="tab-speaking" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>🎙️ Paper 4 口試特訓</span>
-        <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-sky-500/20 text-sky-300 font-bold">NEW</span>
+      <button onclick="switchTab('speaking')" id="tab-speaking" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>🎙️ P4口試</span>
       </button>
-      <button onclick="switchTab('toolkit')" id="tab-toolkit" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>🎓 交功課與錯題紙</span>
-        <span class="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-500/20 text-amber-300 font-bold">NEW</span>
+      <button onclick="switchTab('toolkit')" id="tab-toolkit" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>🎓 打卡/印卷</span>
       </button>
-      <button onclick="switchTab('bank')" id="tab-bank" class="tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5">
-        <span>📚 3000核心字庫</span>
-        <span id="total-badge" class="px-1.5 py-0.5 text-[10px] rounded-full bg-slate-800 text-slate-400">0</span>
+      <button onclick="switchTab('bank')" id="tab-bank" class="tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1">
+        <span>📚 字庫</span>
+        <span id="total-badge" class="px-1.5 py-0.2 text-[10px] rounded-full bg-slate-800 text-slate-400">0</span>
       </button>
     </div>
   </header>
@@ -325,68 +345,83 @@
   </div>
 
   <!-- Main Content Body -->
-  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-5 space-y-5">
+  <main class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-2 sm:py-4 space-y-2.5 sm:space-y-4">
 
-    <!-- Progress Dashboard Strip -->
-    <section id="dashboard-stats-strip" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex flex-col justify-between">
-        <span class="text-xs text-slate-400 font-medium">今日待溫習</span>
-        <div class="mt-1 flex items-baseline justify-between">
-          <span id="stat-due" class="text-2xl font-black text-sky-400">0</span>
-          <span class="text-[11px] text-slate-500">個重點字</span>
+    <!-- Compact Single-Row Progress Strip (Collapsible on mobile to save vertical space) -->
+    <section id="dashboard-stats-strip" class="grid grid-cols-4 gap-1.5 sm:gap-2.5">
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl px-2.5 py-1.5 sm:p-2.5 flex items-center justify-between">
+        <span class="text-[11px] sm:text-xs text-slate-400 font-medium truncate">📅 今日到期</span>
+        <span id="stat-due" class="text-sm sm:text-xl font-black text-sky-400">0</span>
+      </div>
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl px-2.5 py-1.5 sm:p-2.5 flex items-center justify-between">
+        <span class="text-[11px] sm:text-xs text-slate-400 font-medium truncate">✅ 已鞏固</span>
+        <div class="flex items-baseline gap-1">
+          <span id="stat-mastered" class="text-sm sm:text-xl font-black text-emerald-400">0</span>
+          <span id="stat-mastered-pct" class="hidden sm:inline text-[10px] text-emerald-500 font-bold">0%</span>
         </div>
       </div>
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex flex-col justify-between">
-        <span class="text-xs text-slate-400 font-medium">✅ 完全搞掂 (已熟記)</span>
-        <div class="mt-1 flex items-baseline justify-between">
-          <span id="stat-mastered" class="text-2xl font-black text-emerald-400">0</span>
-          <span id="stat-mastered-pct" class="text-xs text-emerald-500 font-bold">0%</span>
-        </div>
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl px-2.5 py-1.5 sm:p-2.5 flex items-center justify-between">
+        <span class="text-[11px] sm:text-xs text-slate-400 font-medium truncate">⏳ 鞏固中</span>
+        <span id="stat-learning" class="text-sm sm:text-xl font-black text-amber-400">0</span>
       </div>
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex flex-col justify-between">
-        <span class="text-xs text-slate-400 font-medium">🤔 勉強記得 (需鞏固)</span>
-        <div class="mt-1 flex items-baseline justify-between">
-          <span id="stat-learning" class="text-2xl font-black text-amber-400">0</span>
-          <span class="text-[11px] text-slate-500">個生字</span>
-        </div>
-      </div>
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex flex-col justify-between">
-        <span class="text-xs text-slate-400 font-medium">❌ 唔熟 (保底攻堅)</span>
-        <div class="mt-1 flex items-baseline justify-between">
-          <span id="stat-forgot" class="text-2xl font-black text-rose-400">0</span>
-          <span class="text-[11px] text-slate-500">個生字</span>
-        </div>
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl px-2.5 py-1.5 sm:p-2.5 flex items-center justify-between">
+        <span class="text-[11px] sm:text-xs text-slate-400 font-medium truncate">❌ 需重溫</span>
+        <span id="stat-forgot" class="text-sm sm:text-xl font-black text-rose-400">0</span>
       </div>
     </section>
 
     <!-- ========================================================
          VIEW 1: LEVEL 3-4 FLASHCARD REVIEW (保分閃卡)
          ======================================================== -->
-    <section id="view-review" class="space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-2.5 rounded-2xl">
-        <div class="flex flex-wrap items-center gap-1.5">
-          <span class="text-xs text-slate-400 mr-1">目標：</span>
-          <button onclick="setReviewFilter('core')" id="filter-core" class="px-2.5 py-1 rounded-xl text-xs font-semibold bg-emerald-600 text-white transition">
-            🌟 精選必背核心詞
+    <section id="view-review" class="space-y-2.5 sm:space-y-3.5">
+      <div class="flex flex-wrap items-center justify-between gap-1.5 bg-slate-900/60 border border-slate-800/80 px-2.5 sm:px-3.5 py-2 rounded-2xl">
+        <div class="flex items-center gap-1 overflow-x-auto max-w-full pb-0.5 sm:pb-0">
+          <button onclick="setReviewFilter('daily')" id="filter-daily" class="px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white whitespace-nowrap transition" title="只派發今日到期複習卡＋定量新詞">
+            📅 今日任務
           </button>
-          <button onclick="setReviewFilter('prep')" id="filter-prep" class="px-2.5 py-1 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-            ⚠️ 介詞易錯重災區
+          <button onclick="setReviewFilter('core')" id="filter-core" class="px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+            📚 自由溫習(核心)
           </button>
-          <button onclick="setReviewFilter('hard')" id="filter-hard" class="px-2.5 py-1 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-            ❌ 專攻唔熟 / 勉強
+          <button onclick="setReviewFilter('prep')" id="filter-prep" class="px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+            ⚠️ 介詞重災區
           </button>
-          <button onclick="setReviewFilter('all')" id="filter-all" class="px-2.5 py-1 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
-            🎲 全部 3000 字隨機
+          <button onclick="setReviewFilter('hard')" id="filter-hard" class="px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+            ❌ 專攻弱項
+          </button>
+          <button onclick="setReviewFilter('all')" id="filter-all" class="px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition">
+            🎲 全部自由睇
           </button>
         </div>
-        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-400">
-          <button onclick="toggleAutoPlayLoop()" id="btn-autoplay-loop" class="px-3 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-600 text-sky-300 hover:text-white border border-sky-500/30 font-bold transition flex items-center gap-1 shadow-sm" title="免動手自動循環播放：英文單字 ➔ 中文意思 ➔ 英文例句">
+        <div class="flex items-center justify-between w-full sm:w-auto gap-1.5 text-xs text-slate-400 pt-1 sm:pt-0 border-t border-slate-800/60 sm:border-none">
+          <button onclick="toggleAutoPlayLoop()" id="btn-autoplay-loop" class="px-2.5 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-600 text-sky-300 hover:text-white border border-sky-500/30 font-bold transition flex items-center gap-1 shadow-sm text-[11px] sm:text-xs" title="免動手自動循環播放：英文單字 ➔ 中文意思 ➔ 英文例句">
             <span id="autoplay-icon">🎧</span>
-            <span id="autoplay-label">搭車自動連播</span>
+            <span id="autoplay-label">搭車連播</span>
           </button>
-          <button onclick="prevCard()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">⬅️ 上一個</button>
-          <span id="card-counter" class="text-slate-200 font-bold">1 / 1</span>
-          <button onclick="nextCardManual()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">下一個 ➡️</button>
+          <div class="flex items-center gap-1.5">
+            <button onclick="prevCard()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px]">⬅️</button>
+            <span id="card-counter" class="text-slate-200 font-bold text-[11px] sm:text-xs min-w-[48px] text-center">1 / 1</span>
+            <button onclick="nextCardManual()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px]">➡️</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 今日到期任務完成提示面板 -->
+      <div id="daily-complete-box" class="hidden max-w-2xl mx-auto bg-emerald-500/15 border-2 border-emerald-500/40 rounded-3xl p-6 text-center space-y-3 shadow-xl">
+        <div class="text-3xl">🎉</div>
+        <h3 class="text-lg sm:text-xl font-black text-white">今日到期複習任務已全部完成！</h3>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+          做得好！你已完成所有到期單字。首次標記「今次記得」的單字已排程於<strong>明天再考一次</strong>，隔日無提示答對即會正式列為「✅ 已鞏固」。
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+          <button onclick="addMoreDailyNewWords(10)" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow">
+            ➕ 再加 10 個新核心詞
+          </button>
+          <button onclick="setReviewFilter('core')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700">
+            📚 切換至「自由溫習模式」
+          </button>
+          <button onclick="switchTab('toolkit')" class="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-bold transition">
+            🎫 生成今日溫習打卡圖
+          </button>
         </div>
       </div>
 
@@ -412,7 +447,7 @@
       </div>
 
       <div class="relative w-full max-w-2xl mx-auto">
-        <div id="flashcard-container" class="perspective-1000 w-full h-[500px] sm:h-[520px] cursor-pointer select-none" onclick="flipCard(event)">
+        <div id="flashcard-container" class="perspective-1000 w-full h-[420px] sm:h-[500px] cursor-pointer select-none" onclick="flipCard(event)">
           <div id="flashcard-inner" class="w-full h-full relative transform-style-3d card-transition">
             
             <!-- FRONT OF CARD -->
@@ -506,12 +541,12 @@
             <span class="text-[11px] opacity-80 mt-0.5">陣間再溫</span>
           </button>
           <button onclick="rateCard('hard')" class="group py-3 px-3 rounded-2xl bg-amber-500/15 hover:bg-amber-600 border border-amber-500/30 hover:border-amber-500 text-amber-300 hover:text-white transition flex flex-col items-center justify-center shadow-md active:scale-95">
-            <span class="font-bold text-sm sm:text-base">🤔 勉強記得 (2)</span>
-            <span class="text-[11px] opacity-80 mt-0.5">明天再考</span>
+            <span class="font-bold text-sm sm:text-base">🤔 印象模糊 (2)</span>
+            <span class="text-[11px] opacity-80 mt-0.5">明天再溫</span>
           </button>
           <button onclick="rateCard('easy')" class="group py-3 px-3 rounded-2xl bg-emerald-500/15 hover:bg-emerald-600 border border-emerald-500/30 hover:border-emerald-500 text-emerald-300 hover:text-white transition flex flex-col items-center justify-center shadow-md active:scale-95">
-            <span class="font-bold text-sm sm:text-base">✅ 完全搞掂 (3)</span>
-            <span id="next-easy-interval" class="text-[11px] opacity-80 mt-0.5">3天後複習</span>
+            <span id="easy-btn-title" class="font-bold text-sm sm:text-base">👍 今次記得 (3)</span>
+            <span id="next-easy-interval" class="text-[11px] opacity-80 mt-0.5">明天確認 ➔ 已鞏固</span>
           </button>
         </div>
 
@@ -1036,7 +1071,7 @@
           <!-- Worksheet Header -->
           <div class="border-b-2 border-slate-900 pb-3 mb-4 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-widest text-slate-600">CAC HKDSE English Level 3–4 Mastery System 3.0</p>
+              <p class="text-[11px] font-bold uppercase tracking-widest text-slate-600">CAC HKDSE English Level 3–4 Mastery System 3.1</p>
               <h3 id="ws-paper-title" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">DSE 個人化重點詞彙默書紙</h3>
             </div>
             <div class="text-xs sm:text-sm font-medium text-slate-800 space-y-1">
@@ -1056,7 +1091,7 @@
 
           <!-- Worksheet Footer -->
           <div class="mt-6 pt-3 border-t border-slate-300 flex items-center justify-between text-[11px] text-slate-500">
-            <span>CAC DSE Eng 保3衝4 系統 3.0 • 自動生成個人化溫習工作紙</span>
+            <span>CAC DSE Eng 保3衝4 系統 3.1 • 自動生成個人化溫習工作紙</span>
             <span>版權所有：CAC LawSir (lsy@cactm.edu.hk)</span>
           </div>
         </div>
@@ -1069,7 +1104,7 @@
   <footer class="border-t border-slate-800/80 bg-slate-900/90 py-4 px-4 mt-8 transition-colors">
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
       <div class="font-semibold text-slate-300">
-        CAC DSE Eng 保3衝4 系統 3.0 • 3000+ 智能詞彙庫與語法排雷
+        CAC DSE Eng 保3衝4 系統 3.1 • 3000+ 智能詞彙庫與語法排雷
       </div>
       <div class="flex items-center gap-2 font-medium">
         <span>版權所有 ： <strong class="text-emerald-400">CAC LawSir</strong></span>
@@ -1348,95 +1383,147 @@
       }
     };
 
-    const WEAK_WORD_RULES = [
-      { pattern: /\bvery important\b/gi, label: "very important", upgrades: ["indispensable", "crucial", "vital"], tip: "議論文中用 indispensable (不可或缺的) 更高分！" },
-      { pattern: /\bimportant\b/gi, label: "important", upgrades: ["crucial", "vital", "significant"], tip: "搭配 role 時建議寫 play a vital / indispensable role。" },
-      { pattern: /\bgood for\b/gi, label: "good for", upgrades: ["beneficial to", "conducive to"], tip: "切記改為 beneficial TO 後，介詞是 to 而非 for！" },
-      { pattern: /\bbad for\b/gi, label: "bad for", upgrades: ["detrimental to", "harmful to"], tip: "detrimental TO (對…有害) 是保 4 衝 5 標誌詞。" },
-      { pattern: /\bnowadays\b/gi, label: "Nowadays", upgrades: ["In contemporary society", "In recent years"], tip: "避免第一隻字寫 Nowadays。" },
-      { pattern: /\bmany\b/gi, label: "many", upgrades: ["numerous", "a wide array of", "a growing number of"], tip: "修飾可數複數名詞時用 numerous。" },
-      { pattern: /\ba lot of\b/gi, label: "a lot of", upgrades: ["a substantial amount of", "a plethora of"], tip: "正式公函與議論文盡量避免 a lot of。" },
-      { pattern: /\bmoreover\b/gi, label: "Moreover", upgrades: ["Furthermore", "In addition", "What is more"], tip: "可用 Furthermore 承上啟下。" },
-      { pattern: /\bi think\b/gi, label: "I think", upgrades: ["From my perspective", "I firmly believe that"], tip: "表達立場時用 From my perspective 更具說服力。" },
-      { pattern: /\bsolve the problem\b/gi, label: "solve the problem", upgrades: ["tackle the problem", "alleviate the problem"], tip: "用 alleviate (紓緩) 或 tackle (處理) 更準確嚴謹。" },
-      { pattern: /\bjoin\b/gi, label: "join", upgrades: ["participate in", "engage in"], tip: "接活動時用 participate in 或 engage in。" },
-      { pattern: /\bmake\b/gi, label: "make", upgrades: ["enable", "allow", "render"], tip: "切忌寫 make students can learn，應改為 enable students to learn。" },
-      { pattern: /\bhelp\b/gi, label: "help", upgrades: ["facilitate", "enable", "assist"], tip: "可升級為 enable sb do 或 facilitate + 名詞。" },
-      { pattern: /\bimprove\b/gi, label: "improve", upgrades: ["enhance", "boost", "strengthen"], tip: "搭配效率或意識時用 enhance。" },
-      { pattern: /\breduce\b/gi, label: "reduce", upgrades: ["alleviate", "mitigate", "curb"], tip: "減輕壓力用 relieve / alleviate stress。" }
-    ];
-
-    // Paper 4 口試模擬真題庫
-    const DSE_SPEAKING_PROMPTS = [
+    // ========================================================
+    // 1.2 EXPRESSION & SENTENCE STRUCTURE CHECKER RULES
+    // 優先次序：① 句構與連接詞完整度 ➔ ② 動詞形式與介詞搭配 ➔ ③ 單複數一致 ➔ ④ 完整片語級詞彙升級
+    // ========================================================
+    const EXPRESSION_CHECK_RULES = [
+      // ① 句意與句子結構完整度 (Sentence Structure & Conjunctions)
       {
-        title: "主題一：青少年精神健康與減壓 (Mental Health & Stress)",
-        gi_context: "Your school is planning a 'Mental Wellness Week' to help students cope with academic pressure. Discuss with your group how to make this week effective.",
-        bullets: [
-          "What kinds of stress-relief activities should be organized",
-          "How to encourage reluctant or shy students to participate",
-          "Whether homework and tests should be cancelled during that week"
-        ],
-        ir_questions: [
-          "1. (Easy) What do you usually do to relax after a long day at school?",
-          "2. (Medium) Do you think secondary school students in Hong Kong have too much homework?",
-          "3. (Level 4+) Why do some teenagers feel reluctant to talk to parents or social workers about their stress?"
-        ]
+        category: "🚨 句構與連接詞修正",
+        pattern: /\bAlthough\s+([^,.!?]+),\s*but\s+/gi,
+        label: "Although ... , but ... (雙重連接詞病句)",
+        upgrades: ["Although $1, "],
+        tip: "英文語法中 Although 與 but 絕不可同時出現於同一句！刪去 but 後句子結構才正確。"
       },
       {
-        title: "主題二：智能手機與人工智能學習 (AI & E-Learning)",
-        gi_context: "The Student Union is discussing whether the school should allow students to use smartphones and AI chatbots freely during lessons.",
-        bullets: [
-          "How digital tools and AI can facilitate classroom learning",
-          "Potential drawbacks such as distraction and plagiarism",
-          "What rules or guidelines should be set for students"
-        ],
-        ir_questions: [
-          "1. (Easy) How many hours do you spend on your smartphone every day?",
-          "2. (Medium) Do you prefer reading printed textbooks or electronic books on a tablet?",
-          "3. (Level 4+) Will artificial intelligence replace human teachers in the future? Why or why not?"
-        ]
+        category: "🚨 句構與連接詞修正",
+        pattern: /\bBecause\s+([^,.!?]+),\s*so\s+/gi,
+        label: "Because ... , so ... (雙重連接詞病句)",
+        upgrades: ["Because $1, "],
+        tip: "英文中 Because 與 so 不可並用，保留其一即可。"
+      },
+      // ② 動詞形式、使役動詞與介詞搭配 (Verb Forms & Preposition Collocations)
+      {
+        category: "⚠️ 動詞形式與搭配錯誤",
+        pattern: /\b(?:make|makes|let|lets)\s+(students|teenagers|children|people|citizens|us|them)\s+can\s+(\w+)/gi,
+        label: "make/let sb can + V (港式英語雙動詞錯誤)",
+        upgrades: ["enable $1 to $2", "allow $1 to $2"],
+        tip: "切忌寫 make students can learn！應改用 enable / allow sb TO + 原形動詞。"
       },
       {
-        title: "主題三：校園環保與走塑生活 (Green Living & Plastic Ban)",
-        gi_context: "Your school Green Club wants to reduce single-use plastic waste on campus. You are discussing the best initiatives to launch next term.",
-        bullets: [
-          "How to reduce plastic waste at the school canteen and tuck shop",
-          "What incentives or rewards can motivate students to bring their own containers",
-          "Whether strict penalties or education is more effective"
-        ],
-        ir_questions: [
-          "1. (Easy) Do you usually bring your own water bottle when you go out?",
-          "2. (Medium) Why do so many people in Hong Kong still order takeaway food with plastic cutlery?",
-          "3. (Level 4+) Should the government impose heavier fines on citizens who do not recycle? Why?"
-        ]
+        category: "⚠️ 動詞形式與搭配錯誤",
+        pattern: /\b(enable|enables|allow|allows|encourage|encourages)\s+(students|teenagers|children|people|citizens|us|them)\s+(relax|learn|improve|develop|understand|concentrate|focus|study|participate|relieve|build|reduce|solve)\b/gi,
+        label: "enable/allow/encourage sb + 漏寫 to",
+        upgrades: ["$1 $2 to $3"],
+        tip: "enable / allow / encourage 接人作受詞後，必須加上不定詞 to + 原形動詞（如 enable students TO relax）！"
       },
       {
-        title: "主題四：課外活動與暑期實習 (ECA & Summer Internships)",
-        gi_context: "The Careers Committee is organizing a summer programme for Secondary 4 and 5 students. Discuss what activities would benefit students most.",
-        bullets: [
-          "Whether workplace internships or overseas study tours are more useful",
-          "How to help underprivileged students afford the programme fee",
-          "What soft skills students need most for their future careers"
-        ],
-        ir_questions: [
-          "1. (Easy) What extracurricular activities do you take part in at school?",
-          "2. (Medium) Do you think Secondary 5 students should do part-time jobs during the school term?",
-          "3. (Level 4+) Which is more important for future success: academic qualifications or interpersonal skills?"
-        ]
+        category: "⚠️ 動詞形式與搭配錯誤",
+        pattern: /\b(contribute|contributes|lead|leads)\s+to\s+(improve|pollute|protect|reduce|increase|solve|relieve|cause|enhance|develop|build)\b/gi,
+        label: "contribute/lead to + 原形動詞 (介詞 to 誤接原形)",
+        upgrades: ["$1 to $2ing"],
+        tip: "contribute to 及 lead to 當中的 to 是介詞，後接動詞必須改為動名詞 V-ing（注意去 e 加 ing）！"
       },
       {
-        title: "主題五：推廣香港地道旅遊 (Promoting Local Tourism)",
-        gi_context: "The Hong Kong Tourism Board is inviting students to suggest new ways to attract young overseas tourists to visit Hong Kong.",
-        bullets: [
-          "What cultural heritage sites or eco-tourism spots should be promoted",
-          "How social media influencers can help promote Hong Kong",
-          "What improvements local shops and restaurants should make"
-        ],
-        ir_questions: [
-          "1. (Easy) Where would you take an overseas friend who is visiting Hong Kong for the first time?",
-          "2. (Medium) Do you think night markets are attractive to young tourists?",
-          "3. (Level 4+) How can Hong Kong strike a balance between tourism development and preserving local neighbourhoods?"
-        ]
+        category: "⚠️ 動詞形式與搭配錯誤",
+        pattern: /\b(emphasize|emphasizes|emphasized)\s+on\b/gi,
+        label: "emphasize on (及物動詞誤加介詞 on)",
+        upgrades: ["$1", "put emphasis on"],
+        tip: "動詞 emphasize 是及物動詞，後面直接接名詞，不可加 on；若用名詞才寫 put emphasis on。"
+      },
+      {
+        category: "⚠️ 動詞形式與搭配錯誤",
+        pattern: /\b(discuss|discusses|discussed)\s+about\b/gi,
+        label: "discuss about (及物動詞誤加 about)",
+        upgrades: ["$1"],
+        tip: "discuss 直接接討論主題，切勿加 about！"
+      },
+      {
+        category: "⚠️ 動詞形式與搭配錯誤",
+        pattern: /\bcope\s+(the\s+\w+|academic\s+stress|stress|pressure|problems)\b/gi,
+        label: "cope + 漏寫介詞 with",
+        upgrades: ["cope with $1", "tackle $1"],
+        tip: "cope 是不及物動詞，必須寫 cope WITH；若不加介詞則應改用及物動詞 tackle。"
+      },
+      // ③ 不可數名詞單複數錯誤 (Countability & Agreement)
+      {
+        category: "⚠️ 單複數與詞性修正",
+        pattern: /\b(many\s+|some\s+|useful\s+)?(informations|equipments|advices|feedbacks|homeworks|luggages)\b/gi,
+        label: "不可數名詞誤加 -s",
+        upgrades: ["useful information", "constructive feedback", "heavy workloads"],
+        tip: "information, equipment, advice, feedback, homework, luggage 均為絕對不可數名詞，永遠不可加 -s！"
+      },
+      // ④ 完整片語級別安全升級 (Safe Phrase-Level Upgrades - 確保上下文語法 100% 吻合)
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\b(help|helps)\s+(students|teenagers|children|people|citizens|us|them)\s+(?:to\s+)?(relax|relieve|learn|improve|develop|understand|concentrate|focus|build|overcome|adapt|acquire)\b/gi,
+        label: "help sb (to) V (可升級為完整 enable 句式)",
+        upgrades: ["enable $2 to $3", "allow $2 to $3"],
+        tip: "連同受詞與後方動詞一併轉換為 enable sb TO do，確保不會漏寫 to！"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\b(is|are|was|were|be)\s+(?:very\s+)?good\s+for\b/gi,
+        label: "be good for (整組升級為連介詞高分搭配)",
+        upgrades: ["$1 beneficial to", "$1 conducive to"],
+        tip: "整組替換為 be beneficial TO 或 be conducive TO，連同介詞 for 一併轉為 to，避免介詞錯配！"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\b(is|are|was|were|be)\s+(?:very\s+)?bad\s+for\b/gi,
+        label: "be bad for (整組升級為連介詞高分搭配)",
+        upgrades: ["$1 detrimental to", "$1 harmful to"],
+        tip: "整組替換為 be detrimental TO，確保介詞自動轉換為 to。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\b(is|are)\s+very\s+important\s+(to|for)\b/gi,
+        label: "be very important to/for",
+        upgrades: ["$1 indispensable $2", "$1 crucial $2"],
+        tip: "保留後方介詞 to/for，升級為 indispensable（不可或缺的）或 crucial（至關重要的）。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\bsolve\s+the\s+(problem|issue|crisis)\b/gi,
+        label: "solve the problem (完整動詞片語升級)",
+        upgrades: ["alleviate the $1", "tackle the $1", "address the $1"],
+        tip: "社會問題往往難以一朝根治，用 alleviate（紓緩）或 tackle（處理）更嚴謹得體。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\bjoin\s+(more\s+)?(extracurricular\s+activities|outdoor\s+activities|activities|voluntary\s+work|clubs|competitions|workshops)\b/gi,
+        label: "join + 活動 (升級為正式動詞片語)",
+        upgrades: ["participate in $1$2", "engage in $1$2"],
+        tip: "連同介詞 in 一併替換為 participate in 或 engage in + 活動。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\breduce\s+(academic\s+stress|stress|pressure|anxiety)\b/gi,
+        label: "reduce stress/pressure (精準搭配升級)",
+        upgrades: ["alleviate $1", "relieve $1"],
+        tip: "搭配壓力或焦慮時，relieve / alleviate stress 比一般 reduce 更地道。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\bmany\s+(students|teenagers|people|citizens|schools|parents|studies|reasons|activities)\b/gi,
+        label: "many + 可數複數名詞",
+        upgrades: ["numerous $1", "a growing number of $1"],
+        tip: "已確認後方為可數複數名詞，可安全替換為 numerous 或 a growing number of。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\bNowadays\b/g,
+        label: "Nowadays (段首高頻重複詞)",
+        upgrades: ["In contemporary society", "In recent years"],
+        tip: "開首可用 In contemporary society（在當代社會）或 In recent years 替換。"
+      },
+      {
+        category: "✨ 完整片語級精煉",
+        pattern: /\bI\s+think\b/gi,
+        label: "I think (口語立場表達)",
+        upgrades: ["From my perspective,", "I firmly believe that"],
+        tip: "議論文表明立場時，用 I firmly believe that 更具說服力。"
       }
     ];
 
@@ -1528,6 +1615,178 @@
       }
     ];
 
+    // Paper 4 模擬真題題庫
+    const DSE_SPEAKING_PROMPTS = [
+      {
+        title: "主題一：青少年精神健康與校園減壓週 (Mental Health Week)",
+        gi_context: "Your school is planning to organize a 'Mental Health Week' to help students cope with academic stress. Your group is discussing how to make the event meaningful.",
+        bullets: [
+          "what stress-relieving activities should be included",
+          "how to encourage shy or stressed students to participate",
+          "whether parents and teachers should also be invited"
+        ],
+        ir_questions: [
+          "1. (Easy) What do you usually do to relax after a long day at school?",
+          "2. (Medium) Do you think Hong Kong students have too much homework nowadays?",
+          "3. (Level 4+) How can schools remove the stigma attached to seeking help from social workers?"
+        ]
+      },
+      {
+        title: "主題二：智能手機與人工智能學習 (AI & Smartphones in School)",
+        gi_context: "The Student Union is discussing whether secondary students should be allowed to use tablets and AI tools freely during lessons.",
+        bullets: [
+          "the benefits of using AI and tablets for learning",
+          "potential problems such as distraction and plagiarism",
+          "school rules needed to ensure responsible use of technology"
+        ],
+        ir_questions: [
+          "1. (Easy) How many hours do you spend on your smartphone every day?",
+          "2. (Medium) Do you prefer reading printed textbooks or electronic books? Why?",
+          "3. (Level 4+) Will artificial intelligence replace human teachers in the future?"
+        ]
+      },
+      {
+        title: "主題三：校園減塑與環保生活 (Plastic-Free Campus Campaign)",
+        gi_context: "The Environmental Club is organizing a 'Plastic-Free Campus Campaign' next month. Your group is discussing practical ways to reduce waste at school.",
+        bullets: [
+          "why students still use so many disposable plastic items",
+          "how the school tuck shop and canteen can help reduce plastic waste",
+          "incentives to reward classes that recycle the most"
+        ],
+        ir_questions: [
+          "1. (Easy) Do you bring your own water bottle to school every day?",
+          "2. (Medium) Why do some people find it hard topractise recycling in Hong Kong?",
+          "3. (Level 4+) Which is more effective in protecting the environment: government legislation or public education?"
+        ]
+      },
+      {
+        title: "主題四：中學生兼職與暑期實習 (Part-time Jobs & Internships)",
+        gi_context: "Your school careers committee is writing an article on whether senior secondary students should take up part-time jobs or summer internships.",
+        bullets: [
+          "what skills teenagers can acquire from workplace experience",
+          "how part-time work might affect students' studies and rest",
+          "how schools can help students find safe and meaningful internships"
+        ],
+        ir_questions: [
+          "1. (Easy) Have you ever done any volunteer work or part-time job?",
+          "2. (Medium) What is your dream job in the future, and why?",
+          "3. (Level 4+) Should work experience be made a compulsory requirement for secondary school graduation?"
+        ]
+      }
+    ];
+
+    // 獨立驗證介詞與語法排雷題庫（每題固定單一空格 ___，教學提示與題目完全分離）
+    const DSE_BLITZ_QUESTIONS = [
+      {
+        id: "prep_001", word: "beneficial", pos: "adj.", zh: "有益的；有利的",
+        question: "Doing regular physical exercise is extremely beneficial ___ both our physical and mental health.",
+        answers: ["to"], options: ["to", "for", "with", "on"],
+        explanation: "beneficial 後面必須配介詞 to（beneficial to sb/sth），切忌受 good for 影響寫成 beneficial for！"
+      },
+      {
+        id: "prep_002", word: "detrimental", pos: "adj.", zh: "有害的；不利的",
+        question: "Chronic sleep deprivation is highly detrimental ___ teenagers' academic performance.",
+        answers: ["to"], options: ["to", "for", "of", "on"],
+        explanation: "detrimental（有害的）與 beneficial 一樣，後面必須配介詞 to！"
+      },
+      {
+        id: "prep_003", word: "contribute", pos: "v.", zh: "促成；有助於",
+        question: "Every citizen can contribute ___ protecting our environment by reducing plastic waste.",
+        answers: ["to"], options: ["to", "for", "in", "with"],
+        explanation: "contribute to 當中的 to 是介詞，後面必須接名詞或動名詞 V-ing（protecting）！"
+      },
+      {
+        id: "prep_004", word: "participate", pos: "v.", zh: "參與；參加",
+        question: "Students are encouraged to actively participate ___ extracurricular activities.",
+        answers: ["in"], options: ["in", "to", "at", "Ø (不加介詞)"],
+        explanation: "participate 是不及物動詞，必須加介詞 in（participate in = take part in）！"
+      },
+      {
+        id: "prep_005", word: "indulge", pos: "v.", zh: "沉迷於；縱情於",
+        question: "Teenagers who lack self-discipline may easily indulge ___ playing mobile games.",
+        answers: ["in"], options: ["in", "to", "on", "with"],
+        explanation: "表示「沉迷於某活動」時，必須使用 indulge in + 名詞/V-ing。"
+      },
+      {
+        id: "prep_006", word: "alleviate", pos: "v.", zh: "減輕；緩解（壓力或問題）",
+        question: "Listening to soft music is an effective way to alleviate ___ academic stress before exams.",
+        answers: ["Ø (不加介詞)"], options: ["Ø (不加介詞)", "to", "with", "from"],
+        explanation: "alleviate 是及物動詞，後面直接接名詞（alleviate stress），切勿畫蛇添足加介詞！"
+      },
+      {
+        id: "prep_007", word: "emphasize", pos: "v.", zh: "強調；重視",
+        question: "Health experts repeatedly emphasize ___ the importance of getting eight hours of sleep.",
+        answers: ["Ø (不加介詞)"], options: ["Ø (不加介詞)", "on", "about", "to"],
+        explanation: "動詞 emphasize 是及物動詞，後面絕對不可加 on！只有名詞短語 put emphasis on 才加 on。"
+      },
+      {
+        id: "prep_008", word: "cope", pos: "v.", zh: "應付；處理（壓力或難題）",
+        question: "Schools should organize workshops to teach students how to cope ___ exam anxiety.",
+        answers: ["with"], options: ["with", "Ø (不加介詞)", "to", "for"],
+        explanation: "cope 是不及物動詞，必須寫 cope WITH stress；若不加介詞則應改用 tackle。"
+      },
+      {
+        id: "prep_009", word: "tackle", pos: "v.", zh: "處理；解決（難題）",
+        question: "The government must take decisive action to tackle ___ the housing shortage problem.",
+        answers: ["Ø (不加介詞)"], options: ["Ø (不加介詞)", "with", "to", "on"],
+        explanation: "tackle 是及物動詞，直接接 the problem，千萬不可受 deal with 影響寫成 tackle with！"
+      },
+      {
+        id: "prep_010", word: "deprive", pos: "v.", zh: "剝奪；使喪失",
+        question: "Heavy workloads and endless tutorials often deprive students ___ sufficient rest.",
+        answers: ["of"], options: ["of", "from", "to", "with"],
+        explanation: "固定搭配：deprive sb OF sth（剝奪某人的某事物），被動語態為 be deprived of。"
+      },
+      {
+        id: "prep_011", word: "comply", pos: "v.", zh: "遵守；依從（法規）",
+        question: "All restaurants must strictly comply ___ food hygiene regulations.",
+        answers: ["with"], options: ["with", "to", "by", "Ø (不加介詞)"],
+        explanation: "comply 後面必須配 with；而 abide 則配 by（abide by），adhere 則配 to（adhere to）。"
+      },
+      {
+        id: "prep_012", word: "dispose", pos: "v.", zh: "丟棄；處理（廢物）",
+        question: "Citizens should learn how to sort and dispose ___ recyclable waste properly.",
+        answers: ["of"], options: ["of", "Ø (不加介詞)", "off", "with"],
+        explanation: "dispose 是不及物動詞，必須加介詞 of（dispose of waste）！"
+      },
+      {
+        id: "prep_013", word: "addicted", pos: "adj.", zh: "對…上癮的",
+        question: "Many secondary students have become addicted to ___ short videos late at night.",
+        answers: ["scrolling"], options: ["scrolling", "scroll", "scrolled", "be scroll"],
+        explanation: "be addicted to 當中的 to 是介詞，後接動詞必須用動名詞 V-ing（scrolling）！"
+      },
+      {
+        id: "prep_014", word: "devote", pos: "v.", zh: "奉獻（時間或精力）",
+        question: "Parents should devote more quality time to ___ with their children every evening.",
+        answers: ["communicating"], options: ["communicating", "communicate", "communicated", "for communicating"],
+        explanation: "devote time to 當中的 to 是介詞，後面必須接名詞或 V-ing（communicating）！"
+      },
+      {
+        id: "prep_015", word: "discourage", pos: "v.", zh: "勸阻；打消…的念頭",
+        question: "Raising tobacco tax is an effective way to discourage teenagers ___ smoking.",
+        answers: ["from"], options: ["from", "to", "of", "against"],
+        explanation: "discourage / prevent / prohibit / deter sb FROM V-ing 全部搭配介詞 from！"
+      },
+      {
+        id: "prep_016", word: "conducive", pos: "adj.", zh: "有助於…的；有利於促成…的",
+        question: "Soft background music creates a relaxing atmosphere conducive ___ reading.",
+        answers: ["to"], options: ["to", "for", "of", "in"],
+        explanation: "be conducive TO + 名詞/V-ing（有助於…），介詞必須用 to！"
+      },
+      {
+        id: "prep_017", word: "vulnerable", pos: "adj.", zh: "易受傷害的；脆弱的",
+        question: "Elderly people living alone are particularly vulnerable ___ telephone deception.",
+        answers: ["to"], options: ["to", "with", "for", "of"],
+        explanation: "be vulnerable TO（易受…傷害），介詞必須用 to。"
+      },
+      {
+        id: "prep_018", word: "appreciate", pos: "v.", zh: "感激；感謝",
+        question: "We would greatly appreciate ___ if you could reply to this invitation by Monday.",
+        answers: ["it"], options: ["it", "you", "Ø (不加字)", "that"],
+        explanation: "appreciate 後接 if 子句時，中間必須加上代名詞 it（I would appreciate it if you could...）！"
+      }
+    ];
+
     // ========================================================
     // 2. STATE & INIT
     // ========================================================
@@ -1540,7 +1799,8 @@
     let speechRate = parseFloat(localStorage.getItem('dse_l34_rate') || '0.85');
     let currentTheme = localStorage.getItem('dse_l34_theme') || 'dark';
     let currentFontSize = localStorage.getItem('dse_l34_fontsize') || 'md';
-    let reviewFilter = 'core';
+    let reviewFilter = 'daily';
+    let dailyNewLimit = 12;
 
     let dictationStreak = 0;
     let currentDictationWord = null;
@@ -1647,8 +1907,38 @@
       showToast(next === 'light' ? '☀️ 已切換至「白底考場模式」' : '🌙 已切換至「黑底護眼模式」');
     }
 
+    function toggleHeaderSettings() {
+      const drawer = document.getElementById('header-settings-drawer');
+      const chevron = document.getElementById('settings-chevron');
+      const btn = document.getElementById('btn-settings-drawer');
+      if (!drawer) return;
+      const isHidden = drawer.classList.contains('hidden');
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+        if (btn) btn.className = 'px-2.5 py-1.5 rounded-xl bg-emerald-600 text-white border border-emerald-500 text-[11px] sm:text-xs font-bold transition flex items-center gap-1 shadow-sm';
+      } else {
+        drawer.classList.add('hidden');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+        if (btn) btn.className = 'px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] sm:text-xs font-bold transition flex items-center gap-1 shadow-sm';
+      }
+    }
+
+    function toggleStatsStrip() {
+      const strip = document.getElementById('dashboard-stats-strip');
+      if (!strip) return;
+      const isHidden = strip.classList.contains('hidden');
+      if (isHidden) {
+        strip.classList.remove('hidden');
+        showToast('📊 已展開溫習數據列');
+      } else {
+        strip.classList.add('hidden');
+        showToast('📱 已收起數據列，騰出更多畫面空間');
+      }
+    }
+
     function createDefaultStats() {
-      return { status: 'new', interval: 0, ease: 2.5, nextReview: Date.now(), lastReviewed: null, note: '' };
+      return { status: 'new', reps: 0, interval: 0, ease: 2.5, nextReview: 0, lastReviewed: null, note: '' };
     }
 
     function normalizeWordItem(raw, idx = 0) {
@@ -1783,342 +2073,45 @@
     }
 
     // ========================================================
-    // 3. INITIALIZATION
-    // ========================================================
-    function initApp() {
-      applyTheme(currentTheme);
-      setFontSize(currentFontSize, true);
-      setAccent(currentAccent, true);
-      setZhVoice(currentZhVoice, true);
-      setSpeechRate(speechRate, true);
-
-      words = DSE_L34_WORDS.map((w, i) => normalizeWordItem(w, i));
-      updateDashboardStats();
-      buildReviewQueue();
-      renderCurrentCard();
-      renderSafetySection();
-      renderReadingSection();
-      renderWordBank();
-      nextDictationQuestion();
-      renderSpeakingPrompt();
-      renderSpeakingPhrases();
-
-      // 載入學生打卡名字設定並初始化打卡證與工作紙
-      const clsInp = document.getElementById('pass-student-class');
-      const nameInp = document.getElementById('pass-student-name');
-      const goalInp = document.getElementById('pass-student-goal');
-      if (clsInp) clsInp.value = studentProfile.classNo || '';
-      if (nameInp) nameInp.value = studentProfile.name || '';
-      if (goalInp) goalInp.value = studentProfile.goal || '全力以赴，英文坐3望4！';
-      renderStudyPassCanvas();
-      renderWorksheetPreview();
-
-      loadCloud3000Words();
-    }
-
-    // ========================================================
-    // 3.5 (NEW): STUDY CHECK-IN PASS CANVAS & PRINTABLE WORKSHEET
-    // ========================================================
-    function saveStudentProfileAndRender() {
-      const clsVal = document.getElementById('pass-student-class')?.value || '';
-      const nameVal = document.getElementById('pass-student-name')?.value || '';
-      const goalVal = document.getElementById('pass-student-goal')?.value || '';
-      studentProfile = { classNo: clsVal, name: nameVal, goal: goalVal };
-      try {
-        localStorage.setItem('dse_l34_student_profile', JSON.stringify(studentProfile));
-      } catch (_) {}
-      renderStudyPassCanvas();
-      renderWorksheetPreview();
-    }
-
-    function generateVerifyHash(str) {
-      let h = 2166136261 >>> 0;
-      for (let i = 0; i < str.length; i++) {
-        h ^= str.charCodeAt(i);
-        h = Math.imul(h, 16777619);
-      }
-      return (h >>> 0).toString(16).toUpperCase().padStart(8, '0');
-    }
-
-    function renderStudyPassCanvas() {
-      const canvas = document.getElementById('study-pass-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.width;
-      const H = canvas.height;
-
-      // 統計數據
-      const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
-      const learningCount = words.filter(w => w.stats?.status === 'learning').length;
-      const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
-      const totalReviewed = masteredCount + learningCount + forgotCount;
-
-      const now = new Date();
-      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-      const stuClass = (studentProfile.classNo || '未填班別').trim();
-      const stuName = (studentProfile.name || 'DSE 考生').trim();
-      const stuGoal = (studentProfile.goal || '全力以赴，英文坐3望4！').trim();
-
-      const rawCode = `${stuClass}|${stuName}|${dateStr.slice(0, 10)}|M:${masteredCount}|L:${learningCount}|B:${blitzBestStreak}|D:${dictationStreak}`;
-      const verifyCode = `CAC-${generateVerifyHash(rawCode)}`;
-
-      // 1. 繪製深色漸層背景
-      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
-      bgGrad.addColorStop(0, '#0f172a');
-      bgGrad.addColorStop(0.6, '#1e293b');
-      bgGrad.addColorStop(1, '#064e3b');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, W, H);
-
-      // 裝飾幾何光暈
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.12)';
-      ctx.beginPath();
-      ctx.arc(W - 80, 80, 140, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 外框線
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.45)';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(16, 16, W - 32, H - 32);
-
-      // 2. 頂部標題列
-      ctx.fillStyle = '#10b981';
-      ctx.font = 'bold 15px Inter, system-ui, sans-serif';
-      ctx.fillText('🎓 CAC HKDSE ENGLISH MASTERY SYSTEM 3.0 • 溫習進度打卡證', 38, 52);
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '13px monospace';
-      ctx.textAlign = 'right';
-      ctx.fillText(`打卡時間: ${dateStr}`, W - 38, 52);
-      ctx.textAlign = 'left';
-
-      // 3. 學生姓名與班別大字顯示
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '900 32px Inter, system-ui, sans-serif';
-      ctx.fillText(`${stuName}`, 38, 102);
-
-      ctx.fillStyle = '#38bdf8';
-      ctx.font = 'bold 18px Inter, system-ui, sans-serif';
-      ctx.fillText(`班別 / 學號：${stuClass}`, 38, 132);
-
-      ctx.fillStyle = '#fcd34d';
-      ctx.font = '14px Inter, system-ui, sans-serif';
-      ctx.fillText(`💬 溫習目標：「${stuGoal.slice(0, 36)}」`, 38, 160);
-
-      // 分隔線
-      ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(38, 182);
-      ctx.lineTo(W - 38, 182);
-      ctx.stroke();
-
-      // 4. 四格核心數據統計卡
-      const boxes = [
-        { label: '✅ 完全搞掂 (已熟記)', val: `${masteredCount} 字`, color: '#34d399', bg: 'rgba(16, 185, 129, 0.14)' },
-        { label: '🤔 勉強記得 (鞏固中)', val: `${learningCount} 字`, color: '#fbbf24', bg: 'rgba(245, 158, 11, 0.14)' },
-        { label: '⚠️ 介詞排雷最高連勝', val: `${blitzBestStreak} 題 🔥`, color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.14)' },
-        { label: '🎧 Paper 3 串字連勝', val: `${dictationStreak} 題 🎯`, color: '#f43f5e', bg: 'rgba(244, 63, 94, 0.14)' }
-      ];
-
-      const boxW = (W - 76 - 36) / 4;
-      const boxY = 205;
-      const boxH = 115;
-
-      boxes.forEach((b, idx) => {
-        const bx = 38 + idx * (boxW + 12);
-        ctx.fillStyle = b.bg;
-        ctx.fillRect(bx, boxY, boxW, boxH);
-        ctx.strokeStyle = b.color;
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(bx, boxY, boxW, boxH);
-
-        ctx.fillStyle = '#cbd5e1';
-        ctx.font = 'bold 12px Inter, system-ui, sans-serif';
-        ctx.fillText(b.label, bx + 12, boxY + 32);
-
-        ctx.fillStyle = b.color;
-        ctx.font = '900 28px Inter, system-ui, sans-serif';
-        ctx.fillText(b.val, bx + 12, boxY + 80);
-      });
-
-      // 5. 底部統計與防偽驗證碼
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
-      ctx.fillRect(38, 345, W - 76, 75);
-      ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
-      ctx.strokeRect(38, 345, W - 76, 75);
-
-      ctx.fillStyle = '#e2e8f0';
-      ctx.font = 'bold 14px Inter, system-ui, sans-serif';
-      ctx.fillText(`📊 累計已溫習生字總數：${totalReviewed} 個  |  ❌ 待攻堅生字：${forgotCount} 個`, 54, 375);
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '12px monospace';
-      ctx.fillText(`🔐 防偽驗證碼 (Verification Code): ${verifyCode}   •   版權所有: CAC LawSir`, 54, 402);
-    }
-
-    function downloadStudyPass() {
-      renderStudyPassCanvas();
-      const canvas = document.getElementById('study-pass-canvas');
-      if (!canvas) return;
-      const stuName = (studentProfile.name || 'Student').replace(/\s+/g, '_');
-      const link = document.createElement('a');
-      link.download = `DSE_StudyPass_${stuName}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      showToast('🎉 已下載高清溫習打卡圖！可直接提交功課！');
-    }
-
-    function renderWorksheetPreview() {
-      const container = document.getElementById('ws-table-container');
-      if (!container) return;
-
-      const source = document.getElementById('ws-source-select')?.value || 'weak';
-      const mode = document.getElementById('ws-mode-select')?.value || 'dict_en';
-      const count = parseInt(document.getElementById('ws-count-select')?.value || '20', 10);
-
-      // 更新試卷抬頭資料
-      const now = new Date();
-      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-      document.getElementById('ws-header-name').textContent = studentProfile.name || '';
-      document.getElementById('ws-header-class').textContent = studentProfile.classNo || '';
-      document.getElementById('ws-header-date').textContent = dateStr;
-
-      let pool = [];
-      let subtitle = '';
-      if (source === 'weak') {
-        pool = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
-        if (pool.length === 0) {
-          pool = words.filter(w => !w.isRandom3000);
-          subtitle = '（目前個人錯題庫為空，系統已自動為你載入 DSE Level 3–4 精選必背核心詞）';
-        } else {
-          subtitle = `（共篩選出 ${pool.length} 個你標記為「唔熟」或「勉強記得」的個人弱點生字）`;
-        }
-      } else if (source === 'paper3') {
-        pool = words.filter(w => w.topic === 'Paper 3 Traps' || (!w.isRandom3000 && w.prep_trap));
-        subtitle = '（專攻 DSE Paper 3 聽力綜合卷最常串錯及漏寫字母的高危單字）';
-      } else if (source === 'prep') {
-        pool = words.filter(w => w.prep_trap && w.prep_trap.trim() !== '');
-        subtitle = '（專攻 DSE Paper 2 寫作最易用錯介詞與動名詞 V-ing 的核心詞彙）';
-      } else {
-        pool = words.filter(w => !w.isRandom3000);
-        subtitle = '（涵蓋 DSE Level 3–4 寫作與閱讀必背高分替換詞）';
-      }
-
-      if (pool.length === 0) pool = [...words];
-      const selected = pool.slice(0, count);
-
-      const titleMap = {
-        dict_en: '✍️ DSE 英文生字默書紙 (看中文默英文)',
-        dict_zh: '🧐 DSE 閱讀詞義理解小測 (看英文寫中文)',
-        study: '📖 DSE 個人化重點詞彙中英對照溫習表'
-      };
-      document.getElementById('ws-paper-title').textContent = titleMap[mode] || 'DSE 重點詞彙工作紙';
-      document.getElementById('ws-paper-subtitle').textContent = subtitle;
-
-      let rowsHtml = '';
-      if (mode === 'dict_en') {
-        rowsHtml = `
-          <table class="w-full border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="border-b-2 border-slate-800 bg-slate-100 text-left">
-                <th class="py-2 px-2 w-10">#</th>
-                <th class="py-2 px-2">中文釋義与詞性 (Meaning & POS)</th>
-                <th class="py-2 px-2 w-28">字首與長度提示</th>
-                <th class="py-2 px-2 w-56">請默寫英文單字 (Spelling)</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${selected.map((item, i) => {
-                const hint = `${item.word[0].toUpperCase()} _ _ (${item.word.length} letters)`;
-                return `
-                  <tr class="border-b border-slate-300">
-                    <td class="py-2.5 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
-                    <td class="py-2.5 px-2 font-semibold text-slate-900">${item.def_zh || item.word} <span class="text-xs font-mono text-slate-500">(${item.pos})</span></td>
-                    <td class="py-2.5 px-2 font-mono text-xs text-slate-600">${hint}</td>
-                    <td class="py-2.5 px-2 font-mono text-slate-400">____________________________</td>
-                  </tr>
-                `;
-              }).join('')}
-            </tbody>
-          </table>
-        `;
-      } else if (mode === 'dict_zh') {
-        rowsHtml = `
-          <table class="w-full border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="border-b-2 border-slate-800 bg-slate-100 text-left">
-                <th class="py-2 px-2 w-10">#</th>
-                <th class="py-2 px-2 w-44">英文單字 (Word)</th>
-                <th class="py-2 px-2">實戰語境例句 (Context Sentence)</th>
-                <th class="py-2 px-2 w-44">請寫出中文意思</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${selected.map((item, i) => `
-                <tr class="border-b border-slate-300">
-                  <td class="py-2.5 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
-                  <td class="py-2.5 px-2 font-bold text-slate-900">${item.word} <span class="text-xs font-mono text-slate-500">(${item.pos})</span></td>
-                  <td class="py-2.5 px-2 text-xs text-slate-700 italic">${item.example || '-'}</td>
-                  <td class="py-2.5 px-2 font-mono text-slate-400">____________________</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        `;
-      } else {
-        rowsHtml = `
-          <table class="w-full border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="border-b-2 border-slate-800 bg-slate-100 text-left">
-                <th class="py-2 px-2 w-8">#</th>
-                <th class="py-2 px-2 w-44">單字與音節拆解</th>
-                <th class="py-2 px-2 w-48">中文釋義與平庸字替換</th>
-                <th class="py-2 px-2">考官介詞排雷 / 實戰例句</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${selected.map((item, i) => `
-                <tr class="border-b border-slate-300">
-                  <td class="py-2 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
-                  <td class="py-2 px-2">
-                    <div class="font-black text-slate-900 text-sm">${item.word}</div>
-                    <div class="text-[11px] font-mono text-slate-500">${item.syllable} (${item.pos})</div>
-                  </td>
-                  <td class="py-2 px-2">
-                    <div class="font-bold text-slate-900">${item.def_zh || ''}</div>
-                    ${item.basic_word ? `<div class="text-[11px] text-slate-600">⚡ 取代: ${item.basic_word}</div>` : ''}
-                  </td>
-                  <td class="py-2 px-2 text-xs text-slate-800">
-                    ${item.prep_trap ? `<div class="font-semibold text-rose-800">⚠️ ${item.prep_trap}</div>` : ''}
-                    <div class="italic text-slate-600">${item.example || ''}</div>
-                  </td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        `;
-      }
-
-      container.innerHTML = rowsHtml;
-    }
-
-    function triggerPrintWorksheet() {
-      renderWorksheetPreview();
-      window.print();
-    }
-
-    // ========================================================
-    // 4. FLASHCARD & REVIEW LOGIC
+    // 4. FLASHCARD & SRS REVIEW LOGIC (按到期時間派卡 + 兩階段鞏固認證)
     // ========================================================
     function isWordDue(w) {
-      if (!w.stats) return true;
-      return w.stats.nextReview <= Date.now();
+      if (!w || !w.stats) return true;
+      if (w.stats.status === 'new') return false;
+      return (w.stats.nextReview || 0) <= Date.now();
+    }
+
+    function isWordConsolidated(w) {
+      return w?.stats?.status === 'mastered' && (w?.stats?.reps || 0) >= 2;
+    }
+
+    function getDailyTaskPool() {
+      const now = Date.now();
+      // 1. 所有已學習且到期的單字 (status !== 'new' && nextReview <= now)
+      const dueLearned = words.filter(w => w.stats && w.stats.status !== 'new' && (w.stats.nextReview || 0) <= now);
+      // 優先排列：唔熟 (forgot) ➔ 鞏固中 (learning) ➔ 已鞏固到期複習 (mastered)
+      const priorityOrder = { forgot: 1, learning: 2, mastered: 3 };
+      dueLearned.sort((a, b) => (priorityOrder[a.stats.status] || 9) - (priorityOrder[b.stats.status] || 9));
+
+      // 2. 定量加入未學過的新核心詞 (status === 'new')
+      const newCore = words.filter(w => (!w.stats || w.stats.status === 'new') && !w.isRandom3000).slice(0, dailyNewLimit);
+      const newExtra = newCore.length < dailyNewLimit
+        ? words.filter(w => (!w.stats || w.stats.status === 'new') && w.isRandom3000).slice(0, dailyNewLimit - newCore.length)
+        : [];
+
+      return [...dueLearned, ...newCore, ...newExtra];
+    }
+
+    function addMoreDailyNewWords(count = 10) {
+      dailyNewLimit += count;
+      buildReviewQueue();
+      renderCurrentCard();
+      showToast(`➕ 已為今日任務加推 ${count} 個新詞！`);
     }
 
     function updateDashboardStats() {
-      const dueCount = words.filter(w => !w.isRandom3000 && isWordDue(w)).length;
+      const dailyPool = getDailyTaskPool();
+      const dueCount = dailyPool.length;
       const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
       const learningCount = words.filter(w => w.stats?.status === 'learning').length;
       const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
@@ -2137,13 +2130,13 @@
 
     function setReviewFilter(mode) {
       reviewFilter = mode;
-      ['core', 'prep', 'hard', 'all'].forEach(m => {
+      ['daily', 'core', 'prep', 'hard', 'all'].forEach(m => {
         const btn = document.getElementById('filter-' + m);
         if (!btn) return;
         if (m === mode) {
-          btn.className = 'px-2.5 py-1 rounded-xl text-xs font-semibold bg-emerald-600 text-white transition';
+          btn.className = 'px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white whitespace-nowrap transition';
         } else {
-          btn.className = 'px-2.5 py-1 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+          btn.className = 'px-2 sm:px-2.5 py-1 rounded-xl text-[11px] sm:text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap transition';
         }
       });
       buildReviewQueue();
@@ -2151,11 +2144,14 @@
     }
 
     function buildReviewQueue() {
-      if (reviewFilter === 'core') {
+      if (reviewFilter === 'daily') {
+        reviewQueue = getDailyTaskPool();
+      } else if (reviewFilter === 'core') {
         reviewQueue = words.filter(w => !w.isRandom3000);
       } else if (reviewFilter === 'hard') {
         reviewQueue = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
         if (reviewQueue.length === 0) {
+          showToast('💡 目前沒有標記為「需重溫／鞏固中」的單字，已顯示核心詞庫');
           reviewQueue = words.filter(w => !w.isRandom3000);
         }
       } else if (reviewFilter === 'prep') {
@@ -2163,7 +2159,6 @@
       } else {
         reviewQueue = [...words].sort(() => Math.random() - 0.5);
       }
-      if (reviewQueue.length === 0) reviewQueue = [...words];
       currentCardIndex = 0;
     }
 
@@ -2197,17 +2192,18 @@
 
       const statusPill = document.getElementById('card-status-pill');
       const st = item.stats?.status || 'new';
+      const reps = item.stats?.reps || 0;
       if (st === 'mastered') {
-        statusPill.textContent = '✅ 完全搞掂';
+        statusPill.textContent = '✅ 已鞏固';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
       } else if (st === 'forgot') {
-        statusPill.textContent = '❌ 唔熟';
+        statusPill.textContent = '❌ 需重溫';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-rose-500/15 text-rose-300 border border-rose-500/30';
       } else if (st === 'learning') {
-        statusPill.textContent = '🤔 勉強記得';
+        statusPill.textContent = reps >= 1 ? '👍 今次記得 (待隔日確認)' : '🤔 印象模糊 (鞏固中)';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30';
       } else {
-        statusPill.textContent = '🆕 未溫習';
+        statusPill.textContent = '🆕 新單字';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-400';
       }
 
@@ -2254,12 +2250,34 @@
       }
 
       const curInterval = item.stats?.interval || 0;
-      const nextEasyDays = curInterval === 0 ? 3 : Math.round(curInterval * 2.2);
-      document.getElementById('next-easy-interval').textContent = `${nextEasyDays}天後複習`;
+      const easyTitleEl = document.getElementById('easy-btn-title');
+      const easyIntervalEl = document.getElementById('next-easy-interval');
+      if (reps >= 1) {
+        const nextDays = curInterval <= 1 ? 3 : Math.round(curInterval * 2.2);
+        if (easyTitleEl) easyTitleEl.textContent = '✅ 確認已鞏固 (3)';
+        if (easyIntervalEl) easyIntervalEl.textContent = `${nextDays}天後再複習`;
+      } else {
+        if (easyTitleEl) easyTitleEl.textContent = '👍 今次記得 (3)';
+        if (easyIntervalEl) easyIntervalEl.textContent = '明天確認 ➔ 已鞏固';
+      }
+
       document.getElementById('user-note-input').value = item.stats?.note || '';
     }
 
     function renderCurrentCard() {
+      const completeBox = document.getElementById('daily-complete-box');
+      const cardWrapper = document.getElementById('flashcard-container')?.parentElement;
+
+      if (reviewFilter === 'daily' && reviewQueue.length === 0) {
+        if (completeBox) completeBox.classList.remove('hidden');
+        if (cardWrapper) cardWrapper.classList.add('hidden');
+        document.getElementById('card-counter').textContent = '0 / 0';
+        return;
+      } else {
+        if (completeBox) completeBox.classList.add('hidden');
+        if (cardWrapper) cardWrapper.classList.remove('hidden');
+      }
+
       if (reviewQueue.length === 0) reviewQueue = [...words];
       if (currentCardIndex >= reviewQueue.length) currentCardIndex = 0;
       if (currentCardIndex < 0) currentCardIndex = reviewQueue.length - 1;
@@ -2274,11 +2292,13 @@
     }
 
     function prevCard() {
+      if (reviewQueue.length === 0) return;
       currentCardIndex = (currentCardIndex - 1 + reviewQueue.length) % reviewQueue.length;
       renderCurrentCard();
     }
 
     function nextCardManual() {
+      if (reviewQueue.length === 0) return;
       currentCardIndex = (currentCardIndex + 1) % reviewQueue.length;
       renderCurrentCard();
     }
@@ -2297,19 +2317,34 @@
       if (!item.stats) item.stats = createDefaultStats();
 
       const DAY_MS = 24 * 60 * 60 * 1000;
+      const prevReps = item.stats.reps || 0;
+
       if (rating === 'forgot') {
         item.stats.status = 'forgot';
+        item.stats.reps = 0;
         item.stats.interval = 0;
-        item.stats.nextReview = Date.now() + 5 * 60 * 1000;
+        item.stats.nextReview = Date.now() + 5 * 60 * 1000; // 5分鐘後重溫
       } else if (rating === 'hard') {
         item.stats.status = 'learning';
+        item.stats.reps = 0;
         item.stats.interval = 1;
-        item.stats.nextReview = Date.now() + 1 * DAY_MS;
+        item.stats.nextReview = Date.now() + 1 * DAY_MS; // 1天後再考
       } else if (rating === 'easy') {
-        item.stats.status = 'mastered';
-        const prev = item.stats.interval || 0;
-        item.stats.interval = prev === 0 ? 3 : Math.round(prev * 2.2);
-        item.stats.nextReview = Date.now() + item.stats.interval * DAY_MS;
+        // 兩階段鞏固機制：第一次按「今次記得」先設為 learning (reps=1)，隔日再答啱才升為 mastered (已鞏固)
+        if (prevReps === 0) {
+          item.stats.status = 'learning';
+          item.stats.reps = 1;
+          item.stats.interval = 1;
+          item.stats.nextReview = Date.now() + 1 * DAY_MS;
+          showToast(`👍 已記錄「${item.word}」今次記得！明天再確認一次即升為「✅ 已鞏固」`);
+        } else {
+          item.stats.status = 'mastered';
+          item.stats.reps = prevReps + 1;
+          const prevInt = item.stats.interval || 1;
+          item.stats.interval = prevInt <= 1 ? 3 : Math.round(prevInt * 2.2);
+          item.stats.nextReview = Date.now() + item.stats.interval * DAY_MS;
+          showToast(`✅ 確認成功！「${item.word}」已正式列為「已鞏固」（${item.stats.interval}天後再複習）`);
+        }
       }
 
       item.stats.lastReviewed = Date.now();
@@ -2317,8 +2352,18 @@
       saveProgressMap();
       updateDashboardStats();
 
-      currentCardIndex++;
-      if (currentCardIndex >= reviewQueue.length) buildReviewQueue();
+      if (reviewFilter === 'daily') {
+        // 在「今日任務」模式下，如果排程已推至未來（非 forgot），即從今日待辦隊列移除
+        if (rating === 'forgot') {
+          currentCardIndex = (currentCardIndex + 1) % reviewQueue.length;
+        } else {
+          reviewQueue.splice(currentCardIndex, 1);
+          if (currentCardIndex >= reviewQueue.length) currentCardIndex = 0;
+        }
+      } else {
+        currentCardIndex++;
+        if (currentCardIndex >= reviewQueue.length) buildReviewQueue();
+      }
       renderCurrentCard();
     }
 
@@ -2338,17 +2383,15 @@
     }
 
     // ========================================================
-    // 5. GRAMMAR & PREP TRAP BLITZ
+    // 5. GRAMMAR & PREP TRAP BLITZ (使用獨立驗證題庫 DSE_BLITZ_QUESTIONS)
     // ========================================================
     function initBlitzQueue() {
-      blitzQueue = words.filter(w => w.prep_trap && w.prep_trap.trim() !== '');
-      if (blitzQueue.length === 0) blitzQueue = [...words];
-      blitzQueue.sort(() => Math.random() - 0.5);
+      blitzQueue = [...DSE_BLITZ_QUESTIONS].sort(() => Math.random() - 0.5);
       blitzCurrentIdx = 0;
       blitzStreak = 0;
       blitzCorrectCount = 0;
       blitzTotalCount = 0;
-      document.getElementById('blitz-pool-count').textContent = `題庫共 ${blitzQueue.length} 題`;
+      document.getElementById('blitz-pool-count').textContent = `精選驗證題庫共 ${blitzQueue.length} 題`;
       document.getElementById('blitz-timer-display').textContent = `${blitzBestStreak} 🏆`;
       renderBlitzQuestion();
     }
@@ -2389,37 +2432,30 @@
         blitzCurrentIdx = 0;
       }
 
-      const item = blitzQueue[blitzCurrentIdx];
-      currentBlitzItem = item;
+      const qItem = blitzQueue[blitzCurrentIdx];
+      currentBlitzItem = qItem;
 
-      document.getElementById('blitz-target-word').textContent = item.word;
-      document.getElementById('blitz-target-pos').textContent = item.pos || 'adj.';
-      document.getElementById('blitz-target-zh').textContent = item.def_zh || '';
+      document.getElementById('blitz-target-word').textContent = qItem.word;
+      document.getElementById('blitz-target-pos').textContent = qItem.pos || '';
+      document.getElementById('blitz-target-zh').textContent = qItem.zh || '';
 
-      let sentence = item.example || `Doing regular exercises is extremely ${item.word} _____ our health.`;
-      let prepTarget = 'to';
-      if (item.prep_trap) {
-        const parts = item.prep_trap.split(' ');
-        if (parts.length > 1) prepTarget = parts[parts.length - 1].replace(/[^a-zA-Z]/g, '').toLowerCase();
-      }
+      // 將目標單字高亮並將固定空格 ___ 轉為醒目橫線
+      const escapedWord = qItem.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const wordRegex = new RegExp(`\\b(${escapedWord}\\w*)\\b`, 'gi');
+      const highlightedQ = qItem.question
+        .replace(wordRegex, `<strong class="text-emerald-400 underline">$1</strong>`)
+        .replace('___', '<span class="px-3 py-0.5 mx-1 rounded-lg bg-amber-500/20 border-b-2 border-amber-400 text-amber-300 font-mono">____</span>');
 
-      if (!sentence.toLowerCase().includes(prepTarget)) {
-        sentence = `Students must be very ${item.word} _____ this important matter.`;
-        prepTarget = 'about';
-      }
+      document.getElementById('blitz-sentence').innerHTML = highlightedQ;
 
-      const escapedWord = item.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`\\b${escapedWord}\\b`, 'gi');
-      const clozeSentence = sentence.replace(regex, `<strong class="text-emerald-400 underline">${item.word}</strong>`);
-      const finalSentence = clozeSentence.replace(new RegExp(`\\b${prepTarget}\\b`, 'gi'), '<span class="px-3 py-0.5 mx-1 rounded-lg bg-amber-500/20 border-b-2 border-amber-400 text-amber-300 font-mono">____</span>');
+      // 生成發音原句（如答案為「Ø (不加介詞)」則填入空字串）
+      const primaryAns = qItem.answers[0];
+      const spokenAns = primaryAns.startsWith('Ø') ? '' : primaryAns;
+      currentBlitzItem.clozeSentenceText = qItem.question.replace('___', spokenAns).replace(/\s+/g, ' ');
+      currentBlitzItem.correctPrep = primaryAns;
 
-      document.getElementById('blitz-sentence').innerHTML = finalSentence;
-      currentBlitzItem.clozeSentenceText = sentence;
-      currentBlitzItem.correctPrep = prepTarget;
-
-      const distractors = ['to', 'for', 'with', 'in', 'on', 'about', 'from', 'at'].filter(d => d !== prepTarget);
-      distractors.sort(() => Math.random() - 0.5);
-      const options = [prepTarget, distractors[0], distractors[1], distractors[2]].sort(() => Math.random() - 0.5);
+      // 洗牌選項
+      const options = [...qItem.options].sort(() => Math.random() - 0.5);
       currentBlitzItem.currentOptions = options;
 
       const optContainer = document.getElementById('blitz-options');
@@ -2439,15 +2475,16 @@
       blitzAnsweredCurrent = true;
       blitzTotalCount++;
 
-      const correct = currentBlitzItem.correctPrep;
-      const isCorrect = selectedOpt.toLowerCase() === correct.toLowerCase();
+      const validAnswers = currentBlitzItem.answers.map(a => a.toLowerCase());
+      const isCorrect = validAnswers.includes(selectedOpt.toLowerCase());
+      const correctDisplay = currentBlitzItem.answers[0];
 
       const optButtons = document.getElementById('blitz-options').children;
       for (let i = 0; i < optButtons.length; i++) {
         const btn = optButtons[i];
         btn.disabled = true;
         const optText = currentBlitzItem.currentOptions[i];
-        if (optText.toLowerCase() === correct.toLowerCase()) {
+        if (validAnswers.includes(optText.toLowerCase())) {
           btn.className = 'py-3 px-4 rounded-xl bg-emerald-500/20 border-2 border-emerald-500 text-emerald-300 font-mono text-sm font-bold flex items-center justify-between';
         } else if (i === btnIdx && !isCorrect) {
           btn.className = 'py-3 px-4 rounded-xl bg-rose-500/20 border-2 border-rose-500 text-rose-300 font-mono text-sm font-bold flex items-center justify-between';
@@ -2472,16 +2509,20 @@
         }
         fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-emerald-500/10 border-emerald-500/30 text-emerald-300';
         fbTitle.textContent = `✅ 答啱啦！連勝 ${blitzStreak} 🔥`;
-        fbTrap.textContent = `考官提點：${currentBlitzItem.word} 搭配介詞 "${correct}" 非常地道！`;
+        fbTrap.textContent = `💡 考點解析：${currentBlitzItem.explanation}`;
       } else {
         blitzStreak = 0;
         fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-rose-500/10 border-rose-500/30 text-rose-300';
-        fbTitle.textContent = `❌ 答錯喇！正確應為：${correct}`;
-        fbTrap.textContent = `🚨 評卷員扣分黑點：${currentBlitzItem.word} 正確配搭為 "${currentBlitzItem.prep_trap || (currentBlitzItem.word + ' ' + correct)}"。已自動將此字加入「唔熟」閃卡複習！`;
+        fbTitle.textContent = `❌ 答錯喇！正確答案為：${correctDisplay}`;
+        fbTrap.textContent = `🚨 評卷員解析：${currentBlitzItem.explanation}（已將 "${currentBlitzItem.word}" 納入今日需重溫清單！）`;
 
         const key = currentBlitzItem.word.toLowerCase();
         if (!progressMap[key]) progressMap[key] = createDefaultStats();
         progressMap[key].status = 'forgot';
+        progressMap[key].reps = 0;
+        progressMap[key].nextReview = Date.now();
+        const matchedWord = words.find(w => w.word.toLowerCase() === key);
+        if (matchedWord) matchedWord.stats = progressMap[key];
         saveProgressMap();
         updateDashboardStats();
       }
@@ -2490,7 +2531,7 @@
       const acc = Math.round((blitzCorrectCount / blitzTotalCount) * 100);
       document.getElementById('blitz-accuracy').textContent = `${acc}%`;
 
-      fbCol.textContent = `🔗 實戰搭配：${(currentBlitzItem.collocations || []).join(' • ') || currentBlitzItem.word}`;
+      fbCol.textContent = `📝 完整正確句子：${currentBlitzItem.clozeSentenceText}`;
       speakText(currentBlitzItem.clozeSentenceText);
     }
 
@@ -3164,9 +3205,9 @@
     function loadSampleWeakParagraph() {
       const editor = document.getElementById('peel-editor');
       if (!editor) return;
-      editor.value = "Nowadays, many students face academic stress. I think doing regular exercise is very important and good for our mental health. Moreover, lack of sleep is bad for our studies. Schools should help students solve the problem and encourage them to join more outdoor activities to reduce pressure.";
+      editor.value = "Although many students face academic stress, but they still stay up late. I think doing regular exercise is very important to our health and good for our mind. It can make students can relax and help students concentration. Moreover, schools should emphasize on mental health and help students cope the problem.";
       analyzeBuilderParagraph();
-      showToast('📡 已載入示範段落！');
+      showToast('🔍 已載入示範段落！右側已按「句構 ➔ 語法搭配 ➔ 完整片語」次序列出修正建議');
     }
 
     function analyzeBuilderParagraph() {
@@ -3187,9 +3228,9 @@
       const structEl = document.getElementById('peel-structure-badge');
       if (structEl) {
         if (wordCount === 0) structEl.textContent = '';
-        else if (wordCount < 60) structEl.textContent = '📈 建議再加 1-2 句例子或解釋';
-        else if (wordCount <= 135) structEl.textContent = '✅ 段落字數非常理想';
-        else structEl.textContent = '⚠️ 段落稍長';
+        else if (wordCount < 60) structEl.textContent = '📈 建議補充具體原因或例子以豐富論點';
+        else if (wordCount <= 135) structEl.textContent = '✅ 段落字數與篇幅非常理想';
+        else structEl.textContent = '⚠️ 段落稍長，注意句子是否過於冗長';
       }
 
       const listEl = document.getElementById('radar-suggestions-list');
@@ -3197,35 +3238,48 @@
       if (!listEl || !badgeEl) return;
 
       const detected = [];
-      WEAK_WORD_RULES.forEach((rule, idx) => {
+      EXPRESSION_CHECK_RULES.forEach((rule, idx) => {
         rule.pattern.lastIndex = 0;
         const match = rule.pattern.exec(text);
-        if (match) detected.push({ ruleIdx: idx, matchedText: match[0], rule });
+        if (match) {
+          // 預先計算套用正則群組 ($1, $2) 後的完整替換片語，讓學生清楚預覽替換後的完整句式
+          const resolvedUpgrades = rule.upgrades.map(upTemplate => {
+            return match[0].replace(new RegExp(rule.pattern.source, rule.pattern.flags.replace('g', '')), upTemplate);
+          });
+          detected.push({ ruleIdx: idx, matchedText: match[0], resolvedUpgrades, rule });
+        }
       });
 
-      badgeEl.textContent = `${detected.length} 個可升級位`;
+      badgeEl.textContent = `${detected.length} 項建議`;
       badgeEl.className = detected.length > 0
         ? 'px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold'
         : 'px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold';
 
       if (detected.length === 0) {
         listEl.innerHTML = text.trim()
-          ? `<div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 font-semibold">🎉 太棒了！目前段落沒有偵測到平庸字。</div>`
-          : `<div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-400">👈 請在左側輸入英文句子。</div>`;
+          ? `<div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 font-semibold">✅ 句構與詞彙搭配檢查通過！未發現常見連接詞衝突、動詞搭配失誤或不當替換。</div>`
+          : `<div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-400">👈 請在左側輸入英文段落，或點擊上方「🧪 載入示範段落」體驗句式與搭配檢查。</div>`;
         return;
       }
 
       listEl.innerHTML = detected.map(item => {
-        const btns = item.rule.upgrades.map(up => {
-          const safeUp = up.replace(/'/g, "\\'");
-          return `<button type="button" onclick="replaceWeakWord(${item.ruleIdx}, '${safeUp}')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-sm">⚡ 換成 ${up}</button>`;
+        const isGrammarError = item.rule.category.includes('🚨') || item.rule.category.includes('⚠️');
+        const boxBorder = isGrammarError ? 'border-rose-500/40' : 'border-amber-500/30';
+        const btnColor = isGrammarError ? 'bg-rose-600 hover:bg-rose-500' : 'bg-emerald-600 hover:bg-emerald-500';
+
+        const btns = item.resolvedUpgrades.map((resolvedText, uIdx) => {
+          const safeTemplate = item.rule.upgrades[uIdx].replace(/'/g, "\\'");
+          return `<button type="button" onclick="replaceWeakWord(${item.ruleIdx}, '${safeTemplate}')" class="px-2.5 py-1 rounded-lg ${btnColor} text-white text-xs font-bold transition shadow-sm">🔧 改為 "${resolvedText}"</button>`;
         }).join('');
 
         return `
-          <div class="p-3 rounded-xl bg-slate-900 border border-amber-500/30 space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-rose-300">⚠️ 偵測到：<span class="underline">${item.matchedText}</span></span>
+          <div class="p-3 rounded-xl bg-slate-900 border ${boxBorder} space-y-2">
+            <div class="flex items-center justify-between gap-1 flex-wrap">
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-slate-800 text-amber-300">${item.rule.category}</span>
               <span class="text-[10px] text-slate-400">${item.rule.label}</span>
+            </div>
+            <div class="text-xs font-bold text-rose-300">
+              原句片段：<span class="underline font-mono">"${item.matchedText}"</span>
             </div>
             <div class="flex flex-wrap gap-1.5">${btns}</div>
             <p class="text-[11px] text-slate-300 leading-relaxed">💡 ${item.rule.tip}</p>
@@ -3234,24 +3288,27 @@
       }).join('');
     }
 
-    function replaceWeakWord(ruleIdx, replacement) {
+    function replaceWeakWord(ruleIdx, upgradeTemplate) {
       const editor = document.getElementById('peel-editor');
-      const rule = WEAK_WORD_RULES[ruleIdx];
+      const rule = EXPRESSION_CHECK_RULES[ruleIdx];
       if (!editor || !rule) return;
 
-      rule.pattern.lastIndex = 0;
-      const match = rule.pattern.exec(editor.value);
+      const singleRegex = new RegExp(rule.pattern.source, rule.pattern.flags.replace('g', ''));
+      const match = singleRegex.exec(editor.value);
       if (match) {
         const original = match[0];
-        const isCapitalized = original[0] === original[0].toUpperCase() && original[0] !== original[0].toLowerCase();
-        const finalRep = isCapitalized
-          ? replacement.charAt(0).toUpperCase() + replacement.slice(1)
-          : replacement;
+        let replacedSegment = original.replace(singleRegex, upgradeTemplate);
 
-        editor.value = editor.value.replace(rule.pattern, finalRep);
+        // 若原句片段在句首大寫，確保替換後首字母同樣大寫
+        const isCapitalized = original[0] === original[0].toUpperCase() && original[0] !== original[0].toLowerCase();
+        if (isCapitalized && replacedSegment.length > 0) {
+          replacedSegment = replacedSegment.charAt(0).toUpperCase() + replacedSegment.slice(1);
+        }
+
+        editor.value = editor.value.replace(singleRegex, replacedSegment);
         analyzeBuilderParagraph();
-        speakText(finalRep);
-        showToast(`✨ 已將 "${original}" 升級為 "${finalRep}"！`);
+        speakText(replacedSegment);
+        showToast(`✨ 已修正句式為："${replacedSegment}"`);
       }
     }
 
@@ -3489,7 +3546,7 @@
         if (!view || !tabBtn) return;
         if (t === tabName) {
           view.classList.remove('hidden');
-          tabBtn.className = 'tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold border-b-2 border-emerald-500 text-emerald-400 whitespace-nowrap flex items-center gap-1.5';
+          tabBtn.className = 'tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-semibold border-b-2 border-emerald-500 text-emerald-400 whitespace-nowrap flex items-center gap-1';
           if (t === 'blitz') initBlitzQueue();
           if (t === 'toolkit') {
             renderStudyPassCanvas();
@@ -3497,7 +3554,7 @@
           }
         } else {
           view.classList.add('hidden');
-          tabBtn.className = 'tab-btn px-3.5 py-2 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1.5';
+          tabBtn.className = 'tab-btn px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap flex items-center gap-1';
         }
       });
     }
@@ -3561,6 +3618,301 @@
       renderWordBank();
       closeModal('backup-modal');
       showToast('🗑️ 已重置所有進度！');
+    }
+
+    // ========================================================
+    // 10. STUDY CHECK-IN PASS & PRINTABLE WORKSHEET (打卡證與錯題默書紙)
+    // ========================================================
+    function saveStudentProfileAndRender() {
+      const clsEl = document.getElementById('pass-student-class');
+      const nameEl = document.getElementById('pass-student-name');
+      const goalEl = document.getElementById('pass-student-goal');
+
+      studentProfile = {
+        classNo: clsEl ? clsEl.value.trim() : '',
+        name: nameEl ? nameEl.value.trim() : '',
+        goal: goalEl ? goalEl.value.trim() : ''
+      };
+      try {
+        localStorage.setItem('dse_l34_student_profile', JSON.stringify(studentProfile));
+      } catch (_) {}
+
+      renderStudyPassCanvas();
+      renderWorksheetPreview();
+    }
+
+    function renderStudyPassCanvas() {
+      const canvas = document.getElementById('study-pass-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      // 背景漸層
+      const grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0, '#0f172a');
+      grad.addColorStop(0.55, '#1e293b');
+      grad.addColorStop(1, '#064e3b');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // 外框裝飾線
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.45)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(18, 18, W - 36, H - 36);
+
+      // 頂部標題列
+      ctx.fillStyle = '#10b981';
+      ctx.font = 'bold 16px Inter, system-ui, sans-serif';
+      ctx.fillText('CAC HKDSE ENGLISH • LEVEL 3–4 MASTERY SYSTEM 3.1', 42, 58);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 30px Inter, system-ui, sans-serif';
+      ctx.fillText('🎫 DSE 英文溫習進度打卡證', 42, 98);
+
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 14px monospace';
+      ctx.fillText(`打卡時間：${dateStr}`, 42, 126);
+
+      // 學生姓名與班別區塊
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.72)';
+      ctx.fillRect(42, 145, W - 84, 78);
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(42, 145, W - 84, 78);
+
+      const dispClass = studentProfile.classNo || '未填寫班別';
+      const dispName = studentProfile.name || '未填寫姓名 (請於左側輸入)';
+      const dispGoal = studentProfile.goal || '全力以赴，英文坐 3 望 4！';
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 18px Inter, system-ui, sans-serif';
+      ctx.fillText(`🏫 班別學號：${dispClass}    👤 學生姓名：${dispName}`, 60, 178);
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '500 14px Inter, system-ui, sans-serif';
+      ctx.fillText(`🎯 溫習目標：${dispGoal.slice(0, 42)}`, 60, 206);
+
+      // 四格核心數據統計
+      const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
+      const learningCount = words.filter(w => w.stats?.status === 'learning').length;
+      const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
+
+      const statsBoxes = [
+        { label: '✅ 已鞏固單字', val: `${masteredCount} 字`, color: '#34d399' },
+        { label: '⏳ 鞏固中單字', val: `${learningCount} 字`, color: '#fbbf24' },
+        { label: '⚠️ 介詞排雷最佳連勝', val: `${blitzBestStreak} 🔥`, color: '#38bdf8' },
+        { label: '🎧 P3 串字目前連勝', val: `${dictationStreak} 🎯`, color: '#f472b6' }
+      ];
+
+      const boxW = (W - 84 - 36) / 4;
+      statsBoxes.forEach((b, idx) => {
+        const bx = 42 + idx * (boxW + 12);
+        const by = 245;
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+        ctx.fillRect(bx, by, boxW, 115);
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+        ctx.strokeRect(bx, by, boxW, 115);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = 'bold 13px Inter, system-ui, sans-serif';
+        ctx.fillText(b.label, bx + 14, by + 35);
+
+        ctx.fillStyle = b.color;
+        ctx.font = '900 28px Inter, system-ui, sans-serif';
+        ctx.fillText(b.val, bx + 14, by + 84);
+      });
+
+      // 底部防偽驗證碼
+      const rawCode = `${dispClass}-${dispName}-${masteredCount}-${learningCount}-${forgotCount}-${blitzBestStreak}-${now.getDate()}`;
+      let hash = 0;
+      for (let i = 0; i < rawCode.length; i++) {
+        hash = ((hash << 5) - hash) + rawCode.charCodeAt(i);
+        hash |= 0;
+      }
+      const verifyCode = 'CAC-' + Math.abs(hash).toString(16).toUpperCase().padStart(6, '0');
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 13px monospace';
+      ctx.fillText(`🔐 防偽驗證碼：${verifyCode}  |  總詞庫：${words.length} 字`, 42, 412);
+
+      ctx.fillStyle = '#10b981';
+      ctx.font = 'bold 13px Inter, system-ui, sans-serif';
+      ctx.fillText('版權所有：CAC LawSir (lsy@cactm.edu.hk)', W - 310, 412);
+    }
+
+    function downloadStudyPass() {
+      renderStudyPassCanvas();
+      const canvas = document.getElementById('study-pass-canvas');
+      if (!canvas) return;
+      try {
+        const link = document.createElement('a');
+        const safeName = (studentProfile.name || 'Student').replace(/\s+/g, '_');
+        link.download = `CAC_DSE_StudyPass_${safeName}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('💾 高清溫習打卡圖已下載！');
+      } catch (e) {
+        showToast('⚠️ 請直接長按圖片儲存或截圖交功課');
+      }
+    }
+
+    function renderWorksheetPreview() {
+      const source = document.getElementById('ws-source-select')?.value || 'weak';
+      const mode = document.getElementById('ws-mode-select')?.value || 'dict_en';
+      const count = parseInt(document.getElementById('ws-count-select')?.value || '20', 10);
+
+      const nameSpan = document.getElementById('ws-header-name');
+      const clsSpan = document.getElementById('ws-header-class');
+      const dateSpan = document.getElementById('ws-header-date');
+      const now = new Date();
+      if (nameSpan) nameSpan.textContent = studentProfile.name || '';
+      if (clsSpan) clsSpan.textContent = studentProfile.classNo || '';
+      if (dateSpan) dateSpan.textContent = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+      let pool = [];
+      if (source === 'weak') {
+        pool = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
+        if (pool.length === 0) {
+          pool = words.filter(w => !w.isRandom3000);
+        }
+      } else if (source === 'paper3') {
+        pool = words.filter(w => w.topic === 'Paper 3 Traps');
+        if (pool.length === 0) pool = words.filter(w => !w.isRandom3000);
+      } else if (source === 'prep') {
+        pool = words.filter(w => !w.isRandom3000 && w.prep_trap);
+      } else {
+        pool = words.filter(w => !w.isRandom3000);
+      }
+
+      const selected = pool.slice(0, count);
+      const subtitleEl = document.getElementById('ws-paper-subtitle');
+      const container = document.getElementById('ws-table-container');
+      if (!container) return;
+
+      if (mode === 'dict_en') {
+        if (subtitleEl) subtitleEl.textContent = '請根據中文釋義、詞性及字首提示，在右欄默寫出正確的英文單字（注意雙寫字母及詞尾）：';
+        container.innerHTML = `
+          <table class="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b-2 border-slate-800 text-left bg-slate-100">
+                <th class="py-2 px-2 w-10">#</th>
+                <th class="py-2 px-2">中文釋義与詞性</th>
+                <th class="py-2 px-2 w-28">字首提示</th>
+                <th class="py-2 px-2 w-56">英文單字默寫欄 (Spelling)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${selected.map((w, i) => `
+                <tr class="border-b border-slate-300">
+                  <td class="py-2.5 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
+                  <td class="py-2.5 px-2 font-semibold text-slate-900">${w.def_zh || w.word} <span class="text-slate-500 font-mono text-xs">(${w.pos})</span></td>
+                  <td class="py-2.5 px-2 font-mono text-slate-600">${w.word[0]}______ (${w.word.length})</td>
+                  <td class="py-2.5 px-2 font-mono text-slate-400">____________________________</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      } else if (mode === 'dict_zh') {
+        if (subtitleEl) subtitleEl.textContent = '請閱讀左側的 DSE 核心英文單字與實戰語境，在右欄寫出準確的中文意思：';
+        container.innerHTML = `
+          <table class="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b-2 border-slate-800 text-left bg-slate-100">
+                <th class="py-2 px-2 w-10">#</th>
+                <th class="py-2 px-2 w-44">英文單字 (Word)</th>
+                <th class="py-2 px-2">實戰例句語境 (Context)</th>
+                <th class="py-2 px-2 w-44">中文意思 (Meaning)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${selected.map((w, i) => `
+                <tr class="border-b border-slate-300">
+                  <td class="py-2.5 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
+                  <td class="py-2.5 px-2 font-bold text-slate-900">${w.word} <span class="text-slate-500 font-mono text-xs">(${w.pos})</span></td>
+                  <td class="py-2.5 px-2 text-slate-700 italic text-xs">${w.example || ''}</td>
+                  <td class="py-2.5 px-2 text-slate-400">____________________</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      } else {
+        if (subtitleEl) subtitleEl.textContent = '中英對照溫習表（包含音節拆解、取代平庸字與評卷員介詞捉錯位提示）：';
+        container.innerHTML = `
+          <table class="w-full border-collapse text-xs">
+            <thead>
+              <tr class="border-b-2 border-slate-800 text-left bg-slate-100">
+                <th class="py-2 px-2 w-8">#</th>
+                <th class="py-2 px-2 w-40">單字與音節</th>
+                <th class="py-2 px-2 w-40">中文釋義</th>
+                <th class="py-2 px-2">介詞排雷 / 實戰搭配與例句</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${selected.map((w, i) => `
+                <tr class="border-b border-slate-300">
+                  <td class="py-2 px-2 font-mono font-bold text-slate-600">${i + 1}.</td>
+                  <td class="py-2 px-2">
+                    <div class="font-bold text-slate-900 text-sm">${w.word}</div>
+                    <div class="font-mono text-slate-500 text-[11px]">${w.syllable} (${w.pos})</div>
+                  </td>
+                  <td class="py-2 px-2 font-semibold text-slate-800">
+                    ${w.def_zh || ''}
+                    ${w.basic_word ? `<div class="text-[11px] text-slate-500">取代: ${w.basic_word}</div>` : ''}
+                  </td>
+                  <td class="py-2 px-2 text-slate-700 space-y-0.5">
+                    ${w.prep_trap ? `<div class="font-bold text-slate-900">⚠️ ${w.prep_trap}</div>` : ''}
+                    <div class="italic text-[11px]">${w.example || ''}</div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+    }
+
+    function triggerPrintWorksheet() {
+      renderWorksheetPreview();
+      window.print();
+    }
+
+    // ========================================================
+    // 11. APPLICATION INITIALIZATION (initApp)
+    // ========================================================
+    function initApp() {
+      applyTheme(currentTheme);
+      setFontSize(currentFontSize, true);
+      setAccent(currentAccent, true);
+      setZhVoice(currentZhVoice, true);
+      setSpeechRate(speechRate, true);
+
+      // 載入已儲存的學生打卡資料
+      const clsEl = document.getElementById('pass-student-class');
+      const nameEl = document.getElementById('pass-student-name');
+      const goalEl = document.getElementById('pass-student-goal');
+      if (clsEl) clsEl.value = studentProfile.classNo || '';
+      if (nameEl) nameEl.value = studentProfile.name || '';
+      if (goalEl) goalEl.value = studentProfile.goal || '全力以赴，英文坐3望4！';
+
+      words = DSE_L34_WORDS.map((w, i) => normalizeWordItem(w, i));
+      updateDashboardStats();
+      setReviewFilter('daily');
+      renderSafetySection();
+      renderReadingSection();
+      renderSpeakingPrompt();
+      renderSpeakingPhrases();
+      renderWordBank();
+      nextDictationQuestion();
+      initBlitzQueue();
+      renderStudyPassCanvas();
+      renderWorksheetPreview();
+
+      loadCloud3000Words();
     }
 
     window.addEventListener('keydown', (e) => {
