@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>CAC DSE Eng 保3衝4 系統 3.1</title>
+  <title>CAC DSE Eng 保3衝4 系統 3.2</title>
   <!-- iOS Web App (PWA) 專屬全螢幕運作設定 -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="CAC 保3衝4 3.1" />
+  <meta name="apple-mobile-web-app-title" content="CAC 保3衝4 3.2" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
@@ -206,21 +206,21 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-200">
 
-  <!-- Top Navigation Header (Compact & Mobile-Friendly v3.1) -->
+  <!-- Top Navigation Header (Compact & Mobile-Friendly v3.2) -->
   <header class="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
     <div class="max-w-5xl mx-auto px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2 min-w-0">
         <div class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-sky-600 flex items-center justify-center font-black text-white shadow-md shadow-emerald-500/20 text-xs">
-          3.1
+          3.2
         </div>
         <div class="min-w-0">
           <div class="flex items-center gap-1.5 flex-wrap">
             <h1 class="font-extrabold text-xs sm:text-base tracking-tight text-white truncate">
-              CAC DSE Eng 保3衝4 3.1
+              CAC DSE Eng 保3衝4 3.2
             </h1>
             <span id="cloud-status-pill" class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold whitespace-nowrap">載入中...</span>
           </div>
-          <p class="hidden md:block text-[11px] text-slate-400 truncate">介詞排雷 • PEEL 積木造句 • 搭車連播 • Paper 4 口試 • 溫習打卡與錯題默書紙</p>
+          <p class="hidden md:block text-[11px] text-slate-400 truncate">隔日無提示鞏固測試 • 語法技能錯題本(換句重測) • PEEL 句式檢查 • 溫習打卡</p>
         </div>
       </div>
 
@@ -408,13 +408,13 @@
       <!-- 今日到期任務完成提示面板 -->
       <div id="daily-complete-box" class="hidden max-w-2xl mx-auto bg-emerald-500/15 border-2 border-emerald-500/40 rounded-3xl p-6 text-center space-y-3 shadow-xl">
         <div class="text-3xl">🎉</div>
-        <h3 class="text-lg sm:text-xl font-black text-white">今日到期複習任務已全部完成！</h3>
-        <p class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-          做得好！你已完成所有到期單字。首次標記「今次記得」的單字已排程於<strong>明天再考一次</strong>，隔日無提示答對即會正式列為「✅ 已鞏固」。
+        <h3 class="text-lg sm:text-xl font-black text-white">今日任務已全部完成！</h3>
+        <p id="daily-complete-summary" class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+          做得好！你已完成今日所有到期複習、語法錯題重測與新詞任務。標記為「👍 我覺得記得」的單字將於<strong>隔日進行無提示新句填空測試</strong>，首次答啱即正式列為「✅ 已鞏固」。
         </p>
         <div class="flex flex-wrap items-center justify-center gap-2.5 pt-2">
           <button onclick="addMoreDailyNewWords(10)" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow">
-            ➕ 再加 10 個新核心詞
+            ➕ 明確追加 10 個新核心詞
           </button>
           <button onclick="setReviewFilter('core')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700">
             📚 切換至「自由溫習模式」
@@ -422,6 +422,84 @@
           <button onclick="switchTab('toolkit')" class="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-bold transition">
             🎫 生成今日溫習打卡圖
           </button>
+        </div>
+      </div>
+
+      <!-- 本輪完成但有「等待重測」題目面板 (避免最後一張卡未夠5分鐘即刻重複出現) -->
+      <div id="daily-waiting-box" class="hidden max-w-2xl mx-auto bg-amber-500/15 border-2 border-amber-500/40 rounded-3xl p-6 text-center space-y-3 shadow-xl">
+        <div class="text-3xl">⏳</div>
+        <h3 id="waiting-box-title" class="text-lg sm:text-xl font-black text-white">本輪完成；有 1 題將於稍後重測</h3>
+        <p id="waiting-box-desc" class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+          剛才標記為「唔熟」或答錯的題目已排入短時間隔冷卻，避免死記硬背同一個畫面。倒數結束後會自動為你派題重測！
+        </p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-slate-950/90 border border-amber-500/40 text-amber-300 font-mono text-sm font-bold">
+          <span>⏱️ 距離下一題到期尚餘：</span>
+          <span id="waiting-countdown-text" class="text-base text-white">04:59</span>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+          <button onclick="setReviewFilter('core')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition border border-slate-700">
+            📚 等候期間先去「自由溫習」
+          </button>
+          <button onclick="forceUnlockWaitingRetests()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition shadow">
+            ⚡ 免等候立即開始重測
+          </button>
+        </div>
+      </div>
+
+      <!-- 隔日無提示鞏固測試 & 語法技能換句重測 專屬互動卡 -->
+      <div id="objective-test-box" class="hidden max-w-2xl mx-auto bg-slate-900 border-2 border-sky-500/50 rounded-3xl p-5 sm:p-7 space-y-4 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <span id="obj-test-badge" class="px-2.5 py-1 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 text-xs font-extrabold">
+              🔐 隔日無提示鞏固測試
+            </span>
+            <span id="obj-test-skill-tag" class="text-xs text-slate-400 font-mono">首次無提示答啱 ➔ ✅ 已鞏固</span>
+          </div>
+          <span id="obj-test-counter" class="text-xs font-bold text-slate-400">1 / 1</span>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <span id="obj-test-prompt-label" class="text-xs font-bold text-emerald-400">📖 目標詞義與詞性：</span>
+            <button type="button" onclick="speakObjectivePrompt()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white text-xs font-semibold transition">
+              🔊 聽句子發音
+            </button>
+          </div>
+          <p id="obj-test-zh" class="text-base sm:text-lg font-extrabold text-white"></p>
+          <div class="pt-2 border-t border-slate-800/80">
+            <span class="text-[11px] text-amber-400 font-semibold block mb-1">📝 全新語境句子填空（檢驗是否真正識用）：</span>
+            <p id="obj-test-sentence" class="text-sm sm:text-base text-slate-100 leading-relaxed font-medium"></p>
+          </div>
+        </div>
+
+        <!-- 拼字輸入區 (用於隔日單字鞏固測試) -->
+        <div id="obj-input-area" class="space-y-2.5">
+          <div class="flex gap-2">
+            <input id="obj-test-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="請在無提示下輸入正確英文單字..." onkeydown="if(event.key==='Enter') submitObjectiveTest()" class="flex-1 bg-slate-950 border-2 border-slate-800 focus:border-sky-500 rounded-2xl px-4 py-3 text-base font-mono text-white outline-none transition" />
+            <button type="button" onclick="submitObjectiveTest()" id="obj-submit-btn" class="px-5 py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm transition shadow-lg">
+              核對答案
+            </button>
+          </div>
+          <div class="flex items-center justify-between text-xs text-slate-400">
+            <button type="button" onclick="useObjectiveHint()" class="text-amber-400 hover:underline font-medium">
+              💡 顯示字首提示（注意：使用提示後本輪不計入「已鞏固」）
+            </button>
+            <span id="obj-hint-display" class="font-mono text-amber-300 font-bold"></span>
+          </div>
+        </div>
+
+        <!-- 四選一選項區 (用於語法技能錯題本換句重測) -->
+        <div id="obj-options-area" class="hidden grid-cols-2 gap-2.5"></div>
+
+        <!-- 作答結果回饋區 -->
+        <div id="obj-feedback-box" class="hidden rounded-2xl p-4 space-y-2 border text-xs sm:text-sm">
+          <div class="flex items-center justify-between gap-2">
+            <span id="obj-feedback-title" class="font-extrabold"></span>
+            <button type="button" onclick="nextObjectiveTaskItem()" class="px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow">
+              繼續下一題 →
+            </button>
+          </div>
+          <p id="obj-feedback-detail" class="text-xs text-slate-200 leading-relaxed"></p>
         </div>
       </div>
 
@@ -773,24 +851,24 @@
               </div>
             </div>
 
-            <div class="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div class="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
               <div>
                 <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
                   <div class="flex items-center gap-1.5">
-                    <span class="text-sm">📡</span>
-                    <h3 class="text-xs sm:text-sm font-extrabold text-amber-300">平庸字與港式英語雷達</h3>
+                    <span class="text-sm">🔍</span>
+                    <h3 class="text-xs sm:text-sm font-extrabold text-amber-300">表達與句式檢查</h3>
                   </div>
-                  <span id="radar-issue-count" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">0 個可升級位</span>
+                  <span id="radar-issue-count" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">0 項建議</span>
                 </div>
                 <p class="text-[11px] text-slate-400 mt-2">
-                  自動偵測文中的平庸字。點擊綠色膠囊即可<strong>一鍵替換成 Level 4 高分字</strong>：
+                  優先次序：<strong>① 句構與連接詞 ➔ ② 動詞形式與介詞搭配 ➔ ③ 單複數一致 ➔ ④ 完整片語級精煉</strong>：
                 </p>
 
                 <div id="radar-suggestions-list" class="mt-3 space-y-2.5 max-h-[270px] overflow-y-auto pr-1"></div>
               </div>
 
               <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800/90 text-[11px] text-slate-400">
-                🎯 <strong class="text-slate-200">評卷員貼士：</strong>每段換走 3–4 個平庸字，Language 分即刻坐 3 望 4！
+                🎯 <strong class="text-slate-200">評卷員貼士：</strong>考評局重視文意清晰與語法搭配準確，切勿為了盲目換深字而破壞句子結構！
               </div>
             </div>
           </div>
@@ -1068,10 +1146,10 @@
 
         <!-- A4 Paper Live Preview Box (Becomes the actual printed page) -->
         <div id="worksheet-preview-paper" class="bg-white text-slate-900 rounded-2xl p-6 sm:p-8 shadow-inner border border-slate-300 max-h-[620px] overflow-y-auto">
-          <!-- Worksheet Header -->
+          <!-- WorksheetHeader -->
           <div class="border-b-2 border-slate-900 pb-3 mb-4 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-widest text-slate-600">CAC HKDSE English Level 3–4 Mastery System 3.1</p>
+              <p class="text-[11px] font-bold uppercase tracking-widest text-slate-600">CAC HKDSE English Level 3–4 Mastery System 3.2</p>
               <h3 id="ws-paper-title" class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5">DSE 個人化重點詞彙默書紙</h3>
             </div>
             <div class="text-xs sm:text-sm font-medium text-slate-800 space-y-1">
@@ -1091,7 +1169,7 @@
 
           <!-- Worksheet Footer -->
           <div class="mt-6 pt-3 border-t border-slate-300 flex items-center justify-between text-[11px] text-slate-500">
-            <span>CAC DSE Eng 保3衝4 系統 3.1 • 自動生成個人化溫習工作紙</span>
+            <span>CAC DSE Eng 保3衝4 系統 3.2 • 自動生成個人化溫習工作紙</span>
             <span>版權所有：CAC LawSir (lsy@cactm.edu.hk)</span>
           </div>
         </div>
@@ -1104,7 +1182,7 @@
   <footer class="border-t border-slate-800/80 bg-slate-900/90 py-4 px-4 mt-8 transition-colors">
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
       <div class="font-semibold text-slate-300">
-        CAC DSE Eng 保3衝4 系統 3.1 • 3000+ 智能詞彙庫與語法排雷
+        CAC DSE Eng 保3衝4 系統 3.2 • 隔日無提示鞏固測試與語法錯題本
       </div>
       <div class="flex items-center gap-2 font-medium">
         <span>版權所有 ： <strong class="text-emerald-400">CAC LawSir</strong></span>
@@ -1153,70 +1231,112 @@
         topic: "Health & Lifestyle", def_zh: "有益的；有利的", def_en: "helpful, useful, or producing good results",
         basic_word: "good / helpful", prep_trap: "beneficial TO",
         collocations: ["beneficial to mental health", "mutually beneficial", "prove beneficial to students"],
-        example: "Doing regular physical exercise is extremely beneficial to both our physical and mental health."
+        example: "Doing regular physical exercise is extremely beneficial to both our physical and mental health.",
+        consolidation_sentence: "Maintaining a balanced diet and adequate sleep is highly beneficial to teenagers' growth."
       },
       {
         id: "l34_002", word: "detrimental", syllable: "det • ri • men • tal", phonetic: "/ˌdet.rɪˈmen.təl/", pos: "adjective",
         topic: "Health & Lifestyle", def_zh: "有害的；不利的", def_en: "causing harm or damage",
         basic_word: "bad / harmful", prep_trap: "detrimental TO",
         collocations: ["detrimental to health", "have a detrimental effect on", "detrimental impact on"],
-        example: "Lack of sleep can have a detrimental effect on students' academic performance."
+        example: "Lack of sleep can have a detrimental effect on students' academic performance.",
+        consolidation_sentence: "Excessive screen time late at night is detrimental to children's eyesight and attention span."
       },
       {
         id: "l34_003", word: "contribute", syllable: "con • trib • ute", phonetic: "/kənˈtrɪb.juːt/", pos: "verb",
         topic: "Social Issues", def_zh: "促成；導致；作出貢獻", def_en: "to help to cause an event or situation; to give something",
         basic_word: "cause / help", prep_trap: "contribute TO + V-ing / 名詞",
         collocations: ["contribute to global warming", "contribute to improving", "contribute to society"],
-        example: "Excessive plastic waste contributes to polluting our oceans and marine life."
+        example: "Excessive plastic waste contributes to polluting our oceans and marine life.",
+        consolidation_sentence: "Every citizen can contribute to building a greener city by recycling household waste."
       },
       {
         id: "l34_004", word: "participate", syllable: "par • tic • i • pate", phonetic: "/pɑːˈtɪs.ɪ.peɪt/", pos: "verb",
         topic: "Campus & Youth", def_zh: "參與；參加", def_en: "to take part in or become involved in an activity",
         basic_word: "join / take part in", prep_trap: "participate IN",
         collocations: ["participate in extracurricular activities", "actively participate in", "encourage students to participate in"],
-        example: "Students are encouraged to actively participate in voluntary work to broaden their horizons."
+        example: "Students are encouraged to actively participate in voluntary work to broaden their horizons.",
+        consolidation_sentence: "Over two hundred students chose to participate in the annual charity walkathon last Sunday."
       },
       {
         id: "l34_005", word: "indulge", syllable: "in • dulge", phonetic: "/ɪnˈdʌldʒ/", pos: "verb",
         topic: "Campus & Youth", def_zh: "沉迷於；縱容", def_en: "to allow yourself to have or do something enjoyable, often too much",
         basic_word: "play too much / addicted to", prep_trap: "indulge IN + V-ing / 名詞",
         collocations: ["indulge in online games", "indulge in social media", "over-indulge in"],
-        example: "Many teenagers indulge in playing mobile games and neglect their schoolwork."
+        example: "Many teenagers indulge in playing mobile games and neglect their schoolwork.",
+        consolidation_sentence: "Students with strong self-discipline will not indulge in scrolling through short videos before exams."
       },
       {
         id: "l34_006", word: "indispensable", syllable: "in • dis • pen • sa • ble", phonetic: "/ˌɪn.dɪˈspen.sə.bəl/", pos: "adjective",
         topic: "Campus & Youth", def_zh: "不可或缺的；絕對必要的", def_en: "so good or important that you could not manage without it",
         basic_word: "very important / necessary", prep_trap: "indispensable TO / FOR",
         collocations: ["play an indispensable role in", "an indispensable part of", "indispensable to success"],
-        example: "Smartphones have become an indispensable part of our daily communication."
+        example: "Smartphones have become an indispensable part of our daily communication.",
+        consolidation_sentence: "Mutual trust and open communication are indispensable to a harmonious family relationship."
       },
       {
         id: "l34_007", word: "alleviate", syllable: "al • le • vi • ate", phonetic: "/əˈliː.vi.eɪt/", pos: "verb",
         topic: "Social Issues", def_zh: "減輕；緩解（壓力、痛楚或問題）", def_en: "to make something bad such as pain or problems less severe",
         basic_word: "reduce / make less", prep_trap: "alleviate (直接接名詞)",
         collocations: ["alleviate academic stress", "alleviate traffic congestion", "alleviate poverty"],
-        example: "Listening to soft music is an effective way to alleviate academic stress before exams."
+        example: "Listening to soft music is an effective way to alleviate academic stress before exams.",
+        consolidation_sentence: "Building more public housing estates will help alleviate the severe housing shortage in Hong Kong."
       },
       {
         id: "l34_008", word: "cultivate", syllable: "cul • ti • vate", phonetic: "/ˈkʌl.tɪ.veɪt/", pos: "verb",
         topic: "Campus & Youth", def_zh: "培養；建立（習慣、興趣或品格）", def_en: "to try to develop and improve something",
         basic_word: "develop / build", prep_trap: "cultivate (直接接名詞)",
         collocations: ["cultivate a reading habit", "cultivate teamwork spirit", "cultivate positive values"],
-        example: "Schools should organize more reading schemes to help students cultivate a lifelong reading habit."
+        example: "Schools should organize more reading schemes to help students cultivate a lifelong reading habit.",
+        consolidation_sentence: "Learning a musical instrument from a young age helps children cultivate patience and perseverance."
       },
       {
         id: "l34_009", word: "broaden", syllable: "broad • en", phonetic: "/ˈbrɔː.dən/", pos: "verb",
         topic: "Campus & Youth", def_zh: "擴闊；拓寬（視野或知識）", def_en: "to increase your knowledge, experience, or range of activities",
         basic_word: "open / widen", prep_trap: "broaden one's horizons",
         collocations: ["broaden our horizons", "broaden students' minds", "broaden one's perspective"],
-        example: "Joining overseas exchange tours can broaden students' horizons and enhance their independence."
+        example: "Joining overseas exchange tours can broaden students' horizons and enhance their independence.",
+        consolidation_sentence: "Reading newspapers from different countries can broaden our perspective on global issues."
       },
       {
         id: "l34_010", word: "relieve", syllable: "re • lieve", phonetic: "/rɪˈliːv/", pos: "verb",
         topic: "Health & Lifestyle", def_zh: "紓緩；減輕（壓力或焦慮）", def_en: "to make an unpleasant feeling, such as pain or worry, less strong",
         basic_word: "reduce stress / relax", prep_trap: "relieve (直接接名詞)",
         collocations: ["relieve pressure", "relieve anxiety and stress", "effective way to relieve"],
-        example: "Talking to trusted friends or teachers can help teenagers relieve their emotional pressure."
+        example: "Talking to trusted friends or teachers can help teenagers relieve their emotional pressure.",
+        consolidation_sentence: "Jogging in the park for thirty minutes is a simple way to relieve daily tension and fatigue."
+      },
+      {
+        id: "l34_011", word: "cope", syllable: "cope", phonetic: "/kəʊp/", pos: "verb",
+        topic: "Health & Lifestyle", def_zh: "應付；處理（壓力或難題）", def_en: "to deal successfully with a difficult situation",
+        basic_word: "handle / deal with", prep_trap: "cope WITH + 名詞",
+        collocations: ["cope with academic stress", "cope with unexpected changes", "cope with pressure"],
+        example: "Schools should organize workshops to teach students how to cope with exam anxiety.",
+        consolidation_sentence: "Resilient young people are able to cope with unexpected changes and setbacks positively."
+      },
+      {
+        id: "l34_012", word: "deprive", syllable: "de • prive", phonetic: "/dɪˈpraɪv/", pos: "verb",
+        topic: "Social Issues", def_zh: "剝奪；使喪失", def_en: "to take something necessary or pleasant away from someone",
+        basic_word: "take away", prep_trap: "deprive sb OF sth",
+        collocations: ["deprive students of sleep", "be deprived of", "deprive children of play time"],
+        example: "Heavy workloads and endless tutorials often deprive students of sufficient rest.",
+        consolidation_sentence: "Overprotective parenting may unintentionally deprive children of the chance to learn from mistakes."
+      },
+      {
+        id: "l34_013", word: "comply", syllable: "com • ply", phonetic: "/kəmˈplaɪ/", pos: "verb",
+        topic: "Paper 3 Traps", def_zh: "遵守；依從（法規或規則）", def_en: "to act according to an order, set of rules, or request",
+        basic_word: "obey / follow", prep_trap: "comply WITH",
+        collocations: ["strictly comply with", "comply with safety regulations", "fail to comply with"],
+        example: "All restaurants must strictly comply with food hygiene regulations.",
+        consolidation_sentence: "Participants in the laboratory session must comply with all safety instructions given by the teacher."
+      },
+      {
+        id: "l34_014", word: "dispose", syllable: "dis • pose", phonetic: "/dɪˈspəʊz/", pos: "verb",
+        topic: "Environment & Tech", def_zh: "丟棄；處理（廢物）", def_en: "to get rid of something, especially by throwing it away",
+        basic_word: "throw away", prep_trap: "dispose OF",
+        collocations: ["dispose of waste properly", "dispose of unwanted items", "safe disposal of"],
+        example: "Citizens should learn how to sort and dispose of recyclable waste properly.",
+        consolidation_sentence: "Hikers are reminded to dispose of their litter properly instead of leaving it on mountain trails."
       }
     ];
 
@@ -1882,223 +2002,249 @@
         group: "disagree", tag: "⚖️ 提出折衷方案",
         en: "While I understand your concern about safety, perhaps we could strike a balance by hiring a qualified instructor.",
         zh: "雖然我理解你對安全的憂慮，但或許我們可以聘請合資格教練，以取得平衡。",
-        tip: "幫兩個爭持不下的隊友「打圓場」提出折衷方案，是衝 Level 4–5 的秘技！"
+        tip: "用 'strike a balance by...' 提出折衷解決方案，展現成熟協商能力。"
       },
       {
         group: "invite", tag: "👋 邀請沉默隊友",
-        en: "We haven't heard from you yet, Candidate B. What is your take on this suggestion?",
-        zh: "B 同學，我們還沒聽過你的意見呢。你對這個建議有什麼看法？",
-        tip: "如果同組有隊友緊張唔敢出聲，主動救佢會令你嘅 Interaction 分數大幅加分！"
+        en: "We haven't heard from you yet. What is your take on this issue?",
+        zh: "我們還沒聽到你的看法呢。你對這個議題有什麼見解？",
+        tip: "主動關心並邀請少發言的隊友，考官必定在 Interaction 項目加分！"
       },
       {
-        group: "invite", tag: "👋 打破靜場 (Dead Air)",
-        en: "Since we all seem to agree on the venue, shall we move on to discuss how to promote the event?",
-        zh: "既然我們似乎都對場地達成共識，不如我們推進去討論如何宣傳這個活動吧？",
-        tip: "當全組講完一點突然靜晒（Dead air），即刻用呢句帶動節奏！"
+        group: "invite", tag: "👋 詢問隊友意見",
+        en: "Do you think this arrangement is feasible given our limited time?",
+        zh: "考慮到我們時間有限，你認為這個安排切實可行嗎？",
+        tip: "在講完自己觀點後拋出問題，自然將發言權交給下一位。"
       },
       {
-        group: "stall", tag: "🧠 爭取 5 秒思考時間 (IR 救命)",
-        en: "That is a very thought-provoking question. Well, if I look at it from a student's perspective, I believe...",
-        zh: "這是一條非常發人深省的問題。嗯，如果我從學生的角度來看，我認為…",
-        tip: "在 1 分鐘個人回應 (IR) 考官問完難題時，千萬不要呆坐 5 秒！用這句自然爭取思考時間。"
+        group: "stall", tag: "🧠 爭取5秒思考時間",
+        en: "That is a very thought-provoking question. Let me consider it from two perspectives.",
+        zh: "這是一個非常發人深省的問題。讓我從兩個角度來思考一下。",
+        tip: "在 1 分鐘 Individual Response 遇到難題時，用這句爭取時間組織 Point 1 & Point 2！"
       },
       {
-        group: "stall", tag: "🧠 分兩層次回答 (IR 萬能起手)",
-        en: "Well, there are two main reasons why I hold this view. First and foremost...",
-        zh: "嗯，我抱持這個觀點主要有兩個原因。首先…",
-        tip: "1 分鐘 IR 只要清晰講出兩個原因加一個個人例子，就已經穩拿 Level 4！"
+        group: "stall", tag: "🧠 換個角度切入",
+        en: "Well, I have never thought about it that way before, but off the top of my head, I would say...",
+        zh: "嗯，我以前從沒這樣想過，但憑我第一時間想到的，我會說…",
+        tip: "'off the top of my head' 是極地道的英文慣用語，自然過渡不冷場。"
       },
       {
-        group: "sum", tag: "🏁 段尾完美總結",
-        en: "As time is running short, let's briefly wrap up our discussion. We have all agreed that...",
-        zh: "由於時間差不多了，讓我們簡短總結一下討論。我們一致同意…",
-        tip: "在計時器剩餘 20 秒時主動幫全組總結，展現極佳的時間感與組織能力！"
+        group: "sum", tag: "🏁 轉移至下一題點",
+        en: "Since we have reached a consensus on the first point, shall we move on to the next aspect?",
+        zh: "既然我們對第一點已達成共識，我們不如推進到下一個討論範疇？",
+        tip: "幫助小組控制時間、避免在同一點兜圈，展現極佳時間管理！"
       },
       {
-        group: "sum", tag: "🏁 個人回應收尾句",
-        en: "So, all in all, I firmly believe that the benefits of this measure far outweigh its drawbacks. Thank you.",
-        zh: "總括而言，我深信這項措施的利遠大於弊。多謝。",
-        tip: "在 1 分鐘 IR 聽到計時器響起前，用這句瀟灑收尾，給考官完整結構感！"
+        group: "sum", tag: "🏁 最後30秒總結陳詞",
+        en: "To wrap up our discussion today, we all agree that combining education with strict rules is the best approach.",
+        zh: "總結我們今天的討論，我們一致認同將教育與嚴格規例結合是最佳做法。",
+        tip: "在計時器剩餘 20 秒時主動用 'To wrap up our discussion' 收尾，完美結束！"
       }
     ];
 
-    // Paper 4 模擬真題題庫
+    // Paper 4 口試模擬真題庫
     const DSE_SPEAKING_PROMPTS = [
       {
-        title: "主題一：青少年精神健康與校園減壓週 (Mental Health Week)",
-        gi_context: "Your school is planning to organize a 'Mental Health Week' to help students cope with academic stress. Your group is discussing how to make the event meaningful.",
+        title: "主題一：青少年精神健康與減壓 (Mental Health & Stress)",
+        gi_context: "Your school is planning a 'Mental Wellness Week' to help students cope with academic stress.",
         bullets: [
-          "what stress-relieving activities should be included",
+          "what activities to include during the week (e.g. workshops, sports, music café)",
           "how to encourage shy or stressed students to participate",
-          "whether parents and teachers should also be invited"
+          "whether homework should be reduced during that week"
         ],
         ir_questions: [
-          "1. (Easy) What do you usually do to relax after a long day at school?",
-          "2. (Medium) Do you think Hong Kong students have too much homework nowadays?",
-          "3. (Level 4+) How can schools remove the stigma attached to seeking help from social workers?"
+          "1. (Easy) What do you usually do to relieve stress after school?",
+          "2. (Medium) Do you think secondary students in Hong Kong have enough sleep?",
+          "3. (Hard) Should mental health education be made a compulsory subject in secondary schools?"
         ]
       },
       {
-        title: "主題二：智能手機與人工智能學習 (AI & Smartphones in School)",
-        gi_context: "The Student Union is discussing whether secondary students should be allowed to use tablets and AI tools freely during lessons.",
+        title: "主題二：人工智能與電子學習 (AI & E-Learning in Schools)",
+        gi_context: "The Student Union is discussing guidelines on the use of Artificial Intelligence (AI) tools for schoolwork.",
         bullets: [
-          "the benefits of using AI and tablets for learning",
-          "potential problems such as distraction and plagiarism",
-          "school rules needed to ensure responsible use of technology"
+          "how AI tools can benefit students' language learning and research",
+          "potential drawbacks such as plagiarism and over-reliance",
+          "how teachers can guide students to use AI responsibly"
         ],
         ir_questions: [
-          "1. (Easy) How many hours do you spend on your smartphone every day?",
-          "2. (Medium) Do you prefer reading printed textbooks or electronic books? Why?",
-          "3. (Level 4+) Will artificial intelligence replace human teachers in the future?"
+          "1. (Easy) How often do you use computers or tablets for your studies?",
+          "2. (Medium) Do you prefer reading printed textbooks or e-books? Why?",
+          "3. (Hard) Will artificial intelligence eventually replace human teachers in the future?"
         ]
       },
       {
-        title: "主題三：校園減塑與環保生活 (Plastic-Free Campus Campaign)",
-        gi_context: "The Environmental Club is organizing a 'Plastic-Free Campus Campaign' next month. Your group is discussing practical ways to reduce waste at school.",
+        title: "主題三：環保走塑與綠色校園 (Green Campus & Plastic Ban)",
+        gi_context: "The Environmental Club wants to reduce single-use plastic waste generated on campus.",
         bullets: [
-          "why students still use so many disposable plastic items",
-          "how the school tuck shop and canteen can help reduce plastic waste",
-          "incentives to reward classes that recycle the most"
+          "why students still buy bottled drinks and disposable cutlery",
+          "practical incentives to encourage bringing reusable bottles and containers",
+          "whether the school tuck shop should ban all plastic packaging"
         ],
         ir_questions: [
-          "1. (Easy) Do you bring your own water bottle to school every day?",
-          "2. (Medium) Why do some people find it hard topractise recycling in Hong Kong?",
-          "3. (Level 4+) Which is more effective in protecting the environment: government legislation or public education?"
-        ]
-      },
-      {
-        title: "主題四：中學生兼職與暑期實習 (Part-time Jobs & Internships)",
-        gi_context: "Your school careers committee is writing an article on whether senior secondary students should take up part-time jobs or summer internships.",
-        bullets: [
-          "what skills teenagers can acquire from workplace experience",
-          "how part-time work might affect students' studies and rest",
-          "how schools can help students find safe and meaningful internships"
-        ],
-        ir_questions: [
-          "1. (Easy) Have you ever done any volunteer work or part-time job?",
-          "2. (Medium) What is your dream job in the future, and why?",
-          "3. (Level 4+) Should work experience be made a compulsory requirement for secondary school graduation?"
+          "1. (Easy) What do you do at home to help protect the environment?",
+          "2. (Medium) Is it convenient for Hong Kong citizens to recycle waste in their neighbourhood?",
+          "3. (Hard) Which is more effective in reducing waste: government legislation or public education?"
         ]
       }
     ];
 
-    // 獨立驗證介詞與語法排雷題庫（每題固定單一空格 ___，教學提示與題目完全分離）
+    // 獨立驗證介詞與語法排雷題庫（每題包含初次句子 question、重測換語境句子 retestQuestion 及所屬語法技能 skill）
     const DSE_BLITZ_QUESTIONS = [
       {
         id: "prep_001", word: "beneficial", pos: "adj.", zh: "有益的；有利的",
+        skill: "adj_preposition", skillLabel: "形容詞 + 介詞搭配 (beneficial to)",
         question: "Doing regular physical exercise is extremely beneficial ___ both our physical and mental health.",
+        retestQuestion: "A quiet and supportive home environment is highly beneficial ___ students' exam revision.",
         answers: ["to"], options: ["to", "for", "with", "on"],
         explanation: "beneficial 後面必須配介詞 to（beneficial to sb/sth），切忌受 good for 影響寫成 beneficial for！"
       },
       {
         id: "prep_002", word: "detrimental", pos: "adj.", zh: "有害的；不利的",
+        skill: "adj_preposition", skillLabel: "形容詞 + 介詞搭配 (detrimental to)",
         question: "Chronic sleep deprivation is highly detrimental ___ teenagers' academic performance.",
+        retestQuestion: "Consuming excessive sugary drinks is detrimental ___ children's dental and physical health.",
         answers: ["to"], options: ["to", "for", "of", "on"],
         explanation: "detrimental（有害的）與 beneficial 一樣，後面必須配介詞 to！"
       },
       {
         id: "prep_003", word: "contribute", pos: "v.", zh: "促成；有助於",
+        skill: "prep_gerund", skillLabel: "介詞 to + 動名詞搭配 (contribute to + N/V-ing)",
         question: "Every citizen can contribute ___ protecting our environment by reducing plastic waste.",
+        retestQuestion: "Regular team-building activities contribute ___ fostering a strong sense of belonging among staff.",
         answers: ["to"], options: ["to", "for", "in", "with"],
-        explanation: "contribute to 當中的 to 是介詞，後面必須接名詞或動名詞 V-ing（protecting）！"
+        explanation: "contribute to 當中的 to 是介詞，後面必須接名詞或動名詞 V-ing（protecting / fostering）！"
       },
       {
         id: "prep_004", word: "participate", pos: "v.", zh: "參與；參加",
+        skill: "verb_preposition", skillLabel: "不及物動詞 + 介詞搭配 (participate in)",
         question: "Students are encouraged to actively participate ___ extracurricular activities.",
+        retestQuestion: "All Secondary Four students were invited to participate ___ the leadership training workshop.",
         answers: ["in"], options: ["in", "to", "at", "Ø (不加介詞)"],
         explanation: "participate 是不及物動詞，必須加介詞 in（participate in = take part in）！"
       },
       {
         id: "prep_005", word: "indulge", pos: "v.", zh: "沉迷於；縱情於",
+        skill: "verb_preposition", skillLabel: "動詞 + 介詞搭配 (indulge in)",
         question: "Teenagers who lack self-discipline may easily indulge ___ playing mobile games.",
+        retestQuestion: "During long holidays, students should not indulge ___ staying up late every night.",
         answers: ["in"], options: ["in", "to", "on", "with"],
         explanation: "表示「沉迷於某活動」時，必須使用 indulge in + 名詞/V-ing。"
       },
       {
         id: "prep_006", word: "alleviate", pos: "v.", zh: "減輕；緩解（壓力或問題）",
+        skill: "transitive_no_prep", skillLabel: "及物動詞直接接賓語 (alleviate + 名詞)",
         question: "Listening to soft music is an effective way to alleviate ___ academic stress before exams.",
+        retestQuestion: "Opening more public clinics can help alleviate ___ the heavy workload of hospital doctors.",
         answers: ["Ø (不加介詞)"], options: ["Ø (不加介詞)", "to", "with", "from"],
-        explanation: "alleviate 是及物動詞，後面直接接名詞（alleviate stress），切勿畫蛇添足加介詞！"
+        explanation: "alleviate 是及物動詞，後面直接接名詞（alleviate stress / workload），切勿畫蛇添足加介詞！"
       },
       {
         id: "prep_007", word: "emphasize", pos: "v.", zh: "強調；重視",
+        skill: "transitive_no_prep", skillLabel: "及物動詞不加介詞 (emphasize + 名詞)",
         question: "Health experts repeatedly emphasize ___ the importance of getting eight hours of sleep.",
+        retestQuestion: "The school principal always emphasizes ___ the value of honesty and academic integrity.",
         answers: ["Ø (不加介詞)"], options: ["Ø (不加介詞)", "on", "about", "to"],
         explanation: "動詞 emphasize 是及物動詞，後面絕對不可加 on！只有名詞短語 put emphasis on 才加 on。"
       },
       {
         id: "prep_008", word: "cope", pos: "v.", zh: "應付；處理（壓力或難題）",
+        skill: "verb_preposition", skillLabel: "不及物動詞 + 介詞搭配 (cope with)",
         question: "Schools should organize workshops to teach students how to cope ___ exam anxiety.",
+        retestQuestion: "Resilient young people are able to cope ___ unexpected changes and setbacks in life.",
         answers: ["with"], options: ["with", "Ø (不加介詞)", "to", "for"],
-        explanation: "cope 是不及物動詞，必須寫 cope WITH stress；若不加介詞則應改用 tackle。"
+        explanation: "cope 是不及物動詞，必須寫 cope WITH；若不加介詞則應改用及物動詞 tackle。"
       },
       {
         id: "prep_009", word: "tackle", pos: "v.", zh: "處理；解決（難題）",
+        skill: "transitive_no_prep", skillLabel: "及物動詞不加介詞 (tackle + 名詞)",
         question: "The government must take decisive action to tackle ___ the housing shortage problem.",
+        retestQuestion: "Working together as a team enables students to tackle ___ complex science projects effectively.",
         answers: ["Ø (不加介詞)"], options: ["Ø (不加介詞)", "with", "to", "on"],
         explanation: "tackle 是及物動詞，直接接 the problem，千萬不可受 deal with 影響寫成 tackle with！"
       },
       {
         id: "prep_010", word: "deprive", pos: "v.", zh: "剝奪；使喪失",
+        skill: "verb_preposition", skillLabel: "雙賓結構動詞搭配 (deprive sb of sth)",
         question: "Heavy workloads and endless tutorials often deprive students ___ sufficient rest.",
+        retestQuestion: "Living in cramped subdivided flats deprives underprivileged children ___ a quiet study space.",
         answers: ["of"], options: ["of", "from", "to", "with"],
         explanation: "固定搭配：deprive sb OF sth（剝奪某人的某事物），被動語態為 be deprived of。"
       },
       {
         id: "prep_011", word: "comply", pos: "v.", zh: "遵守；依從（法規）",
+        skill: "verb_preposition", skillLabel: "不及物動詞 + 介詞搭配 (comply with)",
         question: "All restaurants must strictly comply ___ food hygiene regulations.",
+        retestQuestion: "Visitors entering the laboratory must comply ___ all safety instructions at all times.",
         answers: ["with"], options: ["with", "to", "by", "Ø (不加介詞)"],
         explanation: "comply 後面必須配 with；而 abide 則配 by（abide by），adhere 則配 to（adhere to）。"
       },
       {
         id: "prep_012", word: "dispose", pos: "v.", zh: "丟棄；處理（廢物）",
+        skill: "verb_preposition", skillLabel: "不及物動詞 + 介詞搭配 (dispose of)",
         question: "Citizens should learn how to sort and dispose ___ recyclable waste properly.",
+        retestQuestion: "Hikers must take their rubbish home and dispose ___ plastic bottles in recycling bins.",
         answers: ["of"], options: ["of", "Ø (不加介詞)", "off", "with"],
         explanation: "dispose 是不及物動詞，必須加介詞 of（dispose of waste）！"
       },
       {
         id: "prep_013", word: "addicted", pos: "adj.", zh: "對…上癮的",
+        skill: "prep_gerund", skillLabel: "介詞 to + 動名詞搭配 (be addicted to V-ing)",
         question: "Many secondary students have become addicted to ___ short videos late at night.",
+        retestQuestion: "Teenagers who are addicted to ___ online games often neglect their schoolwork.",
         answers: ["scrolling"], options: ["scrolling", "scroll", "scrolled", "be scroll"],
-        explanation: "be addicted to 當中的 to 是介詞，後接動詞必須用動名詞 V-ing（scrolling）！"
+         retestAnswers: ["playing"], retestOptions: ["playing", "play", "played", "be play"],
+        explanation: "be addicted to 當中的 to 是介詞，後接動詞必須用動名詞 V-ing（scrolling / playing）！"
       },
       {
         id: "prep_014", word: "devote", pos: "v.", zh: "奉獻（時間或精力）",
+        skill: "prep_gerund", skillLabel: "介詞 to + 動名詞搭配 (devote time to V-ing)",
         question: "Parents should devote more quality time to ___ with their children every evening.",
+        retestQuestion: "Senior students need to devote more effort to ___ for the upcoming mock examinations.",
         answers: ["communicating"], options: ["communicating", "communicate", "communicated", "for communicating"],
-        explanation: "devote time to 當中的 to 是介詞，後面必須接名詞或 V-ing（communicating）！"
+        retestAnswers: ["revising"], retestOptions: ["revising", "revise", "revised", "for revising"],
+        explanation: "devote time/effort to 當中的 to 是介詞，後面必須接名詞或 V-ing（communicating / revising）！"
       },
       {
         id: "prep_015", word: "discourage", pos: "v.", zh: "勸阻；打消…的念頭",
+        skill: "verb_preposition", skillLabel: "動詞 + 介詞搭配 (discourage sb from V-ing)",
         question: "Raising tobacco tax is an effective way to discourage teenagers ___ smoking.",
+        retestQuestion: "Heavy fines are imposed to discourage motorists ___ parking illegally on narrow streets.",
         answers: ["from"], options: ["from", "to", "of", "against"],
         explanation: "discourage / prevent / prohibit / deter sb FROM V-ing 全部搭配介詞 from！"
       },
       {
         id: "prep_016", word: "conducive", pos: "adj.", zh: "有助於…的；有利於促成…的",
+        skill: "adj_preposition", skillLabel: "形容詞 + 介詞搭配 (be conducive to)",
         question: "Soft background music creates a relaxing atmosphere conducive ___ reading.",
+        retestQuestion: "Adequate rest and regular exercise are conducive ___ maintaining good mental health.",
         answers: ["to"], options: ["to", "for", "of", "in"],
         explanation: "be conducive TO + 名詞/V-ing（有助於…），介詞必須用 to！"
       },
       {
         id: "prep_017", word: "vulnerable", pos: "adj.", zh: "易受傷害的；脆弱的",
+        skill: "adj_preposition", skillLabel: "形容詞 + 介詞搭配 (be vulnerable to)",
         question: "Elderly people living alone are particularly vulnerable ___ telephone deception.",
+        retestQuestion: "Without parental guidance, young children are easily vulnerable ___ cyberbullying.",
         answers: ["to"], options: ["to", "with", "for", "of"],
         explanation: "be vulnerable TO（易受…傷害），介詞必須用 to。"
       },
       {
         id: "prep_018", word: "appreciate", pos: "v.", zh: "感激；感謝",
+        skill: "pronoun_clause", skillLabel: "公函禮貌請求句構 (appreciate it if...)",
         question: "We would greatly appreciate ___ if you could reply to this invitation by Monday.",
+        retestQuestion: "I would appreciate ___ if you could grant us permission to use the school hall.",
         answers: ["it"], options: ["it", "you", "Ø (不加字)", "that"],
-        explanation: "appreciate 後接 if 子句時，中間必須加上代名詞 it（I would appreciate it if you could...）！"
+        explanation: "appreciate 後接 if 子句時，中間必須加上虛受詞代名詞 it（I would appreciate it if you could...）！"
       }
     ];
 
     // ========================================================
-    // 2. STATE & INIT
+    // 2. STATE, DAILY TRACKER & QUESTION MISTAKE BOOK (v3.2)
     // ========================================================
     let words = [];
     let reviewQueue = [];
+    let waitingRetestList = [];
+    let waitingCountdownTimer = null;
     let currentCardIndex = 0;
     let isFlipped = false;
     let currentAccent = localStorage.getItem('dse_l34_accent') || 'en-GB';
@@ -2107,10 +2253,16 @@
     let currentTheme = localStorage.getItem('dse_l34_theme') || 'dark';
     let currentFontSize = localStorage.getItem('dse_l34_fontsize') || 'md';
     let reviewFilter = 'daily';
-    let dailyNewLimit = 12;
+    const INITIAL_DAILY_NEW_QUOTA = 12;
 
     let dictationStreak = 0;
     let currentDictationWord = null;
+
+    // 客觀鞏固測試 / 語法錯題重測 當前題目狀態
+    let currentObjectiveTask = null;
+    let objUsedHint = false;
+    let objAttemptCount = 0;
+    let objAnswered = false;
 
     // 搭車自動連播狀態
     let isAutoPlaying = false;
@@ -2141,8 +2293,62 @@
 
     const LS_KEY = 'dse_l34_progress_v1';
     const LS_DICT_CACHE_KEY = 'dse_l34_dict_cache_v2';
+    const LS_DAILY_STATE_KEY = 'dse_l34_daily_state_v32';
+    const LS_QUESTION_MISTAKES_KEY = 'dse_l34_question_mistakes_v32';
+
     let progressMap = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
     let dictCache = JSON.parse(localStorage.getItem(LS_DICT_CACHE_KEY) || '{}');
+    let questionMistakeBook = JSON.parse(localStorage.getItem(LS_QUESTION_MISTAKES_KEY) || '{}');
+
+    function getTodayDateStr() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
+
+    function loadOrInitDailyState() {
+      const today = getTodayDateStr();
+      try {
+        const raw = JSON.parse(localStorage.getItem(LS_DAILY_STATE_KEY) || 'null');
+        if (raw && raw.date === today && Array.isArray(raw.assignedNewIds)) {
+          return raw;
+        }
+      } catch (_) {}
+      const fresh = {
+        date: today,
+        assignedNewIds: [],
+        completedQuestionIds: [],
+        firstAttemptResults: []
+      };
+      try { localStorage.setItem(LS_DAILY_STATE_KEY, JSON.stringify(fresh)); } catch (_) {}
+      return fresh;
+    }
+
+    let dailyState = loadOrInitDailyState();
+
+    function saveDailyState() {
+      try { localStorage.setItem(LS_DAILY_STATE_KEY, JSON.stringify(dailyState)); } catch (_) {}
+    }
+
+    function saveQuestionMistakeBook() {
+      try { localStorage.setItem(LS_QUESTION_MISTAKES_KEY, JSON.stringify(questionMistakeBook)); } catch (_) {}
+    }
+
+    function recordFirstAttemptResult(id, type, isCorrect) {
+      if (!dailyState || !Array.isArray(dailyState.firstAttemptResults)) return;
+      const alreadyRecorded = dailyState.firstAttemptResults.some(r => r.id === id && r.type === type);
+      if (!alreadyRecorded) {
+        dailyState.firstAttemptResults.push({
+          id,
+          type,
+          correct: Boolean(isCorrect),
+          timestamp: Date.now()
+        });
+      }
+      if (isCorrect && !dailyState.completedQuestionIds.includes(id)) {
+        dailyState.completedQuestionIds.push(id);
+      }
+      saveDailyState();
+    }
 
     // 學生個人資料（用於打卡證與工作紙）
     let studentProfile = JSON.parse(localStorage.getItem('dse_l34_student_profile') || '{"classNo":"","name":"","goal":"全力以赴，英文坐3望4！"}');
@@ -2245,7 +2451,17 @@
     }
 
     function createDefaultStats() {
-      return { status: 'new', reps: 0, interval: 0, ease: 2.5, nextReview: 0, lastReviewed: null, note: '' };
+      return {
+        status: 'new',
+        reps: 0,
+        interval: 0,
+        ease: 2.5,
+        nextReview: 0,
+        lastReviewed: null,
+        rememberedDate: null,
+        consolidatedByTest: false,
+        note: ''
+      };
     }
 
     function normalizeWordItem(raw, idx = 0) {
@@ -2265,6 +2481,7 @@
         prep_trap: isRandom ? '' : (raw.prep_trap || ''),
         collocations: Array.isArray(raw.collocations) ? raw.collocations : [],
         example: raw.example || '',
+        consolidation_sentence: raw.consolidation_sentence || '',
         isCloud: isRandom,
         isRandom3000: isRandom,
         stats: progressMap[key] || createDefaultStats()
@@ -2380,48 +2597,146 @@
     }
 
     // ========================================================
-    // 4. FLASHCARD & SRS REVIEW LOGIC (按到期時間派卡 + 兩階段鞏固認證)
+    // 4. FLASHCARD, DAILY ASSIGNMENT & OBJECTIVE CONSOLIDATION (v3.2)
     // ========================================================
-    function isWordDue(w) {
-      if (!w || !w.stats) return true;
-      if (w.stats.status === 'new') return false;
-      return (w.stats.nextReview || 0) <= Date.now();
+    function ensureTodayAssignedNewWords() {
+      const today = getTodayDateStr();
+      if (dailyState.date !== today) {
+        dailyState = loadOrInitDailyState();
+      }
+      // 首次建立今日任務名單時，固定抽選最多 12 個未學新詞，當日不會因切換分頁而重新抽換
+      if (dailyState.assignedNewIds.length === 0 && words.length > 0) {
+        const unlearnedCore = words.filter(w => (!w.stats || w.stats.status === 'new') && !w.isRandom3000);
+        const unlearnedExtra = words.filter(w => (!w.stats || w.stats.status === 'new') && w.isRandom3000);
+        const combined = [...unlearnedCore, ...unlearnedExtra].slice(0, INITIAL_DAILY_NEW_QUOTA);
+        dailyState.assignedNewIds = combined.map(w => w.id);
+        saveDailyState();
+      }
     }
 
-    function isWordConsolidated(w) {
-      return w?.stats?.status === 'mastered' && (w?.stats?.reps || 0) >= 2;
+    function isWordEligibleForConsolidationTest(w) {
+      if (!w || !w.stats) return false;
+      const today = getTodayDateStr();
+      // 必須處於 learning 狀態、曾經自評記得 (reps >= 1)、且上次自評記得的日期嚴格早於今日 (隔日)，同時已到達複習時間
+      return (
+        w.stats.status === 'learning' &&
+        (w.stats.reps || 0) >= 1 &&
+        Boolean(w.stats.rememberedDate) &&
+        w.stats.rememberedDate < today &&
+        (w.stats.nextReview || 0) <= Date.now()
+      );
+    }
+
+    function computeDailyQueues() {
+      ensureTodayAssignedNewWords();
+      const now = Date.now();
+      const activeTasks = [];
+      const waitingTasks = [];
+
+      // 1. 語法與介詞題目錯題本 (questionMistakeBook) —— 換新句子重測
+      Object.values(questionMistakeBook).forEach(mRecord => {
+        if (!mRecord || mRecord.resolved) return;
+        const qObj = DSE_BLITZ_QUESTIONS.find(q => q.id === mRecord.questionId);
+        if (!qObj) return;
+        const taskObj = {
+          taskType: 'skill_mistake',
+          id: mRecord.questionId,
+          mistakeRecord: mRecord,
+          blitzQuestion: qObj,
+          nextReview: mRecord.nextReview || 0
+        };
+        if ((mRecord.nextReview || 0) <= now) {
+          activeTasks.push(taskObj);
+        } else {
+          waitingTasks.push(taskObj);
+        }
+      });
+
+      // 2. 已學習單字（分為：隔日無提示鞏固測試 vs 到期閃卡溫習 vs 短時間隔等待重測）
+      const learnedWords = words.filter(w => w.stats && w.stats.status !== 'new');
+      const priorityOrder = { forgot: 1, learning: 2, mastered: 3 };
+      learnedWords.sort((a, b) => (priorityOrder[a.stats.status] || 9) - (priorityOrder[b.stats.status] || 9));
+
+      learnedWords.forEach(w => {
+        const nextRev = w.stats.nextReview || 0;
+        if (nextRev <= now) {
+          if (isWordEligibleForConsolidationTest(w)) {
+            activeTasks.push({ taskType: 'consolidation', id: w.id, wordItem: w });
+          } else {
+            activeTasks.push({ taskType: 'flashcard', id: w.id, wordItem: w });
+          }
+        } else if (w.stats.status === 'forgot') {
+          // 剛標記為「唔熟 (5分鐘後重溫)」但尚未到期的單字，放入等待重測清單
+          waitingTasks.push({ taskType: 'flashcard', id: w.id, wordItem: w, nextReview: nextRev });
+        }
+      });
+
+      // 3. 今日固定派發的新單字 (assignedNewIds) 當中尚未完成初學的單字
+      dailyState.assignedNewIds.forEach(wId => {
+        const w = words.find(item => item.id === wId);
+        if (w && (!w.stats || w.stats.status === 'new')) {
+          activeTasks.push({ taskType: 'flashcard', id: w.id, wordItem: w });
+        }
+      });
+
+      waitingTasks.sort((a, b) => (a.nextReview || 0) - (b.nextReview || 0));
+      return { activeTasks, waitingTasks };
     }
 
     function getDailyTaskPool() {
-      const now = Date.now();
-      // 1. 所有已學習且到期的單字 (status !== 'new' && nextReview <= now)
-      const dueLearned = words.filter(w => w.stats && w.stats.status !== 'new' && (w.stats.nextReview || 0) <= now);
-      // 優先排列：唔熟 (forgot) ➔ 鞏固中 (learning) ➔ 已鞏固到期複習 (mastered)
-      const priorityOrder = { forgot: 1, learning: 2, mastered: 3 };
-      dueLearned.sort((a, b) => (priorityOrder[a.stats.status] || 9) - (priorityOrder[b.stats.status] || 9));
-
-      // 2. 定量加入未學過的新核心詞 (status === 'new')
-      const newCore = words.filter(w => (!w.stats || w.stats.status === 'new') && !w.isRandom3000).slice(0, dailyNewLimit);
-      const newExtra = newCore.length < dailyNewLimit
-        ? words.filter(w => (!w.stats || w.stats.status === 'new') && w.isRandom3000).slice(0, dailyNewLimit - newCore.length)
-        : [];
-
-      return [...dueLearned, ...newCore, ...newExtra];
+      const { activeTasks } = computeDailyQueues();
+      return activeTasks;
     }
 
     function addMoreDailyNewWords(count = 10) {
-      dailyNewLimit += count;
+      ensureTodayAssignedNewWords();
+      const assignedSet = new Set(dailyState.assignedNewIds);
+      const candidates = [
+        ...words.filter(w => (!w.stats || w.stats.status === 'new') && !w.isRandom3000 && !assignedSet.has(w.id)),
+        ...words.filter(w => (!w.stats || w.stats.status === 'new') && w.isRandom3000 && !assignedSet.has(w.id))
+      ].slice(0, count);
+
+      if (candidates.length === 0) {
+        showToast('💡 所有未學新詞已納入清單！');
+        return;
+      }
+
+      candidates.forEach(w => dailyState.assignedNewIds.push(w.id));
+      saveDailyState();
       buildReviewQueue();
       renderCurrentCard();
-      showToast(`➕ 已為今日任務加推 ${count} 個新詞！`);
+      showToast(`➕ 已明確追加 ${candidates.length} 個新單字至今日任務（今日累計派發 ${dailyState.assignedNewIds.length} 個新字）！`);
+    }
+
+    function forceUnlockWaitingRetests() {
+      const now = Date.now();
+      words.forEach(w => {
+        if (w.stats && w.stats.status === 'forgot' && w.stats.nextReview > now) {
+          w.stats.nextReview = now - 1000;
+          progressMap[w.word.toLowerCase()] = w.stats;
+        }
+      });
+      Object.values(questionMistakeBook).forEach(m => {
+        if (m && !m.resolved && m.nextReview > now) {
+          m.nextReview = now - 1000;
+        }
+      });
+      saveProgressMap();
+      saveQuestionMistakeBook();
+      buildReviewQueue();
+      renderCurrentCard();
+      showToast('⚡ 已提前解鎖等待重測題目！');
     }
 
     function updateDashboardStats() {
-      const dailyPool = getDailyTaskPool();
-      const dueCount = dailyPool.length;
-      const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
-      const learningCount = words.filter(w => w.stats?.status === 'learning').length;
-      const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
+      const { activeTasks, waitingTasks } = computeDailyQueues();
+      const dueCount = activeTasks.length + waitingTasks.length;
+      // 只有真正通過隔日無提示測試 (consolidatedByTest === true) 的單字才計入「已鞏固」
+      const masteredCount = words.filter(w => w.stats?.status === 'mastered' && w.stats?.consolidatedByTest).length;
+      const learningCount = words.filter(w => w.stats?.status === 'learning' || (w.stats?.status === 'mastered' && !w.stats?.consolidatedByTest)).length;
+      const forgotWordCount = words.filter(w => w.stats?.status === 'forgot').length;
+      const unresolvedMistakeCount = Object.values(questionMistakeBook).filter(m => m && !m.resolved).length;
+      const forgotCount = forgotWordCount + unresolvedMistakeCount;
 
       document.getElementById('stat-due').textContent = dueCount;
       document.getElementById('due-badge').textContent = dueCount;
@@ -2451,22 +2766,39 @@
     }
 
     function buildReviewQueue() {
+      if (waitingCountdownTimer) {
+        clearInterval(waitingCountdownTimer);
+        waitingCountdownTimer = null;
+      }
       if (reviewFilter === 'daily') {
-        reviewQueue = getDailyTaskPool();
-      } else if (reviewFilter === 'core') {
-        reviewQueue = words.filter(w => !w.isRandom3000);
-      } else if (reviewFilter === 'hard') {
-        reviewQueue = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
-        if (reviewQueue.length === 0) {
-          showToast('💡 目前沒有標記為「需重溫／鞏固中」的單字，已顯示核心詞庫');
-          reviewQueue = words.filter(w => !w.isRandom3000);
-        }
-      } else if (reviewFilter === 'prep') {
-        reviewQueue = words.filter(w => !w.isRandom3000 && w.prep_trap);
+        const { activeTasks, waitingTasks } = computeDailyQueues();
+        reviewQueue = activeTasks;
+        waitingRetestList = waitingTasks;
       } else {
-        reviewQueue = [...words].sort(() => Math.random() - 0.5);
+        waitingRetestList = [];
+        let pool = [];
+        if (reviewFilter === 'core') {
+          pool = words.filter(w => !w.isRandom3000);
+        } else if (reviewFilter === 'hard') {
+          pool = words.filter(w => w.stats?.status === 'forgot' || w.stats?.status === 'learning');
+          if (pool.length === 0) {
+            showToast('💡 目前沒有標記為「需重溫／鞏固中」的單字，已顯示核心詞庫');
+            pool = words.filter(w => !w.isRandom3000);
+          }
+        } else if (reviewFilter === 'prep') {
+          pool = words.filter(w => !w.isRandom3000 && w.prep_trap);
+        } else {
+          pool = [...words].sort(() => Math.random() - 0.5);
+        }
+        reviewQueue = pool.map(w => ({ taskType: 'flashcard', id: w.id, wordItem: w }));
       }
       currentCardIndex = 0;
+    }
+
+    function getActiveFlashcardItem() {
+      const entry = reviewQueue[currentCardIndex];
+      if (!entry) return null;
+      return entry.wordItem || entry;
     }
 
     function populateCardDOM(item) {
@@ -2500,14 +2832,16 @@
       const statusPill = document.getElementById('card-status-pill');
       const st = item.stats?.status || 'new';
       const reps = item.stats?.reps || 0;
-      if (st === 'mastered') {
-        statusPill.textContent = '✅ 已鞏固';
+      if (st === 'mastered' && item.stats?.consolidatedByTest) {
+        statusPill.textContent = '✅ 已鞏固 (通過隔日測試)';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
       } else if (st === 'forgot') {
         statusPill.textContent = '❌ 需重溫';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-rose-500/15 text-rose-300 border border-rose-500/30';
       } else if (st === 'learning') {
-        statusPill.textContent = reps >= 1 ? '👍 今次記得 (待隔日確認)' : '🤔 印象模糊 (鞏固中)';
+        statusPill.textContent = reps >= 1
+          ? `👍 自評記得 (${item.stats.rememberedDate || '待隔日無提示測試'})`
+          : '🤔 印象模糊 (鞏固中)';
         statusPill.className = 'px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30';
       } else {
         statusPill.textContent = '🆕 新單字';
@@ -2556,42 +2890,344 @@
         exampleText.textContent = '';
       }
 
-      const curInterval = item.stats?.interval || 0;
       const easyTitleEl = document.getElementById('easy-btn-title');
       const easyIntervalEl = document.getElementById('next-easy-interval');
-      if (reps >= 1) {
-        const nextDays = curInterval <= 1 ? 3 : Math.round(curInterval * 2.2);
-        if (easyTitleEl) easyTitleEl.textContent = '✅ 確認已鞏固 (3)';
-        if (easyIntervalEl) easyIntervalEl.textContent = `${nextDays}天後再複習`;
+      if (reviewFilter !== 'daily') {
+        if (easyTitleEl) easyTitleEl.textContent = '👍 我覺得記得 (3)';
+        if (easyIntervalEl) easyIntervalEl.textContent = '自由溫習 (不直接列為已鞏固)';
       } else {
-        if (easyTitleEl) easyTitleEl.textContent = '👍 今次記得 (3)';
-        if (easyIntervalEl) easyIntervalEl.textContent = '明天確認 ➔ 已鞏固';
+        if (easyTitleEl) easyTitleEl.textContent = '👍 我覺得記得 (3)';
+        if (easyIntervalEl) easyIntervalEl.textContent = '排程隔日無提示填空測試';
       }
 
       document.getElementById('user-note-input').value = item.stats?.note || '';
     }
 
-    function renderCurrentCard() {
-      const completeBox = document.getElementById('daily-complete-box');
-      const cardWrapper = document.getElementById('flashcard-container')?.parentElement;
+    function startWaitingCountdown() {
+      if (waitingCountdownTimer) clearInterval(waitingCountdownTimer);
+      const updateTimerUI = () => {
+        if (waitingRetestList.length === 0) {
+          clearInterval(waitingCountdownTimer);
+          buildReviewQueue();
+          renderCurrentCard();
+          return;
+        }
+        const now = Date.now();
+        const earliest = waitingRetestList[0]?.nextReview || now;
+        const diffSec = Math.max(0, Math.ceil((earliest - now) / 1000));
+        const mins = String(Math.floor(diffSec / 60)).padStart(2, '0');
+        const secs = String(diffSec % 60).padStart(2, '0');
+        const cdEl = document.getElementById('waiting-countdown-text');
+        if (cdEl) cdEl.textContent = `${mins}:${secs}`;
 
-      if (reviewFilter === 'daily' && reviewQueue.length === 0) {
-        if (completeBox) completeBox.classList.remove('hidden');
-        if (cardWrapper) cardWrapper.classList.add('hidden');
-        document.getElementById('card-counter').textContent = '0 / 0';
+        if (diffSec <= 0) {
+          clearInterval(waitingCountdownTimer);
+          buildReviewQueue();
+          renderCurrentCard();
+          showToast('🔔 稍後重測題目已到期，現在開始重測！');
+        }
+      };
+      updateTimerUI();
+      waitingCountdownTimer = setInterval(updateTimerUI, 1000);
+    }
+
+    function buildConsolidationClozeSentence(wordItem) {
+      const baseSentence = (wordItem.consolidation_sentence && wordItem.consolidation_sentence.trim() !== '')
+        ? wordItem.consolidation_sentence
+        : (wordItem.example && wordItem.example.trim() !== ''
+            ? wordItem.example
+            : `In HKDSE writing, using the word "${wordItem.word}" accurately helps express ideas clearly.`);
+      const escaped = wordItem.word.slice(0, Math.max(3, wordItem.word.length - 2)).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`\\b${escaped}[a-z]*\\b`, 'gi');
+      const masked = baseSentence.replace(regex, '<span class="px-3 py-0.5 mx-1 rounded-lg bg-sky-500/20 border-b-2 border-sky-400 text-sky-300 font-mono">________</span>');
+      return { rawSentence: baseSentence, maskedHtml: masked };
+    }
+
+    function renderObjectiveTestDOM(taskEntry) {
+      currentObjectiveTask = taskEntry;
+      objUsedHint = false;
+      objAttemptCount = 0;
+      objAnswered = false;
+
+      const badgeEl = document.getElementById('obj-test-badge');
+      const tagEl = document.getElementById('obj-test-skill-tag');
+      const counterEl = document.getElementById('obj-test-counter');
+      const zhEl = document.getElementById('obj-test-zh');
+      const sentEl = document.getElementById('obj-test-sentence');
+      const inputArea = document.getElementById('obj-input-area');
+      const optionsArea = document.getElementById('obj-options-area');
+      const fbBox = document.getElementById('obj-feedback-box');
+      const hintDisp = document.getElementById('obj-hint-display');
+
+      if (counterEl) counterEl.textContent = `${currentCardIndex + 1} / ${reviewQueue.length}`;
+      if (fbBox) fbBox.classList.add('hidden');
+      if (hintDisp) hintDisp.textContent = '';
+
+      if (taskEntry.taskType === 'consolidation') {
+        const w = taskEntry.wordItem;
+        if (badgeEl) {
+          badgeEl.textContent = '🔐 隔日無提示鞏固測試 (新例句填空)';
+          badgeEl.className = 'px-2.5 py-1 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 text-xs font-extrabold';
+        }
+        if (tagEl) tagEl.textContent = `首次自評記得日期：${w.stats?.rememberedDate || '昨日'} • 首次無提示答啱即升為「✅ 已鞏固」`;
+        if (zhEl) zhEl.textContent = `${w.def_zh || w.word} (${w.pos})`;
+
+        const clozeObj = buildConsolidationClozeSentence(w);
+        taskEntry.spokenSentence = clozeObj.rawSentence;
+        if (sentEl) sentEl.innerHTML = clozeObj.maskedHtml;
+
+        inputArea.classList.remove('hidden');
+        optionsArea.classList.add('hidden');
+        optionsArea.classList.remove('grid');
+
+        const inp = document.getElementById('obj-test-input');
+        const subBtn = document.getElementById('obj-submit-btn');
+        if (inp) {
+          inp.value = '';
+          inp.disabled = false;
+          setTimeout(() => inp.focus(), 50);
+        }
+        if (subBtn) subBtn.disabled = false;
+      } else if (taskEntry.taskType === 'skill_mistake') {
+        const qObj = taskEntry.blitzQuestion;
+        const mRec = taskEntry.mistakeRecord;
+        if (badgeEl) {
+          badgeEl.textContent = '🎯 語法技能錯題重測 (換新語境驗證)';
+          badgeEl.className = 'px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-extrabold';
+        }
+        if (tagEl) tagEl.textContent = `${qObj.skillLabel || qObj.skill} • 上次誤選：${mRec.selectedAnswer}`;
+        if (zhEl) zhEl.textContent = `核心詞：${qObj.word} (${qObj.pos}) — ${qObj.zh}`;
+
+        const rawSentence = qObj.retestQuestion || qObj.question;
+        const ansList = qObj.retestAnswers || qObj.answers;
+        const optList = [...(qObj.retestOptions || qObj.options)].sort(() => Math.random() - 0.5);
+
+        const escapedWord = qObj.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const wordRegex = new RegExp(`\\b(${escapedWord}\\w*)\\b`, 'gi');
+        const highlighted = rawSentence
+          .replace(wordRegex, `<strong class="text-emerald-400 underline">$1</strong>`)
+          .replace('___', '<span class="px-3 py-0.5 mx-1 rounded-lg bg-amber-500/20 border-b-2 border-amber-400 text-amber-300 font-mono">____</span>');
+
+        if (sentEl) sentEl.innerHTML = highlighted;
+        const primaryAns = ansList[0];
+        taskEntry.spokenSentence = rawSentence.replace('___', primaryAns.startsWith('Ø') ? '' : primaryAns).replace(/\s+/g, ' ');
+        taskEntry.validAnswers = ansList.map(a => a.toLowerCase());
+        taskEntry.displayAnswer = primaryAns;
+
+        inputArea.classList.add('hidden');
+        optionsArea.classList.remove('hidden');
+        optionsArea.classList.add('grid');
+        optionsArea.innerHTML = '';
+
+        optList.forEach((opt, idx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-200 font-mono text-sm font-bold transition flex items-center justify-between';
+          btn.innerHTML = `<span><strong class="text-slate-500 mr-2">[${idx + 1}]</strong> ${opt}</span><span class="text-xs text-slate-400">選擇</span>`;
+          btn.onclick = () => submitSkillMistakeOption(opt, btn, optList);
+          optionsArea.appendChild(btn);
+        });
+      }
+    }
+
+    function useObjectiveHint() {
+      if (!currentObjectiveTask || currentObjectiveTask.taskType !== 'consolidation') return;
+      objUsedHint = true;
+      const w = currentObjectiveTask.wordItem.word;
+      const hintDisp = document.getElementById('obj-hint-display');
+      if (hintDisp) {
+        hintDisp.textContent = `提示：${w[0]}${w[1] || ''}... (共 ${w.length} 字母，尾字 "${w[w.length - 1]}")`;
+      }
+    }
+
+    function speakObjectivePrompt() {
+      if (currentObjectiveTask && currentObjectiveTask.spokenSentence) {
+        speakText(currentObjectiveTask.spokenSentence);
+      }
+    }
+
+    function submitObjectiveTest() {
+      if (!currentObjectiveTask || currentObjectiveTask.taskType !== 'consolidation' || objAnswered) return;
+      const inp = document.getElementById('obj-test-input');
+      const userVal = (inp?.value || '').trim().toLowerCase();
+      if (!userVal) {
+        showToast('⚠️ 請先輸入英文單字答案');
         return;
-      } else {
-        if (completeBox) completeBox.classList.add('hidden');
-        if (cardWrapper) cardWrapper.classList.remove('hidden');
       }
 
-      if (reviewQueue.length === 0) reviewQueue = [...words];
+      objAttemptCount++;
+      objAnswered = true;
+      const wItem = currentObjectiveTask.wordItem;
+      const target = wItem.word.toLowerCase();
+      const isCorrect = userVal === target;
+      const isFirstUnpromptedSuccess = isCorrect && objAttemptCount === 1 && !objUsedHint;
+
+      recordFirstAttemptResult(wItem.id, 'consolidation', isFirstUnpromptedSuccess);
+
+      const fbBox = document.getElementById('obj-feedback-box');
+      const fbTitle = document.getElementById('obj-feedback-title');
+      const fbDetail = document.getElementById('obj-feedback-detail');
+      if (fbBox) fbBox.classList.remove('hidden');
+      if (inp) inp.disabled = true;
+      document.getElementById('obj-submit-btn').disabled = true;
+
+      const DAY_MS = 24 * 60 * 60 * 1000;
+      if (isFirstUnpromptedSuccess) {
+        wItem.stats.status = 'mastered';
+        wItem.stats.consolidatedByTest = true;
+        wItem.stats.reps = (wItem.stats.reps || 1) + 1;
+        wItem.stats.interval = Math.max(3, Math.round((wItem.stats.interval || 1) * 2.5));
+        wItem.stats.nextReview = Date.now() + wItem.stats.interval * DAY_MS;
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-emerald-500/15 border-emerald-500/40 text-emerald-300';
+        fbTitle.textContent = `🎉 隔日無提示測試一次通過！「${wItem.word}」正式列為「✅ 已鞏固」！`;
+        fbDetail.textContent = `完整句子：${currentObjectiveTask.spokenSentence}（下次複習：${wItem.stats.interval} 天後）`;
+      } else if (isCorrect && objUsedHint) {
+        wItem.stats.status = 'learning';
+        wItem.stats.consolidatedByTest = false;
+        wItem.stats.rememberedDate = getTodayDateStr();
+        wItem.stats.nextReview = Date.now() + 1 * DAY_MS;
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-amber-500/15 border-amber-500/40 text-amber-300';
+        fbTitle.textContent = `👍 拼寫正確（使用了提示），將於明天再次進行無提示鞏固測試！`;
+        fbDetail.textContent = `要獲得「✅ 已鞏固」認證，必須在隔日不使用提示首次答啱。完整句子：${currentObjectiveTask.spokenSentence}`;
+      } else {
+        wItem.stats.status = 'forgot';
+        wItem.stats.consolidatedByTest = false;
+        wItem.stats.reps = 0;
+        wItem.stats.interval = 0;
+        wItem.stats.nextReview = Date.now() + 5 * 60 * 1000;
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-rose-500/15 border-rose-500/40 text-rose-300';
+        fbTitle.textContent = `❌ 拼寫未準確！正確答案為：${wItem.word}`;
+        fbDetail.textContent = `已排入「等待重測」清單（5 分鐘後重溫）。完整句子：${currentObjectiveTask.spokenSentence}`;
+      }
+
+      wItem.stats.lastReviewed = Date.now();
+      progressMap[target] = wItem.stats;
+      saveProgressMap();
+      speakText(currentObjectiveTask.spokenSentence);
+      updateDashboardStats();
+    }
+
+    function submitSkillMistakeOption(selectedOpt, clickedBtn, optList) {
+      if (!currentObjectiveTask || currentObjectiveTask.taskType !== 'skill_mistake' || objAnswered) return;
+      objAnswered = true;
+      const qObj = currentObjectiveTask.blitzQuestion;
+      const mRec = currentObjectiveTask.mistakeRecord;
+      const isCorrect = currentObjectiveTask.validAnswers.includes(selectedOpt.toLowerCase());
+
+      recordFirstAttemptResult(qObj.id, 'skill_mistake', isCorrect);
+
+      const buttons = document.getElementById('obj-options-area').children;
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+        const text = optList[i].toLowerCase();
+        if (currentObjectiveTask.validAnswers.includes(text)) {
+          buttons[i].className = 'py-3 px-4 rounded-xl bg-emerald-500/20 border-2 border-emerald-500 text-emerald-300 font-mono text-sm font-bold flex items-center justify-between';
+        } else if (buttons[i] === clickedBtn && !isCorrect) {
+          buttons[i].className = 'py-3 px-4 rounded-xl bg-rose-500/20 border-2 border-rose-500 text-rose-300 font-mono text-sm font-bold flex items-center justify-between';
+        }
+      }
+
+      const fbBox = document.getElementById('obj-feedback-box');
+      const fbTitle = document.getElementById('obj-feedback-title');
+      const fbDetail = document.getElementById('obj-feedback-detail');
+      fbBox.classList.remove('hidden');
+
+      if (isCorrect) {
+        mRec.resolved = true;
+        mRec.firstAttemptCorrect = true;
+        mRec.lastReviewedDate = getTodayDateStr();
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-emerald-500/15 border-emerald-500/40 text-emerald-300';
+        fbTitle.textContent = `✅ 換語境重測答啱！已成功掌握「${qObj.skillLabel}」！`;
+        fbDetail.textContent = `解析：${qObj.explanation} 完整句子：${currentObjectiveTask.spokenSentence}`;
+      } else {
+        mRec.resolved = false;
+        mRec.selectedAnswer = selectedOpt;
+        mRec.nextReview = Date.now() + 5 * 60 * 1000;
+        fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-rose-500/15 border-rose-500/40 text-rose-300';
+        fbTitle.textContent = `❌ 仍然答錯！正確答案為：${currentObjectiveTask.displayAnswer}`;
+        fbDetail.textContent = `${qObj.explanation}（已排入等待重測清單，5 分鐘後再考一次）`;
+      }
+
+      saveQuestionMistakeBook();
+      speakText(currentObjectiveTask.spokenSentence);
+      updateDashboardStats();
+    }
+
+    function nextObjectiveTaskItem() {
+      if (reviewFilter === 'daily') {
+        buildReviewQueue();
+      } else {
+        currentCardIndex = (currentCardIndex + 1) % Math.max(1, reviewQueue.length);
+      }
+      renderCurrentCard();
+    }
+
+    function renderCurrentCard() {
+      const completeBox = document.getElementById('daily-complete-box');
+      const waitingBox = document.getElementById('daily-waiting-box');
+      const objTestBox = document.getElementById('objective-test-box');
+      const cardWrapper = document.getElementById('flashcard-container')?.parentElement;
+
+      if (reviewFilter === 'daily') {
+        const { activeTasks, waitingTasks } = computeDailyQueues();
+        reviewQueue = activeTasks;
+        waitingRetestList = waitingTasks;
+
+        if (reviewQueue.length === 0 && waitingRetestList.length > 0) {
+          if (completeBox) completeBox.classList.add('hidden');
+          if (objTestBox) objTestBox.classList.add('hidden');
+          if (cardWrapper) cardWrapper.classList.add('hidden');
+          if (waitingBox) {
+            waitingBox.classList.remove('hidden');
+            document.getElementById('waiting-box-title').textContent = `本輪完成；有 ${waitingRetestList.length} 題將於稍後重測`;
+          }
+          document.getElementById('card-counter').textContent = `等待重測 (${waitingRetestList.length})`;
+          startWaitingCountdown();
+          return;
+        }
+
+        if (reviewQueue.length === 0 && waitingRetestList.length === 0) {
+          if (waitingBox) waitingBox.classList.add('hidden');
+          if (objTestBox) objTestBox.classList.add('hidden');
+          if (cardWrapper) cardWrapper.classList.add('hidden');
+          if (completeBox) {
+            completeBox.classList.remove('hidden');
+            const summaryEl = document.getElementById('daily-complete-summary');
+            if (summaryEl) {
+              const totalAttempts = dailyState.firstAttemptResults.length;
+              const firstCorrect = dailyState.firstAttemptResults.filter(r => r.correct).length;
+              summaryEl.innerHTML = `今日固定派發新字：<strong>${dailyState.assignedNewIds.length} 個</strong> ｜ 今日已完成項目：<strong>${dailyState.completedQuestionIds.length} 項</strong> ｜ 首次作答準確率：<strong>${totalAttempts ? Math.round((firstCorrect / totalAttempts) * 100) : 100}%</strong>。<br>標記為「👍 我覺得記得」的單字將於<strong>隔日進行無提示新句填空測試</strong>，首次答啱即正式列為「✅ 已鞏固」。`;
+            }
+          }
+          document.getElementById('card-counter').textContent = '0 / 0';
+          return;
+        }
+      }
+
+      if (completeBox) completeBox.classList.add('hidden');
+      if (waitingBox) waitingBox.classList.add('hidden');
+
+      if (reviewQueue.length === 0) {
+        reviewQueue = words.map(w => ({ taskType: 'flashcard', id: w.id, wordItem: w }));
+      }
       if (currentCardIndex >= reviewQueue.length) currentCardIndex = 0;
       if (currentCardIndex < 0) currentCardIndex = reviewQueue.length - 1;
 
-      const item = reviewQueue[currentCardIndex];
-      if (!item) return;
+      const currentEntry = reviewQueue[currentCardIndex];
+      if (!currentEntry) return;
 
+      // 若當前任務屬於「隔日無提示鞏固測試」或「語法技能錯題重測」，顯示客觀測試卡
+      if (currentEntry.taskType === 'consolidation' || currentEntry.taskType === 'skill_mistake') {
+        if (cardWrapper) cardWrapper.classList.add('hidden');
+        if (objTestBox) objTestBox.classList.remove('hidden');
+        renderObjectiveTestDOM(currentEntry);
+        return;
+      }
+
+      if (objTestBox) objTestBox.classList.add('hidden');
+      if (cardWrapper) cardWrapper.classList.remove('hidden');
+
+      const item = currentEntry.wordItem || currentEntry;
       isFlipped = false;
       document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
       populateCardDOM(item);
@@ -2619,39 +3255,73 @@
     }
 
     function rateCard(rating) {
-      const item = reviewQueue[currentCardIndex];
+      const item = getActiveFlashcardItem();
       if (!item) return;
       if (!item.stats) item.stats = createDefaultStats();
 
       const DAY_MS = 24 * 60 * 60 * 1000;
-      const prevReps = item.stats.reps || 0;
+      const todayStr = getTodayDateStr();
+
+      // 自由溫習模式下：允許標記弱項，但按「我覺得記得」絕不推高為 mastered，亦不偽造隔日通過紀錄
+      if (reviewFilter !== 'daily') {
+        if (rating === 'forgot') {
+          item.stats.status = 'forgot';
+          item.stats.consolidatedByTest = false;
+          item.stats.reps = 0;
+          item.stats.interval = 0;
+          item.stats.nextReview = Date.now() + 5 * 60 * 1000;
+          showToast(`📌 已將「${item.word}」加入需重溫清單（5 分鐘後於今日任務重測）`);
+        } else if (rating === 'hard') {
+          if (item.stats.status !== 'mastered') {
+            item.stats.status = 'learning';
+            item.stats.nextReview = Date.now() + 1 * DAY_MS;
+          }
+          showToast(`🤔 自由溫習：已記錄「${item.word}」需繼續鞏固`);
+        } else if (rating === 'easy') {
+          if (item.stats.status === 'new' || item.stats.status === 'forgot') {
+            item.stats.status = 'learning';
+            item.stats.reps = 1;
+            item.stats.rememberedDate = todayStr;
+            item.stats.nextReview = Date.now() + 1 * DAY_MS;
+          }
+          showToast(`👍 自由溫習自評：已記錄「我覺得記得」（需於隔日任務通過無提示填空才列為已鞏固）`);
+        }
+        item.stats.lastReviewed = Date.now();
+        progressMap[item.word.toLowerCase()] = item.stats;
+        saveProgressMap();
+        updateDashboardStats();
+        currentCardIndex = (currentCardIndex + 1) % Math.max(1, reviewQueue.length);
+        renderCurrentCard();
+        return;
+      }
+
+      // 「📅 今日任務」模式
+      recordFirstAttemptResult(item.id, 'flashcard', rating === 'easy');
 
       if (rating === 'forgot') {
         item.stats.status = 'forgot';
+        item.stats.consolidatedByTest = false;
         item.stats.reps = 0;
         item.stats.interval = 0;
-        item.stats.nextReview = Date.now() + 5 * 60 * 1000; // 5分鐘後重溫
+        item.stats.nextReview = Date.now() + 5 * 60 * 1000; // 移入「等待重測」清單，5分鐘後才重新到期，絕不即刻重複出現
+        showToast(`⏳ 「${item.word}」已移入稍後重測清單（5 分鐘後重溫）`);
       } else if (rating === 'hard') {
         item.stats.status = 'learning';
+        item.stats.consolidatedByTest = false;
         item.stats.reps = 0;
         item.stats.interval = 1;
-        item.stats.nextReview = Date.now() + 1 * DAY_MS; // 1天後再考
+        item.stats.nextReview = Date.now() + 1 * DAY_MS;
+        showToast(`🤔 已排程「${item.word}」於明天再溫習`);
       } else if (rating === 'easy') {
-        // 兩階段鞏固機制：第一次按「今次記得」先設為 learning (reps=1)，隔日再答啱才升為 mastered (已鞏固)
-        if (prevReps === 0) {
-          item.stats.status = 'learning';
-          item.stats.reps = 1;
-          item.stats.interval = 1;
-          item.stats.nextReview = Date.now() + 1 * DAY_MS;
-          showToast(`👍 已記錄「${item.word}」今次記得！明天再確認一次即升為「✅ 已鞏固」`);
-        } else {
-          item.stats.status = 'mastered';
-          item.stats.reps = prevReps + 1;
-          const prevInt = item.stats.interval || 1;
-          item.stats.interval = prevInt <= 1 ? 3 : Math.round(prevInt * 2.2);
-          item.stats.nextReview = Date.now() + item.stats.interval * DAY_MS;
-          showToast(`✅ 確認成功！「${item.word}」已正式列為「已鞏固」（${item.stats.interval}天後再複習）`);
+        // 閃卡自評「我覺得記得」：只設為 learning 並記錄 rememberedDate = todayStr，排程明天進行客觀無提示填空測試
+        item.stats.status = 'learning';
+        item.stats.reps = Math.max(1, item.stats.reps || 0);
+        item.stats.interval = 1;
+        if (!item.stats.rememberedDate) {
+          item.stats.rememberedDate = todayStr;
         }
+        item.stats.nextReview = Date.now() + 1 * DAY_MS;
+        showToast(`👍 自評記得！「${item.word}」將於隔日進行「無提示新句填空測試」，答啱即升為已鞏固`);
       }
 
       item.stats.lastReviewed = Date.now();
@@ -2659,24 +3329,14 @@
       saveProgressMap();
       updateDashboardStats();
 
-      if (reviewFilter === 'daily') {
-        // 在「今日任務」模式下，如果排程已推至未來（非 forgot），即從今日待辦隊列移除
-        if (rating === 'forgot') {
-          currentCardIndex = (currentCardIndex + 1) % reviewQueue.length;
-        } else {
-          reviewQueue.splice(currentCardIndex, 1);
-          if (currentCardIndex >= reviewQueue.length) currentCardIndex = 0;
-        }
-      } else {
-        currentCardIndex++;
-        if (currentCardIndex >= reviewQueue.length) buildReviewQueue();
-      }
+      // 重新計算今日任務隊列（剛設為 5 分鐘後重溫的卡會自動轉入 waitingRetestList，不會留在當前隊列尾端即刻出現）
+      buildReviewQueue();
       renderCurrentCard();
     }
 
     let noteTimeout = null;
     function saveUserNote(val) {
-      const item = reviewQueue[currentCardIndex];
+      const item = getActiveFlashcardItem();
       if (!item) return;
       if (!item.stats) item.stats = createDefaultStats();
       item.stats.note = val;
@@ -2690,15 +3350,25 @@
     }
 
     // ========================================================
-    // 5. GRAMMAR & PREP TRAP BLITZ (使用獨立驗證題庫 DSE_BLITZ_QUESTIONS)
+    // 5. GRAMMAR & PREP TRAP BLITZ (連動獨立「語法技能錯題本」+ 換句重測)
     // ========================================================
     function initBlitzQueue() {
-      blitzQueue = [...DSE_BLITZ_QUESTIONS].sort(() => Math.random() - 0.5);
+      // 優先把「語法技能錯題本」中未解決的錯題排在最前（並標記使用 retestQuestion 換語境重測）
+      const unresolvedIds = new Set(
+        Object.values(questionMistakeBook)
+          .filter(m => m && !m.resolved)
+          .map(m => m.questionId)
+      );
+      const mistakeQuestions = DSE_BLITZ_QUESTIONS.filter(q => unresolvedIds.has(q.id));
+      const normalQuestions = DSE_BLITZ_QUESTIONS.filter(q => !unresolvedIds.has(q.id)).sort(() => Math.random() - 0.5);
+
+      blitzQueue = [...mistakeQuestions, ...normalQuestions];
       blitzCurrentIdx = 0;
       blitzStreak = 0;
       blitzCorrectCount = 0;
       blitzTotalCount = 0;
-      document.getElementById('blitz-pool-count').textContent = `精選驗證題庫共 ${blitzQueue.length} 題`;
+      const mistakeNote = mistakeQuestions.length > 0 ? `（含 ${mistakeQuestions.length} 題待重測技能錯題）` : '';
+      document.getElementById('blitz-pool-count').textContent = `驗證題庫共 ${blitzQueue.length} 題 ${mistakeNote}`;
       document.getElementById('blitz-timer-display').textContent = `${blitzBestStreak} 🏆`;
       renderBlitzQuestion();
     }
@@ -2742,27 +3412,37 @@
       const qItem = blitzQueue[blitzCurrentIdx];
       currentBlitzItem = qItem;
 
+      // 若該題在「題目錯題本」中有未解決紀錄，自動切換使用第二句全新語境句子 (retestQuestion)！
+      const mistakeEntry = questionMistakeBook[qItem.id];
+      const isRetestMode = Boolean(mistakeEntry && !mistakeEntry.resolved && qItem.retestQuestion);
+      const activeSentence = isRetestMode ? qItem.retestQuestion : qItem.question;
+      const activeAnswers = (isRetestMode && qItem.retestAnswers) ? qItem.retestAnswers : qItem.answers;
+      const activeOptionsPool = (isRetestMode && qItem.retestOptions) ? qItem.retestOptions : qItem.options;
+
       document.getElementById('blitz-target-word').textContent = qItem.word;
-      document.getElementById('blitz-target-pos').textContent = qItem.pos || '';
+      document.getElementById('blitz-target-pos').textContent = isRetestMode
+        ? `${qItem.pos} • 🔄 錯題換句重測 (${qItem.skillLabel || qItem.skill})`
+        : `${qItem.pos} • ${qItem.skillLabel || ''}`;
       document.getElementById('blitz-target-zh').textContent = qItem.zh || '';
 
       // 將目標單字高亮並將固定空格 ___ 轉為醒目橫線
       const escapedWord = qItem.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const wordRegex = new RegExp(`\\b(${escapedWord}\\w*)\\b`, 'gi');
-      const highlightedQ = qItem.question
+      const highlightedQ = activeSentence
         .replace(wordRegex, `<strong class="text-emerald-400 underline">$1</strong>`)
         .replace('___', '<span class="px-3 py-0.5 mx-1 rounded-lg bg-amber-500/20 border-b-2 border-amber-400 text-amber-300 font-mono">____</span>');
 
       document.getElementById('blitz-sentence').innerHTML = highlightedQ;
 
-      // 生成發音原句（如答案為「Ø (不加介詞)」則填入空字串）
-      const primaryAns = qItem.answers[0];
+      const primaryAns = activeAnswers[0];
       const spokenAns = primaryAns.startsWith('Ø') ? '' : primaryAns;
-      currentBlitzItem.clozeSentenceText = qItem.question.replace('___', spokenAns).replace(/\s+/g, ' ');
+      currentBlitzItem.clozeSentenceText = activeSentence.replace('___', spokenAns).replace(/\s+/g, ' ');
+      currentBlitzItem.activeValidAnswers = activeAnswers.map(a => a.toLowerCase());
       currentBlitzItem.correctPrep = primaryAns;
+      currentBlitzItem.isRetestMode = isRetestMode;
 
       // 洗牌選項
-      const options = [...qItem.options].sort(() => Math.random() - 0.5);
+      const options = [...activeOptionsPool].sort(() => Math.random() - 0.5);
       currentBlitzItem.currentOptions = options;
 
       const optContainer = document.getElementById('blitz-options');
@@ -2782,9 +3462,11 @@
       blitzAnsweredCurrent = true;
       blitzTotalCount++;
 
-      const validAnswers = currentBlitzItem.answers.map(a => a.toLowerCase());
+      const validAnswers = currentBlitzItem.activeValidAnswers || currentBlitzItem.answers.map(a => a.toLowerCase());
       const isCorrect = validAnswers.includes(selectedOpt.toLowerCase());
-      const correctDisplay = currentBlitzItem.answers[0];
+      const correctDisplay = currentBlitzItem.correctPrep || currentBlitzItem.answers[0];
+
+      recordFirstAttemptResult(currentBlitzItem.id, 'blitz', isCorrect);
 
       const optButtons = document.getElementById('blitz-options').children;
       for (let i = 0; i < optButtons.length; i++) {
@@ -2814,26 +3496,40 @@
           localStorage.setItem('dse_blitz_best', String(blitzBestStreak));
           if (blitzMode !== 'timed') document.getElementById('blitz-timer-display').textContent = `${blitzBestStreak} 🏆`;
         }
+        // 如果此題原本在「語法技能錯題本」中且今次換語境重測答啱，標記為已解決
+        if (questionMistakeBook[currentBlitzItem.id]) {
+          questionMistakeBook[currentBlitzItem.id].resolved = true;
+          questionMistakeBook[currentBlitzItem.id].lastReviewedDate = getTodayDateStr();
+          saveQuestionMistakeBook();
+        }
         fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-emerald-500/10 border-emerald-500/30 text-emerald-300';
-        fbTitle.textContent = `✅ 答啱啦！連勝 ${blitzStreak} 🔥`;
+        fbTitle.textContent = currentBlitzItem.isRetestMode
+          ? `✅ 錯題換句重測過關！連勝 ${blitzStreak} 🔥`
+          : `✅ 答啱啦！連勝 ${blitzStreak} 🔥`;
         fbTrap.textContent = `💡 考點解析：${currentBlitzItem.explanation}`;
       } else {
         blitzStreak = 0;
+        // 寫入獨立「語法技能錯題本 (questionMistakeBook)」，直接連動「📅 今日任務」進行換語境句子重測！
+        questionMistakeBook[currentBlitzItem.id] = {
+          questionId: currentBlitzItem.id,
+          word: currentBlitzItem.word,
+          skill: currentBlitzItem.skill || 'verb_preposition',
+          skillLabel: currentBlitzItem.skillLabel || '語法與介詞搭配',
+          selectedAnswer: selectedOpt,
+          correctAnswer: correctDisplay,
+          nextReview: Date.now(), // 立即納入今日任務待重測項目（重測時會自動換成 retestQuestion 新句子）
+          firstAttemptCorrect: false,
+          resolved: false,
+          lastReviewedDate: getTodayDateStr()
+        };
+        saveQuestionMistakeBook();
+
         fbBox.className = 'rounded-2xl p-4 space-y-2 border bg-rose-500/10 border-rose-500/30 text-rose-300';
         fbTitle.textContent = `❌ 答錯喇！正確答案為：${correctDisplay}`;
-        fbTrap.textContent = `🚨 評卷員解析：${currentBlitzItem.explanation}（已將 "${currentBlitzItem.word}" 納入今日需重溫清單！）`;
-
-        const key = currentBlitzItem.word.toLowerCase();
-        if (!progressMap[key]) progressMap[key] = createDefaultStats();
-        progressMap[key].status = 'forgot';
-        progressMap[key].reps = 0;
-        progressMap[key].nextReview = Date.now();
-        const matchedWord = words.find(w => w.word.toLowerCase() === key);
-        if (matchedWord) matchedWord.stats = progressMap[key];
-        saveProgressMap();
-        updateDashboardStats();
+        fbTrap.textContent = `🚨 評卷員解析：${currentBlitzItem.explanation}（已將「${currentBlitzItem.skillLabel || currentBlitzItem.word}」技能錯題納入「📅 今日任務」，重測時將自動換上新語境句子！）`;
       }
 
+      updateDashboardStats();
       document.getElementById('blitz-streak').textContent = `${blitzStreak} 🔥`;
       const acc = Math.round((blitzCorrectCount / blitzTotalCount) * 100);
       document.getElementById('blitz-accuracy').textContent = `${acc}%`;
@@ -2935,13 +3631,13 @@
 
     function speakCurrentWord(event) {
       if (event) event.stopPropagation();
-      const item = reviewQueue[currentCardIndex];
-      if (item) speakText(item.word);
+      const item = getActiveFlashcardItem();
+      if (item && item.word) speakText(item.word);
     }
 
     function speakCurrentExample(event) {
       if (event) event.stopPropagation();
-      const item = reviewQueue[currentCardIndex];
+      const item = getActiveFlashcardItem();
       if (item && item.example) speakText(item.example);
     }
 
@@ -3054,8 +3750,11 @@
 
     async function runAutoPlayStep() {
       if (!isAutoPlaying) return;
-      const item = reviewQueue[currentCardIndex];
-      if (!item) return;
+      const item = getActiveFlashcardItem();
+      if (!item || !item.word) {
+        stopAutoPlayLoop();
+        return;
+      }
 
       if (item.isCloud) {
         await ensureWordDetailsLoaded(item);
@@ -3799,7 +4498,8 @@
     function jumpToCard(wordId) {
       const idx = words.findIndex(w => w.id === wordId);
       if (idx !== -1) {
-        reviewQueue = [...words];
+        setReviewFilter('all');
+        reviewQueue = words.map(w => ({ taskType: 'flashcard', id: w.id, wordItem: w }));
         currentCardIndex = idx;
         switchTab('review');
         renderCurrentCard();
@@ -3917,14 +4617,18 @@
 
     function resetAllProgress() {
       progressMap = {};
+      questionMistakeBook = {};
       localStorage.removeItem(LS_KEY);
+      localStorage.removeItem(LS_QUESTION_MISTAKES_KEY);
+      localStorage.removeItem(LS_DAILY_STATE_KEY);
+      dailyState = loadOrInitDailyState();
       words.forEach(w => { w.stats = createDefaultStats(); });
       updateDashboardStats();
       buildReviewQueue();
       renderCurrentCard();
       renderWordBank();
       closeModal('backup-modal');
-      showToast('🗑️ 已重置所有進度！');
+      showToast('🗑️ 已重置所有進度與錯題紀錄！');
     }
 
     // ========================================================
@@ -3971,7 +4675,7 @@
       // 頂部標題列
       ctx.fillStyle = '#10b981';
       ctx.font = 'bold 16px Inter, system-ui, sans-serif';
-      ctx.fillText('CAC HKDSE ENGLISH • LEVEL 3–4 MASTERY SYSTEM 3.1', 42, 58);
+      ctx.fillText('CAC HKDSE ENGLISH • LEVEL 3–4 MASTERY SYSTEM 3.2', 42, 58);
 
       ctx.fillStyle = '#ffffff';
       ctx.font = '900 30px Inter, system-ui, sans-serif';
@@ -4003,14 +4707,14 @@
       ctx.fillText(`🎯 溫習目標：${dispGoal.slice(0, 42)}`, 60, 206);
 
       // 四格核心數據統計
-      const masteredCount = words.filter(w => w.stats?.status === 'mastered').length;
-      const learningCount = words.filter(w => w.stats?.status === 'learning').length;
-      const forgotCount = words.filter(w => w.stats?.status === 'forgot').length;
+      const masteredCount = words.filter(w => w.stats?.status === 'mastered' && w.stats?.consolidatedByTest).length;
+      const learningCount = words.filter(w => w.stats?.status === 'learning' || (w.stats?.status === 'mastered' && !w.stats?.consolidatedByTest)).length;
+      const forgotCount = words.filter(w => w.stats?.status === 'forgot').length + Object.values(questionMistakeBook).filter(m => m && !m.resolved).length;
 
       const statsBoxes = [
-        { label: '✅ 已鞏固單字', val: `${masteredCount} 字`, color: '#34d399' },
+        { label: '✅ 隔日測試已鞏固', val: `${masteredCount} 字`, color: '#34d399' },
         { label: '⏳ 鞏固中單字', val: `${learningCount} 字`, color: '#fbbf24' },
-        { label: '⚠️ 介詞排雷最佳連勝', val: `${blitzBestStreak} 🔥`, color: '#38bdf8' },
+        { label: '📅 今日已完成項目', val: `${dailyState.completedQuestionIds.length} 項`, color: '#38bdf8' },
         { label: '🎧 P3 串字目前連勝', val: `${dictationStreak} 🎯`, color: '#f472b6' }
       ];
 
